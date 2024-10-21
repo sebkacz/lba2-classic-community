@@ -2,6 +2,7 @@
 #define	COMMON_H
 
 #include <SYSTEM/LIMITS.H>
+#include <cstdint>
 
 // j'en ai marre de planter sur des Rnd(0) !!!!!!!!!!!!!!!!!!!!!
 // Méfie quand même à ne pas passer d'affectation ou d'incrémentation de
