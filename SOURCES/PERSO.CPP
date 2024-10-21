@@ -993,7 +993,7 @@ startloop:
         case FLAG_SARBACANE:     // Sarbacane
         case FLAG_GANT:          // Gant (raquette)
         case FLAG_PISTOLASER:    // PistoLaser
-          Weapon = (uint8)_tInventoryAction;
+          Weapon = (uint8_t)_tInventoryAction;
           if (Comportement > C_DISCRET) {
             SetComportement(C_NORMAL);
           }
@@ -1001,7 +1001,7 @@ startloop:
           break;
 
         case FLAG_SABRE: // SABRE MAGIQUE
-          Weapon = (uint8)_tInventoryAction;
+          Weapon = (uint8_t)_tInventoryAction;
           if (Comportement > C_DISCRET) {
             SetComportement(C_NORMAL);
           }
@@ -1290,7 +1290,7 @@ startloop:
         case C_SCAPH_INT_NORM:
           if (Input & I_SPORTIF) {
             SaveTimer();
-            SetComportement((uint8)_tC_SCAPH_INT_SPOR);
+            SetComportement((uint8_t)_tC_SCAPH_INT_SPOR);
             IncrustComportement(Comportement);
             RestoreTimer();
           }
@@ -1299,7 +1299,7 @@ startloop:
         case C_SCAPH_INT_SPOR:
           if (Input & I_NORMAL) {
             SaveTimer();
-            SetComportement((uint8)_tC_SCAPH_INT_NORM);
+            SetComportement((uint8_t)_tC_SCAPH_INT_NORM);
             IncrustComportement(Comportement);
             RestoreTimer();
           }
@@ -1308,7 +1308,7 @@ startloop:
         case C_SCAPH_EXT_NORM:
           if (Input & I_SPORTIF) {
             SaveTimer();
-            SetComportement((uint8)_tC_SCAPH_EXT_SPOR);
+            SetComportement((uint8_t)_tC_SCAPH_EXT_SPOR);
             IncrustComportement(Comportement);
             RestoreTimer();
           }
@@ -1317,7 +1317,7 @@ startloop:
         case C_SCAPH_EXT_SPOR:
           if (Input & I_NORMAL) {
             SaveTimer();
-            SetComportement((uint8)_tC_SCAPH_EXT_NORM);
+            SetComportement((uint8_t)_tC_SCAPH_EXT_NORM);
             IncrustComportement(Comportement);
             RestoreTimer();
           }
@@ -1664,7 +1664,7 @@ void ReadConfigFile(void) {
   ReadVolumeSettings(); // Lit Volumes dans LBA2.CFG
 
   Version_US = DefFileBufferReadValue("Version_US");
-  NumVersion = (uint8)_tDefFileBufferReadValue("CompressSave");
+  NumVersion = (uint8_t)_tDefFileBufferReadValue("CompressSave");
 
   if (NumVersion)
     NumVersion = SAVE_COMPRESS;
