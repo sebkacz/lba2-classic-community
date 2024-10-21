@@ -150,8 +150,8 @@ char	StatusTxt[][100] = {
 	} ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	SelectConfig = 0 ;
-S32	SelectKey    = 0 ;
+int32_t	SelectConfig = 0 ;
+int32_t	SelectKey    = 0 ;
 
 #define	CFG_X0	10
 #define	CFG_Y0	10
@@ -175,10 +175,10 @@ S32	SelectKey    = 0 ;
 #define	COUL_KEY	(4*16+10)
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	DrawOneConfig( S32 n )
+void	DrawOneConfig( int32_t n )
 {
-	S32 	y = CFG_Y0+30+n*10 ;
-	U8	coul ;
+	int32_t 	y = CFG_Y0+30+n*10 ;
+	uint8_t	coul ;
 
 	if( n==SelectConfig )
 	{
@@ -243,7 +243,7 @@ void	DrawOneConfig( S32 n )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	DrawStatusConfig( S32 num )
+void	DrawStatusConfig( int32_t num )
 {
 	char *txt = StatusTxt[num] ;
 
@@ -266,7 +266,7 @@ void	DrawStatusConfig( S32 num )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	DrawScreenConfig( void )
 {
-	S32	n ;
+	int32_t	n ;
 
 	Box( CFG_X0, CFG_Y0, CFG_X1, CFG_Y1, 0 ) ;
 	Rect( CFG_X0, CFG_Y0, CFG_X1, CFG_Y0+20, COUL_CADRE ) ;
@@ -293,9 +293,9 @@ void	DrawScreenConfig( void )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	CheckKeyConfig( S32 key )
+int32_t	CheckKeyConfig( int32_t key )
 {
-	S32	n ;
+	int32_t	n ;
 
 	for( n=0; n<MAX_INPUT; n++ )
 	{
@@ -312,9 +312,9 @@ S32	CheckKeyConfig( S32 key )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	MenuConfig( void )
 {
-	S32	oldselect ;
-	S32	memoascii = AsciiMode ;
-	S32	akey = 0 ;
+	int32_t	oldselect ;
+	int32_t	memoascii = AsciiMode ;
+	int32_t	akey = 0 ;
 
 	AsciiMode = TRUE ;
 
@@ -415,8 +415,8 @@ void	MenuConfig( void )
 
 		if( akey==A_RETURN )
 		{
-			S32	memokey ;
-			U32	*ptr ;
+			int32_t	memokey ;
+			uint32_t	*ptr ;
 
 			// define new key
 			if( SelectKey==0 )

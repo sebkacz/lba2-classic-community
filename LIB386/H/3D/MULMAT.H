@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-typedef void(Func_MulMatrix)(S32 *MatDst, S32 *MatSrc1, S32 *MatSrc2);
+typedef void(Func_MulMatrix)(int32_t *MatDst, int32_t *MatSrc1, int32_t *MatSrc2);
 
 // -----------------------------------------------------------------------------
 extern Func_MulMatrix *MulMatrix; ///< Do Not call from C

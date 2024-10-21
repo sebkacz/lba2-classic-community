@@ -88,21 +88,21 @@
 #define CURRENTSAVE_FILENAME  "current.lba"
 
 typedef	struct	{
-	S32	Version ;
+	int32_t	Version ;
 
-	S32	OffsetPalette ;
-	S32	OffsetShade ;
-	S32	OffsetFog ;
-	S32	OffsetTransp ;
+	int32_t	OffsetPalette ;
+	int32_t	OffsetShade ;
+	int32_t	OffsetFog ;
+	int32_t	OffsetTransp ;
 
-	S32	ShadeStartPercent ;
-	S32	ShadeNormalLevel ;
-	S32	ShadeEndPercent ;
+	int32_t	ShadeStartPercent ;
+	int32_t	ShadeNormalLevel ;
+	int32_t	ShadeEndPercent ;
 
-	S32	FogCoul ;
+	int32_t	FogCoul ;
 
-	S32	TranspStartPercent ;
-	S32	TranspEndPercent ;
+	int32_t	TranspStartPercent ;
+	int32_t	TranspEndPercent ;
 
 		}	XPL_HEADER ;
 
@@ -186,7 +186,7 @@ typedef	struct	{
 
 /*----------------- Recupere pointeur Anim3DS -------------------*/
 
-#define	GetPtrAnim3DS(num)	(U8 *)HQR_Get( HQRPtrAnim3DS, num )
+#define	GetPtrAnim3DS(num)	(uint8_t *)HQR_Get( HQRPtrAnim3DS, num )
 
 /*----------------- WORLD ----------------------*/
 #define	SHADOW_LEVEL	12
@@ -478,8 +478,8 @@ typedef	struct	{
 #define MAX_VARS_CUBE           80
 #define MAX_VARS_GAME           256
 
-#define	MAX_INVENTORY		((U8)40)
-#define	MAX_BOX_INVENTORY	((U8)35)
+#define	MAX_INVENTORY		((uint8_t)40)
+#define	MAX_BOX_INVENTORY	((uint8_t)35)
 
 #define MAX_CHAPTER             20
 
@@ -686,51 +686,51 @@ typedef	struct	{
 
 typedef struct	// Normalement bien alignée
 {
-	S32    	PosX ;
-	S32    	PosY ;
-	S32    	PosZ ;
+	int32_t    	PosX ;
+	int32_t    	PosY ;
+	int32_t    	PosZ ;
 
 	union   {
 		MOVE Move ;
 		struct {
-			S32    	X ;	// ATTENTION: sert aussi de T_REAL_VALUE_HR (4 S32)
-			S32    	Y ;	// donc OrgX, OrgY, OrgZ
-			S32    	Z ;
+			int32_t    	X ;	// ATTENTION: sert aussi de T_REAL_VALUE_HR (4 int32_t)
+			int32_t    	Y ;	// donc OrgX, OrgY, OrgZ
+			int32_t    	Z ;
 		} Org ;
 		} U ;
 
-	S32    	Info ;
+	int32_t    	Info ;
 
-	U8     	*PtrBody ;              // pour les projectiles 3D
+	uint8_t     	*PtrBody ;              // pour les projectiles 3D
 
-	S16    	Sprite ;                /* num sprite */
+	int16_t    	Sprite ;                /* num sprite */
 
-	S16    	Vx ;
-	S16    	Vy ;
-	S16    	Vz ;
+	int16_t    	Vx ;
+	int16_t    	Vy ;
+	int16_t    	Vz ;
 
-	U32    	Flags ;
-	U32    	Timer ;                 /* memo timer 50hz */
+	uint32_t    	Flags ;
+	uint32_t    	Timer ;                 /* memo timer 50hz */
 
-	S16    	Body ;
-	S16    	Beta ;                  // pour les projectiles 3D
+	int16_t    	Body ;
+	int16_t    	Beta ;                  // pour les projectiles 3D
 
-	S16    	TimeOut ;               /* life time */
-	S16    	Divers ;                /* nombre pour zone giver */
+	int16_t    	TimeOut ;               /* life time */
+	int16_t    	Divers ;                /* nombre pour zone giver */
 
-	U8     	Poids ;
-	U8     	HitForce ;              /* si !=0 force de frappe */
+	uint8_t     	Poids ;
+	uint8_t     	HitForce ;              /* si !=0 force de frappe */
 
-	U8      Owner ;
-	U8	NewForce ;		// HitForce des extras renvoyables
+	uint8_t      Owner ;
+	uint8_t	NewForce ;		// HitForce des extras renvoyables
 
 #ifdef	LBA_EDITOR
 	char	Impact[13] ;		// Impact a générer
-	S32	Angle ;
+	int32_t	Angle ;
 #else
-	S32	Impact ;
+	int32_t	Impact ;
 #endif
-	S32	Scale  ;		// Facteur de zoom
+	int32_t	Scale  ;		// Facteur de zoom
 }       T_EXTRA ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -753,34 +753,34 @@ typedef struct	// Normalement bien alignée
 typedef struct
 {
 	char 	Name[4] ;	// Nom de l'anim
-	S16	Deb ;		// Frame de début dans le HQR
-	S16	Fin ;		// Frame de fin dans le HQR
+	int16_t	Deb ;		// Frame de début dans le HQR
+	int16_t	Fin ;		// Frame de fin dans le HQR
 }       T_ANIM_3DS ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
 typedef struct
 {
-	S32    X0 ;
-	S32    Y0 ;
-	S32    Z0 ;
-	S32    X1 ;
-	S32    Y1 ;
-	S32    Z1 ;
-	S32    Info0 ;
-	S32    Info1 ;
-	S32    Info2 ;
-	S32    Info3 ;
-	S32    Info4 ;	       	// Rajout de 4 champs infos le 08/12/95
-	S32    Info5 ;
-	S32    Info6 ;
-	S32    Info7 ;
+	int32_t    X0 ;
+	int32_t    Y0 ;
+	int32_t    Z0 ;
+	int32_t    X1 ;
+	int32_t    Y1 ;
+	int32_t    Z1 ;
+	int32_t    Info0 ;
+	int32_t    Info1 ;
+	int32_t    Info2 ;
+	int32_t    Info3 ;
+	int32_t    Info4 ;	       	// Rajout de 4 champs infos le 08/12/95
+	int32_t    Info5 ;
+	int32_t    Info6 ;
+	int32_t    Info7 ;
 
-	S16    Type ;
-	S16    Num ;
+	int16_t    Type ;
+	int16_t    Num ;
 
 #ifdef  LBA_EDITOR
-	S16    Snap  ;         	// ce champ ne sert que
+	int16_t    Snap  ;         	// ce champ ne sert que
 				// pour l'edition dans Visu3d !!!!
 #endif
 	}       T_ZONE ;
@@ -789,17 +789,17 @@ typedef struct
 
 #define MAX_HOLO_POS    150
 
-typedef struct  {       S16    Alpha ;
-			S16    Beta ;
-			S16    Size ;
+typedef struct  {       int16_t    Alpha ;
+			int16_t    Beta ;
+			int16_t    Size ;
 
-//                      S16    XIsland ;
-//                      S16    ZIsland ;
+//                      int16_t    XIsland ;
+//                      int16_t    ZIsland ;
 
-//                      U8   Type ;
+//                      uint8_t   Type ;
 
-			S16    Mess ;
-//                      S16    Fleche ;
+			int16_t    Mess ;
+//                      int16_t    Fleche ;
 						} T_HOLO_POS ;
 
 /*---------------- incrust display ---------*/
@@ -818,13 +818,13 @@ typedef struct  {       S16    Alpha ;
 
 #define	INCRUST_YCLIP		(1<<8)
 
-typedef struct  {       S16    Num ;
-			S16    X ;
-			S16    Y ;
-			S16    Type ;
-			S16    Info ;
-			S16    Move ;
-			U32   TimerEnd ;      }       T_INCRUST_DISP ;
+typedef struct  {       int16_t    Num ;
+			int16_t    X ;
+			int16_t    Y ;
+			int16_t    Type ;
+			int16_t    Info ;
+			int16_t    Move ;
+			uint32_t   TimerEnd ;      }       T_INCRUST_DISP ;
 
 /*---------------- Comportements du heros ---------*/
 
@@ -852,9 +852,9 @@ typedef struct	{
 	char	Name[50] ;	// Nom du comportement (pour l'éditeur)
 #endif
 
-	S32	Menu ;		// Index sur ListMenuComp
-	S32	AnimRien ;	// AnimRien specifique pour chaque comportement
-	U8	*PtrFile3d ;	// Pointeur sur fiche 3D
+	int32_t	Menu ;		// Index sur ListMenuComp
+	int32_t	AnimRien ;	// AnimRien specifique pour chaque comportement
+	uint8_t	*PtrFile3d ;	// Pointeur sur fiche 3D
 
 #ifdef	LBA_EDITOR
 	char	File3d[ADELINE_MAX_PATH] ;	// .3D (en version jeu, cela
@@ -862,7 +862,7 @@ typedef struct	{
 						// comportement)
 #endif
 
-	U32	Flags ;				// Caractéristiques du comportement
+	uint32_t	Flags ;				// Caractéristiques du comportement
 
 	}	T_COMPORTEMENT ;
 
@@ -881,11 +881,11 @@ typedef struct	{
 
 /*---------------- Menus Comportement ------------------*/
 typedef struct {
-	S32	Enable ;	// ce comportement-menu est-il disponible ?
-	S32	Previous ;	// comportement-menu précédent
-	S32	Next ;		// comportement-menu suivant
-	S32	NbComps ;	// nombre de comportement
-	S32	Comps[4]  ;	// Liste des comportements du menu
+	int32_t	Enable ;	// ce comportement-menu est-il disponible ?
+	int32_t	Previous ;	// comportement-menu précédent
+	int32_t	Next ;		// comportement-menu suivant
+	int32_t	NbComps ;	// nombre de comportement
+	int32_t	Comps[4]  ;	// Liste des comportements du menu
 	} T_MENU_COMP ;
 
 #define	MAX_MENUS_COMP	8
@@ -899,10 +899,10 @@ extern	T_MENU_COMP	ListMenuComp[MAX_MENUS_COMP] ;
 
 //#define Rnd(n)  (rand()%n)
 
-#define NUM_PERSO       ((U8)0)
+#define NUM_PERSO       ((uint8_t)0)
 #define COUL_PERSO      12	// Couleur de dialogue de Twinsen
 
-#define	NUM_ZOE		((U8)7)	// Numero de personnage scenarique
+#define	NUM_ZOE		((uint8_t)7)	// Numero de personnage scenarique
 #define	COUL_ZOE	4	// Couleur de dialogue de Zoe
 
 #define	COUL_CINEMA	0	// Couleur des bandes cinema
@@ -1364,12 +1364,12 @@ extern	T_MENU_COMP	ListMenuComp[MAX_MENUS_COMP] ;
 
 typedef	struct
 {
-	S32	Box		;//	Inventory position
-	S32	BetaObj		;//	Beta for 3D rotation
-	S32	PtMagie		;//	Needed magie
-	S32	FlagInv		;//	Flag : Used, New, Magic, etc.
-	S16	IdObj3D		;//	Etat courant
-	U8	TabObj3D[4]	;//	Objects evolution ( selon IdObj3D )
+	int32_t	Box		;//	Inventory position
+	int32_t	BetaObj		;//	Beta for 3D rotation
+	int32_t	PtMagie		;//	Needed magie
+	int32_t	FlagInv		;//	Flag : Used, New, Magic, etc.
+	int16_t	IdObj3D		;//	Etat courant
+	uint8_t	TabObj3D[4]	;//	Objects evolution ( selon IdObj3D )
 } T_INV_OBJ	;
 
 //======================== Issus de Dial 
@@ -1426,7 +1426,7 @@ typedef	struct
 #define	F_THROW_MAGIC_EXTRA	41
 #define	F_THROW_FOUDRE		42
 
-#define	NB_F_COMMAND	((S8)43)
+#define	NB_F_COMMAND	((int8_t)43)
 
 //=========================== Effets de Pcx
 #define	PCX_FADE	0

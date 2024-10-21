@@ -32,7 +32,7 @@ void	CloseCD()			;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	PlayCD(S32 track)		;
+void	PlayCD(int32_t track)		;
 
 //--------------------------------------------------------------------------
 //	ChangeVolumeCD :		change the volume of CD
@@ -41,14 +41,14 @@ void	PlayCD(S32 track)		;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ChangeVolumeCD(S32 volume)	;
+void	ChangeVolumeCD(int32_t volume)	;
 
 //--------------------------------------------------------------------------
 //	GetVolumeCD :			get the volume of CD
 //
 //	Returns	:			CD volume (0-127)
 //--------------------------------------------------------------------------
-S32	GetVolumeCD()			;
+int32_t	GetVolumeCD()			;
 
 //--------------------------------------------------------------------------
 //	StopCD :			stop playing track
@@ -78,7 +78,7 @@ void	ResumeCD()			;
 //
 //	Returns	:			TRUE/FALSE
 //--------------------------------------------------------------------------
-S32	IsCDPlaying()		;
+int32_t	IsCDPlaying()		;
 
 //--------------------------------------------------------------------------
 #ifdef __cplusplus

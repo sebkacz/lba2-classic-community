@@ -15,29 +15,29 @@
 
 #include	"DRAWSKY.CPP"
 
-S32	Sky_Y ;
-//S32	NbDrawnPolys ;
+int32_t	Sky_Y ;
+//int32_t	NbDrawnPolys ;
 
-S32	FlagMasque = TRUE ;
+int32_t	FlagMasque = TRUE ;
 
 #if defined(DEBUG_TOOLS)&&defined(LBA_GAME)
-extern	S32	DebugFps	;
+extern	int32_t	DebugFps	;
 #endif
 
 #ifndef	LBA_GAME
-S32	Reglage = 0 ;
+int32_t	Reglage = 0 ;
 #endif
 
 #ifdef	LBA_EDITOR	// Special PERSO.EXE
 #define	INFO_DECORS	1024
-extern	S32	FlagInfos ;
+extern	int32_t	FlagInfos ;
 #endif
 
 //****************************************************************************
 //****************************************************************************
 
-S32	ListTypePolygone[4] =	{ 0, POLY_SOLID, POLY_GOURAUD_TABLE, POLY_DITHER_TABLE } ;
-S32	ListTypePTexture[] =	{
+int32_t	ListTypePolygone[4] =	{ 0, POLY_SOLID, POLY_GOURAUD_TABLE, POLY_DITHER_TABLE } ;
+int32_t	ListTypePTexture[] =	{
 	0, POLY_TEXTURE, POLY_TEXTURE_FLAT, POLY_TEXTURE_GOURAUD,
 	0, POLY_TEXTURE_INCRUST, POLY_TEXTURE_INCRUST_FLAT, POLY_TEXTURE_INCRUST_GOURAUD,
 	0, POLY_TEXTURE_INCRUST, POLY_TEXTURE_INCRUST_FLAT, POLY_TEXTURE_INCRUST_GOURAUD,
@@ -68,7 +68,7 @@ void	DrawSkySeaZBuf()
 
 void	ClsTerrainZBuf()
 {
-	SetClearColor( (U8)FogCoul ) 	;
+	SetClearColor( (uint8_t)FogCoul ) 	;
 	Cls()				;
 	SetClearColor( 0 ) 		;
 
@@ -76,18 +76,18 @@ void	ClsTerrainZBuf()
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
+static inline void DrawFeuillePolyZBuf( int32_t xi, int32_t zi, T_SOMMET_ROT *ptrs)
 {
-	S32 		color		;
+	int32_t 		color		;
 	T_HALF_POLY	*ptrh		;
-	S32 		f0, f1, f2, f3 	;
-	S32		i0, i1, i2, i3	;
-	S32 		x0, z0 		;
-	S32 		x1, z1 		;
-	S32 		x2, z2 		;
-	S32 		x3, z3 		;
-	U8		type		;
-	U16		fog		;
+	int32_t 		f0, f1, f2, f3 	;
+	int32_t		i0, i1, i2, i3	;
+	int32_t 		x0, z0 		;
+	int32_t 		x1, z1 		;
+	int32_t 		x2, z2 		;
+	int32_t 		x3, z3 		;
+	uint8_t		type		;
+	uint16_t		fog		;
 
 	ptrh = &MapPolyGround[zi*(64*2)+xi*2] ;
 
@@ -114,7 +114,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 					ClipZFar - StartZFog,
 					f0 - StartZFog ) ;
 */
-	fog = (U16)(PalLevel + 16 * BoundRegleTrois(0,15,
+	fog = (uint16_t)(PalLevel + 16 * BoundRegleTrois(0,15,
 						ClipZFar - StartZFog,
 						f0 - StartZFog ) )	;
 	SetCLUT( fog ) ;
@@ -125,7 +125,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 	f2 = GET_ZO(ptrs[66].Zrot)	;
 
 	{
-		U8	*i = &MapIntensity[zi*65+xi] 	;
+		uint8_t	*i = &MapIntensity[zi*65+xi] 	;
 
 		i0 = (i[0]&15)*256 - 255		;
 		i1 = (i[65]&15)*256 - 255		;
@@ -149,24 +149,24 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 		{
 			// type 0 triangle 0----------------------------
 
-			Tab_Points[0].Pt_XE	= (S16)x0 ;
-			Tab_Points[0].Pt_YE	= (S16)z0 ;
-			Tab_Points[1].Pt_XE	= (S16)x1 ;
-			Tab_Points[1].Pt_YE	= (S16)z1 ;
-			Tab_Points[2].Pt_XE	= (S16)x2 ;
-			Tab_Points[2].Pt_YE	= (S16)z2 ;
+			Tab_Points[0].Pt_XE	= (int16_t)x0 ;
+			Tab_Points[0].Pt_YE	= (int16_t)z0 ;
+			Tab_Points[1].Pt_XE	= (int16_t)x1 ;
+			Tab_Points[1].Pt_YE	= (int16_t)z1 ;
+			Tab_Points[2].Pt_XE	= (int16_t)x2 ;
+			Tab_Points[2].Pt_YE	= (int16_t)z2 ;
 
 			if( TestVuePoly( Tab_Points ) )
 			{
 				color = (ptrh->Bank << 4) + 11	;
 
-				Tab_Points[0].Pt_Light	= (S16)i0 ;
-				Tab_Points[1].Pt_Light	= (S16)i1 ;
-				Tab_Points[2].Pt_Light	= (S16)i2 ;
+				Tab_Points[0].Pt_Light	= (int16_t)i0 ;
+				Tab_Points[1].Pt_Light	= (int16_t)i1 ;
+				Tab_Points[2].Pt_Light	= (int16_t)i2 ;
 
-				Tab_Points[0].Pt_ZO     = (U16)f0 ;
-				Tab_Points[1].Pt_ZO     = (U16)f1 ;
-				Tab_Points[2].Pt_ZO     = (U16)f2 ;
+				Tab_Points[0].Pt_ZO     = (uint16_t)f0 ;
+				Tab_Points[1].Pt_ZO     = (uint16_t)f1 ;
+				Tab_Points[2].Pt_ZO     = (uint16_t)f2 ;
 
 				if( ptrh->PolyFlag )
 				{
@@ -198,7 +198,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						color = ((i0+i1+i2)*21845)>>24 ;	// *21845 >> 16 EQU / 3
 					}
 
-					type = (U8)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
+					type = (uint8_t)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
 
 					if( Fill_Poly( type, color, 3, Tab_Points ) )
 					{
@@ -207,16 +207,16 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 
 							if( NbAniPoly < MaxPolySea-1 )
 							{
-								PtrAniPoly->X0 = (S16)Min3( x0, x1, x2 ) ;
-								PtrAniPoly->Y0 = (S16)Min3( z0, z1, z2 ) ;
-								PtrAniPoly->X1 = (S16)Max3( x0, x1, x2 ) ;
-								PtrAniPoly->Y1 = (S16)Max3( z0, z1, z2 ) ;
+								PtrAniPoly->X0 = (int16_t)Min3( x0, x1, x2 ) ;
+								PtrAniPoly->Y0 = (int16_t)Min3( z0, z1, z2 ) ;
+								PtrAniPoly->X1 = (int16_t)Max3( x0, x1, x2 ) ;
+								PtrAniPoly->Y1 = (int16_t)Max3( z0, z1, z2 ) ;
 
 								if( ((PtrAniPoly->Y1-PtrAniPoly->Y0)>ANI_POLY_STEP_Y)
 								AND ((PtrAniPoly->X1-PtrAniPoly->X0)>ANI_POLY_STEP_X) )
 								{
 									PtrAniPoly->Type = type ;
-									PtrAniPoly->Color = (U8)color ;
+									PtrAniPoly->Color = (uint8_t)color ;
 
 									PtrAniPoly->Fog = fog ;
 
@@ -245,24 +245,24 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 
 		if( ptrh->PolyFlag + ptrh->TexFlag )
 		{
-			Tab_Points[0].Pt_XE 	= (S16)x2 ;
-			Tab_Points[0].Pt_YE 	= (S16)z2 ;
-			Tab_Points[1].Pt_XE 	= (S16)x3 ;
-			Tab_Points[1].Pt_YE 	= (S16)z3 ;
-			Tab_Points[2].Pt_XE 	= (S16)x0 ;
-			Tab_Points[2].Pt_YE 	= (S16)z0 ;
+			Tab_Points[0].Pt_XE 	= (int16_t)x2 ;
+			Tab_Points[0].Pt_YE 	= (int16_t)z2 ;
+			Tab_Points[1].Pt_XE 	= (int16_t)x3 ;
+			Tab_Points[1].Pt_YE 	= (int16_t)z3 ;
+			Tab_Points[2].Pt_XE 	= (int16_t)x0 ;
+			Tab_Points[2].Pt_YE 	= (int16_t)z0 ;
 
 			if( TestVuePoly( Tab_Points ) )
 			{
 				color = (ptrh->Bank << 4) + 11 	;
 
-				Tab_Points[0].Pt_Light	= (S16)i2 ;
-				Tab_Points[1].Pt_Light 	= (S16)i3 ;
-				Tab_Points[2].Pt_Light 	= (S16)i0 ;
+				Tab_Points[0].Pt_Light	= (int16_t)i2 ;
+				Tab_Points[1].Pt_Light 	= (int16_t)i3 ;
+				Tab_Points[2].Pt_Light 	= (int16_t)i0 ;
 
-				Tab_Points[0].Pt_ZO     = (U16)f2 ;
-				Tab_Points[1].Pt_ZO     = (U16)f3 ;
-				Tab_Points[2].Pt_ZO     = (U16)f0 ;
+				Tab_Points[0].Pt_ZO     = (uint16_t)f2 ;
+				Tab_Points[1].Pt_ZO     = (uint16_t)f3 ;
+				Tab_Points[2].Pt_ZO     = (uint16_t)f0 ;
 
 				if( ptrh->PolyFlag )
 				{
@@ -293,7 +293,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						color = ((i0+i2+i3)*21845)>>24 ;	// *21845 >> 16 EQU / 3
 					}
 
-					type = (U8)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
+					type = (uint8_t)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
 
 					if( Fill_Poly( type, color, 3, Tab_Points ) )
 					{
@@ -301,16 +301,16 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						{ // hihi je suis un polygone animé...
 							if( NbAniPoly < MaxPolySea-1 )
 							{
-								PtrAniPoly->X0 = (S16)Min3( x0, x2, x3 ) ;
-								PtrAniPoly->Y0 = (S16)Min3( z0, z2, z3 ) ;
-								PtrAniPoly->X1 = (S16)Max3( x0, x2, x3 ) ;
-								PtrAniPoly->Y1 = (S16)Max3( z0, z2, z3 ) ;
+								PtrAniPoly->X0 = (int16_t)Min3( x0, x2, x3 ) ;
+								PtrAniPoly->Y0 = (int16_t)Min3( z0, z2, z3 ) ;
+								PtrAniPoly->X1 = (int16_t)Max3( x0, x2, x3 ) ;
+								PtrAniPoly->Y1 = (int16_t)Max3( z0, z2, z3 ) ;
 
 								if( ((PtrAniPoly->Y1-PtrAniPoly->Y0)>ANI_POLY_STEP_Y)
 								AND ((PtrAniPoly->X1-PtrAniPoly->X0)>ANI_POLY_STEP_X) )
 								{
 									PtrAniPoly->Type = type ;
-									PtrAniPoly->Color = (U8)color ;
+									PtrAniPoly->Color = (uint8_t)color ;
 
 									PtrAniPoly->Fog = fog ;
 
@@ -341,24 +341,24 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 
 		if( ptrh->PolyFlag + ptrh->TexFlag )
 		{
-			Tab_Points[0].Pt_XE	= (S16)x3 ;
-			Tab_Points[0].Pt_YE	= (S16)z3 ;
-			Tab_Points[1].Pt_XE	= (S16)x0 ;
-			Tab_Points[1].Pt_YE	= (S16)z0 ;
-			Tab_Points[2].Pt_XE	= (S16)x1 ;
-			Tab_Points[2].Pt_YE	= (S16)z1 ;
+			Tab_Points[0].Pt_XE	= (int16_t)x3 ;
+			Tab_Points[0].Pt_YE	= (int16_t)z3 ;
+			Tab_Points[1].Pt_XE	= (int16_t)x0 ;
+			Tab_Points[1].Pt_YE	= (int16_t)z0 ;
+			Tab_Points[2].Pt_XE	= (int16_t)x1 ;
+			Tab_Points[2].Pt_YE	= (int16_t)z1 ;
 
 			if( TestVuePoly( Tab_Points ) )
 			{
 				color = (ptrh->Bank << 4) + 11 	;
 
-				Tab_Points[0].Pt_Light	= (S16)i3 ;
-				Tab_Points[1].Pt_Light	= (S16)i0 ;
-				Tab_Points[2].Pt_Light	= (S16)i1 ;
+				Tab_Points[0].Pt_Light	= (int16_t)i3 ;
+				Tab_Points[1].Pt_Light	= (int16_t)i0 ;
+				Tab_Points[2].Pt_Light	= (int16_t)i1 ;
 
-				Tab_Points[0].Pt_ZO     = (U16)f3 ;
-				Tab_Points[1].Pt_ZO     = (U16)f0 ;
-				Tab_Points[2].Pt_ZO     = (U16)f1 ;
+				Tab_Points[0].Pt_ZO     = (uint16_t)f3 ;
+				Tab_Points[1].Pt_ZO     = (uint16_t)f0 ;
+				Tab_Points[2].Pt_ZO     = (uint16_t)f1 ;
 
 				if( ptrh->PolyFlag )
 				{
@@ -389,7 +389,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						color = ((i0+i1+i3)*21845)>>24 ;	// *21845 >> 16 EQU / 3
 					}
 
-					type = (U8)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
+					type = (uint8_t)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
 
 					if( Fill_Poly( type, color, 3, Tab_Points ) )
 					{
@@ -397,16 +397,16 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						{ // hihi je suis un polygone animé...
 							if( NbAniPoly < MaxPolySea-1 )
 							{
-								PtrAniPoly->X0 = (S16)Min3( x0, x1, x3 ) ;
-								PtrAniPoly->Y0 = (S16)Min3( z0, z1, z3 ) ;
-								PtrAniPoly->X1 = (S16)Max3( x0, x1, x3 ) ;
-								PtrAniPoly->Y1 = (S16)Max3( z0, z1, z3 ) ;
+								PtrAniPoly->X0 = (int16_t)Min3( x0, x1, x3 ) ;
+								PtrAniPoly->Y0 = (int16_t)Min3( z0, z1, z3 ) ;
+								PtrAniPoly->X1 = (int16_t)Max3( x0, x1, x3 ) ;
+								PtrAniPoly->Y1 = (int16_t)Max3( z0, z1, z3 ) ;
 
 								if( ((PtrAniPoly->Y1-PtrAniPoly->Y0)>ANI_POLY_STEP_Y)
 								AND ((PtrAniPoly->X1-PtrAniPoly->X0)>ANI_POLY_STEP_X) )
 								{
 									PtrAniPoly->Type = type ;
-									PtrAniPoly->Color = (U8)color ;
+									PtrAniPoly->Color = (uint8_t)color ;
 
 									PtrAniPoly->Fog = fog ;
 
@@ -435,24 +435,24 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 
 		if( ptrh->PolyFlag + ptrh->TexFlag )
 		{
-			Tab_Points[0].Pt_XE 	= (S16)x1 ;
-			Tab_Points[0].Pt_YE 	= (S16)z1 ;
-			Tab_Points[1].Pt_XE 	= (S16)x2 ;
-			Tab_Points[1].Pt_YE 	= (S16)z2 ;
-			Tab_Points[2].Pt_XE	= (S16)x3 ;
-			Tab_Points[2].Pt_YE	= (S16)z3 ;
+			Tab_Points[0].Pt_XE 	= (int16_t)x1 ;
+			Tab_Points[0].Pt_YE 	= (int16_t)z1 ;
+			Tab_Points[1].Pt_XE 	= (int16_t)x2 ;
+			Tab_Points[1].Pt_YE 	= (int16_t)z2 ;
+			Tab_Points[2].Pt_XE	= (int16_t)x3 ;
+			Tab_Points[2].Pt_YE	= (int16_t)z3 ;
 
 			if( TestVuePoly( Tab_Points ) )
 			{
 				color = (ptrh->Bank << 4) + 11 ;
 
-				Tab_Points[0].Pt_Light 	= (S16)i1 ;
-				Tab_Points[1].Pt_Light 	= (S16)i2 ;
-				Tab_Points[2].Pt_Light	= (S16)i3 ;
+				Tab_Points[0].Pt_Light 	= (int16_t)i1 ;
+				Tab_Points[1].Pt_Light 	= (int16_t)i2 ;
+				Tab_Points[2].Pt_Light	= (int16_t)i3 ;
 
-				Tab_Points[0].Pt_ZO     = (U16)f1 ;
-				Tab_Points[1].Pt_ZO     = (U16)f2 ;
-				Tab_Points[2].Pt_ZO     = (U16)f3 ;
+				Tab_Points[0].Pt_ZO     = (uint16_t)f1 ;
+				Tab_Points[1].Pt_ZO     = (uint16_t)f2 ;
+				Tab_Points[2].Pt_ZO     = (uint16_t)f3 ;
 
 				if( ptrh->PolyFlag )
 				{
@@ -484,7 +484,7 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						color = ((i1+i2+i3)*21845)>>24 ;	// *21845 >> 16 EQU / 3
 					}
 
-					type = (U8)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
+					type = (uint8_t)ListTypePTexture[ptrh->TexFlag+(ptrh->PolyFlag<<2)] ;
 
 					if( Fill_Poly( type, color, 3, Tab_Points ) )
 					{
@@ -492,16 +492,16 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 						{ // hihi je suis un polygone animé...
 							if( NbAniPoly < MaxPolySea-1 )
 							{
-								PtrAniPoly->X0 = (S16)Min3( x1, x2, x3 ) ;
-								PtrAniPoly->Y0 = (S16)Min3( z1, z2, z3 ) ;
-								PtrAniPoly->X1 = (S16)Max3( x1, x2, x3 ) ;
-								PtrAniPoly->Y1 = (S16)Max3( z1, z2, z3 ) ;
+								PtrAniPoly->X0 = (int16_t)Min3( x1, x2, x3 ) ;
+								PtrAniPoly->Y0 = (int16_t)Min3( z1, z2, z3 ) ;
+								PtrAniPoly->X1 = (int16_t)Max3( x1, x2, x3 ) ;
+								PtrAniPoly->Y1 = (int16_t)Max3( z1, z2, z3 ) ;
 
 								if( ((PtrAniPoly->Y1-PtrAniPoly->Y0)>ANI_POLY_STEP_Y)
 								AND ((PtrAniPoly->X1-PtrAniPoly->X0)>ANI_POLY_STEP_X) )
 								{
 									PtrAniPoly->Type = type ;
-									PtrAniPoly->Color = (U8)color ;
+									PtrAniPoly->Color = (uint8_t)color ;
 
 									PtrAniPoly->Fog = fog ;
 
@@ -555,31 +555,31 @@ static inline void DrawFeuillePolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs)
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-static inline void FillBlackPolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs, U8 *ptra)
+static inline void FillBlackPolyZBuf( int32_t xi, int32_t zi, T_SOMMET_ROT *ptrs, uint8_t *ptra)
 {
 	T_HALF_POLY	*ptrh		;
-//	S32 		f0, f1, f2, f3 	;
-//	S32 		f00, f10, f20, f30 ;
-	S32 		x0, z0 		;
-	S32 		x1, z1 		;
-	S32 		x2, z2 		;
-	S32 		x3, z3 		;
-	U8		b0, b1, b2, b3	;
+//	int32_t 		f0, f1, f2, f3 	;
+//	int32_t 		f00, f10, f20, f30 ;
+	int32_t 		x0, z0 		;
+	int32_t 		x1, z1 		;
+	int32_t 		x2, z2 		;
+	int32_t 		x3, z3 		;
+	uint8_t		b0, b1, b2, b3	;
 
 	ptrh = &MapPolyGround[zi*(64*2)+xi*2] ;
 
 	x0 = ptrs[0].X2D	;
 	z0 = ptrs[0].Y2D 	;
-	b0 = (U8)(ptra[0]&32) 	;
+	b0 = (uint8_t)(ptra[0]&32) 	;
 	x1 = ptrs[65].X2D 	;
 	z1 = ptrs[65].Y2D 	;
-	b1 = (U8)(ptra[65]&32) 	;
+	b1 = (uint8_t)(ptra[65]&32) 	;
 	x3 = ptrs[1].X2D 	;
 	z3 = ptrs[1].Y2D 	;
-	b3 = (U8)(ptra[1]&32) 	;
+	b3 = (uint8_t)(ptra[1]&32) 	;
 	x2 = ptrs[66].X2D 	;
 	z2 = ptrs[66].Y2D 	;
-	b2 = (U8)(ptra[66]&32) 	;
+	b2 = (uint8_t)(ptra[66]&32) 	;
 
 /*
 	xi *= 512 ;
@@ -602,96 +602,96 @@ static inline void FillBlackPolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs, U8 *pt
 
 	if(!(b0|b1))
 	{
-		Tab_Points[0].Pt_XE	= (S16)x0 ;
-		Tab_Points[0].Pt_YE	= (S16)z0 ;
-		Tab_Points[1].Pt_XE	= (S16)x1 ;
-		Tab_Points[1].Pt_YE	= (S16)z1 ;
-		Tab_Points[2].Pt_XE	= (S16)x1 ;
-		Tab_Points[2].Pt_YE	= (S16)479;
-		Tab_Points[3].Pt_XE	= (S16)x0 ;
-		Tab_Points[3].Pt_YE	= (S16)479;
+		Tab_Points[0].Pt_XE	= (int16_t)x0 ;
+		Tab_Points[0].Pt_YE	= (int16_t)z0 ;
+		Tab_Points[1].Pt_XE	= (int16_t)x1 ;
+		Tab_Points[1].Pt_YE	= (int16_t)z1 ;
+		Tab_Points[2].Pt_XE	= (int16_t)x1 ;
+		Tab_Points[2].Pt_YE	= (int16_t)479;
+		Tab_Points[3].Pt_XE	= (int16_t)x0 ;
+		Tab_Points[3].Pt_YE	= (int16_t)479;
 
-		Tab_Points[0].Pt_Light	= (S16)0  ;
-		Tab_Points[1].Pt_Light 	= (S16)0  ;
-		Tab_Points[2].Pt_Light 	= (S16)0  ;
-		Tab_Points[3].Pt_Light 	= (S16)0  ;
+		Tab_Points[0].Pt_Light	= (int16_t)0  ;
+		Tab_Points[1].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[2].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[3].Pt_Light 	= (int16_t)0  ;
 
-		Tab_Points[0].Pt_ZO     = (U16)0  ;
-		Tab_Points[1].Pt_ZO     = (U16)0  ;
-		Tab_Points[2].Pt_ZO     = (U16)0  ;
-		Tab_Points[3].Pt_ZO     = (U16)0  ;
+		Tab_Points[0].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[1].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[2].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[3].Pt_ZO     = (uint16_t)0  ;
 
 		Fill_Poly( 0, 0, 4, Tab_Points ) ;
 	}
 
 	if(!(b1|b2))
 	{
-		Tab_Points[0].Pt_XE	= (S16)x1 ;
-		Tab_Points[0].Pt_YE	= (S16)z1 ;
-		Tab_Points[1].Pt_XE	= (S16)x2 ;
-		Tab_Points[1].Pt_YE	= (S16)z2 ;
-		Tab_Points[2].Pt_XE	= (S16)x2 ;
-		Tab_Points[2].Pt_YE	= (S16)479;
-		Tab_Points[3].Pt_XE	= (S16)x1 ;
-		Tab_Points[3].Pt_YE	= (S16)479;
+		Tab_Points[0].Pt_XE	= (int16_t)x1 ;
+		Tab_Points[0].Pt_YE	= (int16_t)z1 ;
+		Tab_Points[1].Pt_XE	= (int16_t)x2 ;
+		Tab_Points[1].Pt_YE	= (int16_t)z2 ;
+		Tab_Points[2].Pt_XE	= (int16_t)x2 ;
+		Tab_Points[2].Pt_YE	= (int16_t)479;
+		Tab_Points[3].Pt_XE	= (int16_t)x1 ;
+		Tab_Points[3].Pt_YE	= (int16_t)479;
 
-		Tab_Points[0].Pt_Light	= (S16)0  ;
-		Tab_Points[1].Pt_Light 	= (S16)0  ;
-		Tab_Points[2].Pt_Light 	= (S16)0  ;
-		Tab_Points[3].Pt_Light 	= (S16)0  ;
+		Tab_Points[0].Pt_Light	= (int16_t)0  ;
+		Tab_Points[1].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[2].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[3].Pt_Light 	= (int16_t)0  ;
 
-		Tab_Points[0].Pt_ZO     = (U16)0  ;
-		Tab_Points[1].Pt_ZO     = (U16)0  ;
-		Tab_Points[2].Pt_ZO     = (U16)0  ;
-		Tab_Points[3].Pt_ZO     = (U16)0  ;
+		Tab_Points[0].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[1].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[2].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[3].Pt_ZO     = (uint16_t)0  ;
 
 		Fill_Poly( 0, 0, 4, Tab_Points ) ;
 	}
 
 	if(!(b2|b3))
 	{
-		Tab_Points[0].Pt_XE	= (S16)x2 ;
-		Tab_Points[0].Pt_YE	= (S16)z2 ;
-		Tab_Points[1].Pt_XE	= (S16)x3 ;
-		Tab_Points[1].Pt_YE	= (S16)z3 ;
-		Tab_Points[2].Pt_XE	= (S16)x3 ;
-		Tab_Points[2].Pt_YE	= (S16)479;
-		Tab_Points[3].Pt_XE	= (S16)x2 ;
-		Tab_Points[3].Pt_YE	= (S16)479;
+		Tab_Points[0].Pt_XE	= (int16_t)x2 ;
+		Tab_Points[0].Pt_YE	= (int16_t)z2 ;
+		Tab_Points[1].Pt_XE	= (int16_t)x3 ;
+		Tab_Points[1].Pt_YE	= (int16_t)z3 ;
+		Tab_Points[2].Pt_XE	= (int16_t)x3 ;
+		Tab_Points[2].Pt_YE	= (int16_t)479;
+		Tab_Points[3].Pt_XE	= (int16_t)x2 ;
+		Tab_Points[3].Pt_YE	= (int16_t)479;
 
-		Tab_Points[0].Pt_Light	= (S16)0  ;
-		Tab_Points[1].Pt_Light 	= (S16)0  ;
-		Tab_Points[2].Pt_Light 	= (S16)0  ;
-		Tab_Points[3].Pt_Light 	= (S16)0  ;
+		Tab_Points[0].Pt_Light	= (int16_t)0  ;
+		Tab_Points[1].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[2].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[3].Pt_Light 	= (int16_t)0  ;
 
-		Tab_Points[0].Pt_ZO     = (U16)0  ;
-		Tab_Points[1].Pt_ZO     = (U16)0  ;
-		Tab_Points[2].Pt_ZO     = (U16)0  ;
-		Tab_Points[3].Pt_ZO     = (U16)0  ;
+		Tab_Points[0].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[1].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[2].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[3].Pt_ZO     = (uint16_t)0  ;
 
 		Fill_Poly( 0, 0, 4, Tab_Points ) ;
 	}
 
 	if(!(b3|b0))
 	{
-		Tab_Points[0].Pt_XE	= (S16)x3 ;
-		Tab_Points[0].Pt_YE	= (S16)z3 ;
-		Tab_Points[1].Pt_XE	= (S16)x0 ;
-		Tab_Points[1].Pt_YE	= (S16)z0 ;
-		Tab_Points[2].Pt_XE	= (S16)x0 ;
-		Tab_Points[2].Pt_YE	= (S16)479;
-		Tab_Points[3].Pt_XE	= (S16)x3 ;
-		Tab_Points[3].Pt_YE	= (S16)479;
+		Tab_Points[0].Pt_XE	= (int16_t)x3 ;
+		Tab_Points[0].Pt_YE	= (int16_t)z3 ;
+		Tab_Points[1].Pt_XE	= (int16_t)x0 ;
+		Tab_Points[1].Pt_YE	= (int16_t)z0 ;
+		Tab_Points[2].Pt_XE	= (int16_t)x0 ;
+		Tab_Points[2].Pt_YE	= (int16_t)479;
+		Tab_Points[3].Pt_XE	= (int16_t)x3 ;
+		Tab_Points[3].Pt_YE	= (int16_t)479;
 
-		Tab_Points[0].Pt_Light	= (S16)0  ;
-		Tab_Points[1].Pt_Light 	= (S16)0  ;
-		Tab_Points[2].Pt_Light 	= (S16)0  ;
-		Tab_Points[3].Pt_Light 	= (S16)0  ;
+		Tab_Points[0].Pt_Light	= (int16_t)0  ;
+		Tab_Points[1].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[2].Pt_Light 	= (int16_t)0  ;
+		Tab_Points[3].Pt_Light 	= (int16_t)0  ;
 
-		Tab_Points[0].Pt_ZO     = (U16)0  ;
-		Tab_Points[1].Pt_ZO     = (U16)0  ;
-		Tab_Points[2].Pt_ZO     = (U16)0  ;
-		Tab_Points[3].Pt_ZO     = (U16)0  ;
+		Tab_Points[0].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[1].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[2].Pt_ZO     = (uint16_t)0  ;
+		Tab_Points[3].Pt_ZO     = (uint16_t)0  ;
 
 		Fill_Poly( 0, 0, 4, Tab_Points ) ;
 	}
@@ -699,8 +699,8 @@ static inline void FillBlackPolyZBuf( S32 xi, S32 zi, T_SOMMET_ROT *ptrs, U8 *pt
 /*──────────────────────────────────────────────────────────────────────────*/
 struct S_Terrain
 	{
-		S8 x ;
-		S8 y ;
+		int8_t x ;
+		int8_t y ;
 	} ;
 
 struct S_Terrain	TerrNO[9] = {
@@ -729,20 +729,20 @@ struct S_Terrain	TerrSE[9] = {
 
 struct S_Terrain	*TerrainTri ;
 
-S32	OffPosCamera[3]	= {	// offsets camera precalculés
+int32_t	OffPosCamera[3]	= {	// offsets camera precalculés
 	-(512*64),	// -1
 	0,		//  0
 	(512*64)	//  1
 	} ;
 
-extern	S32	PtrProjectPoint( S32 xw, S32 yw, S32 zw ) ;
+extern	int32_t	PtrProjectPoint( int32_t xw, int32_t yw, int32_t zw ) ;
 
 void DrawHorizon2ZBuf()
 {
-	S32	flag = FALSE ;
-	S32	cx = CameraX ;
-	S32	cy = CameraY ;
-	S32	cz = CameraZ ;
+	int32_t	flag = FALSE ;
+	int32_t	cx = CameraX ;
+	int32_t	cy = CameraY ;
+	int32_t	cz = CameraZ ;
 
 	if( BetaCam>=0 AND BetaCam<1024 )
 	{
@@ -778,9 +778,9 @@ void DrawHorizon2ZBuf()
 		TerrainTri = TerrNO ;
 	}
 */
-	for(S32 n=9; n>0; n--, TerrainTri++ )
+	for(int32_t n=9; n>0; n--, TerrainTri++ )
 	{
-		S32	x,y ;
+		int32_t	x,y ;
 
 		x = CurrentCubeX + TerrainTri->x ;
 		y = CurrentCubeY + TerrainTri->y ;
@@ -826,14 +826,14 @@ void DrawHorizon2ZBuf()
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U32 MaskVisible(U8 *in_ptr) {
+uint32_t MaskVisible(uint8_t *in_ptr) {
         // This code conversion could be improved...
 
-        U8 *firstRow = in_ptr;
-        U8 *secondRow = in_ptr + 65;
+        uint8_t *firstRow = in_ptr;
+        uint8_t *secondRow = in_ptr + 65;
 
-        U8 maskH = *firstRow;
-        U8 maskL = *firstRow;
+        uint8_t maskH = *firstRow;
+        uint8_t maskL = *firstRow;
 
         maskH |= *secondRow;
         maskL &= *secondRow;
@@ -844,7 +844,7 @@ U32 MaskVisible(U8 *in_ptr) {
         maskH |= *(secondRow + 1);
         maskL &= *(secondRow + 1);
 
-        U32 finalMask = 0;
+        uint32_t finalMask = 0;
         finalMask |= (maskH << 8);
         finalMask |= maskL;
         finalMask &= 0x20FF;
@@ -855,8 +855,8 @@ U32 MaskVisible(U8 *in_ptr) {
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AffichageTerrainZBuf( void )
 {
-	S16		*ptrm	;
-	U8		*ptra	;
+	int16_t		*ptrm	;
+	uint8_t		*ptra	;
 	T_SOMMET_ROT	*ptrs	;
 
 	// affichage des objets du decors
@@ -867,11 +867,11 @@ void	AffichageTerrainZBuf( void )
 	ptrm = MapSommetY ;
 	ptrs = &SommetRot[0][0] ;
 
-	for (S32 z=0; z<=NB_COTE*512; z+=512)
+	for (int32_t z=0; z<=NB_COTE*512; z+=512)
 	{
-		for (S32 x=0; x<=NB_COTE*512; x+=512)
+		for (int32_t x=0; x<=NB_COTE*512; x+=512)
 		{
-			S32	zr ;
+			int32_t	zr ;
 
 			LongWorldRotatePoint(x, *ptrm, z);
 
@@ -886,7 +886,7 @@ void	AffichageTerrainZBuf( void )
 			else if( (zr<ClipZFar)
 				AND LongProjectPoint( X0,Y0,Z0 ) )
 			{
-				U8	flag	;
+				uint8_t	flag	;
 
 				flag = 16	;
 
@@ -899,8 +899,8 @@ void	AffichageTerrainZBuf( void )
 
 				ptrs->Zrot 	= zr;
 
-				ptrs->X2D	= (S16)Xp;
-				ptrs->Y2D	= (S16)Yp;
+				ptrs->X2D	= (int16_t)Xp;
+				ptrs->Y2D	= (int16_t)Yp;
 
 			}
 			else
@@ -920,11 +920,11 @@ void	AffichageTerrainZBuf( void )
 	ptra  = &SommetAffichable[0][0] ;
 	ptrs  = &SommetRot[0][0] ;
 
-	for(S32 z=0; z<NB_COTE; z++)
+	for(int32_t z=0; z<NB_COTE; z++)
 	{
-		for(S32 x=0; x<NB_COTE; x++)
+		for(int32_t x=0; x<NB_COTE; x++)
 		{
-			S32 mask ;
+			int32_t mask ;
 
 			mask = MaskVisible(ptra) ;
 
@@ -967,8 +967,8 @@ void	AffichageTerrainZBuf( void )
 
 void	AffichageTerrainZBuf( void )
 {
-	S16		*ptrm	;
-	U8		*ptra	;
+	int16_t		*ptrm	;
+	uint8_t		*ptra	;
 	T_SOMMET_ROT	*ptrs	;
 
 	// affichage des objets du decors
@@ -979,11 +979,11 @@ void	AffichageTerrainZBuf( void )
 	ptrm = MapSommetY ;
 	ptrs = &SommetRot[0][0] ;
 
-	for (S32 z=0; z<=NB_COTE*512; z+=512)
+	for (int32_t z=0; z<=NB_COTE*512; z+=512)
 	{
-		for (S32 x=0; x<=NB_COTE*512; x+=512)
+		for (int32_t x=0; x<=NB_COTE*512; x+=512)
 		{
-			S32	zr ;
+			int32_t	zr ;
 
 			LongWorldRotatePoint(x, *ptrm, z);
 
@@ -995,7 +995,7 @@ void	AffichageTerrainZBuf( void )
 			AND (zr>NearClip)
 			AND LongProjectPoint( X0,Y0,Z0 ) )
 			{
-				U8	flag	;
+				uint8_t	flag	;
 
 				flag = 16	;
 
@@ -1008,8 +1008,8 @@ void	AffichageTerrainZBuf( void )
 
 				ptrs->Zrot 	= zr;
 
-				ptrs->X2D	= (S16)Xp;
-				ptrs->Y2D	= (S16)Yp;
+				ptrs->X2D	= (int16_t)Xp;
+				ptrs->Y2D	= (int16_t)Yp;
 
 			}
 			else
@@ -1031,7 +1031,7 @@ void	AffichageTerrainZBuf( void )
 
 	for(z=0; z<NB_COTE; z++)
 	{
-		for(S32 x=0; x<NB_COTE; x++)
+		for(int32_t x=0; x<NB_COTE; x++)
 		{
 			if (MaskVisible(ptra) == 16)
 			{
@@ -1055,12 +1055,12 @@ void	AffichageTerrainZBuf( void )
 
 void	AffichageTerrainRapide( void )
 {
-	for (S32 xi=0; xi<=NB_COTE; xi++)
+	for (int32_t xi=0; xi<=NB_COTE; xi++)
 	{
-		for (S32 zi=0; zi<=NB_COTE; zi++)
+		for (int32_t zi=0; zi<=NB_COTE; zi++)
 		{
 			LongWorldRotatePoint( 	xi*512,
-						(S32)MapSommetY[zi*65+xi],
+						(int32_t)MapSommetY[zi*65+xi],
 						zi*512 );
 
 			if( LongProjectPoint( X0,Y0,Z0 ) )
@@ -1074,9 +1074,9 @@ void	AffichageTerrainRapide( void )
 /*──────────────────────────────────────────────────────────────────────────*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	CopyBlock256( U8 *sour, U8 *dest )
+void	CopyBlock256( uint8_t *sour, uint8_t *dest )
 {
-	S32 y ;
+	int32_t y ;
 
 	for( y=0; y<32; y++ )
 	{
@@ -1087,8 +1087,8 @@ void	CopyBlock256( U8 *sour, U8 *dest )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	RefreshAniPoly = TRUE ;
-S32	NbToRefresh = 0 ;
+int32_t	RefreshAniPoly = TRUE ;
+int32_t	NbToRefresh = 0 ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	ClearAniPoly( void )
@@ -1146,7 +1146,7 @@ void	DoAnimatedPolys()
 
 void	DrawAnimatedPolys()
 {
-	S32		n ;
+	int32_t		n ;
 	S_ANI_POLY	*ptr ;
 
 	if( !NbAniPoly OR !MaxPolySea OR !RefreshAniPoly )	return ;
@@ -1194,7 +1194,7 @@ void	DrawAnimatedPolys()
 
 void	FiltreAnimatedPolys()
 {
-	S32		n ;
+	int32_t		n ;
 	S_ANI_POLY	*ptr ;
 
 	if( !NbAniPoly OR !MaxPolySea )	return ;

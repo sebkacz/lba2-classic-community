@@ -4,14 +4,15 @@
 /*--------------------------------------------------------------------------*/
 //				fonctions ASM
 
+#include <cstdint>
 #ifdef __cplusplus
 extern "C" {
 #endif
 /*--------------------------------------------------------------------------*/
-extern	void	Do_Plasma( U8 *PtrEffectStruct ) ;
+extern	void	Do_Plasma( uint8_t *PtrEffectStruct ) ;
 
 /*--------------------------------------------------------------------------*/
-extern	void	Do_Fire( U8 *buff1, U8 *buff2, U8 *colortable, U8 *TileMap ) ;
+extern	void	Do_Fire( uint8_t *buff1, uint8_t *buff2, uint8_t *colortable, uint8_t *TileMap ) ;
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus
@@ -21,10 +22,10 @@ extern	void	Do_Fire( U8 *buff1, U8 *buff2, U8 *colortable, U8 *TileMap ) ;
 /*--------------------------------------------------------------------------*/
 //				fonctions C (ANIMTEX.CPP)
 
-extern	S32     	NbTexEffects ;
+extern	int32_t     	NbTexEffects ;
 
 /*--------------------------------------------------------------------------*/
-extern	void	ScanTextureAnimation( U8 *ptrtex, S32 nbscanlines ) ;
+extern	void	ScanTextureAnimation( uint8_t *ptrtex, int32_t nbscanlines ) ;
 /*--------------------------------------------------------------------------*/
 extern	void	InitTextureAnimation( void ) ;
 /*--------------------------------------------------------------------------*/
@@ -32,7 +33,7 @@ extern	void	DoTextureAnimation() ;
 /*--------------------------------------------------------------------------*/
 extern	void	InitPlasmaMenu() ;
 /*--------------------------------------------------------------------------*/
-extern	void	SelectPlasmaBank( U8 bank ) ;
+extern	void	SelectPlasmaBank( uint8_t bank ) ;
 /*--------------------------------------------------------------------------*/
 extern	void	ClearPlasmaMenu( void ) ;
 /*--------------------------------------------------------------------------*/

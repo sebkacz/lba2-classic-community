@@ -15,8 +15,8 @@ extern "C" {
 //--------------------------------------------------------------------------
 extern	char		MidiDriverName[]	;
 
-extern	S32		Midi_Driver_Enabled	;
-extern	S32		Midi_Driver_Type	;
+extern	int32_t		Midi_Driver_Enabled	;
+extern	int32_t		Midi_Driver_Type	;
 
 //--------------------------------------------------------------------------
 extern	VOID_FUNC	ClearMidiDriver		;
@@ -24,7 +24,7 @@ extern	VOID_FUNC	PauseMidi		;
 extern	VOID_FUNC	ResumeMidi		;
 
 //--------------------------------------------------------------------------
-S32	InitMidiDriver(	char *driver_name		)	;
+int32_t	InitMidiDriver(	char *driver_name		)	;
 
 //--------------------------------------------------------------------------
 //	ReserMidi : 			Reset all controlers in Midi Synth
@@ -42,9 +42,9 @@ void	ResetMidi(		void			)	;
 //
 //	Returns	: 			boolean
 //--------------------------------------------------------------------------
-U32	PrepareMidi( 		void *ptrxmi,
-				S32  seqnum,
-				S32  volume 		)	;
+uint32_t	PrepareMidi( 		void *ptrxmi,
+				int32_t  seqnum,
+				int32_t  volume 		)	;
 
 //--------------------------------------------------------------------------
 //	ClearMidi :			stop midi until next PrepareMidi
@@ -60,7 +60,7 @@ void	ClearMidi(		void			)	;
 //
 //	Returns	: 			nothing
 //--------------------------------------------------------------------------
-void	PlayBlockMidi( 		S32 blocknum		)	;
+void	PlayBlockMidi( 		int32_t blocknum		)	;
 
 //--------------------------------------------------------------------------
 //	ChainBlockMidi :		Chain a Midi block in the sequence
@@ -69,7 +69,7 @@ void	PlayBlockMidi( 		S32 blocknum		)	;
 //
 //	Returns	: 			nothing
 //--------------------------------------------------------------------------
-void	ChainBlockMidi(		S32 blocknum		)	;
+void	ChainBlockMidi(		int32_t blocknum		)	;
 
 //--------------------------------------------------------------------------
 //	ChangeVolumeMidi :		Change the midi volume
@@ -79,8 +79,8 @@ void	ChainBlockMidi(		S32 blocknum		)	;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ChangeVolumeMidi(	S32 volume,
-				S32 delay		)	;
+void	ChangeVolumeMidi(	int32_t volume,
+				int32_t delay		)	;
 
 //--------------------------------------------------------------------------
 //	StopMidi :			stop midi
@@ -116,7 +116,7 @@ void	StopChainMidi(		void			)	;
 //
 //	Returns	:			Midi block number (-1 if none)
 //--------------------------------------------------------------------------
-S32	GetBlockPlayingMidi(	void			)	;
+int32_t	GetBlockPlayingMidi(	void			)	;
 
 //--------------------------------------------------------------------------
 #ifdef __cplusplus

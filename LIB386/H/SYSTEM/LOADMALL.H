@@ -10,7 +10,7 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	LoadMallocFileSize		;
+extern	uint32_t	LoadMallocFileSize		;
 
 //──────────────────────────────────────────────────────────────────────────
 extern	void	*LoadMalloc(char *filename)	;

@@ -32,7 +32,7 @@
 // Détermine le nombre d'éléments d'un tableau Static
 #define	NbTabIndex(tab)	(sizeof(tab)/sizeof(tab[0]))
 
-#define	LoadFile3D(index)       (BufferFile3D + *( (U32*)BufferFile3D+(index) ) )
+#define	LoadFile3D(index)       (BufferFile3D + *( (uint32_t*)BufferFile3D+(index) ) )
 
 /*----------------*/
 
@@ -249,8 +249,8 @@
 /*──────────────────────────────────────────────────────────────────────────*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-#define	MIN_S16	-32768
-#define	MAX_S16	 32767
+#define	MIN_int16_t	-32768
+#define	MAX_int16_t	 32767
 
 #define	BODY_3D_PROTECT		62
 
@@ -332,9 +332,9 @@
 #define	DO_RIGHT_JUMP	4
 
 typedef	struct {
-	U8	Func ;
-	U8	TypeAnswer ;
-	S16	Value ;
+	uint8_t	Func ;
+	uint8_t	TypeAnswer ;
+	int16_t	Value ;
 	} T_EXE_SWITCH ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -344,126 +344,126 @@ typedef	struct {
 
 typedef	struct
 {
-	U8	GenBody ;		// 0 à 254 mais je veux -1
-	U8	Col ;			/* brick en collision (inutile?) */
-	S16	SizeSHit ;		// Toujours carres
+	uint8_t	GenBody ;		// 0 à 254 mais je veux -1
+	uint8_t	Col ;			/* brick en collision (inutile?) */
+	int16_t	SizeSHit ;		// Toujours carres
 
-	U16	GenAnim ;
-	U16	NextGenAnim ;
+	uint16_t	GenAnim ;
+	uint16_t	NextGenAnim ;
 
-	S32	OldPosX ;		/* old pos world */
-	S32	OldPosY ;
-	S32	OldPosZ ;
+	int32_t	OldPosX ;		/* old pos world */
+	int32_t	OldPosY ;
+	int32_t	OldPosZ ;
 
-	S32	Info ;		/* infos pour DoDir */
-	S32	Info1 ;
-	S32	Info2 ;
-	S32	Info3 ;
+	int32_t	Info ;		/* infos pour DoDir */
+	int32_t	Info1 ;
+	int32_t	Info2 ;
+	int32_t	Info3 ;
 
 	union 	{
 		struct {
-			S32	SHitX ;
-			S32	SHitY ;			// Coups Super Hit
-			S32	SHitZ ;			// Servent aussi pour les Anim3DS
+			int32_t	SHitX ;
+			int32_t	SHitY ;			// Coups Super Hit
+			int32_t	SHitZ ;			// Servent aussi pour les Anim3DS
 			} SHit ;
 
 		// ATTENTION: un PUSHABLE ne peut pas lancer de SUPER_HIT
 		struct {
-			S32	PushX ;
-			S32	PushY ;
-			S32	PushZ ;
+			int32_t	PushX ;
+			int32_t	PushY ;
+			int32_t	PushZ ;
 			} Push ;
 
 		struct {
-			S32	Num ;
-			S32	Deb ;
-			S32	Fin ;
+			int32_t	Num ;
+			int32_t	Deb ;
+			int32_t	Fin ;
 			} A3DS ;
 		} Coord ;
 
-/* B*/	U8	HitBy ;			/* frappe par */
-/* B*/	U8	HitForce ;		/* si !=0 force de frappe anim */
-/* B*/	S16	LifePoint ;		/* point de vie en cours */
-	S16	OptionFlags ;		/* flag d'init 2 */
+/* B*/	uint8_t	HitBy ;			/* frappe par */
+/* B*/	uint8_t	HitForce ;		/* si !=0 force de frappe anim */
+/* B*/	int16_t	LifePoint ;		/* point de vie en cours */
+	int16_t	OptionFlags ;		/* flag d'init 2 */
 
-	U8	*PtrAnimAction ;
+	uint8_t	*PtrAnimAction ;
 
-	S16	Sprite ;
-	S16	OffsetLabelTrack ;
+	int16_t	Sprite ;
+	int16_t	OffsetLabelTrack ;
 
 // divers
 	T_OBJ_3D Obj	;
 
-	U8	*PtrFile3D ;
-	S32	IndexFile3D ;
+	uint8_t	*PtrFile3D ;
+	int32_t	IndexFile3D ;
 
 // constantes
-/* B*/	S16	NbBonus ;		/* nb bonus to give */
-/* B*/	U8	Armure ;		/* resistance */
-	U8	CoulObj ;		/* couleur dominante de l'objet */
+/* B*/	int16_t	NbBonus ;		/* nb bonus to give */
+/* B*/	uint8_t	Armure ;		/* resistance */
+	uint8_t	CoulObj ;		/* couleur dominante de l'objet */
 
 /* game infos */
-	S16	XMin ;			/* ZV */
-	S16	XMax ;
-	S16	YMin ;
-	S16	YMax ;
-	S16	ZMin ;
-	S16	ZMax ;
+	int16_t	XMin ;			/* ZV */
+	int16_t	XMax ;
+	int16_t	YMin ;
+	int16_t	YMax ;
+	int16_t	ZMin ;
+	int16_t	ZMax ;
 
-	S32	OldBeta ;		/* angle de la boucle precedente */
+	int32_t	OldBeta ;		/* angle de la boucle precedente */
 
 
 	BOUND_MOVE	BoundAngle ;	/* valeur real time de rotation */
 
-	U8	*PtrTrack ;	/* ptr track prog */
-	S16	OffsetTrack ;	/* offset dans la track */
+	uint8_t	*PtrTrack ;	/* ptr track prog */
+	int16_t	OffsetTrack ;	/* offset dans la track */
 
-	S16	SRot ;			/* vitesse de rotation */
+	int16_t	SRot ;			/* vitesse de rotation */
 
-	U8	*PtrLife ;
+	uint8_t	*PtrLife ;
 
-	S16	OffsetLife ;	/* offset dans la vie */
-	U16	AnimDial   ;	// se trouve ici pour l'alignement
+	int16_t	OffsetLife ;	/* offset dans la vie */
+	uint16_t	AnimDial   ;	// se trouve ici pour l'alignement
 
-/* B*/	S16	CarryBy ;
-/* B*/	U8	Move ;		/* type de deplacement */
-/* B*/	U8	ObjCol ;		/* num obj en collision */
+/* B*/	int16_t	CarryBy ;
+/* B*/	uint8_t	Move ;		/* type de deplacement */
+/* B*/	uint8_t	ObjCol ;		/* num obj en collision */
 
-	S16	ZoneSce ;		/* zone declenchement scenarique */
-/* B*/	S16	LabelTrack ;		/* dernier label de track */
-/* B*/	S16	MemoLabelTrack ;	/* memo dernier label de track */
-/* B*/  S16     MemoComportement ;	/* memo comportement life */
+	int16_t	ZoneSce ;		/* zone declenchement scenarique */
+/* B*/	int16_t	LabelTrack ;		/* dernier label de track */
+/* B*/	int16_t	MemoLabelTrack ;	/* memo dernier label de track */
+/* B*/  int16_t     MemoComportement ;	/* memo comportement life */
 
-	U32	Flags ;			/* flags divers permanent */
-//	U16	Flags2 ;		/* flags divers permanent */
-	U32	WorkFlags ;		/* flags de gestion */
+	uint32_t	Flags ;			/* flags divers permanent */
+//	uint16_t	Flagint2_t ;		/* flags divers permanent */
+	uint32_t	WorkFlags ;		/* flags de gestion */
 
-	S16	DoorWidth ;		// pour les DOOR
+	int16_t	DoorWidth ;		// pour les DOOR
 
-/* B*/	U8	FlagAnim ;		/* type d'anim en cours (dans flags?) */
+/* B*/	uint8_t	FlagAnim ;		/* type d'anim en cours (dans flags?) */
 
-	U8	CodeJeu ;		// brick spéciale sample ou action
+	uint8_t	CodeJeu ;		// brick spéciale sample ou action
 
 	T_EXE_SWITCH	ExeSwitch ;
 
-//	S16	MessageChapter[MAX_CHAPTER] ;
+//	int16_t	MessageChapter[MAX_CHAPTER] ;
 
 	T_ZONE	*PtrZoneRail ;
 
-	S32	SampleAlways	;	// Handle du sample always en train de se jouer
-	U8	SampleVolume	;
+	int32_t	SampleAlways	;	// Handle du sample always en train de se jouer
+	uint8_t	SampleVolume	;
 }	T_OBJET ;
 
 typedef	struct
 {
-	S32	X ;
-	S32	Y ;
-	S32	Z ;		}	T_TRACK ;
+	int32_t	X ;
+	int32_t	Y ;
+	int32_t	Z ;		}	T_TRACK ;
 
 typedef	struct
 {
-	U8	Type	;
-	U8	Num	;
+	uint8_t	Type	;
+	uint8_t	Num	;
 
 } T_TABALLCUBE	;
 

@@ -6,13 +6,13 @@
 #include <stddef.h>
 
 //──────────────────────────────────────────────────────────────────────────
-U32	LoadMallocFileSize ;
+uint32_t	LoadMallocFileSize ;
 
 //──────────────────────────────────────────────────────────────────────────
 void	*LoadMalloc(char *name)
 {
-	S32	handle	;
-	U32	size	;
+	int32_t	handle	;
+	uint32_t	size	;
 	void	*ptr	;
 
 	LoadMallocFileSize = FileSize( name )		;

@@ -14,7 +14,7 @@
 #define	DOT_WAIT	2	// point vivant mais attendant d'etre lancé
 
 #ifdef	LBA_EDITOR
-extern	S32	FlagInfos ;
+extern	int32_t	FlagInfos ;
 
 #define	MAX_PART_FLOW	100
 #else
@@ -30,7 +30,7 @@ S_ONE_DOT	*ListFlowDots ;
 void	RazListPartFlow( )
 {
 	S_PART_FLOW	*ptrf = ListPartFlow ;
-	S32 n;
+	int32_t n;
 
 	for( n=0; n<MAX_FLOWS; n++, ptrf++ )
 	{
@@ -39,17 +39,17 @@ void	RazListPartFlow( )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-U32	InitPartFlow()
+uint32_t	InitPartFlow()
 {
 	S_ONE_DOT	*ptrd ;
 	S_PART_FLOW	*ptrf = ListPartFlow ;
-	S32 n;
+	int32_t n;
         char tmpFilePath[ADELINE_MAX_PATH];
 
 #ifdef	LBA_EDITOR
 	char	filename[ADELINE_MAX_PATH] ;
-	S32	handle ;
-	S32	flag = FALSE ;
+	int32_t	handle ;
+	int32_t	flag = FALSE ;
 	T_FLOW	*flow ;
 	char	*ptr ;
 	char	*com ;	// pointeur sur le commentaire
@@ -158,7 +158,7 @@ void	FreePartFlow( )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 S_PART_FLOW	*GetFirstFlowDispo( void )
 {
-	S32	n ;
+	int32_t	n ;
 	S_PART_FLOW	*ptrf = ListPartFlow ;
 	// cherche slot
 
@@ -171,20 +171,20 @@ S_PART_FLOW	*GetFirstFlowDispo( void )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-U32	CreateParticleFlow(	S32 flag, S32 owner, S32 num_point,
-				S32 orgx, S32 orgy, S32 orgz,
-				S32 beta, S32 num_flow  )
+uint32_t	CreateParticleFlow(	int32_t flag, int32_t owner, int32_t num_point,
+				int32_t orgx, int32_t orgy, int32_t orgz,
+				int32_t beta, int32_t num_flow  )
 {
-	S32		n ;
+	int32_t		n ;
 	S_PART_FLOW	*ptrf ;
 	S_ONE_DOT	*ptrd ;
 	T_FLOW		*flow ;
-	S32		vitesse ;
-	S32		demi_speed ;
-	S32		demi_weight ;
-	S32		demi_ouvalpha ;
-	S32		demi_ouvbeta ;
-	S32		bank ;
+	int32_t		vitesse ;
+	int32_t		demi_speed ;
+	int32_t		demi_weight ;
+	int32_t		demi_ouvalpha ;
+	int32_t		demi_ouvbeta ;
+	int32_t		bank ;
 
 	// cherche slot
 	ptrf = GetFirstFlowDispo() ;
@@ -297,24 +297,24 @@ U32	CreateParticleFlow(	S32 flag, S32 owner, S32 num_point,
 //                      scale correspond à scale_deb
 //                      transparent correspond à scale_fin
 
-U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
-				S32 orgx, S32 orgy, S32 orgz,
-				S32 beta, S32 num_flow, S32 hitforce,
-				S32 scale, S32 transparent, S32 tempo )
+uint32_t	CreateExtraParticleFlow(int32_t type, int32_t owner, int32_t num, int32_t num2,
+				int32_t orgx, int32_t orgy, int32_t orgz,
+				int32_t beta, int32_t num_flow, int32_t hitforce,
+				int32_t scale, int32_t transparent, int32_t tempo )
 {
 	T_FLOW	*flow ;
-	S32	n ;
-	S32	vitesse ;
-	S32	demi_speed ;
-	S32	demi_weight ;
-	S32	demi_ouvalpha ;
-	S32	demi_ouvbeta ;
-	S32	num_extra ;
-	S32	nbdot ;
-	S32	poids ;
-	S32	delay ;
-	S32	speedrot ;
-	S32	shadow = 0; // yaz
+	int32_t	n ;
+	int32_t	vitesse ;
+	int32_t	demi_speed ;
+	int32_t	demi_weight ;
+	int32_t	demi_ouvalpha ;
+	int32_t	demi_ouvbeta ;
+	int32_t	num_extra ;
+	int32_t	nbdot ;
+	int32_t	poids ;
+	int32_t	delay ;
+	int32_t	speedrot ;
+	int32_t	shadow = 0; // yaz
 
 	flow = LoadPartFlow( num_flow ) ;
 	if( !flow )	return( FALSE ) ;
@@ -349,7 +349,7 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 		switch( type )
 		{
 			case FLOW_EXTRA_OBJ:
-				num_extra = ThrowExtraObj( (U8)owner, orgx, orgy, orgz,
+				num_extra = ThrowExtraObj( (uint8_t)owner, orgx, orgy, orgz,
 #ifdef	LBA_EDITOR
 				    FicName,
 #else
@@ -359,7 +359,7 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 				    beta + MyRnd(flow->OuvertureBeta) - demi_ouvbeta,
 				    vitesse,
 				    -1, // alpharot suivant la trajectoire du throw
-				    (U8)poids, (U8)hitforce ) ;
+				    (uint8_t)poids, (uint8_t)hitforce ) ;
 
 #ifdef	LBA_EDITOR
 				shadow = TRUE ;
@@ -371,11 +371,11 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 			case FLOW_EXTRA_SPRITE:
 				if( num==num2 )	// Pas une anim
 				{
-					num_extra = ThrowExtra( (U8)owner, orgx, orgy, orgz,
-					    (S16)num,
+					num_extra = ThrowExtra( (uint8_t)owner, orgx, orgy, orgz,
+					    (int16_t)num,
 					    flow->Alpha + MyRnd(flow->OuvertureAlpha) - demi_ouvalpha,
 					    beta + MyRnd(flow->OuvertureBeta) - demi_ouvbeta,
-					    vitesse, (U8)poids, (U8)hitforce ) ;
+					    vitesse, (uint8_t)poids, (uint8_t)hitforce ) ;
 
 					if( num_extra!=-1 )
 					{
@@ -384,17 +384,17 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 				}
 				else	// c'est une anim de sprites
 				{
-					num_extra = InitExtraAnimSprite( (U8) owner, orgx, orgy, orgz,
-							     (S16)num, (S16)num2,
+					num_extra = InitExtraAnimSprite( (uint8_t) owner, orgx, orgy, orgz,
+							     (int16_t)num, (int16_t)num2,
 							     tempo, scale,
-							     transparent, (U8)hitforce ) ;
+							     transparent, (uint8_t)hitforce ) ;
 
 					if( num_extra!=-1 )
 					{
 						InitFly(&ListExtra[num_extra],
 							flow->Alpha + MyRnd(flow->OuvertureAlpha) - demi_ouvalpha,
 							beta + MyRnd(flow->OuvertureBeta) - demi_ouvbeta,
-							vitesse, (U8)poids ) ;
+							vitesse, (uint8_t)poids ) ;
 					}
 				}
 
@@ -410,7 +410,7 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 				else		speedrot = num2		;
 
 				num_extra = InitExtraPof( orgx, orgy, orgz,
-						(S16)num,
+						(int16_t)num,
 						flow->Alpha + MyRnd(flow->OuvertureAlpha) - demi_ouvalpha,
 						beta + MyRnd(flow->OuvertureBeta) - demi_ouvbeta,
 						vitesse, poids,
@@ -443,10 +443,10 @@ U32	CreateExtraParticleFlow(S32 type, S32 owner, S32 num, S32 num2,
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	AffParticleFlow( S_PART_FLOW *ptrf )
+int32_t	AffParticleFlow( S_PART_FLOW *ptrf )
 {
-	S32	n ;
-	S32	flag = FALSE ;
+	int32_t	n ;
+	int32_t	flag = FALSE ;
 	S_ONE_DOT	*ptrd ;
 
 	ClearScreenMinMax() ;
@@ -481,9 +481,9 @@ S32	AffParticleFlow( S_PART_FLOW *ptrf )
 #ifdef	LBA_EDITOR
 	if( FlagInfos & INFO_DRAW_ZV )
 	{
-		S32    x, y, z ;
-		S32	xmin, ymin, zmin ;
-		S32	xmax, ymax, zmax ;
+		int32_t    x, y, z ;
+		int32_t	xmin, ymin, zmin ;
+		int32_t	xmax, ymax, zmax ;
 
 		x = ptrf->OrgX ;
 		y = ptrf->OrgY ;
@@ -511,15 +511,15 @@ S32	AffParticleFlow( S_PART_FLOW *ptrf )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 // Anim particule sans l'afficher
-S32	AnimParticleFlow( S_PART_FLOW *ptrf )
+int32_t	AnimParticleFlow( S_PART_FLOW *ptrf )
 {
-	S32	n ;
-	S32	time ;
-	S32	timew ;
-	S32	flag = FALSE ;
-	S32    x, y, z ;
-	S32	xmin, ymin, zmin ;
-	S32	xmax, ymax, zmax ;
+	int32_t	n ;
+	int32_t	time ;
+	int32_t	timew ;
+	int32_t	flag = FALSE ;
+	int32_t    x, y, z ;
+	int32_t	xmin, ymin, zmin ;
+	int32_t	xmax, ymax, zmax ;
 
 	S_ONE_DOT	*ptrd ;
 
@@ -590,7 +590,7 @@ S32	AnimParticleFlow( S_PART_FLOW *ptrf )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	AnimAllFlow()
 {
-	S32	n;
+	int32_t	n;
 	S_PART_FLOW	*ptrf = ListPartFlow ;
 
 	for( n=0; n<MAX_FLOWS; n++, ptrf++ )

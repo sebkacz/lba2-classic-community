@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern void ScaleSpriteTransp(S32 num, S32 x, S32 y, S32 factorx, S32 factory,
+extern void ScaleSpriteTransp(int32_t num, int32_t x, int32_t y, int32_t factorx, int32_t factory,
                               void *ptrbank, void *ptr_transp);
 
 // =============================================================================

@@ -11,10 +11,10 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	COMPRESSED_HEADER *GetPtrBlockMemoryHQR(void *ptrhqr, S32 index);
+extern	COMPRESSED_HEADER *GetPtrBlockMemoryHQR(void *ptrhqr, int32_t index);
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	LoadMemoryHQR( void *ptrhqr, void *ptrdest, S32 index )	;
+extern	uint32_t	LoadMemoryHQR( void *ptrhqr, void *ptrdest, int32_t index )	;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

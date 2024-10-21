@@ -21,7 +21,7 @@ static char *CriticalErrMsg[] = {
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-S32	CriticalErrorCount = 0 ;
+int32_t	CriticalErrorCount = 0 ;
 char	msg[255]  ;
 
 int __far CriticalErrorHandler(	unsigned int deverr,

@@ -67,7 +67,7 @@ void	InitKeyboard()
 	r.x.eax = 0x3509		;//	Function 35h, for Int 9
 	sr.ds = sr.es = 0		;//	Security (kill the cat)
 	int386x( 0x21, &r, &r, &sr )	;//	Call Int 21
-	Old_PM09_Sel = (U32)sr.es	;//	ES:EBX=Old Interrupt 09
+	Old_PM09_Sel = (uint32_t)sr.es	;//	ES:EBX=Old Interrupt 09
 	Old_PM09_Off = r.x.ebx		;
 
 //----- Install New Protected Vector 09 --------
@@ -95,7 +95,7 @@ void	ClearKeyboard()
 //----- Restore Old Protected Vector 09 --------
 	r.x.eax = 0x2509		;//	Set Vector Interupt PM09
 	r.x.edx = Old_PM09_Off		;//	Adr Old Interrupt 09
-	sr.ds = (U16)Old_PM09_Sel	;
+	sr.ds = (uint16_t)Old_PM09_Sel	;
 	sr.es = 0			;//	Security
 	int386x( 0x21, &r, &r, &sr )	;//	Invoke int 21
 

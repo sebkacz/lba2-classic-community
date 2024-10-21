@@ -88,81 +88,81 @@
 
 typedef	struct
 {
-	S32	X	;//	Position Island X Y Z
-	S32	Y	;
-	S32	Z	;
-	S32	Alpha	;//	Position Planet Alpha, Beta et Altitude
-	S32	Beta	;
-	S32	Alt	;
-	S32	Mess	;//	Message sur Island ou Planet
-	S8	ObjFix	;//	Eventual Obj Inventory 3D (FREE NOT USED!)
-	U8	FlagHolo;//	Flag for Planet display, active, etc.
-	U8	Planet	;
-	U8	Island	;
+	int32_t	X	;//	Position Island X Y Z
+	int32_t	Y	;
+	int32_t	Z	;
+	int32_t	Alpha	;//	Position Planet Alpha, Beta et Altitude
+	int32_t	Beta	;
+	int32_t	Alt	;
+	int32_t	Mess	;//	Message sur Island ou Planet
+	int8_t	ObjFix	;//	Eventual Obj Inventory 3D (FREE NOT USED!)
+	uint8_t	FlagHolo;//	Flag for Planet display, active, etc.
+	uint8_t	Planet	;
+	uint8_t	Island	;
 
 } T_ARROW	;
 
 extern	T_ARROW	TabArrow[MAX_OBJECTIF+MAX_CUBE]		;
 
-extern	U32	DecalTimerRef[MAX_OBJECTIF+MAX_CUBE] 	;
+extern	uint32_t	DecalTimerRef[MAX_OBJECTIF+MAX_CUBE] 	;
 
 /*-------------------------------------------------------------------------*/
 
 extern	Struc_Point Tab_Points[]	;
 
 
-extern	U32	AlphaL, BetaL, GammaL	;
-extern	S32	HoloAlpha, HoloBeta, HoloGamma	;
-extern	S32	NumObjectif		;
-extern	S32	OldObjectif		;
+extern	uint32_t	AlphaL, BetaL, GammaL	;
+extern	int32_t	HoloAlpha, HoloBeta, HoloGamma	;
+extern	int32_t	NumObjectif		;
+extern	int32_t	OldObjectif		;
 
-extern	U16	PtrTri[]		;//	For 1 Planet
-extern	S32	ListTriPlanet[]		;//	For 6 Planets
-extern	S32	NbTri			;//	Nb Planet(s) in ListTri
-extern	S32	ModeAuto 		;
-extern	S32	XPos, YPos, ZPos	;
-extern	S32	XDest, YDest, ZDest	;
-extern	S32	ZoomDest		;
-extern	S32	Destination		;
-extern	U32	MyTimerRef		;
-extern	U32	RayonPlanet		;
-extern	S32	DialStatHolo 		;
-extern	S32	SizeRet		;
-extern	U8	RotPal[]	;
+extern	uint16_t	PtrTri[]		;//	For 1 Planet
+extern	int32_t	ListTriPlanet[]		;//	For 6 Planets
+extern	int32_t	NbTri			;//	Nb Planet(s) in ListTri
+extern	int32_t	ModeAuto 		;
+extern	int32_t	XPos, YPos, ZPos	;
+extern	int32_t	XDest, YDest, ZDest	;
+extern	int32_t	ZoomDest		;
+extern	int32_t	Destination		;
+extern	uint32_t	MyTimerRef		;
+extern	uint32_t	RayonPlanet		;
+extern	int32_t	DialStatHolo 		;
+extern	int32_t	SizeRet		;
+extern	uint8_t	RotPal[]	;
 
-extern	S16	RotPalPos 	;
-extern	S32	FlagMap		;
-extern	S32	FlagHoloEnd	;
-extern	S32	XpObjectif	;
-extern	S32	YpObjectif	;
-extern	U32	MemoTimerRot	;
-extern	S32	ZoomedIsland	;
-extern	S32	TwinsenLinkArrow;
-extern	S32	OrgMX, OrgMZ	;
-extern	S32	AlphaM, BetaM	;
-extern	S32	DistanceM	;
-extern	U8	*PtCurrentBody	;//	Tempo : Pointeur dans struc Twinsen
-extern	U8	*PtCurrentAnim	;//	Tempo : Pointeur dans struc Twinsen
-extern	U32	SizeCurrentBody	;//	Tempo : Pointeur dans struc Twinsen
-extern	U32	SizeCurrentAnim	;//	Tempo : Pointeur dans struc Twinsen
-extern	U8	*BufBodyTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
-extern	U8	*BufAnimTempo	;//	Buffer Tempo Traffiquer Anim ( scale & rot )
-extern	U16	*PtrMapping	;
-extern	U16	*PtrGlobe	;
-extern	U8	*PtrAlt		;
-extern	U16	*PtrCoorGlobe	;
-extern	U8	*PtrTextMap	;
+extern	int16_t	RotPalPos 	;
+extern	int32_t	FlagMap		;
+extern	int32_t	FlagHoloEnd	;
+extern	int32_t	XpObjectif	;
+extern	int32_t	YpObjectif	;
+extern	uint32_t	MemoTimerRot	;
+extern	int32_t	ZoomedIsland	;
+extern	int32_t	TwinsenLinkArrow;
+extern	int32_t	OrgMX, OrgMZ	;
+extern	int32_t	AlphaM, BetaM	;
+extern	int32_t	DistanceM	;
+extern	uint8_t	*PtCurrentBody	;//	Tempo : Pointeur dans struc Twinsen
+extern	uint8_t	*PtCurrentAnim	;//	Tempo : Pointeur dans struc Twinsen
+extern	uint32_t	SizeCurrentBody	;//	Tempo : Pointeur dans struc Twinsen
+extern	uint32_t	SizeCurrentAnim	;//	Tempo : Pointeur dans struc Twinsen
+extern	uint8_t	*BufBodyTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
+extern	uint8_t	*BufAnimTempo	;//	Buffer Tempo Traffiquer Anim ( scale & rot )
+extern	uint16_t	*PtrMapping	;
+extern	uint16_t	*PtrGlobe	;
+extern	uint8_t	*PtrAlt		;
+extern	uint16_t	*PtrCoorGlobe	;
+extern	uint8_t	*PtrTextMap	;
 extern	T_OBJ_3D ObjTwinsen	;
-extern	S32	NumOldMess	;
-extern	S32	HoloMode	;
+extern	int32_t	NumOldMess	;
+extern	int32_t	HoloMode	;
 /*-------------------------------------------------------------------------*/
 
 typedef	struct
 {
-	S32	XStar	;
-	S32	YStar	;
-	S32	ZStar	;
-	S32	ColStar	;
+	int32_t	XStar	;
+	int32_t	YStar	;
+	int32_t	ZStar	;
+	int32_t	ColStar	;
 } T_STARS	;
 
 extern	T_STARS	TabStars[];
@@ -170,61 +170,61 @@ extern	T_STARS	TabStars[];
 typedef	struct
 {
 
-	U32	XSpace	;
-	U32	YSpace	;
-	U32	ZSpace	;
-	U16	Rayon	;
-	U16     Zoom	;
+	uint32_t	XSpace	;
+	uint32_t	YSpace	;
+	uint32_t	ZSpace	;
+	uint16_t	Rayon	;
+	uint16_t     Zoom	;
 
-	U16	*PtrCoorGlobe	;
-	U8	*PtrTextMap	;
-	U8	dummy		;// I don't like to wait after watcom about struct align ;)
+	uint16_t	*PtrCoorGlobe	;
+	uint8_t	*PtrTextMap	;
+	uint8_t	dummy		;// I don't like to wait after watcom about struct align ;)
 
 }	T_PLANET		;
 
 extern	T_PLANET	TabPlanet[]	;
 
 /*-------------------------------------------------------------------------*/
-extern	U8		*PtUfo		;
-extern	U8		*PtAnimUfo	;
+extern	uint8_t		*PtUfo		;
+extern	uint8_t		*PtAnimUfo	;
 extern	T_OBJ_3D        Ufo		;
 //----------------------------------------------------------------------------
-extern	U8	*BufFleche	;
-extern	U8	*BufLoFleche	;
-extern	U8	*BufBuggy	;
-extern	U8	*BufDyno	;
+extern	uint8_t	*BufFleche	;
+extern	uint8_t	*BufLoFleche	;
+extern	uint8_t	*BufBuggy	;
+extern	uint8_t	*BufDyno	;
 //----------------------------------------------------------------------------
 
 /*-------------------------------------------------------------------------*/
 
 //────────────────────────────────────────────────────────────────────────────
 //	Objects Scale factor by planet
-extern	S32	TabRayon[]	;
-extern	S32	TabScale[] 	;
-extern	S32	TabZoom[]	;
+extern	int32_t	TabRayon[]	;
+extern	int32_t	TabScale[] 	;
+extern	int32_t	TabZoom[]	;
 //────────────────────────────────────────────────────────────────────────────
 //	Functions
 extern	int	z_sort( void const *a, void const *b)	;
 extern	int	z_sort32( void const *a, void const *b)	;
 
 #ifdef	DEBUG_TOOLS
-extern	S32	SizeHoloMalloc					;
+extern	int32_t	SizeHoloMalloc					;
 #endif
 extern	void	InitHoloMalloc(void)				;
-extern	U8	*HoloMalloc( U32 size )				;
-extern	U8	*LoadHoloMalloc_HQR( const char *name, S32 index )	;
+extern	uint8_t	*HoloMalloc( uint32_t size )				;
+extern	uint8_t	*LoadHoloMalloc_HQR( const char *name, int32_t index )	;
 
-extern	void	ScaleRotBody3D( U8 *ptbody, S32 scale, S32 flagrot )	;
-extern	U32	GetSizeBody3D( U8 *ptbody )	;
-extern	void	ScaleRotAnim3D( U8 *ptanim, S32 scale, S32 flagrot )	;
-extern	U32	GetSizeAnim3D( U8 *ptanim )	;
+extern	void	ScaleRotBody3D( uint8_t *ptbody, int32_t scale, int32_t flagrot )	;
+extern	uint32_t	GetSizeBody3D( uint8_t *ptbody )	;
+extern	void	ScaleRotAnim3D( uint8_t *ptanim, int32_t scale, int32_t flagrot )	;
+extern	uint32_t	GetSizeAnim3D( uint8_t *ptanim )	;
 extern	void	InitAngleArrow(void)		;
-extern	void	HoloPlan(S32 numplan)		;
+extern	void	HoloPlan(int32_t numplan)		;
 
-extern	void    AffUpperLeft( S32 x, S32 y, S32 flag )	;
-extern	void    AffLowerLeft( S32 x, S32 y, S32 flag )	;
-extern	void    AffUpperRight( S32 x, S32 y, S32 flag )	;
-extern	void    AffLowerRight( S32 x, S32 y, S32 flag )	;
+extern	void    AffUpperLeft( int32_t x, int32_t y, int32_t flag )	;
+extern	void    AffLowerLeft( int32_t x, int32_t y, int32_t flag )	;
+extern	void    AffUpperRight( int32_t x, int32_t y, int32_t flag )	;
+extern	void    AffLowerRight( int32_t x, int32_t y, int32_t flag )	;
 extern	void	DoAnimHolo(void)		        ;
 extern	void	AffReticule(void)			;
 extern	void	AffHoloMess(void)			;
@@ -235,5 +235,5 @@ extern	void	HoloSpace(void)				;
 
 extern	void	InitHoloMap()				;
 extern	void	HoloMap(void)				;
-extern	S32	SetHoloPos( S32 num )			;
-extern	void	ClrHoloPos( S32 num )			;
+extern	int32_t	SetHoloPos( int32_t num )			;
+extern	void	ClrHoloPos( int32_t num )			;

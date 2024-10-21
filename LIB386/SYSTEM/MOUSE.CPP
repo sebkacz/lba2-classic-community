@@ -12,22 +12,22 @@ extern "C" {
 
 // --- Public state ------------------------------------------------------------
 bool FlagMouse = false;
-volatile S32 Click = 0;
-volatile U32 MouseX = 0;
-volatile U32 MouseY = 0;
-S32 MouseXDep = 0;
-S32 MouseYDep = 0;
+volatile int32_t Click = 0;
+volatile uint32_t MouseX = 0;
+volatile uint32_t MouseY = 0;
+int32_t MouseXDep = 0;
+int32_t MouseYDep = 0;
 
-S32 MouseSpriteGraphicNum = 0;
+int32_t MouseSpriteGraphicNum = 0;
 const void *MouseSpriteGraphic = NULL;
 
 // --- Private state -----------------------------------------------------------
-S32 LibMouseXDep, LibMouseYDep;
-U32 MouseBoxX0, MouseBoxX1, MouseBoxY0, MouseBoxY1;
+int32_t LibMouseXDep, LibMouseYDep;
+uint32_t MouseBoxX0, MouseBoxX1, MouseBoxY0, MouseBoxY1;
 
 // --- Extern state ------------------------------------------------------------
 // TODO: Convert the asm to .h to hold the data (currently on MOUSEDAT.ASM)
-extern U8 BinGphMouse;
+extern uint8_t BinGphMouse;
 
 // --- Initialization ----------------------------------------------------------
 void InitMouse() {
@@ -44,7 +44,7 @@ void EndMouse() {
 // --- Interface ---------------------------------------------------------------
 void ShowMouse(bool show) { FlagMouse = show; }
 
-void SetMousePos(U32 x, U32 y) {
+void SetMousePos(uint32_t x, uint32_t y) {
   MouseX = x;
   MouseY = y;
 
@@ -63,7 +63,7 @@ void SetMousePos(U32 x, U32 y) {
   }
 }
 
-void SetMouseBox(U32 x0, U32 y0, U32 x1, U32 y1) {
+void SetMouseBox(uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1) {
   assert((x0 <= x1) && (y0 <= y1));
 
   // Limits can't be greater than screen

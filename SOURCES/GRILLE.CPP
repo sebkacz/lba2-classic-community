@@ -16,52 +16,52 @@
 #define	DYBLOCK		1
 #define	DZBLOCK		2
 
-extern	S32	XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;	// bezier.c
+extern	int32_t	XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;	// bezier.c
 
 /*-------------------------------------------------------------------------*/
 
-S32	XpOrgw ;
-S32	YpOrgw ;
+int32_t	XpOrgw ;
+int32_t	YpOrgw ;
 
 #define	NB_COLON	28
 #define	MAX_BRICK	150
 
-S16	NbBrickColon[NB_COLON] ;
+int16_t	NbBrickColon[NB_COLON] ;
 
 typedef	struct
 {
-	S16	Xm ;
-	S16	Ym ;
-	S16	Zm ;
-	S16	Ys ;
-	S16	Brick ;
-	S16	Col ;
+	int16_t	Xm ;
+	int16_t	Ym ;
+	int16_t	Zm ;
+	int16_t	Ys ;
+	int16_t	Brick ;
+	int16_t	Col ;
 
 }	T_COLONB ;
 
 T_COLONB	ListBrickColon[NB_COLON][MAX_BRICK] ;
 
-U8	*BufferMaskBrick ;
-S32	NbBlock			;
-S32	DxBlock, DyBlock, DzBlock;
+uint8_t	*BufferMaskBrick ;
+int32_t	NbBlock			;
+int32_t	DxBlock, DyBlock, DzBlock;
 
-S32	ForbidenBrick = 0 ;
+int32_t	ForbidenBrick = 0 ;
 
-extern	S32	Nxw, Nyw, Nzw ;
-//void	ReajustPos( U8 col ) ;
+extern	int32_t	Nxw, Nyw, Nzw ;
+//void	ReajustPos( uint8_t col ) ;
 /*--------------------------------------------------------------------------*/
 typedef	struct
 {
-	U16	Gri_Start		;//	Index of GRI
-	U16	Grm_Start		;//	Index of GRM
-	U16	Bll_Start		;//	Index of BLL
-	U16	Brk_Start		;//	Index of BRK
-	U16	Max_Brk			;//	Nb Brk
-	U16	ForbidenBrick		;//	NEW : Brick Interdite
-	U32	Max_Size_Gri		;//	Max Size Gri
-	U32	Max_Size_Bll		;//	Max Size Bll
-	U32	Max_Size_Brick_Cube	;//	Max Ideal Style Size
-	U32	Max_Size_Mask_Brick_Cube;//	Max Size Mask
+	uint16_t	Gri_Start		;//	Index of GRI
+	uint16_t	Grm_Start		;//	Index of GRM
+	uint16_t	Bll_Start		;//	Index of BLL
+	uint16_t	Brk_Start		;//	Index of BRK
+	uint16_t	Max_Brk			;//	Nb Brk
+	uint16_t	ForbidenBrick		;//	NEW : Brick Interdite
+	uint32_t	Max_Size_Gri		;//	Max Size Gri
+	uint32_t	Max_Size_Bll		;//	Max Size Bll
+	uint32_t	Max_Size_Brick_Cube	;//	Max Ideal Style Size
+	uint32_t	Max_Size_Mask_Brick_Cube;//	Max Size Mask
 
 } T_BKG_HEADER	;
 
@@ -69,9 +69,9 @@ T_BKG_HEADER	BkgHeader	;
 
 typedef	struct
 {
-	U8	My_Bll		;//	Index Style ( + Bll_Start )
-	U8	My_Grm		;//	Index Grm ( + Grm_Start )
-	U8	UsedBlock[32]	;//	Bluck Used in Bll ( Bits )
+	uint8_t	My_Bll		;//	Index Style ( + Bll_Start )
+	uint8_t	My_Grm		;//	Index Grm ( + Grm_Start )
+	uint8_t	UsedBlock[32]	;//	Bluck Used in Bll ( Bits )
 
 } T_GRI_HEADER	;
 
@@ -86,31 +86,31 @@ T_GRI_HEADER	*GriHeader	;
 #define	OFFSET_BUFFER_FLAG	153800L
 
 /*--------------------------------------------------------------------------*/
-S32	LoadUsedBrick()
+int32_t	LoadUsedBrick()
 {
-	U32	i, j, b	;
-	U8	*pt	;
-	U8	*ptb	;
-	U16	*ptw	;
-	U32	*ptoff	;
-	U8	*ptdata	;
-	U32	offset	;
-	U32	maxbrk	;
-	U32	brick	;
-	U32	offseek	;
-	U32	*ptseek	;
-	U32	handle	;
-	U16	*tabflag;
-	U16	*ptflag	;
-	U32	min, max;
-	U8 	*ptdecomp ;
+	uint32_t	i, j, b	;
+	uint8_t	*pt	;
+	uint8_t	*ptb	;
+	uint16_t	*ptw	;
+	uint32_t	*ptoff	;
+	uint8_t	*ptdata	;
+	uint32_t	offset	;
+	uint32_t	maxbrk	;
+	uint32_t	brick	;
+	uint32_t	offseek	;
+	uint32_t	*ptseek	;
+	uint32_t	handle	;
+	uint16_t	*tabflag;
+	uint16_t	*ptflag	;
+	uint32_t	min, max;
+	uint8_t 	*ptdecomp ;
 	COMPRESSED_HEADER header	;
-	S32	nbbrick	;
+	int32_t	nbbrick	;
         char tmpFilePath[ADELINE_MAX_PATH];
 
-	tabflag = (U16*)((U8*)Screen+OFFSET_BUFFER_FLAG) ;
+	tabflag = (uint16_t*)((uint8_t*)Screen+OFFSET_BUFFER_FLAG) ;
 
-	memset( tabflag, 0, MAX_BRICK_GAME*2L )	;/* Table de U16 pour NewNumBrick */
+	memset( tabflag, 0, MAX_BRICK_GAME*2L )	;/* Table de uint16_t pour NewNumBrick */
 
 	min = 60000			;
 	max = 0				;
@@ -126,8 +126,8 @@ S32	LoadUsedBrick()
 		b = pt[i>>3] & (1<<(7-(i&7)))	;/*	Recup Bit Block	*/
 		if ( !b )	continue	;
 
-		ptb = TabBlock + *(U32 *)(TabBlock+((i-1)<<2));
-		ptw = (U16 *)(ptb + 5)	;/* Jump dx dy dz et collis */
+		ptb = TabBlock + *(uint32_t *)(TabBlock+((i-1)<<2));
+		ptw = (uint16_t *)(ptb + 5)	;/* Jump dx dy dz et collis */
 		maxbrk = *ptb * *(ptb+1) * *(ptb+2)	;/* dx*dy*dz*/
 
 		for ( j = 0 ; j < maxbrk ; j++, ptw += 2 )
@@ -162,7 +162,7 @@ S32	LoadUsedBrick()
 
 	ptflag = tabflag+min		;
 
-	ptoff = (U32 *)BufferBrick	;
+	ptoff = (uint32_t *)BufferBrick	;
 
 	offset = (nbbrick+1)*4L		;
 
@@ -172,14 +172,14 @@ S32	LoadUsedBrick()
 
 	nbbrick = 0			;
 
-	ptseek = (U32 *)Screen	;
+	ptseek = (uint32_t *)Screen	;
 
 	for ( i = min ; i <= max ; i++, ptflag++ )
 	{
 		if ( *ptflag )
 		{
 			nbbrick++		;/*	One More*/
-			*ptflag = (S16)nbbrick	;/*	Brick+1, for BLL */
+			*ptflag = (int16_t)nbbrick	;/*	Brick+1, for BLL */
 			offseek = *(ptseek+i)	;
 			Seek( handle, offseek, SEEK_FROM_START ) 	;
 			Read( handle, &header, sizeof(header))	;
@@ -210,8 +210,8 @@ S32	LoadUsedBrick()
 		b = pt[i>>3] & (1<<(7-(i&7)))	;/*	Recup Bit Block	*/
 		if ( !b )	continue	;
 
-		ptb = TabBlock + *(U32 *)(TabBlock+((i-1)<<2));
-		ptw = (U16 *)(ptb + 5)			;/* Jump dx dy dz et collis */
+		ptb = TabBlock + *(uint32_t *)(TabBlock+((i-1)<<2));
+		ptw = (uint16_t *)(ptb + 5)			;/* Jump dx dy dz et collis */
 		maxbrk = *ptb * *(ptb+1) * *(ptb+2)		;/* dx*dy*dz*/
 
 		for ( j = 0 ; j < maxbrk ; j++, ptw += 2 )
@@ -227,10 +227,10 @@ S32	LoadUsedBrick()
 	return(offset)	;
 }
 /*-------------------------------------------------------------------------*/
-void	InitGrille( U32 numcube )
+void	InitGrille( uint32_t numcube )
 {
-	U32	id_gri	;
-	U32	id_bll	;
+	uint32_t	id_gri	;
+	uint32_t	id_bll	;
         char tmpFilePath[ADELINE_MAX_PATH];
 
 	numcube = TabAllCube[numcube].Num	;//	Indirection
@@ -258,7 +258,7 @@ void	InitGrille( U32 numcube )
 
 	ManageSystem() ;// for streaming
 
-	NbBlock = (*(U32*)TabBlock)/4		;
+	NbBlock = (*(uint32_t*)TabBlock)/4		;
 
 	CopyMapToCube()				;
 
@@ -286,18 +286,18 @@ void	FreeGrille(){}
 /*──────────────────────────────────────────────────────────────────────────*/
 
 /*--------------------------------------------------------------------------*/
-U8	*GetAdrColonneMap( S32 x, S32 z )
+uint8_t	*GetAdrColonneMap( int32_t x, int32_t z )
 {
-	U32	offset	;
+	uint32_t	offset	;
 
-	offset = *(U16*)(BufMap+sizeof(T_GRI_HEADER)+(x+(z*SIZE_CUBE_Z))*2);
+	offset = *(uint16_t*)(BufMap+sizeof(T_GRI_HEADER)+(x+(z*SIZE_CUBE_Z))*2);
 
 	return(BufMap+sizeof(T_GRI_HEADER)+offset )	;
 }
 /*--------------------------------------------------------------------------*/
-U8	*GetAdrColonneCube( S32 x, S32 z )
+uint8_t	*GetAdrColonneCube( int32_t x, int32_t z )
 {
-	U32	offset	;
+	uint32_t	offset	;
 
 	offset = (x*SIZE_CUBE_Y*2)+(z*SIZE_CUBE_Z*SIZE_CUBE_Y*2);
 
@@ -305,10 +305,10 @@ U8	*GetAdrColonneCube( S32 x, S32 z )
 }
 
 /*--------------------------------------------------------------------------*/
-U8	WorldColBrickVisible( 	S32 oldx, S32 oldy, S32 oldz,
-				S32 xw, S32 yw, S32 zw )
+uint8_t	WorldColBrickVisible( 	int32_t oldx, int32_t oldy, int32_t oldz,
+				int32_t xw, int32_t yw, int32_t zw )
 {
-	U8 col = GetWorldColBrickVisible( xw, yw, zw ) ;
+	uint8_t col = GetWorldColBrickVisible( xw, yw, zw ) ;
 
 	if( col )	return( col ) ;
 
@@ -326,7 +326,7 @@ U8	WorldColBrickVisible( 	S32 oldx, S32 oldy, S32 oldz,
 }
 
 /*--------------------------------------------------------------------------*/
-/*U8	WorldColBrickVisible( S32 xw, S32 yw, S32 zw )
+/*uint8_t	WorldColBrickVisible( int32_t xw, int32_t yw, int32_t zw )
 {
 	if( GetBlockBrick( xw, yw, zw ) )
 	{
@@ -338,13 +338,13 @@ U8	WorldColBrickVisible( 	S32 oldx, S32 oldy, S32 oldz,
 
 /*--------------------------------------------------------------------------*/
 
-void	GetShadow( S32 xw, S32 yw, S32 zw )
+void	GetShadow( int32_t xw, int32_t yw, int32_t zw )
 {
-	S32	xm, ym, zm ;
-	U8	*ptc ;
-	S32	y ;
-	U8	*adr ;
-	S32	block ;
+	int32_t	xm, ym, zm ;
+	uint8_t	*ptc ;
+	int32_t	y ;
+	uint8_t	*adr ;
+	int32_t	block ;
 
 	xm = xw/SIZE_BRICK_XZ ;
 	ym = yw/SIZE_BRICK_Y ;
@@ -389,12 +389,12 @@ void	GetShadow( S32 xw, S32 yw, S32 zw )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 /*--------------------------------------------------------------------------*/
-S32	ProjectShadow( T_SORT *ptrs, S32 beta )
+int32_t	ProjectShadow( T_SORT *ptrs, int32_t beta )
 {
-	S32	xmin, zmin, xmax, zmax, xw, yw, zw ;
-	S32	ys, cy		;
-	S32	altitude_ref	;
-	S32	demix, demiz 	;
+	int32_t	xmin, zmin, xmax, zmax, xw, yw, zw ;
+	int32_t	ys, cy		;
+	int32_t	altitude_ref	;
+	int32_t	demix, demiz 	;
 
 	ClearScreenMinMax();
 
@@ -491,16 +491,16 @@ S32	ProjectShadow( T_SORT *ptrs, S32 beta )
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U32	CreateMaskGph( U8 *ptsrc, U8 *ptdst )
+uint32_t	CreateMaskGph( uint8_t *ptsrc, uint8_t *ptdst )
 {
-	U8	*ptd	;
-	U32   nbg, off;
-	U32	*ptoff	;
-	U32	size, i	;
+	uint8_t	*ptd	;
+	uint32_t   nbg, off;
+	uint32_t	*ptoff	;
+	uint32_t	size, i	;
 
-	ptoff = (U32*)ptdst		;
+	ptoff = (uint32_t*)ptdst		;
 
-	off = *(U32 *)ptsrc		;/*	First Offset Src	*/
+	off = *(uint32_t *)ptsrc		;/*	First Offset Src	*/
 
 	*ptoff++ = off			;/*	First Offset	*/
 
@@ -522,8 +522,8 @@ U32	CreateMaskGph( U8 *ptsrc, U8 *ptdst )
 /*-------------------------------------------------------------------------*/
 void	CopyMapToCube()
 {
-	U8	*pts, *ptd	;
-	S32	x, z		;
+	uint8_t	*pts, *ptd	;
+	int32_t	x, z		;
 
 /*-------------- Copy -------------------------*/
 	for ( z = 0 ; z < SIZE_CUBE_Z ; z++ )
@@ -540,7 +540,7 @@ void	CopyMapToCube()
 /*──────────────────────────────────────────────────────────────────────────*/
 void	InitBufferCube()
 {
-	S32	intmem ;
+	int32_t	intmem ;
         char tmpFilePath[ADELINE_MAX_PATH];
 
         GetResPath(tmpFilePath, ADELINE_MAX_PATH, BKG_HQR_NAME);
@@ -570,14 +570,14 @@ void	InitBufferCube()
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	DrawOverBrick( S32 xm, S32 ym, S32 zm )
+void	DrawOverBrick( int32_t xm, int32_t ym, int32_t zm )
 {
 	register T_COLONB	*ptrlbc ;
-	register S32		colscreen ;
-	S32		col, i ;
-	S32		startcol, endcol ;
-	S32		xw, yw, zw ;
-	S32		recouvre ;
+	register int32_t		colscreen ;
+	int32_t		col, i ;
+	int32_t		startcol, endcol ;
+	int32_t		xw, yw, zw ;
+	int32_t		recouvre ;
 
 	startcol = (ClipXMin+24)/24-1 ;
 	endcol = (ClipXMax+24)/24 ;
@@ -638,12 +638,12 @@ void	DrawOverBrick( S32 xm, S32 ym, S32 zm )
 /*--------------------------------------------------------------------------*/
 /* recouvrement reel pour obj qui ne depassent pas la ZV */
 
-void	DrawOverBrick3( S32 xm, S32 ym, S32 zm, S32 ymax )
+void	DrawOverBrick3( int32_t xm, int32_t ym, int32_t zm, int32_t ymax )
 {
 	register T_COLONB	*ptrlbc ;
-	register S32		colscreen ;
-	S32		col, i ;
-	S32		startcol, endcol ;
+	register int32_t		colscreen ;
+	int32_t		col, i ;
+	int32_t		startcol, endcol ;
 
 	startcol = (ClipXMin+24)/24-1 ;
 	endcol = (ClipXMax+24)/24 ;
@@ -692,12 +692,12 @@ void	DrawOverBrick3( S32 xm, S32 ym, S32 zm, S32 ymax )
 // GROSSE RUSTINE: Cage à la fin de LBA2 pour ne pas recouvrir l'objet avec
 // les briques du sol en 0
 
-void	DrawOverBrickCage( S32 xm, S32 ym, S32 zm )
+void	DrawOverBrickCage( int32_t xm, int32_t ym, int32_t zm )
 {
 	register T_COLONB	*ptrlbc ;
-	register S32		colscreen ;
-	S32		col, i ;
-	S32		startcol, endcol ;
+	register int32_t		colscreen ;
+	int32_t		col, i ;
+	int32_t		startcol, endcol ;
 
 	startcol = (ClipXMin+24)/24-1 ;
 	endcol = (ClipXMax+24)/24 ;
@@ -738,13 +738,13 @@ void	DrawOverBrickCage( S32 xm, S32 ym, S32 zm )
 
 /*--------------------------------------------------------------------------*/
 
-void	AffBrickBlock( S32 block, S32 brick, S16 x, S16 y, S16 z )
+void	AffBrickBlock( int32_t block, int32_t brick, int16_t x, int16_t y, int16_t z )
 {
-	U8	*adr	;
-	S32	nb, col ;
+	uint8_t	*adr	;
+	int32_t	nb, col ;
 	register T_COLONB	*ptrlbc ;
-	S16	numbrick;
-	U8      brickcol ;
+	int16_t	numbrick;
+	uint8_t      brickcol ;
 
 	adr = GetAdrBlock( block )	;
 	adr += HEADER_BLOCK		;
@@ -753,7 +753,7 @@ void	AffBrickBlock( S32 block, S32 brick, S16 x, S16 y, S16 z )
 	brickcol = *adr			;
 	adr += 2			;
 
-	numbrick = *(U16*)adr		;	/* & 32767 */
+	numbrick = *(uint16_t*)adr		;	/* & 32767 */
 
 	if ( numbrick AND numbrick!=ForbidenBrick )
 	{
@@ -777,8 +777,8 @@ void	AffBrickBlock( S32 block, S32 brick, S16 x, S16 y, S16 z )
 				ptrlbc->Xm   = x ;
 				ptrlbc->Ym   = y ;
 				ptrlbc->Zm   = z ;
-				ptrlbc->Ys    = (S16)YScreen ;
-				ptrlbc->Brick = (S16)(numbrick-1) ;
+				ptrlbc->Ys    = (int16_t)YScreen ;
+				ptrlbc->Brick = (int16_t)(numbrick-1) ;
 				ptrlbc->Col  = brickcol ;
 				NbBrickColon[ col ]++ ;
 			}
@@ -792,15 +792,15 @@ void	AffBrickBlock( S32 block, S32 brick, S16 x, S16 y, S16 z )
 
 void	AffGrille()
 {
-	S32	block		;
-	U8	*ptc		;
-	S16	z, y, x		;
+	int32_t	block		;
+	uint8_t	*ptc		;
+	int16_t	z, y, x		;
 
 	PtrProjectPoint( 0, 0, 0 ) ;
 	XpOrgw = Xp ;
 	YpOrgw = Yp ;
 
-	memset( NbBrickColon, 0, sizeof(S16)*NB_COLON ) ;
+	memset( NbBrickColon, 0, sizeof(int16_t)*NB_COLON ) ;
 
 	ptc = BufCube		;
 	for ( z = 0 ; z < SIZE_CUBE_Z ; z++ )
@@ -831,13 +831,13 @@ void	AffGrille()
 /*--------------------------------------------------------------------------*/
 // Calcule les masques du Z-Buffer pour DrawOverBrick sans dessiner la
 // brick
-void	AffBrickBlockColon( S32 block, S32 brick, S16 x, S16 y, S16 z )
+void	AffBrickBlockColon( int32_t block, int32_t brick, int16_t x, int16_t y, int16_t z )
 {
-	U8	*adr	;
-	S32	nb, col ;
+	uint8_t	*adr	;
+	int32_t	nb, col ;
 	register T_COLONB	*ptrlbc ;
-	S16	numbrick;
-	U8      brickcol ;
+	int16_t	numbrick;
+	uint8_t      brickcol ;
 
 	adr = GetAdrBlock( block )	;
 	adr += HEADER_BLOCK		;
@@ -846,7 +846,7 @@ void	AffBrickBlockColon( S32 block, S32 brick, S16 x, S16 y, S16 z )
 	brickcol = *adr			;
 	adr += 2			;
 
-	numbrick = *(U16*)adr		;	/* & 32767 */
+	numbrick = *(uint16_t*)adr		;	/* & 32767 */
 
 	if ( numbrick AND numbrick!=ForbidenBrick )
 	{
@@ -868,8 +868,8 @@ void	AffBrickBlockColon( S32 block, S32 brick, S16 x, S16 y, S16 z )
 				ptrlbc->Xm   = x ;
 				ptrlbc->Ym   = y ;
 				ptrlbc->Zm   = z ;
-				ptrlbc->Ys    = (S16)YScreen ;
-				ptrlbc->Brick = (S16)(numbrick-1) ;
+				ptrlbc->Ys    = (int16_t)YScreen ;
+				ptrlbc->Brick = (int16_t)(numbrick-1) ;
 				ptrlbc->Col  = brickcol ;
 				NbBrickColon[ col ]++ ;
 
@@ -883,17 +883,17 @@ void	AffBrickBlockColon( S32 block, S32 brick, S16 x, S16 y, S16 z )
 // afficher les bricks
 void	AffGrilleOnly()
 {
-	S32	block		;
-	U8	*ptc		;
-	U8	*adr ;
-	S16	z, y, x		;
-	U8	codejeu		;
+	int32_t	block		;
+	uint8_t	*ptc		;
+	uint8_t	*adr ;
+	int16_t	z, y, x		;
+	uint8_t	codejeu		;
 
 	PtrProjectPoint( 0, 0, 0 ) ;
 	XpOrgw = Xp ;
 	YpOrgw = Yp ;
 
-	memset( NbBrickColon, 0, sizeof(S16)*NB_COLON ) ;
+	memset( NbBrickColon, 0, sizeof(int16_t)*NB_COLON ) ;
 
 	ptc = BufCube		;
 
@@ -913,7 +913,7 @@ void	AffGrilleOnly()
 					adr = GetAdrBlock( block )	;
 					adr += (HEADER_BLOCK+1)		;
 
-					codejeu = (U8)((*adr)>>4) 	;
+					codejeu = (uint8_t)((*adr)>>4) 	;
 
 					if( codejeu!=CJ_LABYRINTHE )
 					//-------------------
@@ -928,10 +928,10 @@ void	AffGrilleOnly()
 }
 /*--------------------------------------------------------------------------*/
 // Affiche la brick sans calculer le Z-Buffer pour DrawOverBrick
-void	AffBrickBlockOnly( S32 block, S32 brick, S16 x, S16 y, S16 z )
+void	AffBrickBlockOnly( int32_t block, int32_t brick, int16_t x, int16_t y, int16_t z )
 {
-	U8	*adr	;
-	S32	numbrick;
+	uint8_t	*adr	;
+	int32_t	numbrick;
 
 	adr = GetAdrBlock( block )	;
 	adr += HEADER_BLOCK		;
@@ -939,7 +939,7 @@ void	AffBrickBlockOnly( S32 block, S32 brick, S16 x, S16 y, S16 z )
 	adr += ( brick<<2 )		;/* 4 Bytes to Jump	*/
 	adr += 2			;
 
-	numbrick = *(U16*)adr		;	/* & 32767 */
+	numbrick = *(uint16_t*)adr		;	/* & 32767 */
 
 	if( numbrick AND numbrick!=ForbidenBrick )
 	{
@@ -958,11 +958,11 @@ void	AffBrickBlockOnly( S32 block, S32 brick, S16 x, S16 y, S16 z )
 // Redessine uniquement les block n'ayant pas le code jeu Invisible
 void	AffGrilleLabyrinthe()
 {
-	S32	block		;
-	U8	*ptc		;
-	U8	*adr ;
-	S16	z, y, x		;
-	U8	codejeu		;
+	int32_t	block		;
+	uint8_t	*ptc		;
+	uint8_t	*adr ;
+	int16_t	z, y, x		;
+	uint8_t	codejeu		;
 
 	PtrProjectPoint( 0, 0, 0 ) ;
 	XpOrgw = Xp ;
@@ -985,7 +985,7 @@ void	AffGrilleLabyrinthe()
 					adr = GetAdrBlock( block )	;
 					adr += (HEADER_BLOCK+1)		;
 
-					codejeu = (U8)((*adr)>>4) ;
+					codejeu = (uint8_t)((*adr)>>4) ;
 
 					if( codejeu!=CJ_LABYRINTHE )
 					{
@@ -999,15 +999,15 @@ void	AffGrilleLabyrinthe()
 }
 
 // Affiche un cube de block (3*3*3) autour du point passe (coordonnees world)
-void	AffOneBrick( S32 x, S32 y, S32 z )
+void	AffOneBrick( int32_t x, int32_t y, int32_t z )
 {
-	S32	block		;
-	U8	*ptc		;
-	U8	*adr	;
-	S32	xmin, ymin, xmax, ymax ;
-	S16	xs, ys, zs ;
-	S16	zdeb ;
-	U8	codejeu	;
+	int32_t	block		;
+	uint8_t	*ptc		;
+	uint8_t	*adr	;
+	int32_t	xmin, ymin, xmax, ymax ;
+	int16_t	xs, ys, zs ;
+	int16_t	zdeb ;
+	uint8_t	codejeu	;
 
 	xmin = 639 ;
 	ymin = 479 ;
@@ -1022,16 +1022,16 @@ void	AffOneBrick( S32 x, S32 y, S32 z )
 	y /= SIZE_BRICK_Y  ;
 	z /= SIZE_BRICK_XZ ;
 
-	zdeb = (S16)(z-1) ;
+	zdeb = (int16_t)(z-1) ;
 	if( zdeb<0 )	zdeb = 0 ;
 
 	for( zs=zdeb; zs<=z+1; zs++ )
 	{
-		for( xs=(S16)(x-1); xs<=(S16)(x+1); xs++ )
+		for( xs=(int16_t)(x-1); xs<=(int16_t)(x+1); xs++ )
 		{
 			ptc = GetAdrColonneCube( xs, zs )		;
 			ptc += (y-1)*2 ;
-			for( ys=(S16)(y-1); ys<=(S16)(y+1); ys++ )
+			for( ys=(int16_t)(y-1); ys<=(int16_t)(y+1); ys++ )
 			{
 				block = *ptc++	;
 				if( block )
@@ -1041,7 +1041,7 @@ void	AffOneBrick( S32 x, S32 y, S32 z )
 					adr = GetAdrBlock( block )	;
 					adr += (HEADER_BLOCK+1)		;
 
-					codejeu = (U8)((*adr)>>4) ;
+					codejeu = (uint8_t)((*adr)>>4) ;
 
 					if( codejeu==CJ_LABYRINTHE )
 					{
@@ -1067,10 +1067,10 @@ void	AffOneBrick( S32 x, S32 y, S32 z )
 
 void	IncrustGrm( T_ZONE *ptrz )
 {
-	S32 numgrm, xo, yo, zo	;
-	U8	*pts, *ptd	;
-	S32	x, z	 	;
-	S32	dx, dy, dz	;
+	int32_t numgrm, xo, yo, zo	;
+	uint8_t	*pts, *ptd	;
+	int32_t	x, z	 	;
+	int32_t	dx, dy, dz	;
         char tmpFilePath[ADELINE_MAX_PATH];
 
 	numgrm = ptrz->Info0		;
@@ -1083,14 +1083,14 @@ void	IncrustGrm( T_ZONE *ptrz )
 	yo = ptrz->Y0/SIZE_BRICK_Y	;
 	zo = ptrz->Z0/SIZE_BRICK_XZ	;
 
-	pts = (U8*)Screen	;
+	pts = (uint8_t*)Screen	;
 
 	dx = *pts++	;
 	dy = *pts++	;
 	dz = *pts++	;
 
-	yo <<= 1	;//	Cause S16
-	dy <<= 1	;//	Cause S16
+	yo <<= 1	;//	Cause int16_t
+	dy <<= 1	;//	Cause int16_t
 
 	for ( z = zo ; z < zo+dz ; z++ )
 	{
@@ -1109,11 +1109,11 @@ void	IncrustGrm( T_ZONE *ptrz )
 /*--------------------------------------------------------------------------*/
 void	DesIncrustGrm( T_ZONE *ptrz )
 {
-	U8	*pts, *ptd	;
-	U8	col[50]		;//	1 Colonne decompressee
-	S32	x, y, z, dy	;
-	S32	z0, z1, x0, x1	;
-	S32	y0, y1		;
+	uint8_t	*pts, *ptd	;
+	uint8_t	col[50]		;//	1 Colonne decompressee
+	int32_t	x, y, z, dy	;
+	int32_t	z0, z1, x0, x1	;
+	int32_t	y0, y1		;
 
 	x0 = ptrz->X0/SIZE_BRICK_XZ	;
 	x1 = ptrz->X1/SIZE_BRICK_XZ	;
@@ -1124,7 +1124,7 @@ void	DesIncrustGrm( T_ZONE *ptrz )
 	z0 = ptrz->Z0/SIZE_BRICK_XZ	;
 	z1 = ptrz->Z1/SIZE_BRICK_XZ	;
 
-	y = y0 << 1			;//	Cause S16
+	y = y0 << 1			;//	Cause int16_t
 
 	dy = ((y1-y0)+1)<<1		;
 
@@ -1148,7 +1148,7 @@ void	DesIncrustGrm( T_ZONE *ptrz )
 /*--------------------------------------------------------------------------*/
 void	RedrawGRMs( void )
 {
-	S32	n ;
+	int32_t	n ;
 	T_ZONE	*ptrz = ListZone ;
 
 	for( n=0; n<NbZones; n++, ptrz++ )

@@ -6,10 +6,10 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 ScreenXMin = 0;
-S32 ScreenYMin = 0;
-S32 ScreenXMax = 0;
-S32 ScreenYMax = 0;
+int32_t ScreenXMin = 0;
+int32_t ScreenYMin = 0;
+int32_t ScreenXMax = 0;
+int32_t ScreenYMax = 0;
 
 // =============================================================================
 #ifdef __cplusplus

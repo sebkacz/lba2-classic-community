@@ -9,22 +9,22 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-void Plot(S32 x0, S32 y0, S32 coul) {
+void Plot(int32_t x0, int32_t y0, int32_t coul) {
   if ((x0 < ClipXMin) || (x0 > ClipXMax) || (y0 < ClipYMin) ||
       (y0 > ClipYMax)) {
     return;
   }
 
-  ((U8 *)Log)[y0 * ModeDesiredX + x0] = (U8)coul;
+  ((uint8_t *)Log)[y0 * ModeDesiredX + x0] = (uint8_t)coul;
 }
 
-S32 GetPlot(S32 x0, S32 y0) {
+int32_t GetPlot(int32_t x0, int32_t y0) {
   if ((x0 < ClipXMin) || (x0 > ClipXMax) || (y0 < ClipYMin) ||
       (y0 > ClipYMax)) {
     return 0;
   }
 
-  return ((U8 *)Log)[y0 * ModeDesiredX + x0];
+  return ((uint8_t *)Log)[y0 * ModeDesiredX + x0];
 }
 
 // =============================================================================

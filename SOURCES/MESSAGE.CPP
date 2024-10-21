@@ -25,7 +25,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-S32     FlagRestoreCD = 0               ;
+int32_t     FlagRestoreCD = 0               ;
 
 /*-------------------------------------------------------------------------*/
 //======================== Issus de Dial 
@@ -41,11 +41,11 @@ S32     FlagRestoreCD = 0               ;
 #define DIAL_EXP        (1<<6)  // Texte affiche Explain Inventory
 #define DIAL_DEM        (1<<7)  // Texte affiche sur PCX pour Demo
 
-S32     FlagDial = DIAL_DEF     ;
+int32_t     FlagDial = DIAL_DEF     ;
 
-S32     FlagSpeedMessage = FALSE ;// cf MyDial() and NextDialCar()
+int32_t     FlagSpeedMessage = FALSE ;// cf MyDial() and NextDialCar()
 
-S32     DialNbLine ;    // pour la version demo le 02/08/96
+int32_t     DialNbLine ;    // pour la version demo le 02/08/96
 
 #ifdef  LBA_EDITOR
 #define PATH_TXT        "f:\\projet\\lba2\\text\\"
@@ -58,10 +58,10 @@ S32     DialNbLine ;    // pour la version demo le 02/08/96
 #define PathConfigFile  "c:\\adeline.def"
 //#define       CDROM   1
 
-S32     Island  ;
+int32_t     Island  ;
 
 /*-------------------------------------------------------------------------*/
-void    DrawCadre( S32 x0, S32 y0, S32 x1, S32 y1 )
+void    DrawCadre( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
         Rect( x0, y0, x1, y1, LBAWHITE )      ;
 }
@@ -71,7 +71,7 @@ void    *LoadTestMalloc( char *name )
         return(LoadMalloc(name))        ;
 }
 /*-------------------------------------------------------------------------*/
-S32     GetMusicCD()
+int32_t     GetMusicCD()
 {
         return(GetMusicCDR())   ;
 }
@@ -81,9 +81,9 @@ void    StopMusicCD()
         StopCDR()       ;
 }
 /*-------------------------------------------------------------------------*/
-U8   *Screen ;
-U8   *LbaFont;
-U8   *PalOrg ;
+uint8_t   *Screen ;
+uint8_t   *LbaFont;
+uint8_t   *PalOrg ;
 //===========================================================================
 #endif
 
@@ -108,36 +108,36 @@ U8   *PalOrg ;
 #define MAX_SHADE       14              // ex 32!!!
 #define SPEAK_SAMPLE    0x1234
 /*-------------------------------------------------------------------------*/
-S32    Dial_X0=16      ;
-S32    Dial_Y0=334     ;
-S32    Dial_X1=639-16  ;
-S32    Dial_Y1=479-16  ;
-static  S32    DialMaxSize=((623-8)-(16+8));
+int32_t    Dial_X0=16      ;
+int32_t    Dial_Y0=334     ;
+int32_t    Dial_X1=639-16  ;
+int32_t    Dial_Y1=479-16  ;
+static  int32_t    DialMaxSize=((623-8)-(16+8));
 
 static  char    BufLine[256]    ;
 static  char    *PtLine         ;
-static  S32    SizeLine        ;
-static  S32    NbSpace         ;
-static  S32    NbBigSpace      ;
-static  S32    SizeSpace       ;
-static  S32    LenLine         ;
-static  S32    SizeWord        ;
+static  int32_t    SizeLine        ;
+static  int32_t    NbSpace         ;
+static  int32_t    NbBigSpace      ;
+static  int32_t    SizeSpace       ;
+static  int32_t    LenLine         ;
+static  int32_t    SizeWord        ;
 
 /*-------------------------------------------------------------------------*/
 
 static  char    BufferMultiText[256] ;
-static  S32     FileMultiText = -1 ;
-static  S32     NumMultiText = -1 ;
+static  int32_t     FileMultiText = -1 ;
+static  int32_t     NumMultiText = -1 ;
 
-S32     FlecheForcee = FALSE ;
+int32_t     FlecheForcee = FALSE ;
 /*-------------------------------------------------------------------------*/
 
-U16    MaxText          ;
+uint16_t    MaxText          ;
 
 static char     FileText[ADELINE_MAX_PATH]   ;
 
-S32     Language = 1    ;               // English
-S32     LastFileInit=-1 ;
+int32_t     Language = 1    ;               // English
+int32_t     LastFileInit=-1 ;
 
 const char    *TabLanguage[] = {
                         //      Ne pas toucher l'ordre cause HQR
@@ -168,14 +168,14 @@ const char    *ListFileText[] = {     "sys",
                                       "011"     } ;
 // flag de cadre shade
 
-S32     FlagMessageShade = TRUE ;
+int32_t     FlagMessageShade = TRUE ;
 
 #pragma pack(push,4)
 
 typedef struct
 {
-        S32    x       ;
-        S32    y       ;
+        int32_t    x       ;
+        int32_t    y       ;
         char   c       ;
 
 } T_STACKCAR    ;
@@ -184,79 +184,79 @@ typedef struct
 
 static  T_STACKCAR      StackCar[MAX_STACK]       ;
 
-static  S32    NbCar           ;
+static  int32_t    NbCar           ;
 
 #define NB_DEGRADE      14
-static  S32    MinDegrade      ;
-static  S32    MaxDegrade      ;
-U8   *BufText=0L        ;
-static  U8   *PtText=0L ;
-static  S32    SizeText        ;
+static  int32_t    MinDegrade      ;
+static  int32_t    MaxDegrade      ;
+uint8_t   *BufText=0L        ;
+static  uint8_t   *PtText=0L ;
+static  int32_t    SizeText        ;
 
-U16   *BufOrder = 0L    ;
+uint16_t   *BufOrder = 0L    ;
 
-S32    FlagSpeak=FALSE                  ;//     cf InitLanguage
-S32     FlagDisplayText=1               ;//     ON par default
+int32_t    FlagSpeak=FALSE                  ;//     cf InitLanguage
+int32_t     FlagDisplayText=1               ;//     ON par default
 
 //----------------------------------------------------------------------------
 #if defined(CDROM)||defined(LBA_EDITOR)
-U32     *BufMemoSeek=0                          ;
+uint32_t     *BufMemoSeek=0                          ;
 #endif
 
 #ifdef  CDROM
-S32     NumObjSpeak = -1                ;
-S32     FlagVoiceCD=FALSE               ;//     cf InitLanguage
+int32_t     NumObjSpeak = -1                ;
+int32_t     FlagVoiceCD=FALSE               ;//     cf InitLanguage
 
-static  S32     FlagKeepVoice=0         ;
-static  S32     FlagNextVoc=FALSE       ;
-static  U32     FdNar=0                 ;
-//static        U32     FdCd=0                  ;
+static  int32_t     FlagKeepVoice=0         ;
+static  int32_t     FlagNextVoc=FALSE       ;
+static  uint32_t     FdNar=0                 ;
+//static        uint32_t     FdCd=0                  ;
 
 typedef struct
 {
         char    NameHD[13+ADELINE_MAX_PATH]  ;
-        U32     SaveTimer                       ;
-        U32     SizeFileHD                      ;
+        uint32_t     SaveTimer                       ;
+        uint32_t     SizeFileHD                      ;
 
 } T_FILEONHD    ;
 
 T_FILEONHD      TabFileOnHD[MAX_FILE_VOICE] ;
 
-U32     TotalSizeFileHD = 0             ;
-S32     LanguageCD = 0                  ;// Français, a changer of course!
-S32     NbFileOnHD = 0                  ;// No File for the moment
-S32     MaxVoice=0                      ;
+uint32_t     TotalSizeFileHD = 0             ;
+int32_t     LanguageCD = 0                  ;// Français, a changer of course!
+int32_t     NbFileOnHD = 0                  ;// No File for the moment
+int32_t     MaxVoice=0                      ;
 
 #endif
 //-----------------------------------------------------------------------------
 
 char    *PtDial                 ;//     Use by Holomap
-S32    X_Dial, Y_Dial           ;//     Use by Holomap
+int32_t    X_Dial, Y_Dial           ;//     Use by Holomap
 static  char    Word[256]       ;
 static  char    *PtWord         ;
-static  S32    NbLineDial      ;
-static  S32    MaxLineDial=3   ;
-static  S32    FlagEndPage=FALSE;
-static  S32    FlagRunningDial=FALSE;
-static  S32    FlagEndDial=FALSE;
-static  S32    CurrentDial=0   ;
-static  S32    LenWord         ;
+static  int32_t    NbLineDial      ;
+static  int32_t    MaxLineDial=3   ;
+static  int32_t    FlagEndPage=FALSE;
+static  int32_t    FlagRunningDial=FALSE;
+static  int32_t    FlagEndDial=FALSE;
+static  int32_t    CurrentDial=0   ;
+static  int32_t    LenWord         ;
 
 //------------------------------
 // le 03/05/95
 #ifndef COMPILATOR
 struct ListMessages {
-        S32     Perso ;         // numero personnage scenarique
-        S32    Message ;        // numero message
+        int32_t     Perso ;         // numero personnage scenarique
+        int32_t    Message ;        // numero message
         } ;
 
 struct ListMessages *MessList = NULL ;  // Alloue dynamiquement
 
-S32     NbMess = 0 ;            // nombre de messages dans le .txt
+int32_t     NbMess = 0 ;            // nombre de messages dans le .txt
 #endif
 
 /*-------------------------------------------------------------------------*/
-U32     GetHDFreeSize()
+uint32_t     GetHDFreeSize()
 {
   // FIXME: Implement in a portable way
   return 10000000;
@@ -270,14 +270,14 @@ U32     GetHDFreeSize()
 #define BAR_X1  623
 #define BAR_Y1  440
 
-void    TimeBar( U32 max, U32 val )
+void    TimeBar( uint32_t max, uint32_t val )
 {
 #ifdef  LBA_EDITOR
         max = max ;
         val = val ;
 #else
-        U32     x       ;
-        U32     dx      ;
+        uint32_t     x       ;
+        uint32_t     dx      ;
         MemoClipWindow()        ;
         MemoClip()              ;
         UnsetClipWindow()       ;
@@ -315,7 +315,7 @@ void    TimeBar( U32 max, U32 val )
 void    InitLanguage()
 {
         char    string[256] ;
-        S32     n ;
+        int32_t     n ;
 
         // Attention: Textes toujours Valides ???
         strcpy( string, DefFileBufferReadStringDefault( "Language", TabLanguage[1] ) ) ;
@@ -362,10 +362,10 @@ void    InitLanguage()
 
 /*-------------------------------------------------------------------------*/
 
-S32    FindText( S32 text )
+int32_t    FindText( int32_t text )
 {
-        U16 *pt       ;
-        S32 i          ;
+        uint16_t *pt       ;
+        int32_t i          ;
 
         pt = BufOrder   ;
 
@@ -412,7 +412,7 @@ void    ClearVoiceFile()
 {
 #ifndef DEBUG_TOOLS
         T_FILEONHD *pt  ;
-        S32     i       ;
+        int32_t     i       ;
 #endif
 
         CloseFdNar() ;
@@ -440,7 +440,7 @@ return  ;
 void    CalcTotalSizeFileOnHD()
 {
         T_FILEONHD *pt  ;
-        S32     i       ;
+        int32_t     i       ;
 
         TotalSizeFileHD = 0     ;
         pt = TabFileOnHD        ;
@@ -454,7 +454,7 @@ void    CalcTotalSizeFileOnHD()
 void    AffStatusVoiceFile()
 {
         T_FILEONHD *pt  ;
-        S32     i       ;
+        int32_t     i       ;
 
         Text( 10, 8, "%FStatus des fichiers voix :")    ;
 
@@ -468,10 +468,10 @@ void    AffStatusVoiceFile()
 }
 #endif
 /*-------------------------------------------------------------------------*/
-void    AddFileNameOnHD( char *filename, U32 size, U32 timer )
+void    AddFileNameOnHD( char *filename, uint32_t size, uint32_t timer )
 {
         T_FILEONHD *pt  ;
-        S32     i       ;
+        int32_t     i       ;
 
         // on n'insere pas FR_GAM.VOX dans cette liste
         if( ade_strcasestr(filename,"_GAM.VOX") )       return ;
@@ -495,8 +495,8 @@ void    AddFileNameOnHD( char *filename, U32 size, U32 timer )
 void    DeleteOlderFileHD()
 {
         T_FILEONHD *pt, *pt1    ;
-        S32     i               ;
-        U32     min		;
+        int32_t     i               ;
+        uint32_t     min		;
 
         min = 0xFFFFFFFFL       ;//     le plus récent, non?
 
@@ -531,13 +531,13 @@ void    DeleteOlderFileHD()
 }
 /*-------------------------------------------------------------------------*/
 //      Copy File CD On HD
-S32     CopyFileCD_HD( char *filecd, char *filehd )
+int32_t     CopyFileCD_HD( char *filecd, char *filehd )
 {
-        U32     fdr     ;
-        U32     fdw     ;
-        S32     size    ;
-        S32     i       ;
-        S32     sizefile;
+        uint32_t     fdr     ;
+        uint32_t     fdw     ;
+        int32_t     size    ;
+        int32_t     i       ;
+        int32_t     sizefile;
         char    tmpFilePath[ADELINE_MAX_PATH];
 
 
@@ -647,10 +647,10 @@ error:          Close(fdr)      ;
         return(1)       ;
 }
 /*-------------------------------------------------------------------------*/
-S32     TryCopyFileCD_HD( char *filecd, char *filehd )
+int32_t     TryCopyFileCD_HD( char *filecd, char *filehd )
 {
-        S32     ret = 0 ;
-        U32     freesize, size, verif   ;
+        int32_t     ret = 0 ;
+        uint32_t     freesize, size, verif   ;
 
         PauseMusic( FALSE ) ;
 
@@ -702,9 +702,9 @@ void    CloseFdNar()
         }
 }
 /*-------------------------------------------------------------------------*/
-void    InitFileNar( char *file, S32 from )
+void    InitFileNar( char *file, int32_t from )
 {
-        U32     offset          ;
+        uint32_t     offset          ;
 
         CloseFdNar()            ;
 
@@ -741,9 +741,9 @@ error:
 }
 /*-------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------*/
-void    InitSpeak( S32 file )
+void    InitSpeak( int32_t file )
 {
-        S32     size            ;
+        int32_t     size            ;
         char    filehd[ADELINE_MAX_PATH];
         char    filecd[ADELINE_MAX_PATH];
         char    fileName[ADELINE_MAX_PATH];
@@ -798,13 +798,13 @@ void    InitSpeak( S32 file )
         }
 }
 /*-------------------------------------------------------------------------*/
-void    PlaySpeakVoc(S32 fd)
+void    PlaySpeakVoc(int32_t fd)
 {
-        S32    size    ;
-        S32    sizelzss;
-        S16    method  ;
-        U32     pan = 64 ;
-        S32     volume ;
+        int32_t    size    ;
+        int32_t    sizelzss;
+        int16_t    method  ;
+        uint32_t     pan = 64 ;
+        int32_t     volume ;
 
 //      modif du 4/10/94 au cas ou SayMessage avant ( crac HP )
         if ( IsSamplePlaying(SPEAK_SAMPLE))  StopOneSample(SPEAK_SAMPLE)        ;
@@ -834,7 +834,7 @@ void    PlaySpeakVoc(S32 fd)
         if( NumObjSpeak != -1
         AND FlagDial&DIAL_SAY )
         {
-                S32     distance ;
+                int32_t     distance ;
 
                 PtrProjectPoint( ListObjet[NumObjSpeak].Obj.X,
                                  ListObjet[NumObjSpeak].Obj.Y,
@@ -860,7 +860,7 @@ void    PlaySpeakVoc(S32 fd)
 
 }
 /*-------------------------------------------------------------------------*/
-S32     TestSpk( S32 fd )
+int32_t     TestSpk( int32_t fd )
 {
 #ifdef  LBA_EDITOR
         if ( !(OptionsDebug&OPT_SPEAK_MESSAGES) )       return(0)       ;//     Le Codeur ne veut pas
@@ -879,16 +879,16 @@ S32     TestSpk( S32 fd )
         return(0)       ;                       // A plus, snif... :-(
 }
 /*-------------------------------------------------------------------------*/
-S32     TestSpeak()
+int32_t     TestSpeak()
 {
         return(TestSpk( FdNar ));
 }
 /*-------------------------------------------------------------------------*/
 //#ifdef        A_VOIR_SI_UTIL_STOP_MUSIC_BEFORE_PLAYING
 /*
-S32    TestSpeakFromCD()
+int32_t    TestSpeakFromCD()
 {
-        S32     ret     ;
+        int32_t     ret     ;
 
         if ( !CDDrive  )        return(0)       ;
 
@@ -905,11 +905,11 @@ S32    TestSpeakFromCD()
 */
 /*-------------------------------------------------------------------------*/
 /*
-void    SpeakFromCD( S32 file, S32 text )
+void    SpeakFromCD( int32_t file, int32_t text )
 {
-        U16     *pt             ;
-        S32    num, offset     ;
-        S32     max             ;
+        uint16_t     *pt             ;
+        int32_t    num, offset     ;
+        int32_t     max             ;
         char    tmpname[ADELINE_MAX_PATH]    ;
         char    tmpFilename[ADELINE_MAX_PATH];
 
@@ -923,7 +923,7 @@ void    SpeakFromCD( S32 file, S32 text )
         max = FileSize( tmpname )/2     ;
         Load( tmpname, BufSpeak )       ;// Ne pas bousiller BufOrder!
 
-        pt = (U16*)BufSpeak             ;
+        pt = (uint16_t*)BufSpeak             ;
 
         for ( num = 0 ; num < max ; num++ )
         {
@@ -961,7 +961,7 @@ void    SpeakFromCD( S32 file, S32 text )
 */
 /*-------------------------------------------------------------------------*/
 /*
-S32     IsVoiceFileOnHD( S32 island )
+int32_t     IsVoiceFileOnHD( int32_t island )
 {
         char    filehd[_MAX_PATH]       ;
 
@@ -976,10 +976,10 @@ S32     IsVoiceFileOnHD( S32 island )
 }
 */
 /*-------------------------------------------------------------------------*/
-S32    Speak( S32 text )
+int32_t    Speak( int32_t text )
 {
-        S32     num     ;
-        U32     offset  ;
+        int32_t     num     ;
+        uint32_t     offset  ;
 
         if ( !FdNar )return(0L) ;
 
@@ -1050,13 +1050,13 @@ void    StopSpeak()
 //-------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
-S32     Speak(S32 text)
+int32_t     Speak(int32_t text)
 {
         text=text       ;//     Avoid Compilator Warning
         return(0)       ;
 }
 //----------------------------------------------------------------------------
-S32     TestSpeak()
+int32_t     TestSpeak()
 {
         return(0)       ;
 }
@@ -1065,7 +1065,7 @@ S32     TestSpeak()
 //----------------------------------------------------------------------------
 #endif
 /*-------------------------------------------------------------------------*/
-void    InitDial( S32 file )
+void    InitDial( int32_t file )
 {
         NormalWinDial() ;//     By Security
 
@@ -1073,7 +1073,7 @@ void    InitDial( S32 file )
         LastFileInit = file                     ;
 
         GetResPath(FileText, ADELINE_MAX_PATH, TEXT_HQR_NAME);
-        MaxText = (U16)(Load_HQR( FileText, BufOrder,
+        MaxText = (uint16_t)(Load_HQR( FileText, BufOrder,
                           ( Language*MAX_TEXT_LANG*2)+(file*2)+0)/2) ;
 
         Load_HQR( FileText, BufText,
@@ -1091,7 +1091,7 @@ void    ClearDial()
 /*-------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------*/
 //      NEW
-S32     FlagGui = 0     ;
+int32_t     FlagGui = 0     ;
 
 void    GetNextWord(char *ptchaine, char *mot)
 {
@@ -1140,7 +1140,7 @@ void    GetNextWord(char *ptchaine, char *mot)
         SizeWord = SizeFont(mot)        ;
 }
 /*-------------------------------------------------------------------------*/
-static inline S32  PushCar( S32 x, S32 y, char c )
+static inline int32_t  PushCar( int32_t x, int32_t y, char c )
 {
         if(NbCar>=MAX_STACK)
         {
@@ -1168,9 +1168,9 @@ static inline void FlushCar()
         NbCar = MAX_SHADE-1     ;
 }
 /*-------------------------------------------------------------------------*/
-void    AffOneCar( S32 x, S32 y, char c, S32 coul )
+void    AffOneCar( int32_t x, int32_t y, char c, int32_t coul )
 {
-        S32     x0, y0, x1, y1  ;
+        int32_t     x0, y0, x1, y1  ;
 
         if (( c != 32 ) AND ( c != CODE_HARD_SPACE ))
         {
@@ -1204,7 +1204,7 @@ void    AffOneCar( S32 x, S32 y, char c, S32 coul )
 void    AffAllCar()
 {
         T_STACKCAR *pt  ;
-        S32 i, c        ;
+        int32_t i, c        ;
 
         pt = &StackCar[NbCar-1] ;
 
@@ -1220,7 +1220,7 @@ void    AffAllCar()
         FlushCar()      ;
 }
 /*-------------------------------------------------------------------------*/
-void    TestCoulDial( S32 coul )
+void    TestCoulDial( int32_t coul )
 {
         MinDegrade = coul*16    ;
         MaxDegrade = coul*16+12 ;
@@ -1273,10 +1273,10 @@ void    HoloWinDial()
 }
 /*-------------------------------------------------------------------------*/
 /*
-void    DefWinDial( S32 x0, S32 y0, S32 x1, S32 y1 )
+void    DefWinDial( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
-        S16    yh, yb   ;
-        S16    xl, xr   ;
+        int16_t    yh, yb   ;
+        int16_t    xl, xr   ;
 
         Dial_X0 = x0    ;
         Dial_Y0 = y0    ;
@@ -1306,9 +1306,9 @@ void    ExplainWinDial()
 
 }
 /*-------------------------------------------------------------------------*/
-S32     GereFlagDial( S32 text )
+int32_t     GereFlagDial( int32_t text )
 {
-        S32     ret = FALSE     ;
+        int32_t     ret = FALSE     ;
 
         FlagMessageShade = TRUE ;
 
@@ -1346,9 +1346,9 @@ S32     GereFlagDial( S32 text )
         if( FlagDial&DIAL_SAY )         // Say Message
         {
                 InitIncrustDisp( INCRUST_TEXT,
-                                 (S16)text,
+                                 (int16_t)text,
                                  0, 0,
-                                 (S16)(NumObjDial | (ListObjet[NumObjDial].CoulObj<<8)), 1, 2 )                 ;
+                                 (int16_t)(NumObjDial | (ListObjet[NumObjDial].CoulObj<<8)), 1, 2 )                 ;
 
                 // Optimisation : mise a jour des globales servant a
                 // GetMultiText pour ne pas charger le texte 2 fois
@@ -1369,17 +1369,17 @@ S32     GereFlagDial( S32 text )
 }
 
 /*-------------------------------------------------------------------------*/
-S32    GetText( S32 text )
+int32_t    GetText( int32_t text )
 {
-        U16   offset0 ;
-        U16   offset1 ;
-        S32    num      ;
+        uint16_t   offset0 ;
+        uint16_t   offset1 ;
+        int32_t    num      ;
 
         num = FindText( text )          ;//     Must have good number
         if ( num == -1 )        return(0L);//   RETURN
 
-        offset0 = *(U16*)(BufText+((num+0)*2L));
-        offset1 = *(U16*)(BufText+((num+1)*2L));
+        offset0 = *(uint16_t*)(BufText+((num+0)*2L));
+        offset1 = *(uint16_t*)(BufText+((num+1)*2L));
 
         PtText = BufText+offset0        ;
 
@@ -1399,8 +1399,8 @@ void    TestAndDrawRadio( void )
 {
         if( FlagDial&DIAL_RAD )         // Message Radio
         {
-                S32     sprite ;
-                S32     mindx, mindy ;
+                int32_t     sprite ;
+                int32_t     mindx, mindy ;
 
                 // ATTENTION: rustine car seuls ZOE et BALDINO peuvent parler
                 //            avec la radio, donc on teste qui c'est avec la
@@ -1520,7 +1520,7 @@ void    HoloInitDialWindow()
 }
 /*-------------------------------------------------------------------------*/
 
-void    CommonOpenDial( S32 text )
+void    CommonOpenDial( int32_t text )
 {
         CloseDial()             ;
 
@@ -1544,7 +1544,7 @@ void    CommonOpenDial( S32 text )
 
 /*-------------------------------------------------------------------------*/
 
-void    OpenDial(S32 text)
+void    OpenDial(int32_t text)
 {
         CommonOpenDial( text )  ;
 
@@ -1561,8 +1561,8 @@ void    OpenDial(S32 text)
 /*-------------------------------------------------------------------------*/
 void    GetNextLine()
 {
-        S32    dx, dd  ;
-        S32    flag    ;
+        int32_t    dx, dd  ;
+        int32_t    flag    ;
 
         SizeLine = 0    ;
         NbSpace = 0     ;
@@ -1574,7 +1574,7 @@ void    GetNextLine()
 //      if (( FlagDial & DIAL_BIG ) AND ( FlagDial & DIAL_RAD ))
         if (( FlagDial & DIAL_RAD ))
         {
-                S32     clipxmax = 8 ;
+                int32_t     clipxmax = 8 ;
 
                 if ( NbLineDial < 3 )
                 {
@@ -1650,7 +1650,7 @@ void    GetNextLine()
 /*-------------------------------------------------------------------------*/
 void    InitEndPage()
 {
-        S32    i       ;
+        int32_t    i       ;
 
         *BufLine = 0                    ;
         for ( i = 0 ; i < NB_DEGRADE ; i++ )    strcat( BufLine, " ")   ;
@@ -1660,14 +1660,14 @@ void    InitEndPage()
         NbLineDial = 0                  ;
 }
 /*-------------------------------------------------------------------------*/
-S32     NextDialCar()
+int32_t     NextDialCar()
 {
-        static  S32     savetimer       ;
-        static  S32     flagnewpage =TRUE;
-        static  S32     flagfirstline   ;
-                S32     iter            ;
-                S32     res=1           ;
-                S32     dx, dy          ;
+        static  int32_t     savetimer       ;
+        static  int32_t     flagnewpage =TRUE;
+        static  int32_t     flagfirstline   ;
+                int32_t     iter            ;
+                int32_t     res=1           ;
+                int32_t     dx, dy          ;
 
 
         if ( FlagRunningDial == FALSE )
@@ -1809,16 +1809,16 @@ void    CloseDial()
         NextDialCar()           ;       // to force it to reset
 }
 /*-------------------------------------------------------------------------*/
-S32     FlagAnimWhoSpeak=0      ;
-S32     WhoSpeak=0              ;
-S32     XSpeak, YSpeak, ZSpeak  ;
-S32     OrgAnimSpeak            ;
-S32     AlphaSpeak, BetaSpeak, GammaSpeak;
+int32_t     FlagAnimWhoSpeak=0      ;
+int32_t     WhoSpeak=0              ;
+int32_t     XSpeak, YSpeak, ZSpeak  ;
+int32_t     OrgAnimSpeak            ;
+int32_t     AlphaSpeak, BetaSpeak, GammaSpeak;
 T_OBJET *PtrWhoSpeak            ;
 /*-------------------------------------------------------------------------*/
-void    InitWhoSpeak( S32 numobj )
+void    InitWhoSpeak( int32_t numobj )
 {
-        S32     numanim, flag=0, YProj  ;
+        int32_t     numanim, flag=0, YProj  ;
 
         FlagAnimWhoSpeak = FALSE        ;
 
@@ -1887,7 +1887,7 @@ void    ClearWhoSpeak()
 
 void    SpeakAnimation()
 {
-        S32     saveyclip ;
+        int32_t     saveyclip ;
 
         if ( FlagZoomed )       DrawOneInventory(InvSelect)     ;
 
@@ -1923,10 +1923,10 @@ void    SpeakAnimation()
 //────────────────────────────────────────────────────────────────────────────
 //                                 D I A L
 //────────────────────────────────────────────────────────────────────────────
-void    Dial( S32 text, S32 drawscene )
+void    Dial( int32_t text, int32_t drawscene )
 {
-        S32     ret = 0         ;
-        S32     flagabort=0     ;
+        int32_t     ret = 0         ;
+        int32_t     flagabort=0     ;
 
 #ifndef LBA_EDITOR
         ClearIncrusts( INCRUST_SYS_TEXT ) ;
@@ -2026,7 +2026,7 @@ void    Dial( S32 text, S32 drawscene )
 
                         if( DemoSlide )
                         {
-                                S32     endtimer = TimerRefHR + DialNbLine*1000 ;
+                                int32_t     endtimer = TimerRefHR + DialNbLine*1000 ;
 
                                 while( TimerRefHR<endtimer
                                 AND !MyKey AND !Input )
@@ -2067,7 +2067,7 @@ void    Dial( S32 text, S32 drawscene )
 
                 if( DemoSlide )
                 {
-                        S32     endtimer = TimerRefHR + DialNbLine*1000 ;
+                        int32_t     endtimer = TimerRefHR + DialNbLine*1000 ;
 
                         while( TimerRefHR<endtimer
                         AND !MyKey AND !Input )
@@ -2107,11 +2107,11 @@ void    Dial( S32 text, S32 drawscene )
         RestoreTimer( ) ;
 }
 /*──────────────────────────────────────────────────────────────────────────*/
-S32     MyDial( S32 nummess )   // attends une touche si autre page sinon continue
+int32_t     MyDial( int32_t nummess )   // attends une touche si autre page sinon continue
 {
-//      S32     memoflagdisplaytext ;
-        S32     dialstat = 1    ;
-        S32     esc = FALSE ;
+//      int32_t     memoflagdisplaytext ;
+        int32_t     dialstat = 1    ;
+        int32_t     esc = FALSE ;
 
 #ifndef LBA_EDITOR
         ClearIncrusts( INCRUST_SYS_TEXT ) ;
@@ -2213,11 +2213,11 @@ S32     MyDial( S32 nummess )   // attends une touche si autre page sinon contin
 }
 /*──────────────────────────────────────────────────────────────────────────*/
 // attention size max ou tronquée à 255 car + 0
-char    *GetMultiText( S32 text, char *dst )
+char    *GetMultiText( int32_t text, char *dst )
 {
         char    *pts    ;
         char    *ptd    ;
-        S32     smax ;
+        int32_t     smax ;
 
         if( (text == NumMultiText ) AND ( LastFileInit == FileMultiText) )
         {
@@ -2249,7 +2249,7 @@ char    *GetMultiText( S32 text, char *dst )
 }
 /*-------------------------------------------------------------------------*/
 #ifdef  LBA_EDITOR
-void    CleanMessage( char *string, S32 flag )
+void    CleanMessage( char *string, int32_t flag )
 {
         CopyScreen( Log, Screen )       ;
         Message( string, flag )         ;
@@ -2265,7 +2265,7 @@ void    CleanMessage( char *string, S32 flag )
 
 #define GetTxtNextLine(ptr)     (strchr(ptr,0x0A)+1)
 
-void    LoadListMessages( S32 file )
+void    LoadListMessages( int32_t file )
 
 // Cette fonction doit imperativement etre appellee apres un InitDial
 // car elle considere que la variables MaxText est deja
@@ -2274,10 +2274,10 @@ void    LoadListMessages( S32 file )
         char    nametxt[256]   ;        // nom du fichier .txt
         char    *buftxt = 0L ;
         char    *ptr ;                  // pointe sur buftxt
-        S32     sizetxt ;
-        S32     mess = 0 ;              // message en cours
-        S32     n ;
-        S32     flag ;
+        int32_t     sizetxt ;
+        int32_t     mess = 0 ;              // message en cours
+        int32_t     n ;
+        int32_t     flag ;
 
         // si un fichier .txt d'une autre ile a deja ete lu, on libere
         // la structure
@@ -2382,10 +2382,10 @@ void    FreeListMessages( )
 }
 
 /*-------------------------------------------------------------------------*/
-S32     NextMessagePerso( S32 numperso, S32 message )
+int32_t     NextMessagePerso( int32_t numperso, int32_t message )
 
 {
-        S32     n, i = 0 ;
+        int32_t     n, i = 0 ;
 
         if( !MessList OR numperso==-1 ) return( -1 ) ;
 
@@ -2426,10 +2426,10 @@ S32     NextMessagePerso( S32 numperso, S32 message )
 }
 
 /*-------------------------------------------------------------------------*/
-S32     PreviousMessagePerso( S32 numperso, S32 message )
+int32_t     PreviousMessagePerso( int32_t numperso, int32_t message )
 
 {
-        S32     n, i = 0 ;
+        int32_t     n, i = 0 ;
 
         if( !MessList OR numperso==-1 ) return( -1 ) ;
 
@@ -2470,11 +2470,11 @@ S32     PreviousMessagePerso( S32 numperso, S32 message )
 }
 
 /*-------------------------------------------------------------------------*/
-S32     VerifyMessagePerso( S32 numperso, S32 message )
+int32_t     VerifyMessagePerso( int32_t numperso, int32_t message )
 
 {
-        S32     n ;
-        S32     firstmessage = -1 ;
+        int32_t     n ;
+        int32_t     firstmessage = -1 ;
 
         if( !MessList OR numperso==-1 ) return( -1 ) ;
 

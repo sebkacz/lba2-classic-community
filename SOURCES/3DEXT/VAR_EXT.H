@@ -5,38 +5,38 @@
  *══════════════════════════════════════════════════════════════════════════*/
 
 #ifndef	LBA_GAME
-extern	S16	FillFeuille ;
+extern	int16_t	FillFeuille ;
 #endif
 
-extern	S32	ClipZFar  ;
-extern	S32	StartZFog ;
+extern	int32_t	ClipZFar  ;
+extern	int32_t	StartZFog ;
 
 //camera
 
-extern	S32	CamPosX	;
-extern	S32	CamPosY	;
-extern	S32	CamPosZ	;
+extern	int32_t	CamPosX	;
+extern	int32_t	CamPosY	;
+extern	int32_t	CamPosZ	;
 
-extern	S32	AlphaCam ;
-extern	S32	BetaCam	;
-extern	S32	GammaCam ;
-extern	S32	ChampX ;
-extern	S32	ChampZ ;
+extern	int32_t	AlphaCam ;
+extern	int32_t	BetaCam	;
+extern	int32_t	GammaCam ;
+extern	int32_t	ChampX ;
+extern	int32_t	ChampZ ;
 
-extern	S32	VueDistance ;
-extern	S32	VueOffsetX, VueOffsetY, VueOffsetZ ;
+extern	int32_t	VueDistance ;
+extern	int32_t	VueOffsetX, VueOffsetY, VueOffsetZ ;
 
-extern	S32	WorldLightAlpha ;
-extern	S32	WorldLightBeta ;
+extern	int32_t	WorldLightAlpha ;
+extern	int32_t	WorldLightBeta ;
 
 // terrain
 
-//extern	S32		ListCubeInfos[] ;
-extern	S32		*ListCubeInfos ;
+//extern	int32_t		ListCubeInfos[] ;
+extern	int32_t		*ListCubeInfos ;
 
 
 
-extern	U8		*IsleMapIndex ;
+extern	uint8_t		*IsleMapIndex ;
 extern	T_HALF_POLY	*MapPolyGround ;
 
 //extern	char		IsleMapIndex[16][16] ;
@@ -44,35 +44,35 @@ extern	T_HALF_POLY	*MapPolyGround ;
 extern	T_HALF_TEX	*ListTexDef ;
 
 
-extern	S16		*MapSommetY ;
-extern	U8		*MapIntensity ;
+extern	int16_t		*MapSommetY ;
+extern	uint8_t		*MapIntensity ;
 extern	T_SOMMET_ROT	SommetRot[65][65] ;
-extern	U8		SommetAffichable[65][65] ;
+extern	uint8_t		SommetAffichable[65][65] ;
 
 /*
-extern	S16		MapSommetY[65][65] ;
-extern	U8		MapIntensity[65][65] ;
+extern	int16_t		MapSommetY[65][65] ;
+extern	uint8_t		MapIntensity[65][65] ;
 extern	T_SOMMET_ROT	SommetRot[65][65] ;
 */
 
-extern	S32		PalLevel ;
+extern	int32_t		PalLevel ;
 
 #ifdef __cplusplus
-extern "C" S32		FogCoul  ;
+extern "C" int32_t		FogCoul  ;
 #else
-extern S32		FogCoul  ;
+extern int32_t		FogCoul  ;
 #endif
 
-extern	U8		*SkySeaTexture ;
-extern	U8		*ObjTexture ;
-extern	U8		*GroundTexture ;
+extern	uint8_t		*SkySeaTexture ;
+extern	uint8_t		*ObjTexture ;
+extern	uint8_t		*GroundTexture ;
 
 extern	Struc_Point	Tab_Points[] ;
 //extern	Struc_Point	MemoTab_Points[] ;
 
 // decors
 
-extern	S32		NbObjDecors ;
+extern	int32_t		NbObjDecors ;
 extern	T_DECORS	*ListDecors ;
 //extern	T_HQR_HEADER	*HQR_Isle ;
 extern	T_HQR_HEADER	*HQR_Isle_Obj ;
@@ -83,12 +83,12 @@ extern	T_HQR_HEADER	*HQR_ListTexDef ;
 extern	T_HQR_HEADER	*HQR_MapSommetY ;
 extern	T_HQR_HEADER	*HQR_MapIntensity ;
 
-extern	S32		NbObjScreen ;
+extern	int32_t		NbObjScreen ;
 extern	T_LIST_TRI	*ListTriExt ;
 
 // collision avec le terrain
-extern	S32		IndexMapPolyTested ;
-extern	U16		CubeBitField ;
+extern	int32_t		IndexMapPolyTested ;
+extern	uint16_t		CubeBitField ;
 
 //--------------------------------------------------------------------
 // Animation de l'eau
@@ -96,17 +96,17 @@ extern	U16		CubeBitField ;
 #define	SIZE_BUFFER_POLY_SEA	100000L
 #define	MAX_POLY_SEA		(SIZE_BUFFER_POLY_SEA/sizeof(S_ANI_POLY))
 
-extern	S32		TimerAniPoly ;
-extern	S32		CntAniPoly8 ;		// anim 0-7
-extern	S32		CntAniPoly6 ;		// anim 0-5
+extern	int32_t		TimerAniPoly ;
+extern	int32_t		CntAniPoly8 ;		// anim 0-7
+extern	int32_t		CntAniPoly6 ;		// anim 0-5
 
 extern	S_ANI_POLY	*PtrPolySea ; 		// buffer stockage
-extern	S32		MaxPolySea ;
+extern	int32_t		MaxPolySea ;
 
 extern	S_ANI_POLY	*PtrAniPoly ;			// pointeur poly en cours
-extern	S32		NbAniPoly ;
+extern	int32_t		NbAniPoly ;
 
-extern	S32		OffsetAniPoly1 ;
-extern	S32		OffsetAniPoly2 ;
-extern	S32		OffsetAniPoly3 ;
-extern	S32		OffsetAniPoly4 ;
+extern	int32_t		OffsetAniPoly1 ;
+extern	int32_t		OffsetAniPoly2 ;
+extern	int32_t		OffsetAniPoly3 ;
+extern	int32_t		OffsetAniPoly4 ;

@@ -59,7 +59,7 @@ atexit(SafeErrorMallocMsg);
 
 // ··········································································
 
-void InitAdeline(S32 argc, char *argv[]) {
+void InitAdeline(int32_t argc, char *argv[]) {
 
   {
     char resFolderPath[ADELINE_MAX_PATH] = "";

@@ -154,9 +154,9 @@ _TEXT			SEGMENT	USE32 PARA PUBLIC 'CODE'
 
 ;STRUC_CLIPVERTEX dst[],
 ;STRUC_CLIPVERTEX src[],
-;U32 nbvertex,
-;S32 zclip,
-;S32 flag
+;uint32_t nbvertex,
+;int32_t zclip,
+;int32_t flag
 
 ClipperZ		PROC \
 			uses ebx ecx edx edi esi ebp\

@@ -11,19 +11,19 @@
 #include <SVGA/SCREEN.H>
 #include "DIRECTORIES.H"
 
-extern	U8  	*BufferSmack ;// tempo ?
+extern	uint8_t  	*BufferSmack ;// tempo ?
 
-S32	PtrSceneMem	;
-S32	BufferFile3DMem ;
-S32	TabPartFlowMem  ;
-S32	BufferPofMem    ;
-S32	BufferImpactMem ;
+int32_t	PtrSceneMem	;
+int32_t	BufferFile3DMem ;
+int32_t	TabPartFlowMem  ;
+int32_t	BufferPofMem    ;
+int32_t	BufferImpactMem ;
 
 struct	SizeInfo {
-	S32	MaxSizeListDecors ;
-	S32	MaxSizeBodyDecors ;
-	S32	MaxSizeTexDef ;
-	S32	MaxTotalBodyDecors ;
+	int32_t	MaxSizeListDecors ;
+	int32_t	MaxSizeBodyDecors ;
+	int32_t	MaxSizeTexDef ;
+	int32_t	MaxTotalBodyDecors ;
 	} ;
 
 // penser à réaligner les pointeurs (par une macro ?)
@@ -41,8 +41,8 @@ T_MEM	ListMem[] = {
 	{(void**)&BufferSmack, 100000L},// tempo ?
 	} ;
 
-S32	SizeOfMemAllocated 	;	// calculée dynamiquement
-U8	*MainBuffer		;
+int32_t	SizeOfMemAllocated 	;	// calculée dynamiquement
+uint8_t	*MainBuffer		;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 // Spécifique à LBA2: redistribue la mémoire disponible aux différents buffers
@@ -68,8 +68,8 @@ void	AdjustLba2Mem( void )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	AdjustHQRMem( void )
 {
-	U32	memory  ;
-	U32	islemem ;
+	uint32_t	memory  ;
+	uint32_t	islemem ;
 	struct SizeInfo	sizeinfo ;
 	char tmpFilePath[ADELINE_MAX_PATH];
 
@@ -130,8 +130,8 @@ void	AdjustHQRMem( void )
 void   InitMainBuffer( void )
 {
 	T_MEM	*ptrm = ListMem ;
-	U8	*ptr ;
-	S32	t ;
+	uint8_t	*ptr ;
+	int32_t	t ;
 
 	AdjustLba2Mem() ;
 
@@ -148,7 +148,7 @@ void   InitMainBuffer( void )
 
 	// Alloue gros buffer
 
-	MainBuffer = (U8*)Malloc( SizeOfMemAllocated ) ;
+	MainBuffer = (uint8_t*)Malloc( SizeOfMemAllocated ) ;
 	if( !MainBuffer )	TheEnd( NOT_ENOUGH_MEM, "MainBuffer" ) ;
 
 	// Initialise tous les pointeurs
@@ -163,7 +163,7 @@ void   InitMainBuffer( void )
 	}
 
 	// Fixe Pointeurs partageant les même buffer
-	BufCube = (U8*)*ListMem[MEM_PTR_ZBUFFER].AdrPtr ;
+	BufCube = (uint8_t*)*ListMem[MEM_PTR_ZBUFFER].AdrPtr ;
 	BufferBrick = BufCube+(SIZE_CUBE_X*SIZE_CUBE_Y*SIZE_CUBE_Z*2L) ;
 }
 
@@ -171,34 +171,34 @@ void   InitMainBuffer( void )
 void	InitMemory( void )
 {
 	// Alloue Memoire DOS si possible
-	SkySeaTexture = (U8*)SmartMalloc( 256*256L+RECOVER_AREA ) ;
+	SkySeaTexture = (uint8_t*)SmartMalloc( 256*256L+RECOVER_AREA ) ;
 	if( !SkySeaTexture )	TheEnd( NOT_ENOUGH_MEM, "SkySeaTexture" ) ;
 
-	ObjTexture = (U8*)SmartMalloc( 256*256+RECOVER_AREA ) ;
+	ObjTexture = (uint8_t*)SmartMalloc( 256*256+RECOVER_AREA ) ;
 	if( !ObjTexture )	TheEnd( NOT_ENOUGH_MEM, "ObjTexture" ) ;
 
-	GroundTexture = (U8*)SmartMalloc( 256*256+RECOVER_AREA ) ;
+	GroundTexture = (uint8_t*)SmartMalloc( 256*256+RECOVER_AREA ) ;
 	if( !GroundTexture )	TheEnd( NOT_ENOUGH_MEM, "GroundTexture" ) ;
 
-	PtrScene = (U8*)SmartMalloc( PtrSceneMem ) ;
+	PtrScene = (uint8_t*)SmartMalloc( PtrSceneMem ) ;
 	if( !PtrScene )	TheEnd( NOT_ENOUGH_MEM, "PtrScene" ) ;
 
 	TabPartFlow = (T_FLOW*)SmartMalloc( TabPartFlowMem ) ;
 	if( !TabPartFlow )	TheEnd( NOT_ENOUGH_MEM, "TabPartFlow" ) ;
 
-	BufferPof = (U8*)SmartMalloc( BufferPofMem ) ;
+	BufferPof = (uint8_t*)SmartMalloc( BufferPofMem ) ;
 	if( !BufferPof )	TheEnd( NOT_ENOUGH_MEM, "BufferPof" ) ;
 
-	BufferImpact = (U8*)SmartMalloc( BufferImpactMem ) ;
+	BufferImpact = (uint8_t*)SmartMalloc( BufferImpactMem ) ;
 	if( !BufferImpact )	TheEnd( NOT_ENOUGH_MEM, "BufferImpact" ) ;
 
-	BufferFile3D = (U8*)SmartMalloc( BufferFile3DMem ) ;
+	BufferFile3D = (uint8_t*)SmartMalloc( BufferFile3DMem ) ;
 	if( !BufferFile3D )	TheEnd( NOT_ENOUGH_MEM, "BufferFile3D" ) ;
 
-	BufferValidePos = (U8*)SmartMalloc( SIZE_BUFFER_VALIDE_POS ) ;
+	BufferValidePos = (uint8_t*)SmartMalloc( SIZE_BUFFER_VALIDE_POS ) ;
 	if( !BufferValidePos )	TheEnd( NOT_ENOUGH_MEM, "BufferValidePos" ) ;
 
-	IsleMapIndex = (U8*)SmartMalloc( 256 ) ;
+	IsleMapIndex = (uint8_t*)SmartMalloc( 256 ) ;
 	if( !IsleMapIndex )	TheEnd( NOT_ENOUGH_MEM, "IsleMapIndex" ) ;
 
 	AdjustHQRMem() ;

@@ -54,149 +54,149 @@ extern "C" {
 #define TYPE_INC_VALUE		0x00000040
 
 //──────────────────────────────────────────────────────────────────────────
-typedef struct	{	S32	X1 ;		// size/pos pixel box
-			S32	Y1 ;
-			S32	X2 ;
-			S32	Y2 ;
+typedef struct	{	int32_t	X1 ;		// size/pos pixel box
+			int32_t	Y1 ;
+			int32_t	X2 ;
+			int32_t	Y2 ;
 
-			S32	Type ;
-			S32	Flags ; 	// texte centré...
+			int32_t	Type ;
+			int32_t	Flags ; 	// texte centré...
 
-			S32	Handle ;	// info retournée si != -1
+			int32_t	Handle ;	// info retournée si != -1
 			const char	*PtrString ;
 
-			S32	*PtrVar ;	// info switch
-			S32	Mask ;
+			int32_t	*PtrVar ;	// info switch
+			int32_t	Mask ;
 
 		}	T_CLICK_BOX ;
 
 
-typedef struct	{	S32		NbBox 		;
-			S32		LastClicked 	;
+typedef struct	{	int32_t		NbBox 		;
+			int32_t		LastClicked 	;
 			T_CLICK_BOX	*PtrMallocList 	;
 
-			S32	Largeur ;	// en caractere
-			S32	Hauteur ;
+			int32_t	Largeur ;	// en caractere
+			int32_t	Hauteur ;
 
-			S32	X1 ;
-			S32	Y1 ;
-			S32	X2 ;
-			S32	Y2 ;
-			S32	Dx ;
-			S32	Dy ;
+			int32_t	X1 ;
+			int32_t	Y1 ;
+			int32_t	X2 ;
+			int32_t	Y2 ;
+			int32_t	Dx ;
+			int32_t	Dy ;
 
-			S32	Flags ;
+			int32_t	Flags ;
 
-			S32	Repeat ;
+			int32_t	Repeat ;
 
 		}	T_MENU ;
 
-typedef struct	{	S32	WindowX1 ;
-			S32	WindowY1 ;
-			S32	WindowX2 ;
-			S32	WindowY2 ;
-			S32	WindowLig ;
-			S32	WindowCol ;
-			S32	WindowTab ;
-			S32	WindowNbIndex ;
+typedef struct	{	int32_t	WindowX1 ;
+			int32_t	WindowY1 ;
+			int32_t	WindowX2 ;
+			int32_t	WindowY2 ;
+			int32_t	WindowLig ;
+			int32_t	WindowCol ;
+			int32_t	WindowTab ;
+			int32_t	WindowNbIndex ;
 			char	**WindowArray ;
 
 		}	T_WINLIST ;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32		Pointed 		;
-extern	S32		FlagAutoPal		;
+extern	int32_t		Pointed 		;
+extern	int32_t		FlagAutoPal		;
 
 //──────────────────────────────────────────────────────────────────────────
 #define			SetMenuAutoPal(	flag )	\
 			FlagAutoPal = (flag)
 
 //──────────────────────────────────────────────────────────────────────────
-extern void 		DrawWindow(	S32 x1,	S32 y1,	S32 x2,	S32 y2,
-					S32 flags			);
+extern void 		DrawWindow(	int32_t x1,	int32_t y1,	int32_t x2,	int32_t y2,
+					int32_t flags			);
 
-extern void 		DrawBox(	T_MENU *ptrmenu, S32 numlcb,
-					S32 pushed			);
+extern void 		DrawBox(	T_MENU *ptrmenu, int32_t numlcb,
+					int32_t pushed			);
 
 extern T_CLICK_BOX 	*AddHeaderButton(T_MENU *ptrmenu,
-					S32 x1, S32 y1,	S32 width, S32 height );
+					int32_t x1, int32_t y1,	int32_t width, int32_t height );
 
-extern S32 		ScanListClick(	T_MENU *ptrmenu			);
+extern int32_t 		ScanListClick(	T_MENU *ptrmenu			);
 
 //──────────────────────────────────────────────────────────────────────────
 extern void 		InitPalMenu(	void		);
 
-extern void 		CopyPalMenu(	U8 *ptrpal	);
+extern void 		CopyPalMenu(	uint8_t *ptrpal	);
 
 //──────────────────────────────────────────────────────────────────────────
 extern void 		OpenWindow(	T_WINLIST *wlist,
-					S32 x1, S32 y1, S32 largeur, S32 hauteur);
+					int32_t x1, int32_t y1, int32_t largeur, int32_t hauteur);
 
 extern void 		WinSepar(	T_WINLIST *wlist	);
 
 extern void 		WinText(	T_WINLIST *wlist,
-					char *string, S32 value );
+					char *string, int32_t value );
 
 extern void 		WinList(	T_WINLIST *wlist,
-					char **index, S32 nb, S32 size);
+					char **index, int32_t nb, int32_t size);
 
 extern void 		WinSelect(	T_WINLIST *wlist,
-					S32 selected, S32 coul	);
+					int32_t selected, int32_t coul	);
 
 extern void 		FlipWindow(	T_WINLIST *wlist	);
 
-extern S32 		GetIndexWinList(T_WINLIST *wlist	);
+extern int32_t 		GetIndexWinList(T_WINLIST *wlist	);
 
 //──────────────────────────────────────────────────────────────────────────
-extern S32 		OpenMenu(	T_MENU *ptrmenu, S32 width, S32 height);
+extern int32_t 		OpenMenu(	T_MENU *ptrmenu, int32_t width, int32_t height);
 
-extern void 		AddButton(	T_MENU *ptrmenu, S32 handle,
-					S32 x1, S32 y1, S32 width, S32 height,
-					S32 flags, const char *ptrstring	);
+extern void 		AddButton(	T_MENU *ptrmenu, int32_t handle,
+					int32_t x1, int32_t y1, int32_t width, int32_t height,
+					int32_t flags, const char *ptrstring	);
 
-extern void 		AddChangeValue(	T_MENU *ptrmenu, S32 handle,
-					S32 x1, S32 y1, S32 width, S32 height,
-					S32 flags, char *ptrstring, S32 *ptrvar,
-					S32 step, S32 minvar, S32 maxvar);
+extern void 		AddChangeValue(	T_MENU *ptrmenu, int32_t handle,
+					int32_t x1, int32_t y1, int32_t width, int32_t height,
+					int32_t flags, char *ptrstring, int32_t *ptrvar,
+					int32_t step, int32_t minvar, int32_t maxvar);
 
-extern void 		AddSwitch(	T_MENU *ptrmenu, S32 handle,
-					S32 x1, S32 y1, S32 width, S32 height,
-					S32 flags, const char *ptrstring, S32 *ptrvar,
-					S32 mask			);
+extern void 		AddSwitch(	T_MENU *ptrmenu, int32_t handle,
+					int32_t x1, int32_t y1, int32_t width, int32_t height,
+					int32_t flags, const char *ptrstring, int32_t *ptrvar,
+					int32_t mask			);
 
 extern void 		AddText(	T_MENU *ptrmenu,
-					S32 x1, S32 y1, S32 width, S32 height,
-					S32 flags, const char *ptrstring);
+					int32_t x1, int32_t y1, int32_t width, int32_t height,
+					int32_t flags, const char *ptrstring);
 
-extern void 		AddWindow(	T_MENU *ptrmenu, S32 handle,
-					S32 x1, S32 y1 ,S32 width, S32 height,
-					S32 flags			);
+extern void 		AddWindow(	T_MENU *ptrmenu, int32_t handle,
+					int32_t x1, int32_t y1 ,int32_t width, int32_t height,
+					int32_t flags			);
 
-extern S32 		DrawMenu(	T_MENU *ptrmenu,
-					S32 x1, S32 y1			);
+extern int32_t 		DrawMenu(	T_MENU *ptrmenu,
+					int32_t x1, int32_t y1			);
 
-extern S32 		GereMenu(	T_MENU *ptrmenu			);
+extern int32_t 		GereMenu(	T_MENU *ptrmenu			);
 
 extern void 		CloseMenu(	T_MENU *ptrmenu			);
 extern void 		ClearMenu(	T_MENU *ptrmenu			);
 
 //──────────────────────────────────────────────────────────────────────────
-extern void 		GetWindowButton(T_MENU *ptrmenu, S32 handle,
+extern void 		GetWindowButton(T_MENU *ptrmenu, int32_t handle,
 					T_WINLIST *wlist		);
 
-extern void 		GetCoorButton(	T_MENU *ptrmenu, S32 handle,
-					S32 *x0, S32 *y0, S32 *x1, S32 *y1);
+extern void 		GetCoorButton(	T_MENU *ptrmenu, int32_t handle,
+					int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1);
 
-extern S32 		GetOptimalSize(	S32 deltax		);
+extern int32_t 		GetOptimalSize(	int32_t deltax		);
 
 extern void 		GetCoorMenu(	T_MENU *ptrmenu,
-					S32 *x0, S32 *y0, S32 *x1, S32 *y1);
+					int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1);
 
 extern void 		GetSizeMenu(	T_MENU *ptrmenu,
-					U32 *pdx, U32 *pdy 	);
+					uint32_t *pdx, uint32_t *pdy 	);
 
-extern S32 		MenuBestFitX(	S32 deltax 		);
-extern S32 		MenuBestFitY(	S32 deltay 		);
+extern int32_t 		MenuBestFitX(	int32_t deltax 		);
+extern int32_t 		MenuBestFitY(	int32_t deltay 		);
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef __cplusplus

@@ -5,9 +5,9 @@
 #include	<SYSTEM/HQRMLOAD.H>
 
 //──────────────────────────────────────────────────────────────────────────
-S32	HQRM_Load(char *name, S32 index, void **handle)
+int32_t	HQRM_Load(char *name, int32_t index, void **handle)
 {
-	U32	size	;
+	uint32_t	size	;
 
 	size = HQF_Init(name, index)	;
 	if(!size)

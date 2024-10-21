@@ -41,24 +41,24 @@
 #define	INV_NAME_X1	(639-INV_START_X)	//	Name Object X1
 #define	INV_NAME_Y1	471			//	Name Object Y1
 
-extern	S32	ProtectActif 	;
-extern	S32	FlagZoomed	;
-extern	S32	InvSelect 	;
+extern	int32_t	ProtectActif 	;
+extern	int32_t	FlagZoomed	;
+extern	int32_t	InvSelect 	;
 
 /*--------------------------------------------------------------------------*/
 extern void InitInventory(void);
 /*--------------------------------------------------------------------------*/
-extern S32  TricheInventory(S32 ret);
+extern int32_t  TricheInventory(int32_t ret);
 /*--------------------------------------------------------------------------*/
-extern void DrawObjInventory(S32 x,S32 y,S16 *ptrobj,S32 beta,S32 lfactor,S32 zoom);
+extern void DrawObjInventory(int32_t x,int32_t y,int16_t *ptrobj,int32_t beta,int32_t lfactor,int32_t zoom);
 /*--------------------------------------------------------------------------*/
-extern void AffValueBar(S32 x0,S32 y0,S32 x1,S32 y1,S32 value);
+extern void AffValueBar(int32_t x0,int32_t y0,int32_t x1,int32_t y1,int32_t value);
 /*--------------------------------------------------------------------------*/
-extern void SaveBackground(S32 x0,S32 y0,S32 x1,S32 y1);
+extern void SaveBackground(int32_t x0,int32_t y0,int32_t x1,int32_t y1);
 /*--------------------------------------------------------------------------*/
 extern void RestoreBackground(void);
 /*--------------------------------------------------------------------------*/
-extern U32  DrawOneInventory(S32 numbox);
+extern uint32_t  DrawOneInventory(int32_t numbox);
 /*--------------------------------------------------------------------------*/
 extern void OpenInventory(void);
 /*--------------------------------------------------------------------------*/
@@ -66,13 +66,13 @@ extern void DrawListInventory(void);
 /*--------------------------------------------------------------------------*/
 extern void SaveBlockInventory(void);
 /*--------------------------------------------------------------------------*/
-extern void AffObjName(S32 num);
+extern void AffObjName(int32_t num);
 /*--------------------------------------------------------------------------*/
 extern void CheckProtoPack( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void MenuInventory( U32 tempo );
+extern void MenuInventory( uint32_t tempo );
 /*--------------------------------------------------------------------------*/
-extern void DoFoundObj(S32 numobj);
+extern void DoFoundObj(int32_t numobj);
 /*--------------------------------------------------------------------------*/
 extern void DrawArdoiseArrows(void);
 /*--------------------------------------------------------------------------*/
@@ -80,7 +80,7 @@ extern void RouleauRight(void);
 /*--------------------------------------------------------------------------*/
 extern void RouleauLeft(void);
 /*--------------------------------------------------------------------------*/
-extern void ChangeArdoise(S32 left);
+extern void ChangeArdoise(int32_t left);
 /*--------------------------------------------------------------------------*/
 extern void DrawArdoise(void);
 /*--------------------------------------------------------------------------*/
@@ -88,19 +88,19 @@ extern void ResetArdoise( void ) ;
 /*--------------------------------------------------------------------------*/
 extern void GereArdoise(void);
 /*--------------------------------------------------------------------------*/
-extern void BackupAngles( S32 x0, S32 y0, S32 x1, S32 y1 ) ;
+extern void BackupAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1 ) ;
 /*--------------------------------------------------------------------------*/
-extern void RestoreAngles( S32 x0, S32 y0, S32 x1, S32 y1 ) ;
+extern void RestoreAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1 ) ;
 /*--------------------------------------------------------------------------*/
-extern void DrawAngles( S32 x0, S32 y0, S32 x1, S32 y1, U32 type ) ;
+extern void DrawAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint32_t type ) ;
 /*--------------------------------------------------------------------------*/
-extern void DrawCadre(S32 x0,S32 y0,S32 x1,S32 y1,U32 type );
+extern void DrawCadre(int32_t x0,int32_t y0,int32_t x1,int32_t y1,uint32_t type );
 /*--------------------------------------------------------------------------*/
-extern void DrawCadreBox( S32 x0, S32 y0, S32 x1, S32 y1, S32 color ) ;
+extern void DrawCadreBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color ) ;
 /*--------------------------------------------------------------------------*/
-extern void DrawCadreShade( S32 x0, S32 y0, S32 x1, S32 y1, S32 color ) ;
+extern void DrawCadreShade( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color ) ;
 /*--------------------------------------------------------------------------*/
-extern void BackupScreen( S32 flagscreen ) ;
+extern void BackupScreen( int32_t flagscreen ) ;
 /*--------------------------------------------------------------------------*/
 extern void RestoreScreen( void ) ;
 /*--------------------------------------------------------------------------*/

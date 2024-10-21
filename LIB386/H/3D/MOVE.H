@@ -10,33 +10,33 @@ extern "C" {
 // -----------------------------------------------------------------------------
 #pragma pack(push, 4)
 typedef struct {
-  S32 Speed;
-  S32 Acc;
-  U32 LastTimer;
+  int32_t Speed;
+  int32_t Acc;
+  uint32_t LastTimer;
 } MOVE;
 #pragma pack(pop)
 
 #pragma pack(push, 4)
 typedef struct {
   MOVE Move;
-  S32 Cur;
-  S32 End;
+  int32_t Cur;
+  int32_t End;
 } BOUND_MOVE;
 #pragma pack(pop)
 
 // -----------------------------------------------------------------------------
-S32 GetDeltaAccMove(S32 *acc);
-S32 AdjustSpeedAngle(S32 speed, S32 start, S32 end);
-void InitMove(MOVE *pmove, S32 speed);
-void ChangeSpeedMove(MOVE *pmove, S32 speed);
-void ChangeSpeedAngleMove(MOVE *pmove, S32 speed, S32 start, S32 end);
-void InitAngleMove(MOVE *pmove, S32 speed, S32 start, S32 end);
-void ChangeSpeedBoundAngleMove(BOUND_MOVE *pbmove, S32 speed, S32 end);
-void InitBoundMove(BOUND_MOVE *pbmove, S32 speed, S32 start, S32 end);
-void InitBoundAngleMove(BOUND_MOVE *pbmove, S32 speed, S32 start, S32 end);
-S32 GetDeltaMove(MOVE *pmove);
-S32 GetBoundMove(BOUND_MOVE *pbmove);
-S32 GetBoundAngleMove(BOUND_MOVE *pbmove);
+int32_t GetDeltaAccMove(int32_t *acc);
+int32_t AdjustSpeedAngle(int32_t speed, int32_t start, int32_t end);
+void InitMove(MOVE *pmove, int32_t speed);
+void ChangeSpeedMove(MOVE *pmove, int32_t speed);
+void ChangeSpeedAngleMove(MOVE *pmove, int32_t speed, int32_t start, int32_t end);
+void InitAngleMove(MOVE *pmove, int32_t speed, int32_t start, int32_t end);
+void ChangeSpeedBoundAngleMove(BOUND_MOVE *pbmove, int32_t speed, int32_t end);
+void InitBoundMove(BOUND_MOVE *pbmove, int32_t speed, int32_t start, int32_t end);
+void InitBoundAngleMove(BOUND_MOVE *pbmove, int32_t speed, int32_t start, int32_t end);
+int32_t GetDeltaMove(MOVE *pmove);
+int32_t GetBoundMove(BOUND_MOVE *pbmove);
+int32_t GetBoundAngleMove(BOUND_MOVE *pbmove);
 
 // -----------------------------------------------------------------------------
 #define GetSpeedMove(pmove) (pmove)->Speed

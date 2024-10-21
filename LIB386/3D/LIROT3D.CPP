@@ -9,7 +9,7 @@ extern "C" {
 #undef LongInverseRotatePoint
 extern Func_LongInverseRotatePoint *LongInverseRotatePoint;
 
-void LongInverseRotatePoint_C(TYPE_MAT *Mat, S32 x, S32 y, S32 z) {
+void LongInverseRotatePoint_C(TYPE_MAT *Mat, int32_t x, int32_t y, int32_t z) {
 #ifdef __MSC_VER
   __asm {
 		pusha

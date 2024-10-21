@@ -9,10 +9,10 @@
 #include <limits.h>
 
 //──────────────────────────────────────────────────────────────────────────
-U32	Load( char *name, void *buffer )
+uint32_t	Load( char *name, void *buffer )
 {
-	S32	handle	;
-	U32	size	;
+	int32_t	handle	;
+	uint32_t	size	;
 
 	size = FileSize(name)		;
 	if (!size)	return 0	;
@@ -27,10 +27,10 @@ U32	Load( char *name, void *buffer )
 	return 0;
 }
 //──────────────────────────────────────────────────────────────────────────
-S32	LoadSize( char *name, void *buffer, S32 size )
+int32_t	LoadSize( char *name, void *buffer, int32_t size )
 {
-	S32	handle				;
-	S32	maxsize, sizeread, sizetoread	;
+	int32_t	handle				;
+	int32_t	maxsize, sizeread, sizetoread	;
 
 	maxsize = FileSize( name )	;
 	if ( !maxsize )	return(0)	;
@@ -62,10 +62,10 @@ S32	LoadSize( char *name, void *buffer, S32 size )
 	return( 0 )	;
 }
 //──────────────────────────────────────────────────────────────────────────
-U32	Save( char *name, void *buffer, U32 size )
+uint32_t	Save( char *name, void *buffer, uint32_t size )
 {
-	S32	handle		;
-	U32	written = 0	;
+	int32_t	handle		;
+	uint32_t	written = 0	;
 
 	handle = OpenWrite( name )	;
 	if( handle )

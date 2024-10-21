@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-typedef	void	*(Func_TransNumPtr)(S32 num)	;
+typedef	void	*(Func_TransNumPtr)(int32_t num)	;
 
 #pragma	aux	Arg_TransNumPtr		\
 		parm caller	[esi]		\
@@ -17,7 +17,7 @@ typedef	void	*(Func_TransNumPtr)(S32 num)	;
 #pragma	aux	(Arg_TransNumPtr)	Func_TransNumPtr
 
 //****************************************************************************
-void	InitObjects(void *buffer, U32 size, Func_TransNumPtr *fctbody, Func_TransNumPtr *fctanim);
+void	InitObjects(void *buffer, uint32_t size, Func_TransNumPtr *fctbody, Func_TransNumPtr *fctanim);
 
 #pragma aux InitObjects	"*"    			\
 	parm caller		[eax] [ecx] [edx] [ebx]	\

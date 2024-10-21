@@ -21,8 +21,8 @@ extern	COMP_FUNC 	MySortCompFunc	;
 extern void CutFileName( char *filename )	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern S32 FileSelector(	char *titre,		char *selection,
-				char *defaultname,	S32 flags	);
+extern int32_t FileSelector(	char *titre,		char *selection,
+				char *defaultname,	int32_t flags	);
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef __cplusplus

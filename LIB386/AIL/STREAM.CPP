@@ -22,13 +22,13 @@
 //████████████████████████████████████████████████████████████████████████████
 
 extern	HDIGDRIVER	DigDriver	;// Handle to digital audio driver
-extern	S32		LibWaveMasterVolume	;
+extern	int32_t		LibWaveMasterVolume	;
 
 //████████████████████████████████████████████████████████████████████████████
 
 static	HSTREAM		Stream			;
-static	S32		StreamVolume = 127	;
-static	S32		PausedPos		;
+static	int32_t		StreamVolume = 127	;
+static	int32_t		PausedPos		;
 static	char		StreamPathName[_MAX_PATH];
 static	char		PausedPathName[_MAX_PATH];
 
@@ -57,7 +57,7 @@ static void	ManageStream()
 
 //████████████████████████████████████████████████████████████████████████████
 
-static void PlayThisStream(char *name, S32 pos)
+static void PlayThisStream(char *name, int32_t pos)
 {
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -105,7 +105,7 @@ void	PlayStream(char *name)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ChangeVolumeStream(S32 volume)
+void	ChangeVolumeStream(int32_t volume)
 {
 	if(volume>127)
 	{
@@ -130,7 +130,7 @@ void	ChangeVolumeStream(S32 volume)
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetVolumeStream()
+int32_t	GetVolumeStream()
 {
 	return	StreamVolume	;
 }
@@ -176,9 +176,9 @@ void	ResumeStream()
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	IsStreamPlaying()
+int32_t	IsStreamPlaying()
 {
-	S32	playing	;
+	int32_t	playing	;
 
 	if( !Sample_Driver_Enabled || !Stream )	return FALSE ;
 

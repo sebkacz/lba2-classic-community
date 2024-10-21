@@ -60,7 +60,7 @@
 #define Rnd(n)  (rand()%(n))
 
 //──────────────────────────────────────────────────────────────────────────
-S32		MULDIV64( S32 x, S32 mul, S32 div ); // (x*mul)/div
+int32_t		MULDIV64( int32_t x, int32_t mul, int32_t div ); // (x*mul)/div
 
 //──────────────────────────────────────────────────────────────────────────
 // Hard coded breakpoint
@@ -72,7 +72,7 @@ void            BREAKPOINT();
 // Tuning functions
 
 //──────────────────────────────────────────────────────────────────────────
-void	StartCycleCounter(U64 *counter)	;
+void	StartCycleCounter(uint6_t4 *counter)	;
 
 #pragma	aux	StartCycleCounter =	\
 "	.586			"	\
@@ -83,7 +83,7 @@ void	StartCycleCounter(U64 *counter)	;
 	modify	exact	[eax edx]
 
 //──────────────────────────────────────────────────────────────────────────
-U32	GetCycleCounter(U64 *counter)	;
+uint32_t	GetCycleCounter(uint6_t4 *counter)	;
 
 #pragma	aux	GetCycleCounter =	\
 "	.586			"	\
@@ -97,7 +97,7 @@ U32	GetCycleCounter(U64 *counter)	;
 	value		[eax]
 
 //──────────────────────────────────────────────────────────────────────────
-U32	MeanCycleCounter(U64 *counter, U32 iter);
+uint32_t	MeanCycleCounter(uint6_t4 *counter, uint32_t iter);
 
 #pragma	aux	MeanCycleCounter =	\
 "	.586			"	\

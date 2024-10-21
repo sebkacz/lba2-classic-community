@@ -8,7 +8,7 @@
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	void	(Func_ReajustPos)( U8 col ) ;
+typedef	void	(Func_ReajustPos)( uint8_t col ) ;
 /*
 #pragma	aux	Arg_ReajustPos	"*"	\
 		parm caller []		\
@@ -17,7 +17,7 @@ typedef	void	(Func_ReajustPos)( U8 col ) ;
 #pragma	aux	(Arg_ReajustPos)	Func_ReajustPos
 		*/
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	void	(Func_GetShadow)( S32, S32, S32 ) ;
+typedef	void	(Func_GetShadow)( int32_t, int32_t, int32_t ) ;
 /*
 #pragma	aux	Arg_GetShadow	"*"	\
 		parm caller []		\
@@ -27,7 +27,7 @@ typedef	void	(Func_GetShadow)( S32, S32, S32 ) ;
 		*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	void	(Func_DoAnim)( U8 ) ;
+typedef	void	(Func_DoAnim)( uint8_t ) ;
 /*
 #pragma	aux	Arg_DoAnim	"*"	\
 		parm caller []		\
@@ -37,7 +37,7 @@ typedef	void	(Func_DoAnim)( U8 ) ;
 */
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	U8	(Func_WorldColBrick)( S32, S32, S32 ) ;
+typedef	uint8_t	(Func_WorldColBrick)( int32_t, int32_t, int32_t ) ;
 /*
 #pragma	aux	Arg_WorldColBrick	"*"	\
 		parm caller []			\
@@ -47,7 +47,7 @@ typedef	U8	(Func_WorldColBrick)( S32, S32, S32 ) ;
 		*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	U8	(Func_WorldColBrickVisible)( S32, S32, S32, S32, S32, S32 ) ;
+typedef	uint8_t	(Func_WorldColBrickVisible)( int32_t, int32_t, int32_t, int32_t, int32_t, int32_t ) ;
 /*
 #pragma	aux	Arg_WorldColBrickVisible	"*"	\
 		parm caller []				\
@@ -57,7 +57,7 @@ typedef	U8	(Func_WorldColBrickVisible)( S32, S32, S32, S32, S32, S32 ) ;
 		*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	void	(Func_ReajustPosExtra)( T_EXTRA *, U8, S16 * ) ;
+typedef	void	(Func_ReajustPosExtra)( T_EXTRA *, uint8_t, int16_t * ) ;
 /*
 #pragma	aux	Arg_ReajustPosExtra	"*"	\
 		parm caller []			\
@@ -67,9 +67,9 @@ typedef	void	(Func_ReajustPosExtra)( T_EXTRA *, U8, S16 * ) ;
 		*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	S32	(Func_TreeInsert)( S16 numtype, S32 posx, S32 posy, S32 posz,
-				   S32 txmin, S32 tymin, S32 tzmin,
-				   S32 txmax, S32 tymax, S32 tzmax ) ;
+typedef	int32_t	(Func_TreeInsert)( int16_t numtype, int32_t posx, int32_t posy, int32_t posz,
+				   int32_t txmin, int32_t tymin, int32_t tzmin,
+				   int32_t txmax, int32_t tymax, int32_t tzmax ) ;
 /*
 #pragma	aux	Arg_TreeInsert		"*"	\
 		parm caller []			\
@@ -92,7 +92,7 @@ typedef	void	(Func_Init3DView)( void ) ;
 #ifdef	LBA_EDITOR
 typedef	void	(Func_InitGrille)( char * ) ;
 #else	// LBA_EDITOR
-typedef	void	(Func_InitGrille)( U32 ) ;
+typedef	void	(Func_InitGrille)( uint32_t ) ;
 #endif	// LBA_EDITOR
 /*
 #pragma	aux	Arg_InitGrille		"*"	\
@@ -104,7 +104,7 @@ typedef	void	(Func_InitGrille)( U32 ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 #ifndef	LBA_EDITOR
-typedef	U8	(Func_FullWorldColBrick)(S32,S32,S32,S32,S32,S32) ;
+typedef	uint8_t	(Func_FullWorldColBrick)(int32_t,int32_t,int32_t,int32_t,int32_t,int32_t) ;
 /*
 #pragma	aux	Arg_FullWorldColBrick	"*"	\
 		parm caller []			\

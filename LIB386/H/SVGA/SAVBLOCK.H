@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern void SaveBlock(void *screen, void *buffer, S32 x0, S32 y0, S32 x1,
-                      S32 y1);
+extern void SaveBlock(void *screen, void *buffer, int32_t x0, int32_t y0, int32_t x1,
+                      int32_t y1);
 
 // =============================================================================
 #ifdef __cplusplus

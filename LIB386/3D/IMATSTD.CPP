@@ -9,7 +9,7 @@ extern "C" {
 #undef InitMatrixStd
 extern Func_InitMatrix *InitMatrixStd;
 
-void InitMatrixStd_C(TYPE_MAT *MatDst, S32 alpha, S32 beta, S32 gamma) {
+void InitMatrixStd_C(TYPE_MAT *MatDst, int32_t alpha, int32_t beta, int32_t gamma) {
 #ifdef __MSC_VER
   __asm {
 		pusha

@@ -25,7 +25,7 @@
 			public	C	ClearBoxF
 
 ;----------------------------------------------------------------------------
-;void	ClearBoxF(void *dst,  U32 *TabOffDst, T_BOX *box) ;
+;void	ClearBoxF(void *dst,  uint32_t *TabOffDst, T_BOX *box) ;
 
 ;#pragma aux ClearBoxF	       	       	\
 ;	parm	[edi] [edx] [ebx]	\
@@ -110,7 +110,7 @@ ClearBoxFEnd::
 ClearBoxF		ENDP
 
 ;----------------------------------------------------------------------------
-;void	SetClearColor(U32 color)	;
+;void	SetClearColor(uint32_t color)	;
 
 ;#pragma aux SetClearColor		\
 ;	parm	[eax]			\

@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 // --- Initialization ----------------------------------------------------------
-bool InitGraphics(U32 resX, U32 resY) {
+bool InitGraphics(uint32_t resX, uint32_t resY) {
   if (resY > ADELINE_MAX_Y_RES) {
     return false;
   }

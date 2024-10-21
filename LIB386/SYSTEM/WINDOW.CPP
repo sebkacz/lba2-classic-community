@@ -54,7 +54,7 @@ bool IsWindowInitialized() {
 }
 
 // --- Interface ---------------------------------------------------------------
-bool CreateWindowSurface(U32 resX, U32 resY) {
+bool CreateWindowSurface(uint32_t resX, uint32_t resY) {
   assert(windowSystemInitialized == true);
   assert(sdlWindow == NULL);
 
@@ -105,7 +105,7 @@ void UpdateWindowSurface() {
   }
 }
 
-void UpdateWindowSurfaceArea(const T_BOX area[], U32 areaCount) {
+void UpdateWindowSurfaceArea(const T_BOX area[], uint32_t areaCount) {
   assert(area != NULL);
   assert(areaCount > 0);
   assert(areaCount == 1 && "Support for many areas per update not implemented");

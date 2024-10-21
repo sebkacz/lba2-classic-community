@@ -4,31 +4,31 @@
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 typedef struct
 {
-	S32    Z ;
-	S32    NumObj ;
+	int32_t    Z ;
+	int32_t    NumObj ;
 
-	S32    Xw ;
-	S32    Yw ;
-	S32    Zw ;
+	int32_t    Xw ;
+	int32_t    Yw ;
+	int32_t    Zw ;
 
-	S32    XMin ;
-	S32    YMin ;
-	S32    ZMin ;
-	S32    XMax ;
-	S32    YMax ;
-	S32    ZMax ;
-	S32    Num ;
+	int32_t    XMin ;
+	int32_t    YMin ;
+	int32_t    ZMin ;
+	int32_t    XMax ;
+	int32_t    YMax ;
+	int32_t    ZMax ;
+	int32_t    Num ;
 
 	}       T_SORT ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	S32	NbTriObj ;
+extern	int32_t	NbTriObj ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 extern Func_TreeInsert	TreeInsert ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern S32 BaseSort( void ) ;
+extern int32_t BaseSort( void ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 extern void BaseReset( void ) ;

@@ -8,33 +8,33 @@
 //──────────────────────────────────────────────────────────────────────────
 typedef	struct
 	{
-		U32	Id	;
-		U32	Size	;
+		uint32_t	Id	;
+		uint32_t	Size	;
 		void	**Ptr	;
 	}	HQM_HEADER 	;
 
 typedef	union
 	{
 		HQM_HEADER	*h	;
-		U8		*b	;
+		uint8_t		*b	;
 	}	P_HQM_HEADER	;
 
 
 static	P_HQM_HEADER	Ptr_HQM_Memory	= { NULL }	;
 static	P_HQM_HEADER	Ptr_HQM_Next	= { NULL }	;
-static	U32		Size_HQM_Memory	= 0		;
-static	U32		Size_HQM_Free	= 0		;
+static	uint32_t		Size_HQM_Memory	= 0		;
+static	uint32_t		Size_HQM_Free	= 0		;
 
 //──────────────────────────────────────────────────────────────────────────
 // Init le buffer global
-S32	HQM_Init_Memory(U32 size)
+int32_t	HQM_Init_Memory(uint32_t size)
 {
 	if( Ptr_HQM_Memory.b )
 	{
 		return FALSE ;
 	}
 
-	Ptr_HQM_Memory.b = (U8*)Malloc( size + RECOVER_AREA ); // recover area
+	Ptr_HQM_Memory.b = (uint8_t*)Malloc( size + RECOVER_AREA ); // recover area
 	if( !Ptr_HQM_Memory.b )
 	{
 		return FALSE ;
@@ -63,7 +63,7 @@ void	HQM_Clear_Memory()
 
 //──────────────────────────────────────────────────────────────────────────
 // alloue un bloc de memoire
-S32	HQM_Alloc(U32 size, void **ptr)
+int32_t	HQM_Alloc(uint32_t size, void **ptr)
 {
 	if(	(!Ptr_HQM_Memory.b)	||
 		(size > ( Size_HQM_Free+sizeof(HQM_HEADER) ) ) )
@@ -97,14 +97,14 @@ void	HQM_Free_All()
 
 //──────────────────────────────────────────────────────────────────────────
 // resize le dernier bloc de memoire
-void	HQM_Shrink_Last(void *ptr, U32 newsize)
+void	HQM_Shrink_Last(void *ptr, uint32_t newsize)
 {
 	HQM_HEADER	*ptrh		;
-	U32		deltasize	;
+	uint32_t		deltasize	;
 
 	if(!Ptr_HQM_Memory.b)	return 	;
 
-	ptrh = (HQM_HEADER*)((U32)ptr - sizeof(HQM_HEADER)) ;
+	ptrh = (HQM_HEADER*)((uint32_t)ptr - sizeof(HQM_HEADER)) ;
 
 	if( ptrh->Id != 0x12345678 )	return ;	// erreur grave
 
@@ -120,12 +120,12 @@ void	HQM_Shrink_Last(void *ptr, U32 newsize)
 void	HQM_Free(void *ptr)
 {
 	P_HQM_HEADER	header			;
-	U8		*ptrs			;
-	U32		delsize, movesize	;
+	uint8_t		*ptrs			;
+	uint32_t		delsize, movesize	;
 
 	if(!Ptr_HQM_Memory.b)	return 		;
 
-	header.b = (U8*)ptr - sizeof(HQM_HEADER);
+	header.b = (uint8_t*)ptr - sizeof(HQM_HEADER);
 
 	if(header.h->Id != 0x12345678)	return	;	// erreur grave
 
@@ -140,14 +140,14 @@ void	HQM_Free(void *ptr)
 
 	while(header.b < Ptr_HQM_Next.b)
 	{
-		*(U8**)(header.h->Ptr) -= delsize		;
+		*(uint8_t**)(header.h->Ptr) -= delsize		;
 		header.b += header.h->Size+sizeof(HQM_HEADER)	;
 	}
 }
 
 //──────────────────────────────────────────────────────────────────────────
 // test la cohérence du buffer global
-S32	HQM_Check()
+int32_t	HQM_Check()
 {
 	P_HQM_HEADER	ptr	;
 

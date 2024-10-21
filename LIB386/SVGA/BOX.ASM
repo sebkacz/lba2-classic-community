@@ -22,7 +22,7 @@
 			PUBLIC	C Box
 
 ;----------------------------------------------------------------------------
-;void	Box(S32 x0, S32 y0, S32 x1, S32 y1, S32 col)
+;void	Box(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t col)
 
 ;#pragma aux Box	"*"			\
 ;	parm	[eax] [ebx] [ecx] [edx] [esi]	\

@@ -12,36 +12,36 @@
 
 #include <SVGA/SCREEN.H>
 
-extern	S32	Nxw, Nyw, Nzw ;
-extern	S32	SaveNxw, SaveNzw ;
-extern	S32	OldX, OldY, OldZ ;
+extern	int32_t	Nxw, Nyw, Nzw ;
+extern	int32_t	SaveNxw, SaveNzw ;
+extern	int32_t	OldX, OldY, OldZ ;
 
-extern	S32	NbTriObj ;	// OBJECT.CPP
+extern	int32_t	NbTriObj ;	// OBJECT.CPP
 
 extern	T_OBJET	*APtObj ;
 
-extern	U8	AnimNumObj ;
-extern	S32	YMap ;
-extern	S32	Col1 ;
+extern	uint8_t	AnimNumObj ;
+extern	int32_t	YMap ;
+extern	int32_t	Col1 ;
 
-S32	FlagHeroOutX	= FALSE ;	// Twinsen sort du cube en X
-S32	FlagHeroOutZ	= FALSE ;	// Twinsen sort du cube en Z
+int32_t	FlagHeroOutX	= FALSE ;	// Twinsen sort du cube en X
+int32_t	FlagHeroOutZ	= FALSE ;	// Twinsen sort du cube en Z
 
 T_DECORS	*PtrDecorsCol = 0 ;	// Objet du decors en collision
-S16		NumDecorsCol = -1 ;	// avec l'objet courant
+int16_t		NumDecorsCol = -1 ;	// avec l'objet courant
 
-U8	*PtrNuances ;	// Nuances gouraud
+uint8_t	*PtrNuances ;	// Nuances gouraud
 
-S32	LastIsland = -1 ;
+int32_t	LastIsland = -1 ;
 
 #ifdef	LBA_EDITOR
 char	*GenAnimSkate ;	/* identificateur anim en cours */
 #else
-U16	GenAnimSkate ;	/* identificateur anim en cours */
+uint16_t	GenAnimSkate ;	/* identificateur anim en cours */
 #endif
 
 #define	SKATING_TIME_OUT	(25*20)	// 1/2s
-S32	TimerSkating	;
+int32_t	TimerSkating	;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -59,7 +59,7 @@ void	Init3DExt( )
 	InitExternalView() ;			// mallocs
 
 /*#ifdef	LBA_EDITOR
-	ScreenAux		= (U8 *)Malloc( 640*480+RECOVER_AREA ) ;
+	ScreenAux		= (uint8_t *)Malloc( 640*480+RECOVER_AREA ) ;
 	if( !ScreenAux )	TheEnd( NOT_ENOUGH_MEM, "ScreenAux (Init3DExt)" ) ;
 #endif
 */
@@ -130,7 +130,7 @@ void	Init3DExtGame()
 #ifdef	LBA_EDITOR
 void	InitGrilleExt( char *defpathname )
 {
-	S32	numskysea ;
+	int32_t	numskysea ;
         char tmpFilePath[ADELINE_MAX_PATH];
 
 	InitDefFile( defpathname ) ;
@@ -212,9 +212,9 @@ const char	*IleLst[] = {
 	"souscelb",
 	} ;
 
-void	InitGrilleExt( U32 numcube )
+void	InitGrilleExt( uint32_t numcube )
 {
-	S32	numskysea ;
+	int32_t	numskysea ;
 	char	tmpFilePath[ADELINE_MAX_PATH];
 
 	// Pour virer Warning
@@ -373,7 +373,7 @@ void	AffGrilleExt()
 // bon ! En intérieur, on le fixe a la valeur par défaut (afficher en taille
 // normale). D'ailleurs, cette fonction devrait se trouver dans INTEXT.C avec
 // pourquoi pas un pointeur sur fonction
-void	CalculeScaleFactorSprite( S32 x, S32 y, S32 z, S32 scaleorg )
+void	CalculeScaleFactorSprite( int32_t x, int32_t y, int32_t z, int32_t scaleorg )
 {
 	if( CubeMode==CUBE_INTERIEUR AND scaleorg==-1 )
 	{
@@ -381,7 +381,7 @@ void	CalculeScaleFactorSprite( S32 x, S32 y, S32 z, S32 scaleorg )
 	}
 	else
 	{
-		S32	yp0 ;
+		int32_t	yp0 ;
 
 		LongWorldRotatePoint( x, y, z ) ;
 		if( !LongProjectPoint( X0, Y0+1000, Z0 ) )	return ;
@@ -403,9 +403,9 @@ void	CalculeScaleFactorSprite( S32 x, S32 y, S32 z, S32 scaleorg )
  *══════════════════════════════════════════════════════════════════════════*/
 
 // Calcule coordonnees de l'ombre
-void	GetShadowExt( S32 xw, S32 yw, S32 zw )
+void	GetShadowExt( int32_t xw, int32_t yw, int32_t zw )
 {
-	S32	cj = -1 ;// tient compte de la profondeur de l'eau
+	int32_t	cj = -1 ;// tient compte de la profondeur de l'eau
 
 	if( yw>=0 )// l'objet est au-dessus de l'eau (enfin presque car l'eau n'est pas tjs en 0!)
 	{
@@ -436,9 +436,9 @@ void	GetShadowExt( S32 xw, S32 yw, S32 zw )
 
 void	TestCameraPosObjets( void )
 {
-	S32	xmin, ymin, zmin ;
-	S32	xmax, ymax, zmax ;
-	S32	i ;
+	int32_t	xmin, ymin, zmin ;
+	int32_t	xmax, ymax, zmax ;
+	int32_t	i ;
 	T_OBJET	*ptrobj = ListObjet ;
 	T_OBJ_3D *pt3d ;
 
@@ -471,10 +471,10 @@ void	TestCameraPosObjets( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Detecte collision avec le decors en un point (terrain + objets du decors)
-U8	WorldColBrickExt( S32 xw, S32 yw, S32 zw )
+uint8_t	WorldColBrickExt( int32_t xw, int32_t yw, int32_t zw )
 {
-	U32	i ;
-	S32	y = CalculAltitudeObjet( xw, zw, APtObj->CodeJeu>>4 ) ;
+	uint32_t	i ;
+	int32_t	y = CalculAltitudeObjet( xw, zw, APtObj->CodeJeu>>4 ) ;
 
 	PtrDecorsCol = ListDecors ;
 
@@ -505,10 +505,10 @@ U8	WorldColBrickExt( S32 xw, S32 yw, S32 zw )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U8	WorldColBrickVisibleExt(S32 oldx, S32 oldy, S32 oldz,
-				S32 xw, S32 yw, S32 zw )
+uint8_t	WorldColBrickVisibleExt(int32_t oldx, int32_t oldy, int32_t oldz,
+				int32_t xw, int32_t yw, int32_t zw )
 {
-	U8 col = WorldColBrickExt( xw, yw, zw ) ;
+	uint8_t col = WorldColBrickExt( xw, yw, zw ) ;
 
 	if( col )	return( col ) ;
 
@@ -526,9 +526,9 @@ U8	WorldColBrickVisibleExt(S32 oldx, S32 oldy, S32 oldz,
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	ReajustPosExtraExt( T_EXTRA *ptrextra, U8 col, S16 *ptrymin )
+void	ReajustPosExtraExt( T_EXTRA *ptrextra, uint8_t col, int16_t *ptrymin )
 {
-	S32	y ;
+	int32_t	y ;
 
 	if( !col )	return ;
 
@@ -540,10 +540,10 @@ void	ReajustPosExtraExt( T_EXTRA *ptrextra, U8 col, S16 *ptrymin )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Detecte collision des avec le decors entre deux positions
 // (uniquement en version jeu)
-U8	FullWorldColBrickExt(	S32 oldx, S32 oldy, S32 oldz,
-				S32 newx, S32 newy, S32 newz )
+uint8_t	FullWorldColBrickExt(	int32_t oldx, int32_t oldy, int32_t oldz,
+				int32_t newx, int32_t newy, int32_t newz )
 {
-	S32	x0, y0, z0 ;
+	int32_t	x0, y0, z0 ;
 
 	if( WorldColBrickExt( newx,newy,newz )==1 )	return 1 ;
 
@@ -569,9 +569,9 @@ U8	FullWorldColBrickExt(	S32 oldx, S32 oldy, S32 oldz,
 // La ZV passée de l'objet scénarique est précalculée en absolu
 
 // Version ZVs absolues précalculées des Decors
-S32	TestZVDecorsZV( T_DECORS *objet,
-			S32 xpmin, S32 ypmin, S32 zpmin,
-			S32 xpmax, S32 ypmax, S32 zpmax )
+int32_t	TestZVDecorsZV( T_DECORS *objet,
+			int32_t xpmin, int32_t ypmin, int32_t zpmin,
+			int32_t xpmax, int32_t ypmax, int32_t zpmax )
 {
 	if( objet->Body & DEC_INVISIBLE )	return FALSE ;
 
@@ -589,10 +589,10 @@ S32	TestZVDecorsZV( T_DECORS *objet,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Détecte collision de l'objet scénarique courant avec les objets du décors
-U8	WorldColBrickDecors( S32 xpmin, S32 ypmin, S32 zpmin,
-			     S32 xpmax, S32 ypmax, S32 zpmax )
+uint8_t	WorldColBrickDecors( int32_t xpmin, int32_t ypmin, int32_t zpmin,
+			     int32_t xpmax, int32_t ypmax, int32_t zpmax )
 {
-	U16	i ;
+	uint16_t	i ;
 
 	PtrDecorsCol = ListDecors ;
 
@@ -617,7 +617,7 @@ U8	WorldColBrickDecors( S32 xpmin, S32 ypmin, S32 zpmin,
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 // Version ZVs absolues précalculées
-S32	TestZVDecorsXZFullY( S32 xmin, S32 zmin, S32 xmax, S32 zmax, S32 y0, S32 y1, T_DECORS *objet )
+int32_t	TestZVDecorsXZFullY( int32_t xmin, int32_t zmin, int32_t xmax, int32_t zmax, int32_t y0, int32_t y1, T_DECORS *objet )
 {
 	if( objet->Body & DEC_INVISIBLE )	return FALSE ;
 
@@ -636,11 +636,11 @@ S32	TestZVDecorsXZFullY( S32 xmin, S32 zmin, S32 xmax, S32 zmax, S32 y0, S32 y1,
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	ReajustPosDecors( S32 xmin, S32 zmin,
-			  S32 xmax, S32 zmax,
-			  S32 y0, S32 y1 )
+int32_t	ReajustPosDecors( int32_t xmin, int32_t zmin,
+			  int32_t xmax, int32_t zmax,
+			  int32_t y0, int32_t y1 )
 {
-	U16	i ;
+	uint16_t	i ;
 
 	PtrDecorsCol = ListDecors ;
 
@@ -663,7 +663,7 @@ S32	ReajustPosDecors( S32 xmin, S32 zmin,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Détecte collision de l'objet scénarique courant avec le terrain
-U8	WorldColBrickFullExt( S32 xw, S32 yw, S32 zw )
+uint8_t	WorldColBrickFullExt( int32_t xw, int32_t yw, int32_t zw )
 {
 	// terrain
 	if( GiveTerrainCol( xw, zw ) ) return 1 ;
@@ -677,8 +677,8 @@ U8	WorldColBrickFullExt( S32 xw, S32 yw, S32 zw )
 // Initialise la glissage dans les penchés interdits
 void	InitSkating( void )
 {
-	S32	angle	;
-	S32	beta	;
+	int32_t	angle	;
+	int32_t	beta	;
 
 	if( APtObj->WorkFlags&SKATING )	return ;
 
@@ -717,9 +717,9 @@ void	AnnuleSkating( void )
 // Réajuste hauteur (Nyw) de l'objet scénarique courant en fonction du terrain
 // et des objets du décors
 
-void	ReajustPosExt( U8 col )
+void	ReajustPosExt( uint8_t col )
 {
-	S32	coly ;
+	int32_t	coly ;
 
 	if( !col )	return ;
 
@@ -745,7 +745,7 @@ void	ReajustPosExt( U8 col )
 		{
 			if( APtObj->CarryBy==-1 )
 			{
-				S32	ny ;
+				int32_t	ny ;
 
 /*				if( !(APtObj->WorkFlags & ANIM_MASTER_GRAVITY) )
 				{
@@ -788,11 +788,11 @@ void	ReajustPosExt( U8 col )
 
 				if( ShadowTestObject!=AnimNumObj )
 				{
-					APtObj->CarryBy = (S16)ShadowTestObject ;
+					APtObj->CarryBy = (int16_t)ShadowTestObject ;
 				}
 				else if( NumDecorsCol!=-1 )
 				{
-//					APtObj->CarryBy = (S16)(NumDecorsCol|CARRY_BY_DECORS) ;
+//					APtObj->CarryBy = (int16_t)(NumDecorsCol|CARRY_BY_DECORS) ;
 					Nxw = OldX ;
 					Nyw = OldY ;
 					Nzw = OldZ ;
@@ -878,9 +878,9 @@ void	ReajustPosExt( U8 col )
 // Reajuste l'objet scénarique courant contre les objets du décors
 // probablement optimisable !
 
-S32    DoCornerReajustDecors( )
+int32_t    DoCornerReajustDecors( )
 {
-	S32	xpmin, ypmin, zpmin, xpmax, ypmax, zpmax ;
+	int32_t	xpmin, ypmin, zpmin, xpmax, ypmax, zpmax ;
 
 	if( Nxw < 0 )	return 0 ;
 	if( Nzw < 0 )	return 0 ;
@@ -908,7 +908,7 @@ S32    DoCornerReajustDecors( )
 			{
 				// on est au dessus de l'objet
 				Nyw = PtrDecorsCol->YMax+1 ;
-				APtObj->CarryBy = (S16)(NumDecorsCol|CARRY_BY_DECORS) ;
+				APtObj->CarryBy = (int16_t)(NumDecorsCol|CARRY_BY_DECORS) ;
 			}
 		}
 		else if( !TestZVDecorsZV( PtrDecorsCol,
@@ -968,12 +968,12 @@ S32    DoCornerReajustDecors( )
 
 #define	SQR_2	1518500250	/* sqr(2)<<30 */
 
-S32    DoCornerReajustExtPt( void )
+int32_t    DoCornerReajustExtPt( void )
 {
-	U32	flagspecial = FALSE ;
-	U32	algo = 1 ;	// ORTHO
-	S32	t ;
-	S32	modif = FALSE ;
+	uint32_t	flagspecial = FALSE ;
+	uint32_t	algo = 1 ;	// ORTHO
+	int32_t	t ;
+	int32_t	modif = FALSE ;
 
 	// teste des decors en meme temps ?
 
@@ -982,7 +982,7 @@ S32    DoCornerReajustExtPt( void )
 		// s'il y a un objet du decors entre le sol et nous,
 		// on ne tient pas compte de la collision
 
-		S32	y = CalculAltitudeObjet( Nxw, Nzw, APtObj->CodeJeu>>4 ) ;
+		int32_t	y = CalculAltitudeObjet( Nxw, Nzw, APtObj->CodeJeu>>4 ) ;
 
 		if( ReajustPosDecors( Nxw+APtObj->XMin, Nzw+APtObj->ZMin,
 				      Nxw+APtObj->XMax, Nzw+APtObj->ZMax,
@@ -1017,7 +1017,7 @@ S32    DoCornerReajustExtPt( void )
 				}
 				else	// le carre dest demi col
 				{
-					S32	numtriangle = GiveTriangle( Nxw, Nzw ) ;
+					int32_t	numtriangle = GiveTriangle( Nxw, Nzw ) ;
 
 					if( MapPolyGround[IndexMapPolyTested].Sens==0 )
 					{
@@ -1128,7 +1128,7 @@ S32    DoCornerReajustExtPt( void )
 		{
 			// algo diagonale
 
-			S32	angle, d, tx, tz ;
+			int32_t	angle, d, tx, tz ;
 
 			angle = GetAngle2D( OldX, OldZ, Nxw, Nzw ) ;
 
@@ -1137,12 +1137,12 @@ S32    DoCornerReajustExtPt( void )
 			if( MapPolyGround[IndexMapPolyTested].Sens==0 )
 			{
 				// sens 0
-				tx = tz = MULDIV64( d, (S32)(SinTab[ (angle - 512 + 1024)&4095 ])<<16, SQR_2 ) ;
+				tx = tz = MULDIV64( d, (int32_t)(SinTab[ (angle - 512 + 1024)&4095 ])<<16, SQR_2 ) ;
 			}
 			else
 			{
 				// sens 1
-				tz = MULDIV64( d, (S32)(SinTab[ (angle + 512 + 1024)&4095 ])<<16, SQR_2 ) ;
+				tz = MULDIV64( d, (int32_t)(SinTab[ (angle + 512 + 1024)&4095 ])<<16, SQR_2 ) ;
 				tx = -tz	;
 			}
 
@@ -1182,12 +1182,12 @@ S32    DoCornerReajustExtPt( void )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32    GetSkateBeta( S32 nx, S32 nz )
+int32_t    GetSkateBeta( int32_t nx, int32_t nz )
 {
-	S32	numtriangle ;
-	S32	beta ;
-	S32	xi, zi ;
-	S32	y0, y1, y2, y3 ;
+	int32_t	numtriangle ;
+	int32_t	beta ;
+	int32_t	xi, zi ;
+	int32_t	y0, y1, y2, y3 ;
 
 	xi = nx>>9 ;	// div512
 	zi = nz>>9 ;	// div512
@@ -1231,15 +1231,15 @@ S32    GetSkateBeta( S32 nx, S32 nz )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Gestion de l'animation de l'objet scénarique passé (numobj) en mode
 // extérieur. Fait appel à certaines fonctions utilisées aussi en intérieur
-void	DoAnimExt( U8 numobj  )
+void	DoAnimExt( uint8_t numobj  )
 {
 #ifndef	COMPILATOR
 	T_OBJET	*ptrobj ;
-	S32	n ;
-	S32	validepos = TRUE ;
-	S32	oldcarryby ;
-	S32	oldworkflags   ;
-	U8	col ;
+	int32_t	n ;
+	int32_t	validepos = TRUE ;
+	int32_t	oldcarryby ;
+	int32_t	oldworkflags   ;
+	uint8_t	col ;
 
 	APtObj = ptrobj = &ListObjet[(AnimNumObj = numobj)] ;
 
@@ -1336,7 +1336,7 @@ void	DoAnimExt( U8 numobj  )
 		// Verifie qu'on doit toujours glisser
 		if( GiveTerrainCol(Nxw,Nzw) )
 		{
-			S32	beta = GetSkateBeta( Nxw, Nzw ) ;
+			int32_t	beta = GetSkateBeta( Nxw, Nzw ) ;
 
 			// Se trouve-t-on sur les genoux ou sur les fesses ?
 #ifdef	LBA_EDITOR
@@ -1379,7 +1379,7 @@ void	DoAnimExt( U8 numobj  )
 
 	if( APtObj->Flags&CHECK_BRICK_COL )
 	{
-		S32	memox, memoy, memoz ;
+		int32_t	memox, memoy, memoz ;
 
 		YMap = 0 ;
 
@@ -1683,8 +1683,8 @@ void	DoAnimExt( U8 numobj  )
 
 	if( !NumBuggy OR numobj!=NUM_BUGGY OR !IsBuggyPresent() )
 	{
-		S32	flagchgcube = TRUE ;
-		S32	marge = DEMI_BRICK_XZ ;
+		int32_t	flagchgcube = TRUE ;
+		int32_t	marge = DEMI_BRICK_XZ ;
 
 		if( numobj==NUM_PERSO )
 		{
@@ -1746,7 +1746,7 @@ void	DoAnimExt( U8 numobj  )
 	OR  APtObj->GenAnim!=GEN_ANIM_MARCHE) )
 #endif
 	{
-		S32	index ;
+		int32_t	index ;
 
 		index = (CurrentCubeY+PhantomY)*16 + (CurrentCubeX+PhantomX) ;
 		index = IsleMapIndex[index]&127 ; // bug compilo ou debug ?
@@ -1822,7 +1822,7 @@ findoanimext:
 
 	if( numobj==NUM_PERSO )
 	{
-		S16	nu = APtObj->CarryBy ;
+		int16_t	nu = APtObj->CarryBy ;
 
 #ifndef	LBA_EDITOR
 		if( !LastValidePos AND APtObj->LifePoint<=0 )
@@ -1912,14 +1912,14 @@ findoanimext:
 
 #ifdef	LBA_EDITOR
 // Affiche la feuille (carré) d'un polygone indexé par xi,zi
-void	DrawGrilleFeuille3D( S32 xi, S32 zi )
+void	DrawGrilleFeuille3D( int32_t xi, int32_t zi )
 {
-	S32	x0,z0,x3,z3 ;
-	S32	x2,z2,x1,z1 ;
-	S32	cx0,cy0,cx1,cy1 ;
-	S32	sens ;
-	S32	beta ;
-	S32	y0, y1, y2, y3 ;
+	int32_t	x0,z0,x3,z3 ;
+	int32_t	x2,z2,x1,z1 ;
+	int32_t	cx0,cy0,cx1,cy1 ;
+	int32_t	sens ;
+	int32_t	beta ;
+	int32_t	y0, y1, y2, y3 ;
 
 	y0 = MapSommetY[zi*65+xi] ;
 	y1 = MapSommetY[(zi+1)*65+xi] ;
@@ -1989,11 +1989,11 @@ void	DrawGrilleFeuille3D( S32 xi, S32 zi )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Affiche la table de fog dans un box passé en paramètres
-void	AffFogTable( S32 x0, S32 y0, S32 x1, S32 y1 )
+void	AffFogTable( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
-	S32	x, y, xl, yl, fi ;
-	S32	yo ;
-	S32	xo = x0 ;
+	int32_t	x, y, xl, yl, fi ;
+	int32_t	yo ;
+	int32_t	xo = x0 ;
 
 	for( xl=0; xl<256; xl++ )
 	{
@@ -2018,8 +2018,8 @@ void	AffFogTable( S32 x0, S32 y0, S32 x1, S32 y1 )
 // Affiche la palette a l'ecran (Ephémère car aucun rapport avec 3Dext)
 void AffPalette( )
 {
-	S32	t ;
-	S32	x, y ;
+	int32_t	t ;
+	int32_t	x, y ;
 
 	x = y = 0 ;
 
@@ -2103,7 +2103,7 @@ void	RedrawSpeedTerrain()
 #ifdef	LBA_EDITOR
 /*──────────────────────────────────────────────────────────────────────────*/
 // Rotation du terrain à la souris
-S32	GereMouseMovements( S32 boutons )
+int32_t	GereMouseMovements( int32_t boutons )
 {
 	if( CubeMode!=CUBE_EXTERIEUR )	return FALSE ;
 
@@ -2138,14 +2138,14 @@ S32	GereMouseMovements( S32 boutons )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Gestion zoom/pivot du terrain et position caméra
 #ifdef	LBA_EDITOR
-S32	GereExtKeys( U32 key, U32 flagmenu )
+int32_t	GereExtKeys( uint32_t key, uint32_t flagmenu )
 #else
-S32	GereExtKeys( U32 key )
+int32_t	GereExtKeys( uint32_t key )
 #endif
 {
-	S32	flag = 0 ;
-	S32	savetimer ;
-	S32	savetimer2 ;
+	int32_t	flag = 0 ;
+	int32_t	savetimer ;
+	int32_t	savetimer2 ;
 
 	if( CubeMode!=CUBE_EXTERIEUR OR !key )	return( FALSE ) ;
 
@@ -2438,11 +2438,11 @@ S32	GereExtKeys( U32 key )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Dessine le repère dans un rectangle pour ... se repérer !!!
-void	DrawRepereXYZ( S32 x0, S32 y0, S32 x1, S32 y1 )
+void	DrawRepereXYZ( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
-	S32	x, z ;
-	S32	demiw = (x1-x0)/2 ;
-	S32	demih = (y1-y0)/2 ;
+	int32_t	x, z ;
+	int32_t	demiw = (x1-x0)/2 ;
+	int32_t	demih = (y1-y0)/2 ;
 
 	if( CubeMode!=CUBE_EXTERIEUR )	return ;
 
@@ -2543,12 +2543,12 @@ void	DrawCameraInfos()
 // Cherche le numéro d'un cube dans CUBE.LST d'après sa position dans la carte
 // Cette fonction va gicler car il n'y a plus de normalisation des noms de cubes
 // extérieurs ! (domage !!!!)
-S16	SearchNumCube( S32 x, S32 y )
+int16_t	SearchNumCube( int32_t x, int32_t y )
 {
 	char	*pt ;
 	char	scename[20] ;
-	S16	n = 0 ;
-	S32	len ;
+	int16_t	n = 0 ;
+	int32_t	len ;
 
 	if( Island<10 )
 		sprintf( scename, "%1d_x%02d_%02d", Island, x, y ) ;
@@ -2577,8 +2577,8 @@ S16	SearchNumCube( S32 x, S32 y )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Créer une zone de changement de cube automatiquement
-void	CreateExtZone( S32 x0, S32 y0, S32 z0, S32 x1, S32 y1, S32 z1,
-		       S32 xd, S32 yd, S32 zd, S32 cubex, S32 cubey )
+void	CreateExtZone( int32_t x0, int32_t y0, int32_t z0, int32_t x1, int32_t y1, int32_t z1,
+		       int32_t xd, int32_t yd, int32_t zd, int32_t cubex, int32_t cubey )
 {
 	T_ZONE *ptrz ;
 
@@ -2621,7 +2621,7 @@ void	CreateExtZone( S32 x0, S32 y0, S32 z0, S32 x1, S32 y1, S32 z1,
 /*──────────────────────────────────────────────────────────────────────────*/
 // Créer toutes les zones de changement de cube sélectionnées dans un cube
 // extérieur automatiquement
-void	CreateExtZones( S32 zones, S32 hauteur )
+void	CreateExtZones( int32_t zones, int32_t hauteur )
 {
 	if( CubeMode!=CUBE_EXTERIEUR )	return ;
 
@@ -2655,9 +2655,9 @@ void	CreateExtZones( S32 zones, S32 hauteur )
 void	MenuCreateExtZones()
 {
 	T_MENU	menu ;
-	S32	zones = CREATE_ZONE_NORD|CREATE_ZONE_SUD|CREATE_ZONE_EST|CREATE_ZONE_OUEST ;
-	S32	select, flag = FALSE ;
-	S32	hauteur = 15000L ;
+	int32_t	zones = CREATE_ZONE_NORD|CREATE_ZONE_SUD|CREATE_ZONE_EST|CREATE_ZONE_OUEST ;
+	int32_t	select, flag = FALSE ;
+	int32_t	hauteur = 15000L ;
 
 	BackupScreen( TRUE ) ;
 

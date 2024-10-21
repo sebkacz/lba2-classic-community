@@ -11,18 +11,18 @@ extern "C" {
 #define TABKEYS_NUM_KEYS (256 + (16 * 8))
 
 // --- Public state ------------------------------------------------------------
-extern S32 AsciiMode;
-extern S32 Key;
-extern U8  TabKeys[TABKEYS_NUM_KEYS]; ///< Keyboard and Joysticks state
+extern int32_t AsciiMode;
+extern int32_t Key;
+extern uint8_t  TabKeys[TABKEYS_NUM_KEYS]; ///< Keyboard and Joysticks state
 
 // --- Initialization ----------------------------------------------------------
 void InitKeyboard();
 void EndKeyboard();
 
 // --- Interface ---------------------------------------------------------------
-S32 GetAscii();
-S32 CheckKey(U32 key);
-void GetKeyScancodeName(char *string, U8 strMaxLen, U32 scanCode);
+int32_t GetAscii();
+int32_t CheckKey(uint32_t key);
+void GetKeyScancodeName(char *string, uint8_t strMaxLen, uint32_t scanCode);
 
 void ManageKeyboard();
 void HandleEventsKeyboard(const void *event);

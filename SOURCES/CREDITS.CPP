@@ -20,11 +20,11 @@
 
 #define	SPEED_ROT	1100
 
-U8	*PalCredits ;
+uint8_t	*PalCredits ;
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-U8	*NextLine( U8 *ptr )
+uint8_t	*NextLine( uint8_t *ptr )
 {
 	while( *ptr >= 32 ) ptr++ ;
 	while( *ptr <  32 ) ptr++ ;
@@ -33,7 +33,7 @@ U8	*NextLine( U8 *ptr )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	InitXplPalette( U8 *ptrxpl )
+void	InitXplPalette( uint8_t *ptrxpl )
 {
 	XPL_HEADER	*xplh ;
 
@@ -63,7 +63,7 @@ int	sub_qsort( const void *a, const void *b )
 
 //----------------------------------------------------------------------------
 
-void	AddTri( S32 type, S32 num )
+void	AddTri( int32_t type, int32_t num )
 {
 	// mettre une protection depassement list
 	T_SORT	*ptrtri = &ListTri[NbTriObj] ;
@@ -80,42 +80,42 @@ void	AddTri( S32 type, S32 num )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-#define	PtrCredits	((U8*)ScreenAux)
+#define	PtrCredits	((uint8_t*)ScreenAux)
 
-S32     GamePlayCredits( const char *file_name, S32 mode )
+int32_t     GamePlayCredits( const char *file_name, int32_t mode )
 {
-	S32     flagexit = FALSE ;
-	S32     flag = 1 ;
-	S32     n ;
-	S32     x0, y0, x1, y1 ;
-	S32     xc ;
-	U8      *ptrlist ;
-	U8      *ptrl ;
-	U8      *ptr ;
-	S32     nbl ;
-	S32	dx, xf, yf ;
-	S32     y ;
-	S32	timer ;
-	S32     i ;
-	S32     flagframe ;
-	S32     finished ;
-	S32     angle ;
-	S32     player_stop;
+	int32_t     flagexit = FALSE ;
+	int32_t     flag = 1 ;
+	int32_t     n ;
+	int32_t     x0, y0, x1, y1 ;
+	int32_t     xc ;
+	uint8_t      *ptrlist ;
+	uint8_t      *ptrl ;
+	uint8_t      *ptr ;
+	int32_t     nbl ;
+	int32_t	dx, xf, yf ;
+	int32_t     y ;
+	int32_t	timer ;
+	int32_t     i ;
+	int32_t     flagframe ;
+	int32_t     finished ;
+	int32_t     angle ;
+	int32_t     player_stop;
 
-	S32	type ;
-	S32	NbMovingObj ;
-	S32	nextobj ;
-	S32	a ;
-	S32	scrolltimer ;
+	int32_t	type ;
+	int32_t	NbMovingObj ;
+	int32_t	nextobj ;
+	int32_t	a ;
+	int32_t	scrolltimer ;
 
-	S32     NbObjects ;
+	int32_t     NbObjects ;
 
-//	U8      *LbaFont ;
-	S32     FontBoxY0 ;
-	S32     FontBoxY1 ;
-//	S32     FontTab ;
-	S32     FontHeight ;
-	S32	distance ;
+//	uint8_t      *LbaFont ;
+	int32_t     FontBoxY0 ;
+	int32_t     FontBoxY1 ;
+//	int32_t     FontTab ;
+	int32_t     FontHeight ;
+	int32_t	distance ;
 	T_SORT	*ptrtri ;
 
 	S_CRED_INFOS_2            *ptrinfos ;
@@ -195,7 +195,7 @@ S32     GamePlayCredits( const char *file_name, S32 mode )
 //	ColorFont( LBAWHITE ) ;
 
 	BoxReset() ;
-	SetClearColor( (U8)FogCoul ) ;
+	SetClearColor( (uint8_t)FogCoul ) ;
 	Cls() ;
 	CopyScreen( Log, Screen ) ;
 
@@ -275,7 +275,7 @@ S32     GamePlayCredits( const char *file_name, S32 mode )
 
 	FadeToPal( PalCredits ) ;
 
-/*	SetClearColor( (U8)FogCoul ) ;
+/*	SetClearColor( (uint8_t)FogCoul ) ;
 	Cls() ;
 	CopyScreen( Log, Screen ) ;
 	BoxStaticFullflip() ;

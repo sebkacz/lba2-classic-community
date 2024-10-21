@@ -2,7 +2,7 @@
 
 #include "DIRECTORIES.H"
 
-extern	S32	Nxw, Nyw, Nzw ;	// Object.c
+extern	int32_t	Nxw, Nyw, Nzw ;	// Object.c
 
 /*══════════════════════════════════════════════════════════════════════════*
 	  █▀▀▀▀ █     █▀▀▀▀ █▀▀▀▀ █   █ █▀▀▀▀ ▀▀█▀▀ ▀▀█▀▀ █▀▀▀▀ ██▀▀▀
@@ -13,18 +13,18 @@ extern	S32	Nxw, Nyw, Nzw ;	// Object.c
 void	InitDarts()
 {
 	T_DART *ptrd ;
-	U8	*ptrbody ;
-	U32	t ;
-	S32	x0,x1,y0,y1,z0,z1 ;
-	S32	size ;
+	uint8_t	*ptrbody ;
+	uint32_t	t ;
+	int32_t	x0,x1,y0,y1,z0,z1 ;
+	int32_t	size ;
 	T_BODY_HEADER	*ptr ;
 
 #ifdef	LBA_EDITOR
-	PtrBody[NbBodys] = (U8 *)LoadTestMalloc( BODY_3D_DART ) ;
+	PtrBody[NbBodys] = (uint8_t *)LoadTestMalloc( BODY_3D_DART ) ;
 	if( !PtrBody[NbBodys] )	TheEndCheckFile( BODY_3D_DART ) ;
 	ptrbody = PtrBody[NbBodys] ;
 #else
-	ptrbody = (U8*)GivePtrObjFix( BODY_3D_DART ) ;
+	ptrbody = (uint8_t*)GivePtrObjFix( BODY_3D_DART ) ;
 	if( !ptrbody ) {
 		char tmpFilePath[ADELINE_MAX_PATH];
 		GetResPath(tmpFilePath, ADELINE_MAX_PATH, OBJFIX_HQR_NAME);
@@ -71,10 +71,10 @@ void	InitDarts()
 }
 
 // Recupere premiere flechette libre dans la structure
-S32	GetDart()
+int32_t	GetDart()
 {
 	T_DART *ptrd ;
-	U32	t ;
+	uint32_t	t ;
 
 	ptrd = ListDart ;
 
@@ -93,7 +93,7 @@ S32	GetDart()
 void	TakeAllDarts()
 {
 	T_DART	*ptrd ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrd = ListDart ;
 
@@ -111,10 +111,10 @@ void	TakeAllDarts()
 
 void	CheckDartCol( T_OBJET *ptrobj )
 {
-	S32	n ;
+	int32_t	n ;
 	T_DART	*ptrd ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
 
 	if( ptrobj->Flags&INVISIBLE )	return ;
 

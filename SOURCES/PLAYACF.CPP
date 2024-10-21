@@ -9,9 +9,9 @@ char		*EndListAcf ;
 
 #ifdef	LBA_EDITOR
 #define	SIZE_BUFFER_SMACK	1000000L
-U8  	*BufferSmack ;
+uint8_t  	*BufferSmack ;
 #else
-U8  	*BufferSmack ;// initialisé dans MEM.CPP
+uint8_t  	*BufferSmack ;// initialisé dans MEM.CPP
 #endif
 
 //---------------------------------------------------------------------------
@@ -43,7 +43,7 @@ void InitAcf(void) {
   // dispo Screen,ScreenAux,BufSpeak
   SmackRegisterMemory(Screen, (ModeDesiredX * ModeDesiredY + RECOVER_AREA) * 3);
 
-  BufferSmack = (U8 *)Malloc(SIZE_BUFFER_SMACK);
+  BufferSmack = (uint8_t *)Malloc(SIZE_BUFFER_SMACK);
   if (!BufferSmack)
     TheEnd(NOT_ENOUGH_MEM, "BufferSmack (InitAcf())");
 
@@ -96,8 +96,8 @@ char	*GetAcfName( char *name )
 
 //---------------------------------------------------------------------------
 // TODO: New implementation was not tested yet
-S32 GetNumAcf(const char *name) {
-  S32 n = 0;
+int32_t GetNumAcf(const char *name) {
+  int32_t n = 0;
 
   const char *nameDotAt = strchr(name, '.');
   const size_t nameNoDotLen = (nameDotAt)
@@ -127,9 +127,9 @@ S32 GetNumAcf(const char *name) {
 
 void	PlayAllAcf( void )
 {
-	S32	firsttime = TRUE ;
-	S32	n = 0 ;
-	S32	var = FLAG_ACF ;
+	int32_t	firsttime = TRUE ;
+	int32_t	n = 0 ;
+	int32_t	var = FLAG_ACF ;
 	char	getname[13] ;
 
 	PtrAcf = ListAcf ;
@@ -181,7 +181,7 @@ void	PlayAllAcf( void )
 
 //---------------------------------------------------------------------------
 
-//extern	void	CopyFrameDoubleXY( U8 *ptrsrc ) ;
+//extern	void	CopyFrameDoubleXY( uint8_t *ptrsrc ) ;
 
 /***************************************************************************\
 |*									   *|
@@ -190,15 +190,15 @@ void	PlayAllAcf( void )
 \***************************************************************************/
 
 // TODO: Implement SMACK video playback
-S32	PlayAcf( const char *name )
+int32_t	PlayAcf( const char *name )
 {
   return 0;
 //	Smack		*smk	      	;
-//	U32		frame	      	;
-//	S32		n 		;
-//	S32		ret 		;
-//	U8		*decompbuf	;
-//	U32		smackflags	;
+//	uint32_t		frame	      	;
+//	int32_t		n 		;
+//	int32_t		ret 		;
+//	uint8_t		*decompbuf	;
+//	uint32_t		smackflags	;
 //#ifdef	LBA_EDITOR
 //	char		name_acf[256] 	;
 //
@@ -249,8 +249,8 @@ S32	PlayAcf( const char *name )
 //	if( n==-1 )	return 0 ;
 //
 //	{
-//		S32	var	;
-//		S32	bit	;
+//		int32_t	var	;
+//		int32_t	bit	;
 //
 //		var = n/16	;
 //		if( n>=32 )
@@ -265,9 +265,9 @@ S32	PlayAcf( const char *name )
 //		}
 //
 //#ifdef	LBA_EDITOR
-//		ListVarGame[FLAG_ACF+(n/16)].Value |= (S16)(1<<(n&15)) ;
+//		ListVarGame[FLAG_ACF+(n/16)].Value |= (int16_t)(1<<(n&15)) ;
 //#else
-//		ListVarGame[FLAG_ACF+(n/16)] |= (S16)(1<<(n&15)) ;
+//		ListVarGame[FLAG_ACF+(n/16)] |= (int16_t)(1<<(n&15)) ;
 //#endif
 //	}
 //
@@ -303,7 +303,7 @@ S32	PlayAcf( const char *name )
 //		TheEnd( PROGRAM_OK, MessageNoCD ) ;
 //#endif
 //
-//	decompbuf = (U8*)radmalloc( 320*200 )	;
+//	decompbuf = (uint8_t*)radmalloc( 320*200 )	;
 //
 //	if( !decompbuf )
 //	{
@@ -320,7 +320,7 @@ S32	PlayAcf( const char *name )
 //
 ////	if( Sample_Driver_Enabled )
 //	{
-//		S32	vol ;
+//		int32_t	vol ;
 //
 //		if( UseWaveMixer )
 //		{

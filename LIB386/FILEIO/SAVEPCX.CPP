@@ -6,9 +6,9 @@
 #include "PCXHEAD.H"
 
 //──────────────────────────────────────────────────────────────────────────
-static void next_char( U32 fd, U8 *pt, S32 val)
+static void next_char( uint32_t fd, uint8_t *pt, int32_t val)
 {
-	pt[Index++] = (U8)val	;
+	pt[Index++] = (uint8_t)val	;
 
 	if ( Index == SIZE_BUF )
 	{
@@ -18,12 +18,12 @@ static void next_char( U32 fd, U8 *pt, S32 val)
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void SavePCX(char *filename, void *screen, S32 xres, S32 yres, void *ptrpalette)
+void SavePCX(char *filename, void *screen, int32_t xres, int32_t yres, void *ptrpalette)
 {
-	S32	i, k, number, num_out	;
-	S32	ch, old_ch 		;
-	U8	file_buf[SIZE_BUF]	;
-	S32	fd 			;
+	int32_t	i, k, number, num_out	;
+	int32_t	ch, old_ch 		;
+	uint8_t	file_buf[SIZE_BUF]	;
+	int32_t	fd 			;
 
 	PcxHeader.password	= 0x0A	;
 	PcxHeader.version	= 0x05	;
@@ -35,12 +35,12 @@ void SavePCX(char *filename, void *screen, S32 xres, S32 yres, void *ptrpalette)
 
 	// resx * resy - 256 colors
 	PcxHeader.bits_per_pixel= 0x08		;
-	PcxHeader.xmax 		= (S16)(xres-1)	;
-	PcxHeader.ymax 		= (S16)(yres-1)	;
-	PcxHeader.xres 		= (S16)xres	;
-	PcxHeader.yres 		= (S16)yres	;
+	PcxHeader.xmax 		= (int16_t)(xres-1)	;
+	PcxHeader.ymax 		= (int16_t)(yres-1)	;
+	PcxHeader.xres 		= (int16_t)xres	;
+	PcxHeader.yres 		= (int16_t)yres	;
 	PcxHeader.no_of_planes	= 1 		;
-	PcxHeader.bytes_per_line= (S16)xres	;
+	PcxHeader.bytes_per_line= (int16_t)xres	;
 
 	fd = OpenWrite(filename) 	;
 
@@ -57,7 +57,7 @@ void SavePCX(char *filename, void *screen, S32 xres, S32 yres, void *ptrpalette)
 	{
 		number = 1	;
 
-                old_ch = ((U8*)screen)[ModeDesiredX*k]   ;
+                old_ch = ((uint8_t*)screen)[ModeDesiredX*k]   ;
 
 		for ( i = 1 ; i <= xres; i++ )
 		{
@@ -67,7 +67,7 @@ void SavePCX(char *filename, void *screen, S32 xres, S32 yres, void *ptrpalette)
 			}
 			else
 			{
-                                ch = ((U8*)screen)[ModeDesiredX*k+i]     ;
+                                ch = ((uint8_t*)screen)[ModeDesiredX*k+i]     ;
 			}
 
 			if (( ch == old_ch ) && (number < 63) )
@@ -76,7 +76,7 @@ void SavePCX(char *filename, void *screen, S32 xres, S32 yres, void *ptrpalette)
 			}
 			else
 			{
-				num_out = ((U8) number | 0xC0)	;
+				num_out = ((uint8_t) number | 0xC0)	;
 				if ((number != 1) || ((old_ch & 0xC0) == 0xC0))
 				{
 					next_char(fd, file_buf, num_out);

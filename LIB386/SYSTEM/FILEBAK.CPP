@@ -8,7 +8,7 @@
 #include	<string.h>
 
 //--------------------------------------------------------------------------//
-S32	CopyBak( char *name )
+int32_t	CopyBak( char *name )
 {
 	char	bakfname[_MAX_PATH] 	;
 

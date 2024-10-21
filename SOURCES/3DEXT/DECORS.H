@@ -12,6 +12,6 @@ extern void AffichageObjetDecorsZV(void) ;
 /*--------------------------------------------------------------------------*/
 extern void AffichageObjetDecorsZBuf(void);
 /*--------------------------------------------------------------------------*/
-extern S32 TestZVDecors(S32 xw,S32 yw,S32 zw,T_DECORS *objet);
+extern int32_t TestZVDecors(int32_t xw,int32_t yw,int32_t zw,T_DECORS *objet);
 
 #endif	// DECORS_H

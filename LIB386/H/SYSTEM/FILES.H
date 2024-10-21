@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -15,18 +16,18 @@ enum ESeekOrigin {
 };
 
 // -----------------------------------------------------------------------------
-S32 OpenRead(const char *filename);
-S32 OpenWrite(const char *filename);
-S32 OpenReadWrite(const char *filename);
-S32 Close(S32 handle);
+int32_t OpenRead(const char *filename);
+int32_t OpenWrite(const char *filename);
+int32_t OpenReadWrite(const char *filename);
+int32_t Close(int32_t handle);
 
-S32 Read(S32 handle, void* buffer, U32 maxReadBytes);
-S32 Write(S32 handle, const void* buffer, U32 maxWriteBytes);
-S32 Seek(S32 handle, S32 offset, ESeekOrigin origin);
+int32_t Read(int32_t handle, void* buffer, uint32_t maxReadBytes);
+int32_t Write(int32_t handle, const void* buffer, uint32_t maxWriteBytes);
+int32_t Seek(int32_t handle, int32_t offset, ESeekOrigin origin);
 
-U32 Delete(const char* filename);
-S32 Touch(const char* filename);
-U32 FileSize(const char* filename);
+uint32_t Delete(const char* filename);
+int32_t Touch(const char* filename);
+uint32_t FileSize(const char* filename);
 
 /// Check if file or directory \p path exists.
 bool ExistsFileOrDir(const char* path);

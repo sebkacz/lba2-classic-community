@@ -32,7 +32,7 @@ void	ClearAIL()
 #ifndef	_WIN32
 
 //████████████████████████████████████████████████████████████████████████████
-S32	InitTimerAIL()
+int32_t	InitTimerAIL()
 {
 	HTIMER  HandleTimer ;
 

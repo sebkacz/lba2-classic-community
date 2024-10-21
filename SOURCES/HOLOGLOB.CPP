@@ -12,76 +12,76 @@
 //	Concerning BODY and ANIM
 T_OBJ_3D ObjTwinsen	;
 
-U8	*BufFleche	;
-U8	*BufLoFleche	;
-U8	*BufBuggy	;
-U8	*BufDyno	;
+uint8_t	*BufFleche	;
+uint8_t	*BufLoFleche	;
+uint8_t	*BufBuggy	;
+uint8_t	*BufDyno	;
 
-U8	*BufBodyTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
-U8	*BufAnimTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
+uint8_t	*BufBodyTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
+uint8_t	*BufAnimTempo	;//	Buffer Tempo Traffiquer Body ( scale & rot )
 
-U8	*PtCurrentBody	;
-U8	*PtCurrentAnim	;
+uint8_t	*PtCurrentBody	;
+uint8_t	*PtCurrentAnim	;
 
-U32	SizeCurrentBody	;
-U32	SizeCurrentAnim	;
+uint32_t	SizeCurrentBody	;
+uint32_t	SizeCurrentAnim	;
 
 //────────────────────────────────────────────────────────────────────────────
 //	Concerning OBJECTIF
-S32	NumObjectif=-1	;
-S32	NextObjectif=-1	;
-S32	OldObjectif=-2	;
-U32	DistObjectif	;
-S32	XpObjectif	;
-S32	YpObjectif	;
-S32	XpNextObjectif	;
-S32	YpNextObjectif	;
+int32_t	NumObjectif=-1	;
+int32_t	NextObjectif=-1	;
+int32_t	OldObjectif=-2	;
+uint32_t	DistObjectif	;
+int32_t	XpObjectif	;
+int32_t	YpObjectif	;
+int32_t	XpNextObjectif	;
+int32_t	YpNextObjectif	;
 
 //────────────────────────────────────────────────────────────────────────────
 //	Divers
 
-S32	ZBufYMin = 0		;
-S32	ZBufYMax = 0		;
+int32_t	ZBufYMin = 0		;
+int32_t	ZBufYMax = 0		;
 
-S32	HoloAlpha = 0		;
-S32	HoloBeta = 0		;
-S32	HoloGamma = 0		;
+int32_t	HoloAlpha = 0		;
+int32_t	HoloBeta = 0		;
+int32_t	HoloGamma = 0		;
 
-S32	DestAlpha 		;
-S32	DestBeta		;
-S32	TwinsenLinkArrow=0	;//	Twinsen Linked with an arrow ?
+int32_t	DestAlpha 		;
+int32_t	DestBeta		;
+int32_t	TwinsenLinkArrow=0	;//	Twinsen Linked with an arrow ?
 
-S32	ZoomedIsland=-1		;
-U32	RayonPlanet		;
-S32	FlagMap = 0		;
-S32	FlagHoloEnd = 0		;
+int32_t	ZoomedIsland=-1		;
+uint32_t	RayonPlanet		;
+int32_t	FlagMap = 0		;
+int32_t	FlagHoloEnd = 0		;
 
 
-U16	*PtrMapping		;
-U16	*PtrGlobe		;
-U8	*PtrAlt			;
-U8	*PtrTextMap		;
-U16	*PtrCoorGlobe		;
-U16	PtrTri[17*33*6]		;//	For 1 Planet
-S32	ListTriPlanet[MAX_PLANET*2]	;//	For 6 Planets
-S32	NbTri			;//	Nb Planet(s) in ListTriPlanet
-S32	ModeAuto = 0		;
-S32	XPos, YPos, ZPos	;
-S32	XDest, YDest, ZDest	;
-S32	ZoomDest=ZOOM_TWINSUN	;
-S32	ZoomPlanet		;
-S32	ZoomPlanetDest  	;
-S32	Destination=P_TWINSUN	;
-U32	MyTimerRef		;
-S32	SizeRet = 24		;
-S32	ColRet = 143		;
-U32	MemoTimerRet		;
-U32	MemoTimerRot		;
-S32	DialStatHolo = -1	;
-U8	RotPal[(32+31)*3] 	;
-S16	RotPalPos = 0 		;
-S32	NumOldMess=-1		;
-S32	HoloMode=0		;//	0 Globe, 1 Plan
+uint16_t	*PtrMapping		;
+uint16_t	*PtrGlobe		;
+uint8_t	*PtrAlt			;
+uint8_t	*PtrTextMap		;
+uint16_t	*PtrCoorGlobe		;
+uint16_t	PtrTri[17*33*6]		;//	For 1 Planet
+int32_t	ListTriPlanet[MAX_PLANET*2]	;//	For 6 Planets
+int32_t	NbTri			;//	Nb Planet(s) in ListTriPlanet
+int32_t	ModeAuto = 0		;
+int32_t	XPos, YPos, ZPos	;
+int32_t	XDest, YDest, ZDest	;
+int32_t	ZoomDest=ZOOM_TWINSUN	;
+int32_t	ZoomPlanet		;
+int32_t	ZoomPlanetDest  	;
+int32_t	Destination=P_TWINSUN	;
+uint32_t	MyTimerRef		;
+int32_t	SizeRet = 24		;
+int32_t	ColRet = 143		;
+uint32_t	MemoTimerRet		;
+uint32_t	MemoTimerRot		;
+int32_t	DialStatHolo = -1	;
+uint8_t	RotPal[(32+31)*3] 	;
+int16_t	RotPalPos = 0 		;
+int32_t	NumOldMess=-1		;
+int32_t	HoloMode=0		;//	0 Globe, 1 Plan
 //────────────────────────────────────────────────────────────────────────────
 /*		A R R O W
 
@@ -93,12 +93,12 @@ S32	HoloMode=0		;//	0 Globe, 1 Plan
 
 */
 T_ARROW	TabArrow[MAX_OBJECTIF+MAX_CUBE]		;
-U32	DecalTimerRef[MAX_OBJECTIF+MAX_CUBE] 	;
+uint32_t	DecalTimerRef[MAX_OBJECTIF+MAX_CUBE] 	;
 //────────────────────────────────────────────────────────────────────────────
 //	Objects Scale factor by planet
-S32	TabRayon[MAX_PLANET] = { 1000, 250, 500, 500 }	;
-S32	TabScale[MAX_PLANET] = { 8, 2, 5, 5 }		;
-S32	TabZoom[MAX_PLANET] = { 8000, 2000, 5000, 5000 };
+int32_t	TabRayon[MAX_PLANET] = { 1000, 250, 500, 500 }	;
+int32_t	TabScale[MAX_PLANET] = { 8, 2, 5, 5 }		;
+int32_t	TabZoom[MAX_PLANET] = { 8000, 2000, 5000, 5000 };
 //────────────────────────────────────────────────────────────────────────────
 //		S T A R S
 T_STARS	TabStars[MAX_STARS]	;//	3200 bytes
@@ -110,12 +110,12 @@ T_PLANET	TabPlanet[MAX_PLANET]	;
 //────────────────────────────────────────────────────────────────────────────
 //		U F O
 
-U8		*PtUfo		;
-U8		*PtAnimUfo	;
+uint8_t		*PtUfo		;
+uint8_t		*PtAnimUfo	;
 T_OBJ_3D        Ufo		;
 
 //────────────────────────────────────────────────────────────────────────────
-S32	SetHoloPos( S32 num )
+int32_t	SetHoloPos( int32_t num )
 {
 	if ( !(TabArrow[MAX_OBJECTIF+num].FlagHolo & 2 ))	 //	Bit 1=0 Never asked
 	{
@@ -132,7 +132,7 @@ S32	SetHoloPos( S32 num )
 	return FALSE ;
 }
 //────────────────────────────────────────────────────────────────────────────
-void	ClrHoloPos( S32 num )
+void	ClrHoloPos( int32_t num )
 {
 	TabArrow[MAX_OBJECTIF+num].FlagHolo &= ~(1) ;//	Clear bit 0 (Unactiv)
 	TabArrow[MAX_OBJECTIF+num].FlagHolo |= 2    ;//	Set bit 1 (Already Asked)
@@ -156,7 +156,7 @@ static void	AdjustZBufMinMax( void )
 //────────────────────────────────────────────────────────────────────────────
 //────────────────────────────────────────────────────────────────────────────
 //────────────────────────────────────────────────────────────────────────────
-void	AffUpperLeft( S32 x, S32 y, S32 flag )
+void	AffUpperLeft( int32_t x, int32_t y, int32_t flag )
 {
 	Line( x, y, x+SX, y, ColRet )		;
 	Line( x, y+1, x+SX-1, y+1, ColRet )	;
@@ -166,7 +166,7 @@ void	AffUpperLeft( S32 x, S32 y, S32 flag )
 	if ( flag )	BoxMovingAdd( x, y, x+SX, y+SY )	;//	U L
 }
 //────────────────────────────────────────────────────────────────────────────
-void	AffLowerLeft( S32 x, S32 y, S32 flag )
+void	AffLowerLeft( int32_t x, int32_t y, int32_t flag )
 {
 	Line( x, y, x+SX, y, ColRet )		;
 	Line( x, y-1, x+SX-1, y-1, ColRet )	;
@@ -176,7 +176,7 @@ void	AffLowerLeft( S32 x, S32 y, S32 flag )
 	if ( flag )	BoxMovingAdd( x, y-SY, x+SX, y )	;//	L L
 }
 //────────────────────────────────────────────────────────────────────────────
-void	AffUpperRight( S32 x, S32 y, S32 flag )
+void	AffUpperRight( int32_t x, int32_t y, int32_t flag )
 {
 	Line( x, y, x-SX, y, ColRet )		;
 	Line( x, y+1, x-(SX-1), y+1, ColRet)	;
@@ -186,7 +186,7 @@ void	AffUpperRight( S32 x, S32 y, S32 flag )
 	if ( flag )	BoxMovingAdd( x-SX, y, x, y+SY )	;//	U R
 }
 //────────────────────────────────────────────────────────────────────────────
-void	AffLowerRight( S32 x, S32 y, S32 flag )
+void	AffLowerRight( int32_t x, int32_t y, int32_t flag )
 {
 	Line( x, y, x-SX, y, ColRet )		;
 	Line( x, y-1, x-(SX-1), y-1, ColRet)	;
@@ -200,8 +200,8 @@ void	AffLowerRight( S32 x, S32 y, S32 flag )
 //	Pas gegene, je reve d'autre chose, mais quoi ?
 void	AffReticule()
 {
-	S32	x0, y0	;
-	S32	x1, y1	;
+	int32_t	x0, y0	;
+	int32_t	x1, y1	;
 
 	if ( NumObjectif != OldObjectif )//	if -1 reinit ok
 	{
@@ -233,8 +233,8 @@ void	AffReticule()
 
 void	AffHoloMess()
 {
-	S32	mess=-1	;
-	U32	dx	;
+	int32_t	mess=-1	;
+	uint32_t	dx	;
 
 	if ( NumObjectif != OldObjectif )//	It's a new One!
 	{
@@ -284,7 +284,7 @@ void	AffHoloMess()
 //────────────────────────────────────────────────────────────────────────────
 void	InitObjectifPlanet()
 {
-	S32	i	;
+	int32_t	i	;
 	T_ARROW	*pt	;
 
 	NumObjectif = -1	;//	None by default
@@ -313,7 +313,7 @@ void	InitObjectifPlanet()
 //	Pourrait etre fait dans InitObjectifPlanet() avant boucle mais bof...
 void	ClearObjectifPlanet()
 {
-	S32	i	;
+	int32_t	i	;
 	T_ARROW	*pt	;
 
 	pt = TabArrow	;
@@ -333,11 +333,11 @@ void	PrepareObjectifPlanet()
 	DistObjectif = 100		;// Arbitrary (distance 2d ;)
 }
 //────────────────────────────────────────────────────────────────────────────
-void	ComputeObjectifPlanet( S32 arrow )
+void	ComputeObjectifPlanet( int32_t arrow )
 {
 	T_ARROW	*pt	;
-	S32	dist	;
-	S32	x, y, z	;
+	int32_t	dist	;
+	int32_t	x, y, z	;
 
 	pt = &TabArrow[arrow]	;
 
@@ -409,24 +409,24 @@ void	DrawArrowGlobe( T_SORT *ptt )
 //────────────────────────────────────────────────────────────────────────────
 int 	z_sort( void const *a, void const *b)
 {
-	return( *(S16*)a - *(S16*)b ) ;
+	return( *(int16_t*)a - *(int16_t*)b ) ;
 }
 /*-------------------------------------------------------------------------*/
 //	For Planet Sort
 int	z_sort32( void const *a, void const *b)
 {
-	return( *(S32*)a - *(S32*)b ) ;
+	return( *(int32_t*)a - *(int32_t*)b ) ;
 }
 //────────────────────────────────────────────────────────────────────────────
-void	DrawListHoloGlobe(S32 pos)
+void	DrawListHoloGlobe(int32_t pos)
 {
-	S32	xm, ym, zm	;
-	S32	talt, arrow	;
-	S32	flag=0		;
+	int32_t	xm, ym, zm	;
+	int32_t	talt, arrow	;
+	int32_t	flag=0		;
 	T_ARROW *pt		;
 	T_SORT *ptt		;
-	S32	nbtri=0		;
-	U32	timer, angle	;
+	int32_t	nbtri=0		;
+	uint32_t	timer, angle	;
 
 	timer = TimerRefHR*2	;
 
@@ -580,11 +580,11 @@ void	DrawListHoloGlobe(S32 pos)
 
 void	ComputeCoorGlobe()
 {
-	S32	alpha, beta 	;
-	U16	*ptrc 		;
-	U8	*mptrv, *ptrv 	;
-	S32	x, y 		;
-	S32	normal 		;
+	int32_t	alpha, beta 	;
+	uint16_t	*ptrc 		;
+	uint8_t	*mptrv, *ptrv 	;
+	int32_t	x, y 		;
+	int32_t	normal 		;
 
 	ptrc = PtrCoorGlobe	;
 
@@ -613,9 +613,9 @@ void	ComputeCoorGlobe()
 			y = Z0 				;
 			Rotate( x, 0, beta ) 		;
 			WorldRotatePoint( X0, y, Z0 ) 	;
-			*ptrc++ = (U16)X0 		;
-			*ptrc++ = (U16)Y0 		;
-			*ptrc++ = (U16)Z0 		;
+			*ptrc++ = (uint16_t)X0 		;
+			*ptrc++ = (uint16_t)Y0 		;
+			*ptrc++ = (uint16_t)Z0 		;
 		}
 
 		Rotate( RayonPlanet + *mptrv * 2 , 0, alpha ) 	;
@@ -624,9 +624,9 @@ void	ComputeCoorGlobe()
 		Rotate( x, 0, 0 ) 		;	//...
 		WorldRotatePoint( X0, y, Z0 ) 	;
 
-		*ptrc++ = (U16)X0 	;
-		*ptrc++ = (U16)Y0 	;
-		*ptrc++ = (U16)Z0 	;
+		*ptrc++ = (uint16_t)X0 	;
+		*ptrc++ = (uint16_t)Y0 	;
+		*ptrc++ = (uint16_t)Z0 	;
 	}
 }
 //────────────────────────────────────────────────────────────────────────────
@@ -641,9 +641,9 @@ void	AdjustScreenMax()
 //────────────────────────────────────────────────────────────────────────────
 void	ComputeGlobeProj()
 {
-	U16	*ptr, *ptrt	;
-	S16	*ptrc 		;
-	S32	alpha, beta	;
+	uint16_t	*ptr, *ptrt	;
+	int16_t	*ptrc 		;
+	int32_t	alpha, beta	;
 
 
 	ScreenXMin = 32000	;
@@ -654,7 +654,7 @@ void	ComputeGlobeProj()
 	ptr = PtrGlobe 		;
 	ptrt = PtrTri 		;
 
-	ptrc = (S16*)PtrCoorGlobe ;
+	ptrc = (int16_t*)PtrCoorGlobe ;
 
 	for( alpha = -1024; alpha <= 1024; alpha += STEP_ANGLE )
 	{
@@ -668,16 +668,16 @@ void	ComputeGlobeProj()
 
 			if( alpha != 1024 )
 			{
-//				*ptrt++ = (U16)Z0		;
-				*ptrt++ = (U16)(CameraZr-Z0)	;// for zbuffer
-				*ptrt++ = (U16)(ptr-PtrGlobe)	;
+//				*ptrt++ = (uint16_t)Z0		;
+				*ptrt++ = (uint16_t)(CameraZr-Z0)	;// for zbuffer
+				*ptrt++ = (uint16_t)(ptr-PtrGlobe)	;
 			}
 
 			LongProjectPoint( X0, Y0, Z0 ) ;
 
 			AdjustScreenMax()	;
-			*ptr++ = (U16)Xp 	;
-			*ptr++ = (U16)Yp 	;
+			*ptr++ = (uint16_t)Xp 	;
+			*ptr++ = (uint16_t)Yp 	;
 		}
 
 		X0 = *ptrc++ 	;
@@ -689,8 +689,8 @@ void	ComputeGlobeProj()
 		LongProjectPoint( X0, Y0, Z0 )	;
 		AdjustScreenMax()		;
 
-		*ptr++ = (U16)Xp 	;
-		*ptr++ = (U16)Yp 	;
+		*ptr++ = (uint16_t)Xp 	;
+		*ptr++ = (uint16_t)Yp 	;
 	}
 
 //	qsort( PtrTri, 512, 4, z_sort ) ;
@@ -699,9 +699,9 @@ void	ComputeGlobeProj()
 /*══════════════════════════════════════════════════════════════════════════*/
 void	DrawHolomap()
 {
-	U16	*ptr, *ptrm	;
-	S32	n, off		;
-	S32	zr		;
+	uint16_t	*ptr, *ptrm	;
+	int32_t	n, off		;
+	int32_t	zr		;
 
 	RepMask = 0xFFFF	;//	Ya besoin a chaque fois ?
 
@@ -735,9 +735,9 @@ void	DrawHolomap()
 			Tab_Points[2].Pt_MapV = ptrm[3] 	;
 
 			// for zbuffer
-			Tab_Points[0].Pt_ZO     = (U16)zr 	;
-			Tab_Points[1].Pt_ZO     = (U16)zr 	;
-			Tab_Points[2].Pt_ZO     = (U16)zr 	;
+			Tab_Points[0].Pt_ZO     = (uint16_t)zr 	;
+			Tab_Points[1].Pt_ZO     = (uint16_t)zr 	;
+			Tab_Points[2].Pt_ZO     = (uint16_t)zr 	;
 
 			Fill_Poly( 8, 0, 3, Tab_Points )	;
 		}
@@ -759,9 +759,9 @@ void	DrawHolomap()
 			Tab_Points[2].Pt_MapV = ptrm[3] 	;
 
 			// for zbuffer
-			Tab_Points[0].Pt_ZO     = (U16)zr	;
-			Tab_Points[1].Pt_ZO     = (U16)zr 	;
-			Tab_Points[2].Pt_ZO     = (U16)zr 	;
+			Tab_Points[0].Pt_ZO     = (uint16_t)zr	;
+			Tab_Points[1].Pt_ZO     = (uint16_t)zr 	;
+			Tab_Points[2].Pt_ZO     = (uint16_t)zr 	;
 
 			Fill_Poly( 8, 0, 3, Tab_Points )	;
 		}
@@ -770,9 +770,9 @@ void	DrawHolomap()
 
 //────────────────────────────────────────────────────────────────────────────
 #ifdef	DEBUG_TOOLS
-S32	SizeHoloMalloc = 640L*480L+RECOVER_AREA	;
+int32_t	SizeHoloMalloc = 640L*480L+RECOVER_AREA	;
 #endif
-U8	*PtHoloMalloc				;
+uint8_t	*PtHoloMalloc				;
 //────────────────────────────────────────────────────────────────────────────
 void	InitHoloMalloc(void)
 {
@@ -782,9 +782,9 @@ void	InitHoloMalloc(void)
 #endif
 }
 //────────────────────────────────────────────────────────────────────────────
-U8	*HoloMalloc( U32 size )
+uint8_t	*HoloMalloc( uint32_t size )
 {
-	U8	*ptret	;
+	uint8_t	*ptret	;
 
 #ifdef	DEBUG_TOOLS
 	SizeHoloMalloc -= size		;
@@ -798,10 +798,10 @@ U8	*HoloMalloc( U32 size )
 	return(ptret)		;
 }
 //────────────────────────────────────────────────────────────────────────────
-U8	*LoadHoloMalloc_HQR( const char *name, S32 index )
+uint8_t	*LoadHoloMalloc_HQR( const char *name, int32_t index )
 {
-	U8	*pt	;
-	U32	size	;
+	uint8_t	*pt	;
+	uint32_t	size	;
 
 	size = HQF_ResSize( name, index );
 
@@ -812,9 +812,9 @@ U8	*LoadHoloMalloc_HQR( const char *name, S32 index )
 	return(pt)	;
 }
 //────────────────────────────────────────────────────────────────────────────
-void	InitHoloGlobe(S32 planet)
+void	InitHoloGlobe(int32_t planet)
 {
-	S32	id	;
+	int32_t	id	;
         char    tmpFilePath[ADELINE_MAX_PATH];
 
 	Planet = planet	;
@@ -825,15 +825,15 @@ void	InitHoloGlobe(S32 planet)
 
         InitHoloMalloc()	;
 
-	BufBodyTempo = (U8*)HoloMalloc(SizeCurrentBody)	;
-	BufAnimTempo = (U8*)HoloMalloc(SizeCurrentAnim)	;
+	BufBodyTempo = (uint8_t*)HoloMalloc(SizeCurrentBody)	;
+	BufAnimTempo = (uint8_t*)HoloMalloc(SizeCurrentAnim)	;
 
 	GetResPath(tmpFilePath, ADELINE_MAX_PATH, HOLO_HQR_NAME);
 
-	BufFleche = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_FLECHE )	;
+	BufFleche = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_FLECHE )	;
 	ScaleRotBody3D( BufFleche, SCALE_OBJ_GLOBE, TRUE )	;
 
-	BufLoFleche = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_LOFLECHE );
+	BufLoFleche = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_LOFLECHE );
 	ScaleRotBody3D( BufLoFleche, SCALE_OBJ_GLOBE, TRUE )	;
 
 //----- Recuperation Body Twinsen et Scale
@@ -851,17 +851,17 @@ void	InitHoloGlobe(S32 planet)
 
 //----- For One Planet
 
-	PtrGlobe = (U16*)HoloMalloc(SIZE_TEXT_GLOBE)	;
+	PtrGlobe = (uint16_t*)HoloMalloc(SIZE_TEXT_GLOBE)	;
 
-	PtrCoorGlobe = (U16*)HoloMalloc(SIZE_COOR_GLOBE)	;
+	PtrCoorGlobe = (uint16_t*)HoloMalloc(SIZE_COOR_GLOBE)	;
 
-	PtrMapping = (U16*)LoadHoloMalloc_HQR( tmpFilePath, HQR_COORMAPP_HMM );// CoorMapp.HMM
+	PtrMapping = (uint16_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_COORMAPP_HMM );// CoorMapp.HMM
 
 	id = HQR_TWINSUN_HMT+(Planet*2)			;
 
-	PtrAlt = (U8*)LoadHoloMalloc_HQR( tmpFilePath, id ) 		;// .HMT
+	PtrAlt = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, id ) 		;// .HMT
 
-	PtrTextMap   = (U8*)LoadHoloMalloc_HQR( tmpFilePath, id+1 ) 	;// .HMG
+	PtrTextMap   = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, id+1 ) 	;// .HMG
 
 	RayonPlanet = RAYON_PLANET		;
 
@@ -926,12 +926,12 @@ void	DoAnimHolo()
 	ObjectSetInterAnim( &ObjTwinsen )	;
 }
 //────────────────────────────────────────────────────────────────────────────
-void	FindAngleIsland(S32 island)
+void	FindAngleIsland(int32_t island)
 {
-	S32	xm, ym, zm	;
-	S32	halpha, hbeta	;
-	S32	alpha, beta, alt;
-	S32	min, dist	;
+	int32_t	xm, ym, zm	;
+	int32_t	halpha, hbeta	;
+	int32_t	alpha, beta, alt;
+	int32_t	min, dist	;
 
 
 	alpha = TabArrow[island].Alpha	;
@@ -970,9 +970,9 @@ void	FindAngleIsland(S32 island)
 	}
 }
 //────────────────────────────────────────────────────────────────────────────
-S32	GoToArrow()
+int32_t	GoToArrow()
 {
-	U32	time	;
+	uint32_t	time	;
 
 	time = TimerRefHR-MemoTimerRot	;
 
@@ -987,10 +987,10 @@ S32	GoToArrow()
 	return(0)	;
 }
 //────────────────────────────────────────────────────────────────────────────
-void	HoloGlobe(S32 planet)
+void	HoloGlobe(int32_t planet)
 {
-	S32	testnofire = TRUE 	;
-	U32	memotime		;
+	int32_t	testnofire = TRUE 	;
+	uint32_t	memotime		;
 
 	InitHoloGlobe(planet)		;
 
@@ -1018,7 +1018,7 @@ void	HoloGlobe(S32 planet)
 		MyGetInput() ;
 
 		// Clear une bande du ZBuffer
-		memset( (PtrZBuffer+TabOffLine[ZBufYMin]),// PtrZBuffer est un (U16 *)
+		memset( (PtrZBuffer+TabOffLine[ZBufYMin]),// PtrZBuffer est un (uint16_t *)
 			255,
 			(ZBufYMax-ZBufYMin+1)*640*2 );	// Clear ZBuffer
 
@@ -1147,7 +1147,7 @@ GraphPrintf( FALSE, 0, 0, "%d     ", NbFramePerSecond )	;
 /*══════════════════════════════════════════════════════════════════════════*/
 Func_TransNumPtr	HoloGivePtrAnim	;
 
-void	*HoloGivePtrAnim(S32 index)
+void	*HoloGivePtrAnim(int32_t index)
 {
 	index = index		;// Pour virer Warning
 	return( BufAnimTempo )	;//	Surement plus simple a faire
@@ -1155,7 +1155,7 @@ void	*HoloGivePtrAnim(S32 index)
 /*══════════════════════════════════════════════════════════════════════════*/
 Func_TransNumPtr	HoloGivePtrBody	;
 
-void	*HoloGivePtrBody(S32 index)
+void	*HoloGivePtrBody(int32_t index)
 {
 	index = index		;// Pour virer Warning
 	return( BufBodyTempo )	;//	Voir au dessus...
@@ -1172,7 +1172,7 @@ void	InitHoloMap()
 /*══════════════════════════════════════════════════════════════════════════*/
 void	HoloMap()
 {
-	S32	flagproto = FALSE ;
+	int32_t	flagproto = FALSE ;
 
 
 //----- DEBUG
@@ -1200,8 +1200,8 @@ void	HoloMap()
 	TestCoulDial( COUL_PERSO ) 	;
 	InitDial( 2 )		;//	FR_GAM.DIA
 
-	PtCurrentBody = (U8*)GivePtrBody( ListObjet[NUM_PERSO].Obj.Body.Num )	;
-	PtCurrentAnim = (U8*)GivePtrAnim( ListObjet[NUM_PERSO].Obj.Anim.Num )	;
+	PtCurrentBody = (uint8_t*)GivePtrBody( ListObjet[NUM_PERSO].Obj.Body.Num )	;
+	PtCurrentAnim = (uint8_t*)GivePtrAnim( ListObjet[NUM_PERSO].Obj.Anim.Num )	;
 
 	SizeCurrentBody = GetSizeBody3D( PtCurrentBody );
 	SizeCurrentAnim = GetSizeAnim3D( PtCurrentAnim );

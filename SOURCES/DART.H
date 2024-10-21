@@ -22,21 +22,21 @@
 typedef struct
 {
 //	T_OBJ_3D	Obj ;		// Structure de l'objet
-	S32		PosX;
-	S32		PosY ;
-	S32		PosZ ;
-	S32		Alpha ;
-	S32		Beta ;
-	S32		Body ;
-	S32		NumCube ;	// Numéro du cube dans lequel se trouve la fléchette
-	U32		Flags	;
+	int32_t		PosX;
+	int32_t		PosY ;
+	int32_t		PosZ ;
+	int32_t		Alpha ;
+	int32_t		Beta ;
+	int32_t		Body ;
+	int32_t		NumCube ;	// Numéro du cube dans lequel se trouve la fléchette
+	uint32_t		Flags	;
 
-	S32		XMin	;	// ZV des flechettes
-	S32		YMin	;
-	S32		ZMin	;
-	S32		XMax	;
-	S32		YMax	;
-	S32		ZMax	;
+	int32_t		XMin	;	// ZV des flechettes
+	int32_t		YMin	;
+	int32_t		ZMin	;
+	int32_t		XMax	;
+	int32_t		YMax	;
+	int32_t		ZMax	;
 } T_DART ;
 
 // Flags des flechettes
@@ -46,7 +46,7 @@ typedef struct
 /*--------------------------------------------------------------------------*/
 extern	void	InitDarts( void ) 	;
 /*--------------------------------------------------------------------------*/
-extern	S32	GetDart( void )		;
+extern	int32_t	GetDart( void )		;
 /*--------------------------------------------------------------------------*/
 extern	void	TakeAllDarts( void )	;
 /*--------------------------------------------------------------------------*/

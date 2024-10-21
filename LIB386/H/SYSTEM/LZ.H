@@ -11,7 +11,7 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	void	ExpandLZ(void *Dst, void *Src, U32 DecompSize, U32 MinBloc);
+extern	void	ExpandLZ(void *Dst, void *Src, uint32_t DecompSize, uint32_t MinBloc);
 
 #pragma aux ExpandLZ	"*"		\
 	parm caller	[edi] [ebx] [ecx] [eax]	\

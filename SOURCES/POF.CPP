@@ -1,18 +1,18 @@
 #include	"C_EXTERN.H"
 
 //***************************************************************************
-S32	PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation )
+int32_t	PofDisplay3DExt( int32_t x, int32_t y, int32_t z, int32_t num_pof, int32_t scale, int32_t rotation )
 {
-	S32	coul, n;
-	S32	x0, y0, scale3d ;
-	S32	xpc, ypc ;
-	S16	*ptr_point, *ptrw;
-	U8	p;
-	U8	*ptr_pof ;
+	int32_t	coul, n;
+	int32_t	x0, y0, scale3d ;
+	int32_t	xpc, ypc ;
+	int16_t	*ptr_point, *ptrw;
+	uint8_t	p;
+	uint8_t	*ptr_pof ;
 
-//	ptr_pof = (U8*)HQR_Get( HQR_Pof, num_pof ) ;
+//	ptr_pof = (uint8_t*)HQR_Get( HQR_Pof, num_pof ) ;
 
-	ptr_pof = BufferPof + *(((U32*)BufferPof)+num_pof) ;
+	ptr_pof = BufferPof + *(((uint32_t*)BufferPof)+num_pof) ;
 
 	LongWorldRotatePoint( x, y, z ) ;
 	x0 = Z0;
@@ -34,8 +34,8 @@ S32	PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation )
 
 	if( rotation != 0 )
 	{
-		ptrw = (S16*)ptr_pof;
-		ptr_point = (S16*)Obj_ListRotatedPoints;
+		ptrw = (int16_t*)ptr_pof;
+		ptr_point = (int16_t*)Obj_ListRotatedPoints;
 
 		for( p=0; p<n; p++ )
 		{
@@ -46,17 +46,17 @@ S32	PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation )
 
 			AdjustScreenMinMax() ;
 
-			*ptr_point++ = (S16)Xp ;
-			*ptr_point++ = (S16)Yp ;
+			*ptr_point++ = (int16_t)Xp ;
+			*ptr_point++ = (int16_t)Yp ;
 			ptrw += 2;
 		}
 
-		ptr_pof = (U8*)ptrw;
+		ptr_pof = (uint8_t*)ptrw;
 	}
 	else
 	{
-		ptrw = (S16*)ptr_pof;
-		ptr_point = (S16*)Obj_ListRotatedPoints;
+		ptrw = (int16_t*)ptr_pof;
+		ptr_point = (int16_t*)Obj_ListRotatedPoints;
 
 		for( p=0; p<n; p++ )
 		{
@@ -65,11 +65,11 @@ S32	PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation )
 
 			AdjustScreenMinMax() ;
 
-			*ptr_point++ = (S16)Xp ;
-			*ptr_point++ = (S16)Yp ;
+			*ptr_point++ = (int16_t)Xp ;
+			*ptr_point++ = (int16_t)Yp ;
 		}
 
-		ptr_pof = (U8*)ptrw;
+		ptr_pof = (uint8_t*)ptrw;
 	}
 
 	n = *ptr_pof++; // nb line
@@ -77,14 +77,14 @@ S32	PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation )
 	{
 		p = *ptr_pof++;
 
-		ptr_point = (S16*)Obj_ListRotatedPoints+p*2 ;
+		ptr_point = (int16_t*)Obj_ListRotatedPoints+p*2 ;
 
 		x0 = *ptr_point++ ;
 		y0 = *ptr_point ;
 
 		p = *ptr_pof++;
 
-		ptr_point = (S16*)Obj_ListRotatedPoints+p*2 ;
+		ptr_point = (int16_t*)Obj_ListRotatedPoints+p*2 ;
 
 		Xp = *ptr_point++ ;
 		Yp = *ptr_point ;

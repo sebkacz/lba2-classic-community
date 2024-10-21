@@ -4,15 +4,15 @@
 #define	SELECT_H
 
 /*--------------------------------------------------------------------------*/
-extern void BigLine(S32 x0,S32 y0,S32 x1,S32 y1,S32 coul);
+extern void BigLine(int32_t x0,int32_t y0,int32_t x1,int32_t y1,int32_t coul);
 /*--------------------------------------------------------------------------*/
-extern void DrawColFeuille3D(S32 x0,S32 z0,S32 x1,S32 z1,S32 x2,S32 z2,S32 x3,S32 z3,S32 type,S32 color,S32 col0,S32 col1);
+extern void DrawColFeuille3D(int32_t x0,int32_t z0,int32_t x1,int32_t z1,int32_t x2,int32_t z2,int32_t x3,int32_t z3,int32_t type,int32_t color,int32_t col0,int32_t col1);
 /*--------------------------------------------------------------------------*/
-extern void DrawFeuille3D(S32 x1,S32 z1,S32 x2,S32 z2,S32 x3,S32 z3,S32 x4,S32 z4,S32 type,S32 color,S32 bigline);
+extern void DrawFeuille3D(int32_t x1,int32_t z1,int32_t x2,int32_t z2,int32_t x3,int32_t z3,int32_t x4,int32_t z4,int32_t type,int32_t color,int32_t bigline);
 /*--------------------------------------------------------------------------*/
-extern S32 TestCroise(S32 xA,S32 yA,S32 xB,S32 yB,S32 xC,S32 yC,S32 xD,S32 yD);
+extern int32_t TestCroise(int32_t xA,int32_t yA,int32_t xB,int32_t yB,int32_t xC,int32_t yC,int32_t xD,int32_t yD);
 /*--------------------------------------------------------------------------*/
-extern S32 SelectPoly(S32 x,S32 y);
+extern int32_t SelectPoly(int32_t x,int32_t y);
 /*--------------------------------------------------------------------------*/
 
 #endif	// SELECT_H

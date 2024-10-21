@@ -8,15 +8,15 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32              AsciiMode;
-extern S32              Key;
-extern U8               TabKeys[];
+extern int32_t              AsciiMode;
+extern int32_t              Key;
+extern uint8_t               TabKeys[];
 extern WINDOW_PROC_PTR  OldKeybWindowProc;
 extern WINDOW_PROC      KeybWindowProc;
 extern HANDLE           AsciiMutex;
 
 // -----------------------------------------------------------------------------
-extern S32   GetAscii();
+extern int32_t   GetAscii();
 extern void  ClearAsciiBuffer();
 extern void  ManageKeyboard();
 

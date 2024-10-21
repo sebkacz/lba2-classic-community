@@ -5,14 +5,14 @@
 
 #include <errno.h>
 
-U8	*PtrSce ;
-U8	*PtrScene ;
-S32	CubeMode = 0 ; // 0-->Intérieur - 1-->Extérieur
-S32	LastCubeMode = 0 ; // 0-->Intérieur - 1-->Extérieur
+uint8_t	*PtrSce ;
+uint8_t	*PtrScene ;
+int32_t	CubeMode = 0 ; // 0-->Intérieur - 1-->Extérieur
+int32_t	LastCubeMode = 0 ; // 0-->Intérieur - 1-->Extérieur
 
-#define	GET_S8	(*PtrSce++)
-#define	GET_S16	(*(S16*)PtrSce) ; PtrSce+=2
-#define	GET_U32	(*(U32*)PtrSce) ; PtrSce+=4
+#define	GET_int8_t	(*PtrSce++)
+#define	GET_int16_t	(*(int16_t*)PtrSce) ; PtrSce+=2
+#define	GET_uint32_t	(*(uint32_t*)PtrSce) ; PtrSce+=4
 
 /*══════════════════════════════════════════════════════════════════════════*
 	     █▀▀▀▄  █    ██▀▀▀ █  ▄▀       █▀▀▀▀ █   █ ██▄ █ █▀▀▀▀
@@ -43,15 +43,15 @@ void	RestoreDiskEnv()
 	  ▀▀▀▀▀ ▀▀▀▀▀ ▀▀▀▀▀ ▀▀  ▀ ▀▀▀▀▀ ▀▀▀▀▀ ▀▀     ▀▀   ▀▀▀▀▀ ▀▀▀▀▀
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	LoadScene( S32 numscene )
+int32_t	LoadScene( int32_t numscene )
 {
 	T_OBJET	*ptrobj ;
 	T_ZONE  *ptrz   ;
-	S32	sizetoload ;
-	S32	indexfile3d ;
-	U8	n ;
+	int32_t	sizetoload ;
+	int32_t	indexfile3d ;
+	uint8_t	n ;
 	char tmpFilePath[ADELINE_MAX_PATH];
-//        U8	t ;
+//        uint8_t	t ;
 
 	// numscene+1 car en 0 se trouve SizeCube.MAX (taille du plus gros .SCC)
 	GetResPath(tmpFilePath, ADELINE_MAX_PATH, SCENE_HQR_NAME);
@@ -68,18 +68,18 @@ S32	LoadScene( S32 numscene )
 
 		NewCube = numscene ;
 
-		Island = GET_S8 ;
+		Island = GET_int8_t ;
 
 		Planet = TabArrow[Island].Planet;
 
 		// Sert uniquement pour la 3DExt
-		CurrentCubeX = GET_S8 ;
-		CurrentCubeY = GET_S8 ;
+		CurrentCubeX = GET_int8_t ;
+		CurrentCubeY = GET_int8_t ;
 
-		ShadowLevel = GET_S8 ;
-		ModeLabyrinthe = GET_S8 ;
+		ShadowLevel = GET_int8_t ;
+		ModeLabyrinthe = GET_int8_t ;
 
-		CubeMode = GET_S8 ;
+		CubeMode = GET_int8_t ;
 
 		if( !FlagLoadGame
 		AND (!FlagDrawHorizon OR (CubeMode+LastCubeMode!=2)) )
@@ -91,51 +91,51 @@ S32	LoadScene( S32 numscene )
 			BoxUpdate() ;
 		}
 
-		n = GET_S8 ;
+		n = GET_int8_t ;
 
 // ambiance: AMBIANCE
 
-		AlphaLight = GET_S16 ;
-		BetaLight = GET_S16 ;
+		AlphaLight = GET_int16_t ;
+		BetaLight = GET_int16_t ;
 
-		SampleAmbiance[0] = GET_S16 ;
-		SampleRepeat[0] = GET_S16 ;
-		SampleRnd[0] = GET_S16 ;
-		SampleFreq[0] = GET_S16 ;
-		SampleVol[0] = GET_S16 ;
-		SampleAmbiance[1] = GET_S16 ;
-		SampleRepeat[1] = GET_S16 ;
-		SampleRnd[1] = GET_S16 ;
-		SampleFreq[1] = GET_S16 ;
-		SampleVol[1] = GET_S16 ;
-		SampleAmbiance[2] = GET_S16 ;
-		SampleRepeat[2] = GET_S16 ;
-		SampleRnd[2] = GET_S16 ;
-		SampleFreq[2] = GET_S16 ;
-		SampleVol[2] = GET_S16 ;
-		SampleAmbiance[3] = GET_S16 ;
-		SampleRepeat[3] = GET_S16 ;
-		SampleRnd[3] = GET_S16 ;
-		SampleFreq[3] = GET_S16 ;
-		SampleVol[3] = GET_S16 ;
-		SecondMin = GET_S16 ;
-		SecondEcart = GET_S16 ;
+		SampleAmbiance[0] = GET_int16_t ;
+		SampleRepeat[0] = GET_int16_t ;
+		SampleRnd[0] = GET_int16_t ;
+		SampleFreq[0] = GET_int16_t ;
+		SampleVol[0] = GET_int16_t ;
+		SampleAmbiance[1] = GET_int16_t ;
+		SampleRepeat[1] = GET_int16_t ;
+		SampleRnd[1] = GET_int16_t ;
+		SampleFreq[1] = GET_int16_t ;
+		SampleVol[1] = GET_int16_t ;
+		SampleAmbiance[2] = GET_int16_t ;
+		SampleRepeat[2] = GET_int16_t ;
+		SampleRnd[2] = GET_int16_t ;
+		SampleFreq[2] = GET_int16_t ;
+		SampleVol[2] = GET_int16_t ;
+		SampleAmbiance[3] = GET_int16_t ;
+		SampleRepeat[3] = GET_int16_t ;
+		SampleRnd[3] = GET_int16_t ;
+		SampleFreq[3] = GET_int16_t ;
+		SampleVol[3] = GET_int16_t ;
+		SecondMin = GET_int16_t ;
+		SecondEcart = GET_int16_t ;
 
-		CubeJingle = GET_S8 ;
+		CubeJingle = GET_int8_t ;
 
 // hero inits: HERO_START
 
 		ptrobj = ListObjet ;
 
-		CubeStartX = GET_S16 ;
-		CubeStartY = GET_S16 ;
-		CubeStartZ = GET_S16 ;
+		CubeStartX = GET_int16_t ;
+		CubeStartY = GET_int16_t ;
+		CubeStartZ = GET_int16_t ;
 
-		sizetoload = GET_S16 ;
+		sizetoload = GET_int16_t ;
 		ptrobj->PtrTrack = PtrSce ;
 		PtrSce += sizetoload ;
 
-		sizetoload = GET_S16 ;
+		sizetoload = GET_int16_t ;
 		ptrobj->PtrLife = PtrSce ;
 		PtrSce += sizetoload ;
 
@@ -143,14 +143,14 @@ S32	LoadScene( S32 numscene )
 
 // objets: OBJECT
 
-		NbObjets = GET_S16 ;
+		NbObjets = GET_int16_t ;
 		for( n=1; n<NbObjets; n++, ptrobj++ )
 		{
 			InitObject( n ) ;
 
-			ptrobj->Flags  = GET_U32 ;
+			ptrobj->Flags  = GET_uint32_t ;
 
-			indexfile3d = GET_S16 ;
+			indexfile3d = GET_int16_t ;
 
 			if( !(ptrobj->Flags & SPRITE_3D) )
 			{
@@ -164,19 +164,19 @@ S32	LoadScene( S32 numscene )
 
 			ManageSystem() ;// for streaming
 
-			ptrobj->GenBody = GET_S8 ;
-			ptrobj->GenAnim = GET_S16 ;
-			ptrobj->Sprite = GET_S16 ;
+			ptrobj->GenBody = GET_int8_t ;
+			ptrobj->GenAnim = GET_int16_t ;
+			ptrobj->Sprite = GET_int16_t ;
 
-			ptrobj->OldPosX = ptrobj->Obj.X = GET_S16 ;
-			ptrobj->OldPosY = ptrobj->Obj.Y = GET_S16 ;
-			ptrobj->OldPosZ = ptrobj->Obj.Z = GET_S16 ;
-			ptrobj->HitForce = GET_S8 ;
-			ptrobj->OptionFlags = GET_S16 ;
+			ptrobj->OldPosX = ptrobj->Obj.X = GET_int16_t ;
+			ptrobj->OldPosY = ptrobj->Obj.Y = GET_int16_t ;
+			ptrobj->OldPosZ = ptrobj->Obj.Z = GET_int16_t ;
+			ptrobj->HitForce = GET_int8_t ;
+			ptrobj->OptionFlags = GET_int16_t ;
 			ptrobj->OptionFlags &= ~EXTRA_GIVE_NOTHING ;
-			ptrobj->Obj.Beta = GET_S16 ;
-			ptrobj->SRot = GET_S16 ;
-			ptrobj->Move = GET_S8 ;
+			ptrobj->Obj.Beta = GET_int16_t ;
+			ptrobj->SRot = GET_int16_t ;
+			ptrobj->Move = GET_int8_t ;
 
 			if( !(ptrobj->Flags&SPRITE_3D)
 			AND ptrobj->Move!=MOVE_WAGON	// cf TM_SPEED
@@ -188,48 +188,48 @@ S32	LoadScene( S32 numscene )
 					ptrobj->SRot++ ;
 				}
 
-				ptrobj->SRot = (S16)(51200 / (S32)ptrobj->SRot) ; // 1024*1000/20
+				ptrobj->SRot = (int16_t)(51200 / (int32_t)ptrobj->SRot) ; // 1024*1000/20
 			}
 
-			ptrobj->Info  = GET_S16 ;
-			ptrobj->Info1 = GET_S16 ;
-			ptrobj->Info2 = GET_S16 ;
-			ptrobj->Info3 = GET_S16 ;
+			ptrobj->Info  = GET_int16_t ;
+			ptrobj->Info1 = GET_int16_t ;
+			ptrobj->Info2 = GET_int16_t ;
+			ptrobj->Info3 = GET_int16_t ;
 
-			ptrobj->NbBonus = GET_S16 ;
-			ptrobj->CoulObj = GET_S8 ;
+			ptrobj->NbBonus = GET_int16_t ;
+			ptrobj->CoulObj = GET_int8_t ;
 
 			if( ptrobj->Flags & ANIM_3DS )
 			{
 				// num anim 3DS
-				ptrobj->Coord.A3DS.Num = GET_U32 ;
+				ptrobj->Coord.A3DS.Num = GET_uint32_t ;
 				// NbFps
-				ptrobj->Info3 = ptrobj->SizeSHit = GET_S16 ;
+				ptrobj->Info3 = ptrobj->SizeSHit = GET_int16_t ;
 			}
 
-			ptrobj->Armure = GET_S8 ;
-			ptrobj->LifePoint = GET_S8 ;
+			ptrobj->Armure = GET_int8_t ;
+			ptrobj->LifePoint = GET_int8_t ;
 
 			// Message chapter (a virer)
 /*			for( t=0; t<MAX_CHAPTER; t++ )
 			{
-				ptrobj->MessageChapter[t] = GET_S16 ;
+				ptrobj->MessageChapter[t] = GET_int16_t ;
 			}
 */
-			sizetoload = GET_S16 ;
+			sizetoload = GET_int16_t ;
 			ptrobj->PtrTrack = PtrSce ;
 			PtrSce = PtrSce + sizetoload ;
 
-			sizetoload = GET_S16 ;
+			sizetoload = GET_int16_t ;
 			ptrobj->PtrLife = PtrSce ;
 			PtrSce = PtrSce + sizetoload ;
 		}
 
-		Checksum = GET_U32 ;
+		Checksum = GET_uint32_t ;
 
 // zone declechement: ZONE
 
-		NbZones = GET_S16 ;
+		NbZones = GET_int16_t ;
 		ListZone = (T_ZONE*)PtrSce ;
 		PtrSce += NbZones * sizeof(T_ZONE) ;
 
@@ -276,12 +276,12 @@ S32	LoadScene( S32 numscene )
 
 // point track: TRACK
 
-		NbBrickTrack = GET_S16 ;
+		NbBrickTrack = GET_int16_t ;
 		ListBrickTrack = (T_TRACK*)PtrSce ;
 		PtrSce += NbBrickTrack * sizeof(T_TRACK) ;
 
 		//--------- PATCHES ----------
-		NbPatches   = GET_U32 ;
+		NbPatches   = GET_uint32_t ;
 		ListPatches = (T_PATCH *)PtrSce ;
 		//----------------------------
 
@@ -307,10 +307,10 @@ S32	LoadScene( S32 numscene )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Pour le buggy pour recupérer les coordonnées 2D d'un cube extérieur dans
 // la map
-S32	LoadSceneCubeXY( S32 numcube, S32 *cubex, S32 *cubey )
+int32_t	LoadSceneCubeXY( int32_t numcube, int32_t *cubex, int32_t *cubey )
 {
-	S32	x, y 	;
-	U8	island, shadowlvl, modelaby, cubemode ;
+	int32_t	x, y 	;
+	uint8_t	island, shadowlvl, modelaby, cubemode ;
 	char tmpFilePath[ADELINE_MAX_PATH];
 
 	// ATTENTION: chargée dans ScreenAux car normalement appelée dans le
@@ -329,15 +329,15 @@ S32	LoadSceneCubeXY( S32 numcube, S32 *cubex, S32 *cubey )
 
 // info world: INFO_WORLD
 
-	island = GET_S8 ;
+	island = GET_int8_t ;
 
 	// Sert uniquement pour la 3DExt
-	x = GET_S8 ;
-	y = GET_S8 ;
+	x = GET_int8_t ;
+	y = GET_int8_t ;
 
-	shadowlvl = GET_S8 ;
-	modelaby  = GET_S8 ;
-	cubemode  = GET_S8 ;
+	shadowlvl = GET_int8_t ;
+	modelaby  = GET_int8_t ;
+	cubemode  = GET_int8_t ;
 
 	if( cubemode==CUBE_EXTERIEUR
 	AND island==Island
@@ -355,7 +355,7 @@ S32	LoadSceneCubeXY( S32 numcube, S32 *cubex, S32 *cubey )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U8 AddDirIfNot( const char *path ) {
+uint8_t AddDirIfNot( const char *path ) {
   if (ExistsFileOrDir(path)) {
     return IsDirectory(path);
   }

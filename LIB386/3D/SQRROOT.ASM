@@ -13,7 +13,7 @@
 		public	C	Sqr
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;U32	QSqr(U32 xLow, U32 xHigh)	;
+;uint32_t	QSqr(uint32_t xLow, uint32_t xHigh)	;
 
 ;#pragma aux QSqr				\
 ;	parm		[eax] [edx]		\
@@ -87,7 +87,7 @@ easy:
 QSqr		endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;U32	Sqr(U32 x)			;
+;uint32_t	Sqr(uint32_t x)			;
 
 ;#pragma aux Sqr				\
 ;	parm		[eax]			\

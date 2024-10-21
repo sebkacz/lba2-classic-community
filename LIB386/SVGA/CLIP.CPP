@@ -9,25 +9,25 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 ClipXMin = 0;
-S32 ClipYMin = 0;
-S32 ClipXMax = 0;
-S32 ClipYMax = 0;
+int32_t ClipXMin = 0;
+int32_t ClipYMin = 0;
+int32_t ClipXMax = 0;
+int32_t ClipYMax = 0;
 
-S32 ClipWindowXMin = 0;
-S32 ClipWindowYMin = 0;
-S32 ClipWindowXMax = 0;
-S32 ClipWindowYMax = 0;
+int32_t ClipWindowXMin = 0;
+int32_t ClipWindowYMin = 0;
+int32_t ClipWindowXMax = 0;
+int32_t ClipWindowYMax = 0;
 
-S32 MemoClipXMin = 0;
-S32 MemoClipYMin = 0;
-S32 MemoClipXMax = 0;
-S32 MemoClipYMax = 0;
+int32_t MemoClipXMin = 0;
+int32_t MemoClipYMin = 0;
+int32_t MemoClipXMax = 0;
+int32_t MemoClipYMax = 0;
 
-S32 MemoClipWindowXMin = 0;
-S32 MemoClipWindowYMin = 0;
-S32 MemoClipWindowXMax = 0;
-S32 MemoClipWindowYMax = 0;
+int32_t MemoClipWindowXMin = 0;
+int32_t MemoClipWindowYMin = 0;
+int32_t MemoClipWindowXMax = 0;
+int32_t MemoClipWindowYMax = 0;
 
 // -----------------------------------------------------------------------------
 void MemoClip() {
@@ -41,7 +41,7 @@ void RestoreClip() {
   SetClip(MemoClipXMin, MemoClipYMin, MemoClipXMax, MemoClipYMax);
 }
 
-void SetClip(S32 x0, S32 y0, S32 x1, S32 y1) {
+void SetClip(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   ClipXMin = ade_max(x0, ClipWindowXMin);
   ClipXMax = ade_min(x1, ClipWindowXMax);
   ClipYMin = ade_max(y0, ClipWindowYMin);
@@ -67,7 +67,7 @@ void RestoreClipWindow() {
                 MemoClipWindowXMax, MemoClipWindowYMax);
 }
 
-void SetClipWindow(S32 x0, S32 y0, S32 x1, S32 y1) {
+void SetClipWindow(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   ClipWindowXMin = ade_max(0, x0);
   ClipWindowXMax = ade_min(x1, ModeResX - 1);
   ClipWindowYMin = ade_max(0, y0);

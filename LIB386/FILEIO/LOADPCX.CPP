@@ -5,7 +5,7 @@
 #include "PCXHEAD.H"
 
 //──────────────────────────────────────────────────────────────────────────
-static	S32 next_char( U32 fd, U8 *pt)
+static	int32_t next_char( uint32_t fd, uint8_t *pt)
 {
 	if ( Index == SIZE_BUF )
 	{
@@ -17,14 +17,14 @@ static	S32 next_char( U32 fd, U8 *pt)
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void	LoadPCX(char *file_name, void *screen, S32 *resx, S32 *resy, void *tabcol)
+void	LoadPCX(char *file_name, void *screen, int32_t *resx, int32_t *resy, void *tabcol)
 {
-	S32 	col, row, sizex			;
-	S32	fd				;
-	U8	*buffer, file_buf[SIZE_BUF]	;
+	int32_t 	col, row, sizex			;
+	int32_t	fd				;
+	uint8_t	*buffer, file_buf[SIZE_BUF]	;
 
 
-	buffer = (U8*)screen		;
+	buffer = (uint8_t*)screen		;
 
 	fd = OpenRead( file_name )	;
 
@@ -47,7 +47,7 @@ void	LoadPCX(char *file_name, void *screen, S32 *resx, S32 *resy, void *tabcol)
 	{
 		for ( col=sizex; col>=0; )
 		{
-			S32	ch, pass	;
+			int32_t	ch, pass	;
 
 			ch = next_char( fd, file_buf )	;
 			if ((ch & 0xC0) != 0xC0)
@@ -64,7 +64,7 @@ void	LoadPCX(char *file_name, void *screen, S32 *resx, S32 *resy, void *tabcol)
 
 			for (; pass>0; pass-- )
 			{
-				*buffer++ = (U8)ch	;
+				*buffer++ = (uint8_t)ch	;
 			}
 		}
 	}

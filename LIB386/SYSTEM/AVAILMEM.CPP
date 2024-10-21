@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // --- Interface ---------------------------------------------------------------
-U64 AvailableMem() {
+uint64_t AvailableMem() {
   // Not the same as available, but good enough for now...
   return SDL_GetSystemRAM();
 }

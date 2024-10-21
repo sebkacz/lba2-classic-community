@@ -9,7 +9,7 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 // TODO: Test if this function is properly adapted to be called from C...
-void RotateVector(S32 norme, S32 alpha, S32 beta, S32 gamma);
+void RotateVector(int32_t norme, int32_t alpha, int32_t beta, int32_t gamma);
 
 // =============================================================================
 #ifdef __cplusplus

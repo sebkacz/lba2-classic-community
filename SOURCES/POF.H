@@ -15,7 +15,7 @@
 #endif
 
 //----------------------------------------------------------------------------------
-extern S32 PofDisplay3DExt( S32 x, S32 y, S32 z, S32 num_pof, S32 scale, S32 rotation ) ;
+extern int32_t PofDisplay3DExt( int32_t x, int32_t y, int32_t z, int32_t num_pof, int32_t scale, int32_t rotation ) ;
 //----------------------------------------------------------------------------------
 
 #endif	/* POF_H */

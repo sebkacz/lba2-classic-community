@@ -1,32 +1,32 @@
 #include	"C_EXTERN.H"
 
-S32	MyKey	;
+int32_t	MyKey	;
 
-U8	PtrPalNormal[768+RECOVER_AREA] ;
-U8	*PtrPal	;
+uint8_t	PtrPalNormal[768+RECOVER_AREA] ;
+uint8_t	*PtrPal	;
 
 #define	BCL_FADE	50
 
 //──────────────────────────────────────────────────────────────────────────
-void	FadePal( U8 r, U8 v, U8 b, U8 *ptrpal, S32 percent )
+void	FadePal( uint8_t r, uint8_t v, uint8_t b, uint8_t *ptrpal, int32_t percent )
 {
-	U8	workpal[768] ;
-	S32	n ;
+	uint8_t	workpal[768] ;
+	int32_t	n ;
 
 	for( n=0; n<256; n++ )
 	{
-		workpal[n*3+0] = (U8)RegleTrois( r, ptrpal[n*3+0], BCL_FADE, percent ) ;
-		workpal[n*3+1] = (U8)RegleTrois( v, ptrpal[n*3+1], BCL_FADE, percent ) ;
-		workpal[n*3+2] = (U8)RegleTrois( b, ptrpal[n*3+2], BCL_FADE, percent ) ;
+		workpal[n*3+0] = (uint8_t)RegleTrois( r, ptrpal[n*3+0], BCL_FADE, percent ) ;
+		workpal[n*3+1] = (uint8_t)RegleTrois( v, ptrpal[n*3+1], BCL_FADE, percent ) ;
+		workpal[n*3+2] = (uint8_t)RegleTrois( b, ptrpal[n*3+2], BCL_FADE, percent ) ;
 	}
 
 	Palette( workpal ) ;
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void	FadeToBlack( U8 *ptrpal )
+void	FadeToBlack( uint8_t *ptrpal )
 {
-	S32	n ;
+	int32_t	n ;
 
 	SaveTimer() ;
 
@@ -39,9 +39,9 @@ void	FadeToBlack( U8 *ptrpal )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void	FadeToPal( U8 *ptrpal )
+void	FadeToPal( uint8_t *ptrpal )
 {
-	S32	n ;
+	int32_t	n ;
 
 	SaveTimer() ;
 
@@ -56,7 +56,7 @@ void	FadeToPal( U8 *ptrpal )
 //──────────────────────────────────────────────────────────────────────────
 void	SetBlackPal()
 {
-	S32	n ;
+	int32_t	n ;
 
 	SaveTimer() ;
 

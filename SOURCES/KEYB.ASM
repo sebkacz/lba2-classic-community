@@ -118,7 +118,7 @@ wait_timer:
 iodelay		ENDP
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void		keyboard_write(U8 cmd)	;
+;void		keyboard_write(uint8_t cmd)	;
 
 ;#pragma aux	keyboard_write	\
 ;	parm	[ebx]		\
@@ -154,7 +154,7 @@ wrt_error:
 keyboard_write	ENDP
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void		keyboard_cmd(U8 cmd)	;
+;void		keyboard_cmd(uint8_t cmd)	;
 
 ;#pragma aux	keyboard_cmd	\
 ;	parm	[ebx]		\
@@ -204,7 +204,7 @@ keyboard_cmd	ENDP
 ;*══════════════════════════════════════════════════════════════════════════*
 comment	@
 
-;S32		keyboard_read()	;
+;int32_t		keyboard_read()	;
 
 ;#pragma aux	keyboard_read	\
 ;modify		[eax ecx]

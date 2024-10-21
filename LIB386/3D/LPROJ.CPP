@@ -9,8 +9,8 @@ extern "C" {
 #undef LongProjectPoint
 extern Func_LongProjectPoint *LongProjectPoint;
 
-S32 LongProjectPoint_C(S32 x, S32 y, S32 z) {
-  S32 result;
+int32_t LongProjectPoint_C(int32_t x, int32_t y, int32_t z) {
+  int32_t result;
 
 #ifdef __MSC_VER
   __asm {

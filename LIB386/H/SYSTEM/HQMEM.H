@@ -11,7 +11,7 @@ extern	"C"	{
 
 //──────────────────────────────────────────────────────────────────────────
 // Init le buffer global
-extern	S32	HQM_Init_Memory(U32 size)		;
+extern	int32_t	HQM_Init_Memory(uint32_t size)		;
 
 //──────────────────────────────────────────────────────────────────────────
 // free le buffer global
@@ -19,7 +19,7 @@ extern	void	HQM_Clear_Memory()			;
 
 //──────────────────────────────────────────────────────────────────────────
 // alloue un bloc de memoire
-extern	S32	HQM_Alloc(U32 size, void **ptr)		;
+extern	int32_t	HQM_Alloc(uint32_t size, void **ptr)		;
 
 //──────────────────────────────────────────────────────────────────────────
 // free tous les blocs dans le buffer global
@@ -27,7 +27,7 @@ extern	void	HQM_Free_All()				;
 
 //──────────────────────────────────────────────────────────────────────────
 // resize le dernier bloc de memoire
-extern	void	HQM_Shrink_Last(void *ptr, U32 newsize)	;
+extern	void	HQM_Shrink_Last(void *ptr, uint32_t newsize)	;
 
 //──────────────────────────────────────────────────────────────────────────
 // libere un bloc de memoire et bouche le trou (remap les ptrs)
@@ -35,7 +35,7 @@ extern	void	HQM_Free(void *ptr)			;
 
 //──────────────────────────────────────────────────────────────────────────
 // test la cohérence du buffer global
-extern	S32	HQM_Check()				;
+extern	int32_t	HQM_Check()				;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

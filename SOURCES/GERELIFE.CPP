@@ -5,15 +5,15 @@
 #include <SVGA/VIDEO.H>
 #include <SYSTEM/KEYBOARD_KEYS.H>
 
-U8	*PtrPrg ;
-U8	TypeAnswer ;
+uint8_t	*PtrPrg ;
+uint8_t	TypeAnswer ;
 
-extern	S32	InvSelect ;	// INVENT.CPP
+extern	int32_t	InvSelect ;	// INVENT.CPP
 
-#define	RET_S8	0
-#define	RET_S16	1
+#define	RET_int8_t	0
+#define	RET_int16_t	1
 #define	RET_STRING	2
-#define	RET_U8	4
+#define	RET_uint8_t	4
 
 #define	CONE_VIEW	1024
 
@@ -28,13 +28,13 @@ extern	S32	InvSelect ;	// INVENT.CPP
 
 void	DoFuncLife( T_OBJET *ptrobj )
 {
-	S32	num ;
-	S32	n ;
-	S32	angle ;
-	S32	distance ;
+	int32_t	num ;
+	int32_t	n ;
+	int32_t	angle ;
+	int32_t	distance ;
 	T_ZONE	*ptrz ;
 
-	TypeAnswer = RET_S8 ;
+	TypeAnswer = RET_int8_t ;
 
 	switch( *PtrPrg++ )	/* func */
 	{
@@ -58,7 +58,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_LIFE_POINT:
 			Value = ptrobj->LifePoint ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break	;
 
 //---------------------------------------------------------------------------
@@ -79,7 +79,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_LIFE_POINT_OBJ:
 			Value = ListObjet[*PtrPrg++].LifePoint ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break	;
 
 //---------------------------------------------------------------------------
@@ -98,7 +98,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_DISTANCE:
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -126,7 +126,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_DISTANCE_3D:
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -150,7 +150,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_CONE_VIEW:
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -217,7 +217,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 		case LF_NB_GOLD_PIECES:
 			if( Planet>=2  )	Value = NbZlitosPieces ;
 			else			Value = NbGoldPieces ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -243,19 +243,19 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_CHOICE:
 			Value = GameChoice ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break	;
 
 //---------------------------------------------------------------------------
 		case LF_FUEL:
 //			Value = ListVarGame[FLAG_CARBURANT] ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break	;
 
 //---------------------------------------------------------------------------
 		case LF_L_TRACK:
 			Value = ptrobj->LabelTrack ;
-			TypeAnswer = RET_U8 ;
+			TypeAnswer = RET_uint8_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -266,13 +266,13 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_VAR_CUBE:
 			Value = ListVarCube[ *PtrPrg++ ] ;
-			TypeAnswer = RET_U8 ;
+			TypeAnswer = RET_uint8_t ;
 			break ;
 
 //---------------------------------------------------------------------------
 		case LF_VAR_GAME:
 			Value = ListVarGame[ *PtrPrg++ ] ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -317,7 +317,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 
 				// init incdisp symbol utilisation
 				InitIncrustDisp( INCRUST_INVENTORY|INCRUST_YCLIP,
-						 (S16)num,
+						 (int16_t)num,
 						 0, 0,
 						 0, 0, 3 ) ;
 			}
@@ -326,7 +326,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_L_TRACK_OBJ:
 			Value = ListObjet[ *PtrPrg++ ].LabelTrack ;
-			TypeAnswer = RET_U8 ;
+			TypeAnswer = RET_uint8_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -342,13 +342,13 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_ANIM:
 			Value = ptrobj->GenAnim ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break ;
 
 //---------------------------------------------------------------------------
 		case LF_ANIM_OBJ:
 			Value = ListObjet[*PtrPrg++].GenAnim ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -394,7 +394,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 		case LF_RND:
 			Value = *PtrPrg++ ;
 			Value = MyRnd(Value) ;
-			TypeAnswer = RET_U8 ;
+			TypeAnswer = RET_uint8_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -419,20 +419,20 @@ void	DoFuncLife( T_OBJET *ptrobj )
 
 //---------------------------------------------------------------------------
 		case LF_BETA:
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			Value = ptrobj->Obj.Beta ;
 			break ;
 
 //---------------------------------------------------------------------------
 		case LF_BETA_OBJ:
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 			Value = ListObjet[ *PtrPrg++ ].Obj.Beta ;
 			break ;
 
 //---------------------------------------------------------------------------
 		case LF_ANGLE:	// mesure l'angle entre 2 objets
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -450,7 +450,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_ANGLE_OBJ:	// mesure l'angle entre 2 objets
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -468,7 +468,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_REAL_ANGLE:	// mesure l'angle entre 2 objets
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -488,7 +488,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 //---------------------------------------------------------------------------
 		case LF_DISTANCE_MESSAGE:
 			num = *PtrPrg++ ;
-			TypeAnswer = RET_S16 ;
+			TypeAnswer = RET_int16_t ;
 
 			if( ListObjet[num].WorkFlags & OBJ_DEAD )
 			{
@@ -544,7 +544,7 @@ void	DoFuncLife( T_OBJET *ptrobj )
 			{
 				Value = (ptrobj->Col&128)?TRUE:FALSE ;
 			}
-			TypeAnswer = RET_U8 ;
+			TypeAnswer = RET_uint8_t ;
 			break ;
 
 //---------------------------------------------------------------------------
@@ -585,19 +585,19 @@ void	DoFuncLife( T_OBJET *ptrobj )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-S32    DoTest()
+int32_t    DoTest()
 {
-	U8	test ;
-	S32	valueword ;
-	S8	valuebyte ;
-	U8	valueUbyte ;
+	uint8_t	test ;
+	int32_t	valueword ;
+	int8_t	valuebyte ;
+	uint8_t	valueUbyte ;
 
 	test = *PtrPrg++ ;
 
 	switch( TypeAnswer )
 	{
 //---------------------------------------------------------------------------
-	case RET_S8:
+	case RET_int8_t:
 
 		valuebyte = *PtrPrg++ ;
 		switch( test )
@@ -622,8 +622,8 @@ S32    DoTest()
 		}
 
 //---------------------------------------------------------------------------
-	case RET_U8:
-		valueUbyte = (U8)*PtrPrg++ ;
+	case RET_uint8_t:
+		valueUbyte = (uint8_t)*PtrPrg++ ;
 		switch( test )
 		{
 		case LT_EQUAL:
@@ -646,9 +646,9 @@ S32    DoTest()
 		}
 
 //---------------------------------------------------------------------------
-	case RET_S16:
+	case RET_int16_t:
 
-		valueword = *(S16*)PtrPrg ;
+		valueword = *(int16_t*)PtrPrg ;
 		PtrPrg += 2 ;
 		switch( test )
 		{
@@ -699,7 +699,7 @@ S32    DoTest()
 
 void	CleanTrack( T_OBJET *ptrobj )
 {
-	U8	*ptrtrack ;
+	uint8_t	*ptrtrack ;
 
 	if( ptrobj->OffsetTrack!=-1 )
 	{
@@ -710,26 +710,26 @@ void	CleanTrack( T_OBJET *ptrobj )
 	       switch( *ptrtrack )
 	       {
 		       case TM_FACE_TWINSEN:
-			       *(S16*)(ptrtrack+1) = -1 ;
+			       *(int16_t*)(ptrtrack+1) = -1 ;
 			       break ;
 
 		       case TM_WAIT_NB_ANIM:
-			       *(U8*)(ptrtrack+2) = 0 ;
+			       *(uint8_t*)(ptrtrack+2) = 0 ;
 			       break ;
 
 		       case TM_WAIT_NB_SECOND:
 		       case TM_WAIT_NB_DIZIEME:
 		       case TM_WAIT_NB_SECOND_RND:
 		       case TM_WAIT_NB_DIZIEME_RND:
-			       *(U32*)(ptrtrack+2) = 0 ;
+			       *(uint32_t*)(ptrtrack+2) = 0 ;
 			       break ;
 
 		       case TM_ANGLE:
-			       *(S16*)(ptrtrack+1) &= 0x7FFF ;
+			       *(int16_t*)(ptrtrack+1) &= 0x7FFF ;
 			       break ;
 
 		       case TM_ANGLE_RND:
-			       *(S16*)(ptrtrack+3) = -1 ;
+			       *(int16_t*)(ptrtrack+3) = -1 ;
 			       break ;
 
 		       case TM_LOOP:
@@ -741,10 +741,10 @@ void	CleanTrack( T_OBJET *ptrobj )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-void	AdjustDirObject( T_OBJET *ptrobj, S32 oldmove )
+void	AdjustDirObject( T_OBJET *ptrobj, int32_t oldmove )
 {
-	S32	x, z 	;
-	S16	nu 	;
+	int32_t	x, z 	;
+	int16_t	nu 	;
 
 	switch( ptrobj->Move )
 	{
@@ -798,17 +798,17 @@ void	AdjustDirObject( T_OBJET *ptrobj, S32 oldmove )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-void	DoLife( U8 numobj )
+void	DoLife( uint8_t numobj )
 {
-	S32	flag = 0 ;
+	int32_t	flag = 0 ;
 	T_OBJET	*ptrobj ;
 	T_ZONE	*ptrz ;
 
-	S32	obj ;
-	S32	num ;
-	U8	*ptrmacro ;
-	U8	*memoptr ;
-	S32	n ;
+	int32_t	obj ;
+	int32_t	num ;
+	uint8_t	*ptrmacro ;
+	uint8_t	*memoptr ;
+	int32_t	n ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -872,7 +872,7 @@ void	DoLife( U8 numobj )
 // si sce permet objets magique ordre quelconque transforme SET en INC
 				MagicLevel = *PtrPrg++ ;
 				// remplie magie a fond
-				MagicPoint = (U8)(MagicLevel * 20) ;
+				MagicPoint = (uint8_t)(MagicLevel * 20) ;
 				break ;
 
 //---------------------------------------------------------------------------
@@ -901,7 +901,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_KILL_OBJ:
 				num = *PtrPrg++	;
-//				CheckCarrier( (U8)num ) ;
+//				CheckCarrier( (uint8_t)num ) ;
 				ListObjet[num].WorkFlags |= OBJ_DEAD	;
 				ListObjet[num].Obj.Body.Num = -1		;
 				ListObjet[num].ZoneSce = -1		;
@@ -921,7 +921,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DIR:
 				{
-				S32	oldmove = ptrobj->Move ;
+				int32_t	oldmove = ptrobj->Move ;
 
 				switch( oldmove )
 				{
@@ -968,7 +968,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DIR_OBJ:
 				{
-				S32	oldmove  ;
+				int32_t	oldmove  ;
 				T_OBJET	*ptrobjt ;
 
 				obj = *PtrPrg++ ;
@@ -1024,7 +1024,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SET_COMPORTEMENT:
-				ptrobj->OffsetLife = *(S16*)PtrPrg ;
+				ptrobj->OffsetLife = *(int16_t*)PtrPrg ;
 				PtrPrg += 2 ;
 				break ;
 
@@ -1033,7 +1033,7 @@ void	DoLife( U8 numobj )
 				num = *PtrPrg++ ;
 				if( ListObjet[num].LifePoint>0 )
 				{
-					ListObjet[num].OffsetLife = *(S16*)PtrPrg ;
+					ListObjet[num].OffsetLife = *(int16_t*)PtrPrg ;
 				}
 				PtrPrg += 2 ;
 				break ;
@@ -1046,8 +1046,8 @@ void	DoLife( U8 numobj )
 				{
 					// Au cas ou on veuille ressuciter 1 objet
 					ListObjet[num].WorkFlags &= ~OBJ_DEAD ;
-					InitBody( GEN_BODY_NORMAL, (U8)num ) ;
-					InitAnim( GEN_ANIM_RIEN, ANIM_REPEAT, (U8)num ) ;
+					InitBody( GEN_BODY_NORMAL, (uint8_t)num ) ;
+					InitAnim( GEN_ANIM_RIEN, ANIM_REPEAT, (uint8_t)num ) ;
 				}
 
 				ListObjet[num].LifePoint = *PtrPrg++ ;
@@ -1072,8 +1072,8 @@ void	DoLife( U8 numobj )
 				{
 					// Au cas ou on veuille ressuciter 1 objet
 					ListObjet[num].WorkFlags &= ~OBJ_DEAD ;
-					InitBody( GEN_BODY_NORMAL, (U8)num ) ;
-					InitAnim( GEN_ANIM_RIEN, ANIM_REPEAT, (U8)num ) ;
+					InitBody( GEN_BODY_NORMAL, (uint8_t)num ) ;
+					InitAnim( GEN_ANIM_RIEN, ANIM_REPEAT, (uint8_t)num ) ;
 				}
 
 				ListObjet[num].LifePoint += *PtrPrg++ ;
@@ -1087,7 +1087,7 @@ void	DoLife( U8 numobj )
 				num = *PtrPrg++ ;
 				if( ListObjet[num].LifePoint>0 )
 				{
-					HitObj( numobj, (U8)num, (S32)*PtrPrg, ListObjet[num].Obj.Beta ) ;
+					HitObj( numobj, (uint8_t)num, (int32_t)*PtrPrg, ListObjet[num].Obj.Beta ) ;
 				}
 				PtrPrg++ ;
 				break ;
@@ -1095,7 +1095,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_TRACK:
 				CleanTrack( ptrobj ) ;
-				ptrobj->OffsetTrack = *(S16*)PtrPrg ;
+				ptrobj->OffsetTrack = *(int16_t*)PtrPrg ;
 				PtrPrg += 2 ;
 				Track_SetLabel( ptrobj ) ;
 				break ;
@@ -1106,7 +1106,7 @@ void	DoLife( U8 numobj )
 				if( ListObjet[num].LifePoint>0 )
 				{
 					CleanTrack( &ListObjet[num] ) ;
-					ListObjet[num].OffsetTrack = *(S16*)PtrPrg ;
+					ListObjet[num].OffsetTrack = *(int16_t*)PtrPrg ;
 					Track_SetLabel( &ListObjet[num] ) ;
 				}
 				PtrPrg += 2 ;
@@ -1154,7 +1154,7 @@ void	DoLife( U8 numobj )
 				DoFuncLife( ptrobj ) ;
 				if( !DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				}
 				else
 				{
@@ -1167,7 +1167,7 @@ void	DoLife( U8 numobj )
 				DoFuncLife( ptrobj ) ;
 				if( DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				}
 				else
 				{
@@ -1180,7 +1180,7 @@ void	DoLife( U8 numobj )
 				DoFuncLife( ptrobj ) ;
 				if( !DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				}
 				else
 				{
@@ -1196,7 +1196,7 @@ void	DoLife( U8 numobj )
 				{
 					*ptrmacro = LM_SWIF ;
 				}
-				PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+				PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				break ;
 
 //---------------------------------------------------------------------------
@@ -1204,7 +1204,7 @@ void	DoLife( U8 numobj )
 				DoFuncLife( ptrobj ) ;
 				if( !DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				}
 				else
 				{
@@ -1217,24 +1217,24 @@ void	DoLife( U8 numobj )
 			case LM_NEVERIF:
 				DoFuncLife( ptrobj ) ;
 				DoTest() ;
-				PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+				PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_OFFSET: 	/* jmp à offset */
-				PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+				PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_ELSE:
-				PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+				PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_SWITCH:
 				ptrobj->ExeSwitch.Func = *PtrPrg ;
 				DoFuncLife( ptrobj ) ;
-				ptrobj->ExeSwitch.Value = (S16)Value ;
+				ptrobj->ExeSwitch.Value = (int16_t)Value ;
 				ptrobj->ExeSwitch.TypeAnswer = TypeAnswer ;
 				break ;
 
@@ -1248,7 +1248,7 @@ void	DoLife( U8 numobj )
 
 				if( !DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)memoptr ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)memoptr ;
 				}
 				break ;
 
@@ -1262,13 +1262,13 @@ void	DoLife( U8 numobj )
 
 				if( DoTest() )
 				{
-					PtrPrg = ptrobj->PtrLife + *(S16*)memoptr ;
+					PtrPrg = ptrobj->PtrLife + *(int16_t*)memoptr ;
 				}
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_BREAK:	// saute au END_SWITCH
-				PtrPrg = ptrobj->PtrLife + *(S16*)PtrPrg ;
+				PtrPrg = ptrobj->PtrLife + *(int16_t*)PtrPrg ;
 				break ;
 
 //---------------------------------------------------------------------------
@@ -1281,7 +1281,7 @@ void	DoLife( U8 numobj )
 				num = *PtrPrg++ ;
 				if( ListObjet[num].LifePoint>0 )
 				{
-					InitBody( *PtrPrg, (U8)num ) ;
+					InitBody( *PtrPrg, (uint8_t)num ) ;
 				}
 				PtrPrg++ ;
 				break ;
@@ -1291,14 +1291,14 @@ void	DoLife( U8 numobj )
 				num = *PtrPrg++ ;
 				if( ListObjet[num].LifePoint>0 )
 				{
-					InitAnim( *(U16*)PtrPrg, ANIM_REPEAT, (U8)num ) ;
+					InitAnim( *(uint16_t*)PtrPrg, ANIM_REPEAT, (uint8_t)num ) ;
 				}
 				PtrPrg+=2 ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_ANIM:
-				InitAnim( *(U16*)PtrPrg, ANIM_REPEAT,numobj ) ;
+				InitAnim( *(uint16_t*)PtrPrg, ANIM_REPEAT,numobj ) ;
 				PtrPrg+=2 ;
 				break ;
 
@@ -1306,8 +1306,8 @@ void	DoLife( U8 numobj )
 			case LM_ANIM_SET:
 //				ptrobj->GenAnim = NO_ANIM ;
 //				ptrobj->Obj.Anim.Num = -1 ;
-//				InitAnim( *(U16*)PtrPrg, ANIM_REPEAT, numobj ) ;
-				SetAnim( numobj, *(U16*)PtrPrg ) ;
+//				InitAnim( *(uint16_t*)PtrPrg, ANIM_REPEAT, numobj ) ;
+				SetAnim( numobj, *(uint16_t*)PtrPrg ) ;
 				PtrPrg+=2 ;
 				break ;
 
@@ -1319,12 +1319,12 @@ void	DoLife( U8 numobj )
 #ifdef	CDROM
 					NumObjSpeak = num ;
 #endif
-					NumObjDial = (U8)num ;
+					NumObjDial = (uint8_t)num ;
 
 					// au cas ou l'on soit appelé pendant un eclair
 					Palette( PtrPal ) ;
 
-					Dial( *(S16*)PtrPrg, TRUE ) ;
+					Dial( *(int16_t*)PtrPrg, TRUE ) ;
 				}
 				PtrPrg += 2 ;
 				break ;
@@ -1337,12 +1337,12 @@ void	DoLife( U8 numobj )
 #ifdef	CDROM
 					NumObjSpeak = num ;
 #endif
-					NumObjDial = (U8)num ;
+					NumObjDial = (uint8_t)num ;
 
 					// au cas ou l'on soit appelé pendant un eclair
 					Palette( PtrPal ) ;
 
-					Dial( *(S16*)PtrPrg, TRUE ) ;
+					Dial( *(int16_t*)PtrPrg, TRUE ) ;
 				}
 				PtrPrg += 2 ;
 				break ;
@@ -1357,7 +1357,7 @@ void	DoLife( U8 numobj )
 				// au cas ou l'on soit appelé pendant un eclair
 				Palette( PtrPal ) ;
 
-				Dial( *(S16*)PtrPrg, TRUE ) ;
+				Dial( *(int16_t*)PtrPrg, TRUE ) ;
 				PtrPrg += 2 ;
 				break ;
 
@@ -1371,7 +1371,7 @@ void	DoLife( U8 numobj )
 				// au cas ou l'on soit appelé pendant un eclair
 				Palette( PtrPal ) ;
 
-				Dial( *(S16*)PtrPrg, TRUE ) ;
+				Dial( *(int16_t*)PtrPrg, TRUE ) ;
 				PtrPrg += 2 ;
 				break ;
 
@@ -1386,7 +1386,7 @@ void	DoLife( U8 numobj )
 				// au cas ou l'on soit appelé pendant un eclair
 				Palette( PtrPal ) ;
 
-				Dial( *(S16*)PtrPrg, TRUE ) ;
+				Dial( *(int16_t*)PtrPrg, TRUE ) ;
 				ListObjet[NUM_PERSO].CoulObj = COUL_PERSO ;
 				PtrPrg += 2 ;
 				break ;
@@ -1418,7 +1418,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_VAR_GAME:
 				num = *PtrPrg++ ;
-				ListVarGame[num] = *(S16*)PtrPrg ;
+				ListVarGame[num] = *(int16_t*)PtrPrg ;
 
 				if( num==FLAG_MONEY )
 				{
@@ -1432,9 +1432,9 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_ADD_VAR_GAME:
 				num = *PtrPrg++ ;
-				if( ListVarGame[num]+*(S16*)PtrPrg<MAX_S16 )
-					ListVarGame[num] += *(S16*)PtrPrg ;
-				else	ListVarGame[num] = MAX_S16 ;
+				if( ListVarGame[num]+*(int16_t*)PtrPrg<MAX_int16_t )
+					ListVarGame[num] += *(int16_t*)PtrPrg ;
+				else	ListVarGame[num] = MAX_int16_t ;
 
 				if( num==FLAG_MONEY )
 				{
@@ -1448,9 +1448,9 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SUB_VAR_GAME:
 				num = *PtrPrg++ ;
-				if( ListVarGame[num]-*(S16*)PtrPrg>MIN_S16 )
-					ListVarGame[num] -= *(S16*)PtrPrg ;
-				else	ListVarGame[num] = MIN_S16 ;
+				if( ListVarGame[num]-*(int16_t*)PtrPrg>MIN_int16_t )
+					ListVarGame[num] -= *(int16_t*)PtrPrg ;
+				else	ListVarGame[num] = MIN_int16_t ;
 
 				if( num==FLAG_MONEY )
 				{
@@ -1473,7 +1473,7 @@ void	DoLife( U8 numobj )
 				if( Planet>=2 )
 				{
 					num = NbZlitosPieces ;
-					NbZlitosPieces -= *(S16*)PtrPrg ;
+					NbZlitosPieces -= *(int16_t*)PtrPrg ;
 					if( NbZlitosPieces < 0 )
 					{
 						NbZlitosPieces = 0 ;
@@ -1482,7 +1482,7 @@ void	DoLife( U8 numobj )
 				else
 				{
 					num = NbGoldPieces ;
-					NbGoldPieces -= *(S16*)PtrPrg ;
+					NbGoldPieces -= *(int16_t*)PtrPrg ;
 					if( NbGoldPieces < 0 )
 					{
 						NbGoldPieces = 0 ;
@@ -1496,13 +1496,13 @@ void	DoLife( U8 numobj )
 
 				// aff piece
 				InitIncrustDisp( INCRUST_SPRITE|INCRUST_YCLIP,
-						 (S16)SPRITE_PIECE,	// Kashes ou Zlitos
+						 (int16_t)SPRITE_PIECE,	// Kashes ou Zlitos
 						 12, 15,
 						 0, 0, 3 ) ;
 
 				// aff cmpt si pas
 				{
-					S32	money ;
+					int32_t	money ;
 					T_INCRUST_DISP	*ptrdisp ;
 					ptrdisp = ListIncrustDisp ;
 
@@ -1522,9 +1522,9 @@ void	DoLife( U8 numobj )
 					}
 
 					InitIncrustDisp( INCRUST_CMPT|INCRUST_YCLIP,
-							 (S16)num,
+							 (int16_t)num,
 							 32, 20,
-							 (S16)money, 0, 3 ) ;
+							 (int16_t)money, 0, 3 ) ;
 				}
 				break ;
 
@@ -1533,7 +1533,7 @@ void	DoLife( U8 numobj )
 				if( Planet>=2 )
 				{
 					num = NbZlitosPieces ;
-					NbZlitosPieces += *(S16*)PtrPrg ;
+					NbZlitosPieces += *(int16_t*)PtrPrg ;
 					if( NbZlitosPieces > 999 )
 					{
 						NbZlitosPieces = 999 ;
@@ -1542,7 +1542,7 @@ void	DoLife( U8 numobj )
 				else
 				{
 					num = NbGoldPieces ;
-					NbGoldPieces += *(S16*)PtrPrg ;
+					NbGoldPieces += *(int16_t*)PtrPrg ;
 					if( NbGoldPieces > 999 )
 					{
 						NbGoldPieces = 999 ;
@@ -1556,7 +1556,7 @@ void	DoLife( U8 numobj )
 
 				// incruste pendant 2 sec le bonus trouve
 				InitIncrustDisp( INCRUST_SPRITE|INCRUST_YCLIP,
-						 (S16)SPRITE_PIECE,	// Kashes ou Zlitos
+						 (int16_t)SPRITE_PIECE,	// Kashes ou Zlitos
 						 10, 30,
 						 0, 0, 2 ) ;
 				break ;
@@ -1597,9 +1597,9 @@ void	DoLife( U8 numobj )
 						}
 
 						InitIncrustDisp( INCRUST_CMPT|INCRUST_YCLIP,
-								 (S16)num,
+								 (int16_t)num,
 								 32, 20,
-								 (S16)NbLittleKeys, 0, 2 ) ;
+								 (int16_t)NbLittleKeys, 0, 2 ) ;
 					}
 				}
 				break ;
@@ -1626,7 +1626,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DOOR_LEFT:
 				ptrobj->Obj.Beta = (768*MUL_ANGLE) ;
-				ptrobj->Obj.X = ptrobj->Obj.LastAnimStepX - *(S16*)PtrPrg ;
+				ptrobj->Obj.X = ptrobj->Obj.LastAnimStepX - *(int16_t*)PtrPrg ;
 				ptrobj->WorkFlags &= ~AUTO_STOP_DOOR ;
 				ptrobj->SRot = 0 ;
 				PtrPrg += 2 ;
@@ -1635,7 +1635,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DOOR_RIGHT:
 				ptrobj->Obj.Beta = (256*MUL_ANGLE) ;
-				ptrobj->Obj.X = ptrobj->Obj.LastAnimStepX + *(S16*)PtrPrg ;
+				ptrobj->Obj.X = ptrobj->Obj.LastAnimStepX + *(int16_t*)PtrPrg ;
 				ptrobj->WorkFlags &= ~AUTO_STOP_DOOR ;
 				ptrobj->SRot = 0 ;
 				PtrPrg += 2 ;
@@ -1644,7 +1644,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DOOR_UP:
 				ptrobj->Obj.Beta = (512*MUL_ANGLE) ;
-				ptrobj->Obj.Z = ptrobj->Obj.LastAnimStepZ - *(S16*)PtrPrg ;
+				ptrobj->Obj.Z = ptrobj->Obj.LastAnimStepZ - *(int16_t*)PtrPrg ;
 				ptrobj->WorkFlags &= ~AUTO_STOP_DOOR ;
 				ptrobj->SRot = 0 ;
 				PtrPrg += 2 ;
@@ -1653,7 +1653,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_SET_DOOR_DOWN:
 				ptrobj->Obj.Beta = (0*MUL_ANGLE) ;
-				ptrobj->Obj.Z = ptrobj->Obj.LastAnimStepZ + *(S16*)PtrPrg ;
+				ptrobj->Obj.Z = ptrobj->Obj.LastAnimStepZ + *(int16_t*)PtrPrg ;
 				ptrobj->WorkFlags &= ~AUTO_STOP_DOOR ;
 				ptrobj->SRot = 0 ;
 				PtrPrg += 2 ;
@@ -1804,7 +1804,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_POS_POINT:
 				{
-				S16	nu ;
+				int16_t	nu ;
 
 				Value = *PtrPrg++ ;	// index point
 				X0 = ListBrickTrack[Value].X ;
@@ -1878,7 +1878,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_ADD_CHOICE:
-				GameListChoice[GameNbChoices] = *(S16*)PtrPrg ;
+				GameListChoice[GameNbChoices] = *(int16_t*)PtrPrg ;
 				PtrPrg += 2 ;
 				GameNbChoices++ ;
 				break ;
@@ -1894,7 +1894,7 @@ void	DoLife( U8 numobj )
 					// au cas ou l'on soit appelé pendant un eclair
 					Palette( PtrPal ) ;
 
-					GameAskChoice( *(S16*)PtrPrg ) ;
+					GameAskChoice( *(int16_t*)PtrPrg ) ;
 					GameNbChoices = 0 ;
 					PtrPrg += 2 ;
 					RestoreTimer() ;
@@ -1911,12 +1911,12 @@ void	DoLife( U8 numobj )
 					{
 						SaveTimer() ;
 						TestCoulDial( ListObjet[num].CoulObj ) ;
-						NumObjDial = (U8)num ;
+						NumObjDial = (uint8_t)num ;
 
 						// au cas ou l'on soit appelé pendant un eclair
 						Palette( PtrPal ) ;
 
-						GameAskChoice( *(S16*)PtrPrg ) ;
+						GameAskChoice( *(int16_t*)PtrPrg ) ;
 						GameNbChoices = 0 ;
 						RestoreTimer() ;
 						AffScene( AFF_ALL_FLIP )	;
@@ -1928,7 +1928,7 @@ void	DoLife( U8 numobj )
 //---------------------------------------------------------------------------
 			case LM_FULL_POINT:
 				ListObjet[NUM_PERSO].LifePoint = MAX_LIFE_POINTS ;
-				MagicPoint = (U8)(MagicLevel * 20) ;
+				MagicPoint = (uint8_t)(MagicLevel * 20) ;
 				if( ListVarGame[FLAG_CONQUE] )
 				{
 					TabInv[FLAG_CONQUE].PtMagie = INV_MAX_VALUE ;
@@ -1937,7 +1937,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_BETA:
-				ptrobj->Obj.Beta = *(S16*)PtrPrg ;
+				ptrobj->Obj.Beta = *(int16_t*)PtrPrg ;
 				ClearRealAngle( ptrobj ) ;
 				PtrPrg += 2 ;
 				break ;
@@ -1955,7 +1955,7 @@ void	DoLife( U8 numobj )
 
 					if( numobj==NUM_PERSO )
 					{
-						S32 max = 0 ;
+						int32_t max = 0 ;
 
 						// Compte nombre de messages valides
 						// pour ce chapitre
@@ -2050,7 +2050,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SET_ARMURE:
-				ptrobj->Armure = *(S8*)PtrPrg ;
+				ptrobj->Armure = *(int8_t*)PtrPrg ;
 				PtrPrg++ ;
 				break ;
 
@@ -2059,7 +2059,7 @@ void	DoLife( U8 numobj )
 				num = *PtrPrg++	;
 				if( ListObjet[num].LifePoint>0 )
 				{
-					ListObjet[num].Armure = *(S8*)PtrPrg ;
+					ListObjet[num].Armure = *(int8_t*)PtrPrg ;
 				}
 				PtrPrg++ ;
 				break;
@@ -2094,7 +2094,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SAMPLE:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				HQ_3D_MixSample( num, 0x1000, 0, 1,
 					ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -2102,7 +2102,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SAMPLE_RND:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				HQ_3D_MixSample( num, 0x800, 0x1000, 1,
 					ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -2110,7 +2110,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SAMPLE_ALWAYS:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 
 				if( ptrobj->SampleAlways
@@ -2123,7 +2123,7 @@ void	DoLife( U8 numobj )
 				if( !ptrobj->SampleAlways
 				OR  !IsSamplePlaying( ptrobj->SampleAlways ) )
 				{
-					ptrobj->SampleVolume = (U8)ParmSampleVolume ;
+					ptrobj->SampleVolume = (uint8_t)ParmSampleVolume ;
 
 					ptrobj->SampleAlways = HQ_3D_MixSample( num, 0x1000, 0, 0,
 								ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -2139,7 +2139,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_SAMPLE_STOP:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 
 				if( ptrobj->SampleAlways
@@ -2154,7 +2154,7 @@ void	DoLife( U8 numobj )
 
 //---------------------------------------------------------------------------
 			case LM_REPEAT_SAMPLE:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				HQ_3D_MixSample( num, 0x1000, 0, *PtrPrg++,
 					ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -2276,14 +2276,14 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 //---------------------------------------------------------------------------
 			case LM_SET_ANIM_DIAL:
-				ptrobj->AnimDial = *(U16*)PtrPrg ;
+				ptrobj->AnimDial = *(uint16_t*)PtrPrg ;
 				PtrPrg += 2 ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_PCX:
 				num = *PtrPrg++ ;
-				EffectPcx( (U8)num, (U8*)Screen, *PtrPrg++, TRUE ) ;
+				EffectPcx( (uint8_t)num, (uint8_t*)Screen, *PtrPrg++, TRUE ) ;
 				break ;
 
 //---------------------------------------------------------------------------
@@ -2293,8 +2293,8 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 				obj = *PtrPrg++ ;	// numobj
 				if( ListObjet[obj].LifePoint>0 )
 				{
-					NumObjDial = (U8)obj ;
-					EffectPcxMess( (U8)num, (U8*)Screen, (U8)n, *(S16*)PtrPrg ) ;
+					NumObjDial = (uint8_t)obj ;
+					EffectPcxMess( (uint8_t)num, (uint8_t*)Screen, (uint8_t)n, *(int16_t*)PtrPrg ) ;
 				}
 				PtrPrg+=2 ;
 				break ;
@@ -2302,13 +2302,13 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 //---------------------------------------------------------------------------
 			case LM_PALETTE:
 				num = *PtrPrg++ ;
-				PaletteIndex( (U8)num ) ;
+				PaletteIndex( (uint8_t)num ) ;
 				break ;
 
 //---------------------------------------------------------------------------
 			case LM_FADE_TO_PAL:
 				num = *PtrPrg++ ;
-				FadeToPalIndex( (U8)num ) ;
+				FadeToPalIndex( (uint8_t)num ) ;
 				if( num==3 )// Palette noire ?
 				{
 					FlagFade = TRUE ;
@@ -2357,7 +2357,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 					{
 						if( ListArdoise[n] == num )
 						{
-							CurrentArdoise = (U8)n ;
+							CurrentArdoise = (uint8_t)n ;
 							flag = 1 ;
 						}
 					}
@@ -2367,7 +2367,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 						if( NbArdoise<MAX_ARDOISE )
 						{
 							CurrentArdoise = NbArdoise ;
-							ListArdoise[NbArdoise++] = (S8)num ;
+							ListArdoise[NbArdoise++] = (int8_t)num ;
 						}
 					}
 
@@ -2418,7 +2418,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 				num = *PtrPrg++ ;
 				ptrobj->OffsetTrack = SearchOffsetTrack( ptrobj,
-									 (U8)ListVarGame[num] ) ;
+									 (uint8_t)ListVarGame[num] ) ;
 
 				// Blindage Bug du Marchand Ambulant
 				if( ptrobj->OffsetTrack<0 )
@@ -2444,7 +2444,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 //---------------------------------------------------------------------------
 			case LM_SET_SPRITE:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 
 				if( ptrobj->Flags & SPRITE_3D )
@@ -2473,16 +2473,16 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 //---------------------------------------------------------------------------
 			case LM_IMPACT_OBJ:
 				num = *PtrPrg++ ;
-				n = *(U16*)PtrPrg ;
+				n = *(uint16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 
 				if( ListObjet[num].LifePoint>0 )
 				{
 					DoImpact( n,
 						  ListObjet[num].Obj.X,
-						  ListObjet[num].Obj.Y+*(S16*)PtrPrg,
+						  ListObjet[num].Obj.Y+*(int16_t*)PtrPrg,
 						  ListObjet[num].Obj.Z,
-						  (U8)num ) ;
+						  (uint8_t)num ) ;
 				}
 
 				PtrPrg += 2 ;
@@ -2496,7 +2496,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 				Y0 = ListBrickTrack[Value].Y ;
 				Z0 = ListBrickTrack[Value].Z ;
 
-				DoImpact( *(U16*)PtrPrg, X0, Y0, Z0, numobj ) ;
+				DoImpact( *(uint16_t*)PtrPrg, X0, Y0, Z0, numobj ) ;
 
 				PtrPrg += 2 ;
 				break ;
@@ -2513,7 +2513,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 				if( num!=CinemaMode )
 				{
-					CinemaMode = (U8)num ;
+					CinemaMode = (uint8_t)num ;
 
 					if( !num )
 					{
@@ -2556,12 +2556,12 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 //---------------------------------------------------------------------------
 			case LM_NEW_SAMPLE:
-				num = *(S16*)PtrPrg ;
+				num = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
-				ParmSampleDecalage  = *(S16*)PtrPrg ;
+				ParmSampleDecalage  = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				ParmSampleVolume    = *PtrPrg++ ;
-				ParmSampleFrequence = *(S16*)PtrPrg ;
+				ParmSampleFrequence = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				HQ_3D_MixSample( num, 0x1000, 0, 1,
 					ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -2569,10 +2569,10 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 
 //---------------------------------------------------------------------------
 			case LM_PARM_SAMPLE:
-				ParmSampleDecalage  = *(S16*)PtrPrg ;
+				ParmSampleDecalage  = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				ParmSampleVolume    = *PtrPrg++ ;
-				ParmSampleFrequence = *(S16*)PtrPrg ;
+				ParmSampleFrequence = *(int16_t*)PtrPrg ;
 				PtrPrg+=2 ;
 				break ;
 
@@ -2582,7 +2582,7 @@ HERCULE( HPrintf( "errno= %d: %s\n", errno, strerror(errno) ) ) ;
 				num = *PtrPrg++ ;
 				if( ListObjet[obj].LifePoint>0 )
 				{
-					PosObjetAroundAnother( (U8)num, (U8)obj ) ;
+					PosObjetAroundAnother( (uint8_t)num, (uint8_t)obj ) ;
 				}
 				break ;
 

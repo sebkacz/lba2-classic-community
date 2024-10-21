@@ -69,60 +69,60 @@ enum PolyType {
 // -----------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct {
-  S16 Pt_XE;    ///< Screen coordinate X
-  S16 Pt_YE;    ///< Screen coordinate Y
-  U16 Pt_MapU;  ///< texture coordinate U
-  U16 Pt_MapV;  ///< texture coordinate V
-  U16 Pt_Light; ///< intensity (0.8.0)
-  U16 Pt_ZO;    ///< normalized Z
-  U32 Pt_W;     ///< 2^31 / Z (non normalized)
+  int16_t Pt_XE;    ///< Screen coordinate X
+  int16_t Pt_YE;    ///< Screen coordinate Y
+  uint16_t Pt_MapU;  ///< texture coordinate U
+  uint16_t Pt_MapV;  ///< texture coordinate V
+  uint16_t Pt_Light; ///< intensity (0.8.0)
+  uint16_t Pt_ZO;    ///< normalized Z
+  uint32_t Pt_W;     ///< 2^31 / Z (non normalized)
 } Struc_Point;
 #pragma pack(pop)
 
 // -----------------------------------------------------------------------------
-extern PTR_U8 PtrCLUTGouraud;
-extern PTR_U8 PtrCLUTFog;
+extern PTR_uint8_t PtrCLUTGouraud;
+extern PTR_uint8_t PtrCLUTFog;
 
-extern PTR_U8 PtrMap;
-extern PTR_U16 PtrZBuffer;
-extern S32 RepMask;
+extern PTR_uint8_t PtrMap;
+extern PTR_uint16_t PtrZBuffer;
+extern int32_t RepMask;
 
-extern S32 Fill_Z_Fog_Near;     ///< Fog Range
-extern S32 Fill_Z_Fog_Far;      ///< Fog Range
-extern U32 Fill_ZBuffer_Factor; ///< normalizing factor for Z Buffer
-extern U32 IsPolygonHidden;     ///< normalizing factor for Z Buffer
+extern int32_t Fill_Z_Fog_Near;     ///< Fog Range
+extern int32_t Fill_Z_Fog_Far;      ///< Fog Range
+extern uint32_t Fill_ZBuffer_Factor; ///< normalizing factor for Z Buffer
+extern uint32_t IsPolygonHidden;     ///< normalizing factor for Z Buffer
 
 // -----------------------------------------------------------------------------
-typedef S32(FUNC_FILL_POLY)(S32 Type_Poly, S32 Color_Poly, S32 Nb_Points,
+typedef int32_t(FUNC_FILL_POLY)(int32_t Type_Poly, int32_t Color_Poly, int32_t Nb_Points,
                             Struc_Point *Ptr_Points);
 
 // -----------------------------------------------------------------------------
-extern void Switch_Fillers_ASM(U32 Bank); ///< Do Not call from C
-void Switch_Fillers_C(U32 Bank);
+extern void Switch_Fillers_ASM(uint32_t Bank); ///< Do Not call from C
+void Switch_Fillers_C(uint32_t Bank);
 #define Switch_Fillers Switch_Fillers_C
 
 extern FUNC_FILL_POLY Fill_PolyFast; ///< Do Not call from C
-S32 Fill_Poly_C(S32 Type_Poly, S32 Color_Poly, S32 Nb_Points,
+int32_t Fill_Poly_C(int32_t Type_Poly, int32_t Color_Poly, int32_t Nb_Points,
                 Struc_Point *Ptr_Points);
 #define Fill_Poly Fill_Poly_C
 
-extern void Fill_Sphere(S32 Type_Sphere, S32 Color_Sphere, S32 Centre_X,
-                        S32 Centre_Y, S32 Rayon); ///< Do Not call from C
+extern void Fill_Sphere(int32_t Type_Sphere, int32_t Color_Sphere, int32_t Centre_X,
+                        int32_t Centre_Y, int32_t Rayon); ///< Do Not call from C
 
 /// Patch all the fillers routine with the new scanlines offsets
-extern void SetScreenPitch(U32 *New_TabOffLine); ///< Do Not call from C
+extern void SetScreenPitch(uint32_t *New_TabOffLine); ///< Do Not call from C
 // FIXME: There are callers using SetScreenPitch(), must be careful with patch
 
 /// Set the line (in PtrCLUTGouraud) corresponding to the actual palette.
-extern void SetCLUT(U32 defaultline);
+extern void SetCLUT(uint32_t defaultline);
 
-extern void SetFog(S32 z_near, S32 z_far);
+extern void SetFog(int32_t z_near, int32_t z_far);
 
-S32 INV64(S32 a);
+int32_t INV64(int32_t a);
 
 // -----------------------------------------------------------------------------
 /// 16-bit Z standard for 16-bit zbuffer
-#define GET_ZO(a) (U16)(((a)*Fill_ZBuffer_Factor) >> 16)
+#define GET_ZO(a) (uint16_t)(((a)*Fill_ZBuffer_Factor) >> 16)
 
 // =============================================================================
 #ifdef __cplusplus

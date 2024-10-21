@@ -10,17 +10,17 @@ extern "C" {
 //──────────────────────────────────────────────────────────────────────────
 struct s_ProcessorSignature
 	{
-		U32	Stepping		:4	;
-		U32	Model			:4	;
-		U32	Family			:4	;
-		U32	Type			:2	;
-		U32	FPU			:1	;
-		U32	CPUID			:1	;
-		U32	Manufacturer		:4	;
-		U32	CacheWriteBack		:1	;
-		U32	CacheAllocOnWrite	:1	;
-		U32	CacheDisabled		:1	;
-		U32	Undefined		:9	;
+		uint32_t	Stepping		:4	;
+		uint32_t	Model			:4	;
+		uint32_t	Family			:4	;
+		uint32_t	Type			:2	;
+		uint32_t	FPU			:1	;
+		uint32_t	CPUID			:1	;
+		uint32_t	Manufacturer		:4	;
+		uint32_t	CacheWriteBack		:1	;
+		uint32_t	CacheAllocOnWrite	:1	;
+		uint32_t	CacheDisabled		:1	;
+		uint32_t	Undefined		:9	;
 	};
 
 extern s_ProcessorSignature ProcessorSignature;
@@ -87,24 +87,24 @@ extern s_ProcessorSignature ProcessorSignature;
 //──────────────────────────────────────────────────────────────────────────
 struct s_ProcessorFeatureFlags
 	{
-		U32	FPUOnChip			:1	;
-		U32	VitualModeExtensions		:1	;
-		U32	DebugExtensions			:1	;
-		U32	PageSizeExtensions		:1	;
-		U32	TimeStampCounter		:1	;
-		U32	ModelSpecificRegisters		:1	;
-		U32	PhysicalAddressExtensions	:1	;
-		U32	MachineCheckException		:1	;
-		U32	CMPXCHG8BInstruction		:1	;
-		U32	APIC				:1	;
-		U32	Reserved1			:2	;
-		U32	MemoryTypeRangeRegisters	:1	;
-		U32	GlobalPagingExtensions		:1	;
-		U32	MachineCheckArchitecture	:1	;
-		U32	ConditionalMoveInstruction	:1	;
-		U32	Reserved2			:7	;
-		U32	MMX				:1	;
-		U32	Reserved3			:8	;
+		uint32_t	FPUOnChip			:1	;
+		uint32_t	VitualModeExtensions		:1	;
+		uint32_t	DebugExtensions			:1	;
+		uint32_t	PageSizeExtensions		:1	;
+		uint32_t	TimeStampCounter		:1	;
+		uint32_t	ModelSpecificRegisters		:1	;
+		uint32_t	PhysicalAddressExtensions	:1	;
+		uint32_t	MachineCheckException		:1	;
+		uint32_t	CMPXCHG8BInstruction		:1	;
+		uint32_t	APIC				:1	;
+		uint32_t	Reserved1			:2	;
+		uint32_t	MemoryTypeRangeRegisters	:1	;
+		uint32_t	GlobalPagingExtensions		:1	;
+		uint32_t	MachineCheckArchitecture	:1	;
+		uint32_t	ConditionalMoveInstruction	:1	;
+		uint32_t	Reserved2			:7	;
+		uint32_t	MMX				:1	;
+		uint32_t	Reserved3			:8	;
 	};
 
 extern s_ProcessorFeatureFlags ProcessorFeatureFlags;
@@ -145,18 +145,18 @@ extern	char	ProcessorManufacturerIDString[]	;
 //──────────────────────────────────────────────────────────────────────────
 typedef	struct
 	{
-		U32	Entries		:16	;
-		U32	Ways		:8	;
-		U32	Reserved	:8	;
+		uint32_t	Entries		:16	;
+		uint32_t	Ways		:8	;
+		uint32_t	Reserved	:8	;
 	}
 	TLB	;
 
 typedef	struct
 	{
-		U32	LineSize	:8	;
-		U32	Tags		:4	;
-		U32	Ways		:4	;
-		U32	Size		:16	;
+		uint32_t	LineSize	:8	;
+		uint32_t	Tags		:4	;
+		uint32_t	Ways		:4	;
+		uint32_t	Size		:16	;
 	}
 	CACHE	;
 
@@ -185,7 +185,7 @@ extern	CACHE	ProcessorL2Cache		;
 #pragma	aux	ProcessorL2Cache		"*"
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	ProcessorIdentification()	;
+extern	uint32_t	ProcessorIdentification()	;
 
 #pragma	aux	ProcessorIdentification	"*"	\
 	modify	[eax ebx ecx edx esi edi]

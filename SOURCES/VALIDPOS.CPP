@@ -1,19 +1,19 @@
 #include 	"C_EXTERN.H"
 
-S32	ValideCube		;
+int32_t	ValideCube		;
 
-S32	ValidePos     = TRUE 	;
-S32	LastValidePos = TRUE 	;
+int32_t	ValidePos     = TRUE 	;
+int32_t	LastValidePos = TRUE 	;
 
 T_OBJET	ValideHero ;
-U32	SizeOfBufferValidePos	;
-U8	*BufferValidePos	;
+uint32_t	SizeOfBufferValidePos	;
+uint8_t	*BufferValidePos	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	SaveValidePos( void )
 {
 	T_OBJET	memoobj ;
-	S32	timerrefhr = TimerRefHR ;
+	int32_t	timerrefhr = TimerRefHR ;
 	T_OBJET	*ptrobj = &ListObjet[NUM_PERSO] ;
 
 	if( ptrobj->LifePoint<=0 )	return ;
@@ -27,7 +27,7 @@ void	SaveValidePos( void )
 
 	SaveContexte( timerrefhr ) ;
 
-	SizeOfBufferValidePos = (U32)(PtrSave-BufferValidePos) ;
+	SizeOfBufferValidePos = (uint32_t)(PtrSave-BufferValidePos) ;
 
 	memcpy( ptrobj, &memoobj, sizeof(T_OBJET) ) ;
 
@@ -42,8 +42,8 @@ void	SaveValidePos( void )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	RestartValidePos( void )
 {
-	S32	flagload ;
-	S32	savetimerrefhr ;
+	int32_t	flagload ;
+	int32_t	savetimerrefhr ;
 
 	PtrSave = BufferValidePos ;
 

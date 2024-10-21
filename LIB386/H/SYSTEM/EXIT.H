@@ -12,7 +12,7 @@ extern "C" {
 extern char PathConfigFile[ADELINE_MAX_PATH];
 
 // -----------------------------------------------------------------------------
-extern U32 RegisterInitClear(PTR_VOID_FUNC init, PTR_VOID_FUNC clear);
+extern uint32_t RegisterInitClear(PTR_VOID_FUNC init, PTR_VOID_FUNC clear);
 
 // =============================================================================
 #ifdef __cplusplus

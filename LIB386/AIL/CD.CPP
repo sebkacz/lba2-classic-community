@@ -17,17 +17,17 @@
 //████████████████████████████████████████████████████████████████████████████
 
 static	HREDBOOK	Cd		;
-static	U32		Tracks		;
-static	U32		Track		;
-static	U32		PausedTrack	;
-static	U32		Cur		;
-static	U32		End		;
+static	uint32_t		Tracks		;
+static	uint32_t		Track		;
+static	uint32_t		PausedTrack	;
+static	uint32_t		Cur		;
+static	uint32_t		End		;
 
-static	S32		OldVolumeCD	;
+static	int32_t		OldVolumeCD	;
 
 //████████████████████████████████████████████████████████████████████████████
 
-static	S32	CheckCD()
+static	int32_t	CheckCD()
 {
 	if(!Cd)	return	FALSE	;
 
@@ -142,9 +142,9 @@ void	CloseCD()
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	PlayCD(S32 track)
+void	PlayCD(int32_t track)
 {
-	U32	start, end	;
+	uint32_t	start, end	;
 
 	if(!CheckCD() || !track || (track>Tracks))	return	;
 
@@ -158,7 +158,7 @@ void	PlayCD(S32 track)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ChangeVolumeCD(S32 volume)
+void	ChangeVolumeCD(int32_t volume)
 {
 	if( !CheckCD() )	return ;
 
@@ -176,7 +176,7 @@ void	ChangeVolumeCD(S32 volume)
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetVolumeCD()
+int32_t	GetVolumeCD()
 {
 	return	AIL_redbook_volume(Cd)	;
 }
@@ -217,9 +217,9 @@ void	ResumeCD()
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	IsCDPlaying()
+int32_t	IsCDPlaying()
 {
-	S32	playing	;
+	int32_t	playing	;
 
 	if( !CheckCD() || !Track)	return FALSE ;
 

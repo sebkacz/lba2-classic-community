@@ -14,9 +14,9 @@ extern "C" {
 // --- Public state ------------------------------------------------------------
 void *Log = NULL;
 void *Screen = NULL;
-U32 ModeDesiredX = 0;
-U32 ModeDesiredY = 0;
-U32 TabOffLine[ADELINE_MAX_Y_RES];
+uint32_t ModeDesiredX = 0;
+uint32_t ModeDesiredY = 0;
+uint32_t TabOffLine[ADELINE_MAX_Y_RES];
 
 // --- Initialization ----------------------------------------------------------
 bool InitScreen() {
@@ -39,7 +39,7 @@ void EndScreen() {
 }
 
 // --- Interface ---------------------------------------------------------------
-bool CreateScreenMemory(U32 resX, U32 resY) {
+bool CreateScreenMemory(uint32_t resX, uint32_t resY) {
   // Log and Screen are not asserted to be NULL since they may be already
   //  allocated at InitMainBuffer()
 
@@ -70,8 +70,8 @@ bool CreateScreenMemory(U32 resX, U32 resY) {
   ModeDesiredY = resY;
 
   // Fill the log and screen table
-  S32 off = 0;
-  for (S32 i = 0; i < ADELINE_MAX_Y_RES; i++) {
+  int32_t off = 0;
+  for (int32_t i = 0; i < ADELINE_MAX_Y_RES; i++) {
     TabOffLine[i] = off;
     off += ModeDesiredX;
   }

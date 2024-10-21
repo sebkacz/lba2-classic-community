@@ -88,9 +88,9 @@ T_MENU_COMP	ListMenuComp[MAX_MENUS_COMP] = {
 MOVE		RealRot 	;
 T_OBJ_3D	InvObjTwinsen[MAX_COMPORTEMENTS];
 
-S32	DebComportement = 110 ;	// Espacement entre deux comportement
-S32	ComportementMenu = 0 ;		// menu comportement en cours
-S32	IndexComportement = 0 ;
+int32_t	DebComportement = 110 ;	// Espacement entre deux comportement
+int32_t	ComportementMenu = 0 ;		// menu comportement en cours
+int32_t	IndexComportement = 0 ;
 
 #define	CTRL_X0	100
 #define	CTRL_Y0	100
@@ -104,12 +104,12 @@ S32	IndexComportement = 0 ;
 /*══════════════════════════════════════════════════════════════════════════*/
 
 // Recupere le menu comportement precedent disponible
-S32	GetPreviousMenuComp( )
+int32_t	GetPreviousMenuComp( )
 {
 	T_MENU_COMP *ptrmcomp = &ListMenuComp[ComportementMenu] ;
 
-	S32	flag = FALSE ;
-	S32	n = -1 ;
+	int32_t	flag = FALSE ;
+	int32_t	n = -1 ;
 
 	while( !flag AND n!=ComportementMenu )
 	{
@@ -131,12 +131,12 @@ S32	GetPreviousMenuComp( )
 }
 
 // Recupere le menu comportement suivant disponible
-S32	GetNextMenuComp( )
+int32_t	GetNextMenuComp( )
 {
 	T_MENU_COMP *ptrmcomp = &ListMenuComp[ComportementMenu] ;
 
-	S32	flag = FALSE ;
-	S32	n = -1 ;
+	int32_t	flag = FALSE ;
+	int32_t	n = -1 ;
 
 	while( !flag AND n!=ComportementMenu )
 	{
@@ -159,11 +159,11 @@ S32	GetNextMenuComp( )
 
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	DrawObjComportement( S32 x0, S32 y0, S32 x1, S32 y1,
-	S32 y3d , S32 betaflag ,
+void	DrawObjComportement( int32_t x0, int32_t y0, int32_t x1, int32_t y1,
+	int32_t y3d , int32_t betaflag ,
 	T_OBJ_3D *ptrobj3d )
 {
-	S32	beta ;
+	int32_t	beta ;
 
 	SetIsoProjection( (x1+x0)/2, (y1+y0)/2 );
 
@@ -188,9 +188,9 @@ void	DrawObjComportement( S32 x0, S32 y0, S32 x1, S32 y1,
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	DrawComportement( S32 num, S32 comportement, S32 beta, S32 copyblock )
+void	DrawComportement( int32_t num, int32_t comportement, int32_t beta, int32_t copyblock )
 {
-	S32	x0, y0, x1, y1 	;
+	int32_t	x0, y0, x1, y1 	;
 
 	x0 = CTRL_X0+DebComportement + num * 110 -1	;
 	y0 = CTRL_Y0+10-1 			;
@@ -219,7 +219,7 @@ void	DrawComportement( S32 num, S32 comportement, S32 beta, S32 copyblock )
 	}
 	else
 	{
-		U32	arrows	= 0 ;
+		uint32_t	arrows	= 0 ;
 
 		// cadre des comportements
 		DrawCadreBox( x0,y0, x1,y1, COUL_SELECT_MENU ) ;
@@ -260,11 +260,11 @@ void	DrawComportement( S32 num, S32 comportement, S32 beta, S32 copyblock )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	DrawInfoMenu( S32 x0, S32 y0 )
+void	DrawInfoMenu( int32_t x0, int32_t y0 )
 {
-	S32	x,x1 ;
-	S32	l ;
-	S32	lifepoint ;
+	int32_t	x,x1 ;
+	int32_t	l ;
+	int32_t	lifepoint ;
 
 	UnsetClip() ;
 
@@ -355,9 +355,9 @@ void	DrawInfoMenu( S32 x0, S32 y0 )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	DrawMenuComportement( S32 beta )
+void	DrawMenuComportement( int32_t beta )
 {
-	S32	n ;
+	int32_t	n ;
 	T_MENU_COMP *ptrmcomp = &ListMenuComp[ComportementMenu] ;
 
 	SetIsoProjection( 320-8-1, 240 ) 			;
@@ -396,21 +396,21 @@ void	CalculeDebComportement( T_MENU_COMP *ptrmcomp )
 // parametre release: TRUE si on désire laisser le menu comportement actif
 // si on lache rapidement la touche <CTRL>
 
-void	MenuComportement( S32 affone )
+void	MenuComportement( int32_t affone )
 {
 	T_OBJET	*ptrobj 	;
-	U8	*memoptrfile3d 	;
-	S32	oldindex 	;
-	S32	oldmenu		;
-	S32	memoisland 	;
-	S32	bodyhero	;
-	S32	release = TRUE	;
-	S32	n		;
-	S32	flag = FALSE	;
-	S32	savetimer	;
-	S32	oldcomp		;
+	uint8_t	*memoptrfile3d 	;
+	int32_t	oldindex 	;
+	int32_t	oldmenu		;
+	int32_t	memoisland 	;
+	int32_t	bodyhero	;
+	int32_t	release = TRUE	;
+	int32_t	n		;
+	int32_t	flag = FALSE	;
+	int32_t	savetimer	;
+	int32_t	oldcomp		;
 	T_MENU_COMP *ptrmcomp	;
-	S32	flagproto = FALSE ;
+	int32_t	flagproto = FALSE ;
 
 	SaveTimer() ;
 
@@ -587,7 +587,7 @@ void	MenuComportement( S32 affone )
 				IndexComportement = ptrmcomp->NbComps-1 ;
 
 			oldindex = IndexComportement ;
-			Comportement = (U8)ptrmcomp->Comps[IndexComportement] ;
+			Comportement = (uint8_t)ptrmcomp->Comps[IndexComportement] ;
 
 			CopyBlock( CTRL_X0, CTRL_Y0, CTRL_X1, CTRL_Y1, Screen,
 				   CTRL_X0, CTRL_Y0, Log ) ;
@@ -618,7 +618,7 @@ void	MenuComportement( S32 affone )
 
 		if( IndexComportement != oldindex )
 		{
-			Comportement = (U8)ptrmcomp->Comps[IndexComportement] ;
+			Comportement = (uint8_t)ptrmcomp->Comps[IndexComportement] ;
 
 			DrawComportement( oldindex, ptrmcomp->Comps[oldindex], ptrobj->Obj.Beta, TRUE ) ;
 
@@ -642,7 +642,7 @@ void	MenuComportement( S32 affone )
 	if( oldcomp==C_BUGGY AND Comportement!=C_BUGGY )
 	{
 		ptrobj->Move = MOVE_MANUAL ;
-		LeaveBuggy( (U8)Comportement ) ;
+		LeaveBuggy( (uint8_t)Comportement ) ;
 	}
 
 	SetComportement( Comportement ) ;
@@ -676,9 +676,9 @@ void	MenuComportement( S32 affone )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	IncrustComportement( U8 comportement )
+void	IncrustComportement( uint8_t comportement )
 {
-	S32	n ;
+	int32_t	n ;
 	T_INCRUST_DISP	*ptrdisp = ListIncrustDisp ;
 
 	// clear old SYS_TEXT
@@ -691,7 +691,7 @@ void	IncrustComportement( U8 comportement )
 	}
 
 	InitIncrustDisp( INCRUST_SYS_TEXT,
-			 (S16)comportement,
+			 (int16_t)comportement,
 			 10, ClipWindowYMax-40,
 			 LBAWHITE, 0, 1 ) ;
 }

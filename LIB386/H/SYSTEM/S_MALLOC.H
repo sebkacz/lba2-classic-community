@@ -9,8 +9,8 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 void SafeErrorMallocMsg();
-void SafeFree(void *ptr, char *file, U32 line);
-void *SafeMshrink(void *ptr, U32 taille, char *file, U32 line);
+void SafeFree(void *ptr, char *file, uint32_t line);
+void *SafeMshrink(void *ptr, uint32_t taille, char *file, uint32_t line);
 
 // =============================================================================
 #ifdef __cplusplus

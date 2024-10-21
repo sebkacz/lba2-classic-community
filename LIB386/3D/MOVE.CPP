@@ -9,8 +9,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-void ChangeSpeedMove(MOVE *pmove, S32 speed) {
-  U32 timer, delta;
+void ChangeSpeedMove(MOVE *pmove, int32_t speed) {
+  uint32_t timer, delta;
 
   timer = TimerRefHR;
 
@@ -24,31 +24,31 @@ void ChangeSpeedMove(MOVE *pmove, S32 speed) {
   pmove->Speed = speed;
 }
 
-void InitMove(MOVE *pmove, S32 speed) {
+void InitMove(MOVE *pmove, int32_t speed) {
   RestartMove(pmove);
   pmove->Speed = speed;
 }
 
-void ChangeSpeedAngleMove(MOVE *pmove, S32 speed, S32 start, S32 end) {
+void ChangeSpeedAngleMove(MOVE *pmove, int32_t speed, int32_t start, int32_t end) {
   ChangeSpeedMove(pmove, AdjustSpeedAngle(speed, start, end));
 }
 
-void InitAngleMove(MOVE *pmove, S32 speed, S32 start, S32 end) {
+void InitAngleMove(MOVE *pmove, int32_t speed, int32_t start, int32_t end) {
   InitMove(pmove, AdjustSpeedAngle(speed, start, end));
 }
 
-void ChangeSpeedBoundAngleMove(BOUND_MOVE *pbmove, S32 speed, S32 end) {
+void ChangeSpeedBoundAngleMove(BOUND_MOVE *pbmove, int32_t speed, int32_t end) {
   ChangeSpeedMove(&(pbmove->Move), AdjustSpeedAngle(speed, pbmove->Cur, end));
   pbmove->End = end & 4095;
 }
 
-void InitBoundAngleMove(BOUND_MOVE *pbmove, S32 speed, S32 start, S32 end) {
+void InitBoundAngleMove(BOUND_MOVE *pbmove, int32_t speed, int32_t start, int32_t end) {
   InitAngleMove(&(pbmove->Move), speed, start, end);
   pbmove->Cur = start & 4095;
   pbmove->End = end & 4095;
 }
 
-void InitBoundMove(BOUND_MOVE *pbmove, S32 speed, S32 start, S32 end) {
+void InitBoundMove(BOUND_MOVE *pbmove, int32_t speed, int32_t start, int32_t end) {
   if (start == end) {
     speed = 0;
   } else if (start > end) {
@@ -61,8 +61,8 @@ void InitBoundMove(BOUND_MOVE *pbmove, S32 speed, S32 start, S32 end) {
   pbmove->End = end;
 }
 
-S32 GetDeltaMove(MOVE *pmove) {
-  U32 timer, delta;
+int32_t GetDeltaMove(MOVE *pmove) {
+  uint32_t timer, delta;
 
   timer = TimerRefHR;
 
@@ -77,14 +77,14 @@ S32 GetDeltaMove(MOVE *pmove) {
   }
 }
 
-S32 GetBoundMove(BOUND_MOVE *pbmove) {
-  S32 temp, cur;
+int32_t GetBoundMove(BOUND_MOVE *pbmove) {
+  int32_t temp, cur;
 
   temp = GetDeltaMove(&(pbmove->Move));
   cur = pbmove->Cur;
 
   if (temp) {
-    S32 end;
+    int32_t end;
 
     end = pbmove->End;
 
@@ -108,14 +108,14 @@ S32 GetBoundMove(BOUND_MOVE *pbmove) {
   return cur;
 }
 
-S32 GetBoundAngleMove(BOUND_MOVE *pbmove) {
-  S32 temp, cur;
+int32_t GetBoundAngleMove(BOUND_MOVE *pbmove) {
+  int32_t temp, cur;
 
   temp = GetDeltaMove(&(pbmove->Move));
   cur = pbmove->Cur;
 
   if (temp) {
-    S32 end;
+    int32_t end;
 
     end = pbmove->End;
 
@@ -150,8 +150,8 @@ S32 GetBoundAngleMove(BOUND_MOVE *pbmove) {
   return cur;
 }
 
-S32 AdjustSpeedAngle(S32 speed, S32 start, S32 end) {
-  S32 diff = (end & 4095) - (start & 4095);
+int32_t AdjustSpeedAngle(int32_t speed, int32_t start, int32_t end) {
+  int32_t diff = (end & 4095) - (start & 4095);
   if (diff == 0) {
     return 0;
   }
@@ -164,7 +164,7 @@ S32 AdjustSpeedAngle(S32 speed, S32 start, S32 end) {
   return (diff < 2048) ? speed : -speed;
 }
 
-S32 GetDeltaAccMove(S32 *acc) {
+int32_t GetDeltaAccMove(int32_t *acc) {
   if (*acc >= 1000 || *acc <= -1000) {
     ldiv_t tmpDivRem = ldiv(*acc, 1000);
     *acc = tmpDivRem.rem;

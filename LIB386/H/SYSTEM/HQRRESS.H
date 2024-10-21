@@ -17,10 +17,10 @@ extern	"C"	{
 
 //──────────────────────────────────────────────────────────────────────────
 typedef struct  {
-                        S32		MaxSize	;
-                        S32		FreeSize;
-                        S32		MaxIndex;
-                        S32		NbIndex	;
+                        int32_t		MaxSize	;
+                        int32_t		FreeSize;
+                        int32_t		MaxIndex;
+                        int32_t		NbIndex	;
                         void		*Buffer	;
                         char		Name[ADELINE_MAX_PATH];
 		}	T_HQR_HEADER 		;
@@ -29,7 +29,7 @@ typedef struct  {
 #pragma	pack(pop)
 
 //──────────────────────────────────────────────────────────────────────────
-typedef	void	(HQR_GET_CALLBACK)(char *hqrname, S32 index);
+typedef	void	(HQR_GET_CALLBACK)(char *hqrname, int32_t index);
 
 //──────────────────────────────────────────────────────────────────────────
 extern	HQR_GET_CALLBACK	*HQRGetErrorFunc;
@@ -42,12 +42,12 @@ extern	HQR_GET_CALLBACK	*HQRGetDelFunc	;
 #pragma	aux	HqrGetDelFunc	"*"
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	HQR_Flag ;
+extern	int32_t	HQR_Flag ;
 
 //──────────────────────────────────────────────────────────────────────────
 extern	T_HQR_HEADER	*HQR_Init_Ressource(	const char	*hqrname,
- 						S32	maxsize,
-						S32	maxrsrc		);
+ 						int32_t	maxsize,
+						int32_t	maxrsrc		);
 
 //──────────────────────────────────────────────────────────────────────────
 #define			HQR_Lock_Ressource(header)
@@ -56,7 +56,7 @@ extern	T_HQR_HEADER	*HQR_Init_Ressource(	const char	*hqrname,
 extern	void		HQR_Reset_Ressource(	T_HQR_HEADER *header	);
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32		HQR_Change_Ressource(	T_HQR_HEADER *header,
+extern	int32_t		HQR_Change_Ressource(	T_HQR_HEADER *header,
 						const char *newhqrname	);
 
 //──────────────────────────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ extern	void		HQR_Free_Ressource(	T_HQR_HEADER *header	);
 
 //──────────────────────────────────────────────────────────────────────────
 extern	void		*HQR_Get(		T_HQR_HEADER *header,
-						S32 index		);
+						int32_t index		);
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

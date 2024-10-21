@@ -2,24 +2,24 @@
 #define	PATCH_H
 
 typedef struct {
-	S16	Size	;
-	S16	Offset	;
+	int16_t	Size	;
+	int16_t	Offset	;
 	} T_PATCH ;
 
 #define	MAX_PATCHES        500
 
 #ifdef	COMPILATOR
-extern	S32	MaxPatches  	;
+extern	int32_t	MaxPatches  	;
 extern	T_PATCH	ListPatches[MAX_PATCHES] ;
 #else
 extern	T_PATCH *ListPatches ;
 #endif
 
-extern	S32	NbPatches  ;
+extern	int32_t	NbPatches  ;
 
 #ifdef	COMPILATOR
 //─────────────────────────────────────────────────────────────────────────────
-extern	void	AddPatch( S16 size, S16 offset ) ;
+extern	void	AddPatch( int16_t size, int16_t offset ) ;
 #else
 //─────────────────────────────────────────────────────────────────────────────
 extern	void	SetPatches( void ) ;

@@ -6,7 +6,7 @@ extern "C" {
 #define	FUNC_H
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern U32	ComputeTime( void );
+extern uint32_t	ComputeTime( void );
 
 #pragma	aux     ComputeTime	"*"	\
 		parm caller []		\
@@ -14,7 +14,7 @@ extern U32	ComputeTime( void );
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern U32	GetHDFreeSize( void );
+extern uint32_t	GetHDFreeSize( void );
 
 #pragma	aux     GetHDFreeSize	"*"	\
 		parm caller []		\
@@ -23,7 +23,7 @@ extern U32	GetHDFreeSize( void );
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern void	SmallSort(T_SORT *, U32, U32);
+extern void	SmallSort(T_SORT *, uint32_t, uint32_t);
 
 #pragma	aux     SmallSort	"*"	\
 		parm caller []		\
@@ -39,11 +39,11 @@ extern void	SmallSort(T_SORT *, U32, U32);
 #define	PaletteSync(pal)	{ SetVideoPaletteSync(pal); }
 //#define	PaletteSync(pal)	{ VsyncTimer(); Palette(pal); }
 
-//extern void	PaletteSync( U8 *palette ) ;
+//extern void	PaletteSync( uint8_t *palette ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern U8	SearchBoundColRGB( U8 Rouge, U8 Vert, U8 Bleu, U8 *Palette, U8 coulmin, U8 coulmax ) ;
+extern uint8_t	SearchBoundColRGB( uint8_t Rouge, uint8_t Vert, uint8_t Bleu, uint8_t *Palette, uint8_t coulmin, uint8_t coulmax ) ;
 
 #pragma	aux     SearchBoundColRGB	"*"	\
 		parm caller []			\

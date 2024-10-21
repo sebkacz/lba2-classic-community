@@ -12,17 +12,17 @@ extern "C" {
 #endif
 
 // --- Public state ------------------------------------------------------------
-volatile U32 TimerSystemHR;
-volatile U32 TimerRefHR;
-volatile S32 CmptFrame;
-volatile S32 NbFramePerSecond;
+volatile uint32_t TimerSystemHR;
+volatile uint32_t TimerRefHR;
+volatile int32_t CmptFrame;
+volatile int32_t NbFramePerSecond;
 
 // --- Private state -----------------------------------------------------------
-volatile S32 TimerLock;
-volatile S32 CmptMemoTimerRef;
-static U32 MemoTimerRefHR;
-U32 LastTime;
-U32 LastEvaluate;
+volatile int32_t TimerLock;
+volatile int32_t CmptMemoTimerRef;
+static uint32_t MemoTimerRefHR;
+uint32_t LastTime;
+uint32_t LastEvaluate;
 
 // --- Initialization ----------------------------------------------------------
 void InitTimer() {
@@ -63,7 +63,7 @@ void RestoreTimer() {
   }
 }
 
-void SetTimerHR(U32 time) {
+void SetTimerHR(uint32_t time) {
   LockTimer();
   TimerRefHR = time;
   UnlockTimer();
@@ -79,7 +79,7 @@ void ManageTime() {
   LastTime = TimerSystemHR;
 
   // FPS Calculation
-  S32 time = TimerSystemHR - LastEvaluate;
+  int32_t time = TimerSystemHR - LastEvaluate;
   if (time >= 1000) {
     NbFramePerSecond = (CmptFrame * 1000 + time / 2) / time;
     CmptFrame = 0;

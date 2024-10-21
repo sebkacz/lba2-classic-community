@@ -10,7 +10,7 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 typedef void(Func_RotTransList)(TYPE_MAT *Mat, TYPE_VT16 *Dst, TYPE_VT16 *Src,
-                                S32 NbPoints);
+                                int32_t NbPoints);
 
 // -----------------------------------------------------------------------------
 extern Func_RotTransList *RotTransList; ///< Do Not call from C

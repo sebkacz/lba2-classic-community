@@ -29,7 +29,7 @@
 		public	C	ProjectListIso
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	ProjectListIso(S32 *Dst, S32 *Src, S32 NbPt, S32 OrgX, S32 OrgY, OrgZ);
+;void	ProjectListIso(int32_t *Dst, int32_t *Src, int32_t NbPt, int32_t OrgX, int32_t OrgY, OrgZ);
 
 ;#pragma aux ProjectListIso			\
 ;	parm		[edi] [esi] [ecx]	\

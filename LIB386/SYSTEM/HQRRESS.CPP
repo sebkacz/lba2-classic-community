@@ -10,10 +10,10 @@
 #include	<string.h>
 
 //──────────────────────────────────────────────────────────────────────────
-typedef struct  {       S32		Index	;
+typedef struct  {       int32_t		Index	;
                         void		*Ptr	;
-                        S32		Size	;
-                        U32		Time	;
+                        int32_t		Size	;
+                        uint32_t		Time	;
 		}       T_HQR_BLOC 		;
 
 //──────────────────────────────────────────────────────────────────────────
@@ -21,7 +21,7 @@ HQR_GET_CALLBACK	*HQRGetErrorFunc= NULL	;
 HQR_GET_CALLBACK	*HQRGetDelFunc	= NULL	;
 
 //──────────────────────────────────────────────────────────────────────────
-S32	HQR_Flag ;	// flag "load done" par HQR_Get
+int32_t	HQR_Flag ;	// flag "load done" par HQR_Get
 
 //──────────────────────────────────────────────────────────────────────────
 // initialise la gestion bufferisée d'une ressource
@@ -30,8 +30,8 @@ S32	HQR_Flag ;	// flag "load done" par HQR_Get
 // MaxIndex: nombre de fiche max stocké
 // (devrait être > maxsize/average file size )
 T_HQR_HEADER	*HQR_Init_Ressource(	const char	*hqrname,
- 					S32	maxsize,
-					S32	maxrsrc	)
+ 					int32_t	maxsize,
+					int32_t	maxrsrc	)
 {
 	T_HQR_HEADER	*header ;
 	void		*buffer ;
@@ -74,7 +74,7 @@ void	HQR_Reset_Ressource(T_HQR_HEADER *header)
 
 //──────────────────────────────────────────────────────────────────────────
 // change le nom du fichiers HQR qui contient les fiches (vide le buffer)
-S32	HQR_Change_Ressource(T_HQR_HEADER *header, const char *newhqrname)
+int32_t	HQR_Change_Ressource(T_HQR_HEADER *header, const char *newhqrname)
 {
 	if(newhqrname && newhqrname[0])
 	{
@@ -116,10 +116,10 @@ void	HQR_Free_Ressource(T_HQR_HEADER *header)
 
 //──────────────────────────────────────────────────────────────────────────
 // retourne le pointeur mémoire de la fiche (index) demandée
-T_HQR_BLOC *HQR_GiveBloc(S32 index, S32 nbindex, T_HQR_BLOC *bloc) {
+T_HQR_BLOC *HQR_GiveBloc(int32_t index, int32_t nbindex, T_HQR_BLOC *bloc) {
         if (nbindex > 0) {
                 T_HQR_BLOC *endOfBlocs = &bloc[nbindex];
-                for (S32 n = 0; &bloc[n] != endOfBlocs; ++n) {
+                for (int32_t n = 0; &bloc[n] != endOfBlocs; ++n) {
                         T_HQR_BLOC *currBloc = &bloc[n];
                         if (currBloc->Index == index) {
                           return currBloc;
@@ -132,11 +132,11 @@ T_HQR_BLOC *HQR_GiveBloc(S32 index, S32 nbindex, T_HQR_BLOC *bloc) {
 
 //──────────────────────────────────────────────────────────────────────────
 // supprime une fiche dans le buffer d'une ressource
-static inline void HQR_Del_Bloc(T_HQR_HEADER *header, S32 index)
+static inline void HQR_Del_Bloc(T_HQR_HEADER *header, int32_t index)
 {
-	S32		n			;
+	int32_t		n			;
 	T_HQR_BLOC	*ptrbloc		;
-	S32		delsize			;
+	int32_t		delsize			;
 	void		*ptrs, *ptrd		;
 
 	ptrbloc = (T_HQR_BLOC*)(header+1);
@@ -147,8 +147,8 @@ static inline void HQR_Del_Bloc(T_HQR_HEADER *header, S32 index)
 	{
 		// shift buffer
 		ptrd = ptrbloc[index].Ptr 		;
-		ptrs = (void*)((U8*)ptrd + delsize)	;
-		memmove(ptrd, ptrs, (header->MaxSize-header->FreeSize)-((U32)ptrs-(U32)(header->Buffer)) ) ;
+		ptrs = (void*)((uint8_t*)ptrd + delsize)	;
+		memmove(ptrd, ptrs, (header->MaxSize-header->FreeSize)-((uint32_t)ptrs-(uint32_t)(header->Buffer)) ) ;
 
 		// shift index table
 		ptrd = (void*)&ptrbloc[index]		;
@@ -158,7 +158,7 @@ static inline void HQR_Del_Bloc(T_HQR_HEADER *header, S32 index)
 		// shift index value
 		for(n=index; n<(header->NbIndex-1); n++ )
 		{
-			*(S32*)&(ptrbloc[n].Ptr) -= delsize;
+			*(int32_t*)&(ptrbloc[n].Ptr) -= delsize;
 		}
 	}
 
@@ -169,13 +169,13 @@ static inline void HQR_Del_Bloc(T_HQR_HEADER *header, S32 index)
 
 //──────────────────────────────────────────────────────────────────────────
 // retourne le pointeur mémoire de la fiche (index) demandée
-void	*HQR_Get(T_HQR_HEADER *header, S32 index)
+void	*HQR_Get(T_HQR_HEADER *header, int32_t index)
 {
-	S32		n, oldest	;
-	U32		testtime	;
+	int32_t		n, oldest	;
+	uint32_t		testtime	;
 	void		*ptr		;
 	T_HQR_BLOC	*ptrbloc	;
-	S32		size		;
+	int32_t		size		;
 
 	if(index < 0) 	goto error	;
 
@@ -231,7 +231,7 @@ error:				if(HQRGetErrorFunc)	HQRGetErrorFunc(header->Name, index)	;
 		}
 
 		// compute ptr
-		ptr = (void *)((U8*)header->Buffer + header->MaxSize - header->FreeSize);
+		ptr = (void *)((uint8_t*)header->Buffer + header->MaxSize - header->FreeSize);
 
 		// space size ok, update struct
 		ptrbloc[header->NbIndex].Index	= index		;

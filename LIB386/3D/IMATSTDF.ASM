@@ -50,7 +50,7 @@ M(Finale) = {M(Alpha)*M(Gamma)}*M(Beta)
 
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	InitMatrixStdF(S32 *MatDst, S32 alpha, S32 beta, S32 gamma) ;
+;void	InitMatrixStdF(int32_t *MatDst, int32_t alpha, int32_t beta, int32_t gamma) ;
 
 ;#pragma aux InitMatrixStdF	"*"		\
 ;	parm		[edi] [eax] [ebx] [ecx]	\

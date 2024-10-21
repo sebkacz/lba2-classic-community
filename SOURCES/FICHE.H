@@ -2,23 +2,23 @@
 #define	FICHE_H
 
 /*--------------------------------------------------------------------------*/
-extern void ThrowMagicBall(S32 x,S32 y,S32 z,S32 alpha,S32 beta,S32 vitesse,U8 poids);
+extern void ThrowMagicBall(int32_t x,int32_t y,int32_t z,int32_t alpha,int32_t beta,int32_t vitesse,uint8_t poids);
 /*--------------------------------------------------------------------------*/
-extern void SampleMagicBall(S32 x,S32 y,S32 z);
+extern void SampleMagicBall(int32_t x,int32_t y,int32_t z);
 /*--------------------------------------------------------------------------*/
-extern S32 ThrowDart(S32 x,S32 y,S32 z,S32 alpha,S32 beta,S32 vitesse,U8 poids);
+extern int32_t ThrowDart(int32_t x,int32_t y,int32_t z,int32_t alpha,int32_t beta,int32_t vitesse,uint8_t poids);
 /*--------------------------------------------------------------------------*/
-extern void ThrowConque(T_OBJET *ptrobj,S32 x,S32 y,S32 z,S16 nb);
+extern void ThrowConque(T_OBJET *ptrobj,int32_t x,int32_t y,int32_t z,int16_t nb);
 /*--------------------------------------------------------------------------*/
-extern U16  ChoiceAnimGant( void ) ;
+extern uint16_t  ChoiceAnimGant( void ) ;
 /*--------------------------------------------------------------------------*/
 extern void InitBodyZV( T_OBJET *ptrobj ) ;
 /*--------------------------------------------------------------------------*/
-extern void GereAnimAction(T_OBJET *ptrobj,U8 numobj);
+extern void GereAnimAction(T_OBJET *ptrobj,uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern S32  SearchAnim(U16 numanim,S32 numobj);
+extern int32_t  SearchAnim(uint16_t numanim,int32_t numobj);
 /*--------------------------------------------------------------------------*/
-extern S32  SearchBody(U8 numbody,S32 numobj);
+extern int32_t  SearchBody(uint8_t numbody,int32_t numobj);
 /*--------------------------------------------------------------------------*/
 
 #endif	// FICHE_H

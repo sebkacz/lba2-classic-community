@@ -8,7 +8,7 @@
 #include	<string.h>
 
 //----------------------------------------------------------------------------
-	U32	QuietLog = FALSE	;
+	uint32_t	QuietLog = FALSE	;
 static	char	LogName[ADELINE_MAX_PATH]=""	;
 static	char	LogStr[256]		;
 

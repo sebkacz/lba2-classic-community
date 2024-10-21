@@ -4,18 +4,18 @@
 #include <SYSTEM/KEYBOARD.H>
 
 //***************************************************************************
-	U32	Input		;
+	uint32_t	Input		;
 
 //***************************************************************************
-static	U32	NoRepeatInput	;
+static	uint32_t	NoRepeatInput	;
 
 //***************************************************************************
-static	S32	NbKeys		;
-static	U32	*InputKeys	;
-static	U32	*InputMasks	;
+static	int32_t	NbKeys		;
+static	uint32_t	*InputKeys	;
+static	uint32_t	*InputMasks	;
 
 //***************************************************************************
-void	DefineInputKeys(S32 nbkeys, U32 *keys, U32 *inputmasks)
+void	DefineInputKeys(int32_t nbkeys, uint32_t *keys, uint32_t *inputmasks)
 {
 	NbKeys		= nbkeys	;
 	InputKeys	= keys		;
@@ -23,9 +23,9 @@ void	DefineInputKeys(S32 nbkeys, U32 *keys, U32 *inputmasks)
 }
 
 //***************************************************************************
-void    GetInput(U32 norepeat)
+void    GetInput(uint32_t norepeat)
 {
-	S32     i	;
+	int32_t     i	;
 
 	// update TabKeys
 	ManageKeyboard()		;

@@ -15,7 +15,7 @@
 			public	C	FastCopyF
 
 ;----------------------------------------------------------------------------
-;void	FastCopyF(void *dst, void *src, U32 len) ;
+;void	FastCopyF(void *dst, void *src, uint32_t len) ;
 
 ;#pragma aux FastCopyF	       	       	\
 ;	parm	[edi] [esi] [ecx]	\

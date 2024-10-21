@@ -10,13 +10,13 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	Input	;
+extern	uint32_t	Input	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	void	DefineInputKeys(S32 nbkeymasks, U32 *keys, U32 *inputmasks);
+extern	void	DefineInputKeys(int32_t nbkeymasks, uint32_t *keys, uint32_t *inputmasks);
 
 //──────────────────────────────────────────────────────────────────────────
-extern	void    GetInput(U32 norepeat)	;
+extern	void    GetInput(uint32_t norepeat)	;
 
 //──────────────────────────────────────────────────────────────────────────
 extern	void    ClearNoRepeatInput( void ) ;

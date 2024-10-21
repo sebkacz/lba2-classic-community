@@ -16,7 +16,7 @@
 		PUBLIC  C 	GetAngleVector2D
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;S32 	GetAngleVector2D( S32 x, S32 z)			;
+;int32_t 	GetAngleVector2D( int32_t x, int32_t z)			;
 
 ;#pragma aux GetAngleVector2D	"*"			\
 ;	parm		[eax] [ebx]	 		\

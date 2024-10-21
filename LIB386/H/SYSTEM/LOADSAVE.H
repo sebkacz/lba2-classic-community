@@ -10,13 +10,13 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	Load( char *name, void *buffer )		;
+extern	uint32_t	Load( char *name, void *buffer )		;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	LoadSize( char *name, void *buffer, S32 size )	;
+extern	int32_t	LoadSize( char *name, void *buffer, int32_t size )	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	Save( char *name, void *buffer, U32 size )	;
+extern	uint32_t	Save( char *name, void *buffer, uint32_t size )	;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

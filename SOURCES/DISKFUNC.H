@@ -8,9 +8,9 @@
 /*--------------------------------------------------------------------------*/
 extern void ChoicePalette(void) ;
 /*--------------------------------------------------------------------------*/
-extern S32  LoadScene(S32 numscene);
+extern int32_t  LoadScene(int32_t numscene);
 /*--------------------------------------------------------------------------*/
-extern S32  LoadSceneCubeXY( S32 numcube, S32 *cubex, S32 *cubey ) ;
+extern int32_t  LoadSceneCubeXY( int32_t numcube, int32_t *cubex, int32_t *cubey ) ;
 /*--------------------------------------------------------------------------*/
 extern void CreateLbaDirectories( void ) ;
 /*--------------------------------------------------------------------------*/

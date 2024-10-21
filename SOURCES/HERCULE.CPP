@@ -20,7 +20,7 @@
 
 //--------------------------------------------------------------
 
-S32	HTabY[25] =
+int32_t	HTabY[25] =
 	{
 		BASEH,
 		BASEH+160,
@@ -56,10 +56,10 @@ HBoxStyle       HBStyles[] =
 	} ;
 
 
-S32	ModeHercule = FALSE ;
+int32_t	ModeHercule = FALSE ;
 
-S32	HCurX = 0 ;
-S32	HCurY = 0 ;
+int32_t	HCurX = 0 ;
+int32_t	HCurY = 0 ;
 
 char	MsgBuf[1000] ;
 
@@ -73,9 +73,9 @@ char	MsgBuf[1000] ;
  *══════════════════════════════════════════════════════════════════════════*/
 
 //--------------------------------------------------------------
-void HCentre( S32 y, char *texte )
+void HCentre( int32_t y, char *texte )
 {
-	S32 x;
+	int32_t x;
 
 	x = (80/2) - ( strlen( texte ) / 2 );
 
@@ -83,9 +83,9 @@ void HCentre( S32 y, char *texte )
 }
 
 //--------------------------------------------------------------
-void HCentreC( S32 y, U8 attr, char *texte )
+void HCentreC( int32_t y, uint8_t attr, char *texte )
 {
-	S32 x;
+	int32_t x;
 
 	x = (80/2) - ( strlen ( texte ) / 2 );
 
@@ -93,9 +93,9 @@ void HCentreC( S32 y, U8 attr, char *texte )
 }
 
 //--------------------------------------------------------------
-void	HStringf( S32 x, S32 y, char *format, ... )
+void	HStringf( int32_t x, int32_t y, char *format, ... )
 {
-	S32	len ;
+	int32_t	len ;
 	char	MsgBuf[256];
 	va_list arglist;
 
@@ -108,9 +108,9 @@ void	HStringf( S32 x, S32 y, char *format, ... )
 }
 
 //--------------------------------------------------------------
-void	HStringfC( S32 x, S32 y, U8 attr, char *format, ... )
+void	HStringfC( int32_t x, int32_t y, uint8_t attr, char *format, ... )
 {
-	S32	len ;
+	int32_t	len ;
 	char	MsgBuf[256];
 	va_list arglist;
 
@@ -127,7 +127,7 @@ void	HStringfC( S32 x, S32 y, U8 attr, char *format, ... )
 
 void	HPrintf( char *format, ... )
 {
-	S32	len ;
+	int32_t	len ;
 	char	*ptr ;
 	va_list arglist;
 
@@ -176,9 +176,9 @@ void	HPrintf( char *format, ... )
 }
 
 //--------------------------------------------------------------
-void	HPrintfC( U8 attr, char *format, ... )
+void	HPrintfC( uint8_t attr, char *format, ... )
 {
-	S32	len ;
+	int32_t	len ;
 	char	MsgBuf[1000];
 	char	*ptr ;
 	va_list arglist;
@@ -230,7 +230,7 @@ void	HPrintfC( U8 attr, char *format, ... )
 // Gestion de curseur
 //--------------------------------------------------------------
 
-void	HGotoXY( S32 x, S32 y )
+void	HGotoXY( int32_t x, int32_t y )
 {
 	HCurX = x ;
 	HCurY = y ;
@@ -252,7 +252,7 @@ void	HGotoXY( S32 x, S32 y )
  *══════════════════════════════════════════════════════════════════════════*/
 
 //--------------------------------------------------------------
-void	HRect( S32 x0, S32 y0, S32 x1, S32 y1, U8 style )
+void	HRect( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t style )
 {
 	HBoxStyle *ptrs = &HBStyles[style] ;
 
@@ -269,7 +269,7 @@ void	HRect( S32 x0, S32 y0, S32 x1, S32 y1, U8 style )
 }
 
 //--------------------------------------------------------------
-void	HBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr, U8 style )
+void	HBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr, uint8_t style )
 {
 	HClsBox( x0, y0, x1, y1, attr ) ;
 	HRect( x0, y0, x1, y1, style ) ;
@@ -288,13 +288,13 @@ void	HBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr, U8 style )
 
 //--------------------------------------------------------------
 
-void	CaptureHerculeScreen( char *filename, U32 flags )
+void	CaptureHerculeScreen( char *filename, uint32_t flags )
 {
-	U8	*ptr = (U8 *)BASEH ;
-	U8	*buf ;
-	S32	size = 0 ;
+	uint8_t	*ptr = (uint8_t *)BASEH ;
+	uint8_t	*buf ;
+	int32_t	size = 0 ;
 
-	buf = (U8 *) Malloc( SIZE_SCREEN_MAX ) ;
+	buf = (uint8_t *) Malloc( SIZE_SCREEN_MAX ) ;
 
 	if( buf )
 	{
@@ -306,9 +306,9 @@ void	CaptureHerculeScreen( char *filename, U32 flags )
 		}
 		else
 		{
-			S32	n, t ;
-			U8	*ptr_buf = buf ;
-			U8	c ;
+			int32_t	n, t ;
+			uint8_t	*ptr_buf = buf ;
+			uint8_t	c ;
 
 			// traite les 25 lignes
 			for( n=0; n<25; n++ )

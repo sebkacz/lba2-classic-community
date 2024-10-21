@@ -20,11 +20,11 @@ extern 	HMDIDRIVER	MdiDriver			;// Handle to midi driver
 
 static	HWAVESYNTH	WaveSynthesizer	= NULL		;
 static	void		*WaveLib	= NULL		;
-static	S32		SizeLib		= 0		;
+static	int32_t		SizeLib		= 0		;
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	InitSampleSynthesizer( void *wavelib, S32 sizelib, S32 voices )
+void	InitSampleSynthesizer( void *wavelib, int32_t sizelib, int32_t voices )
 {
 	if((!Midi_Driver_Enabled)||(!Sample_Driver_Enabled))	return	;
 

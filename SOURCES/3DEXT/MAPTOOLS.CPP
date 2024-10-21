@@ -1,7 +1,7 @@
 #include "DEFINES.H"
 
-extern	void	HPrintf( S32 x, S32 y, char *format, ... ) ;
-extern	U8	AnimNumObj ;
+extern	void	HPrintf( int32_t x, int32_t y, char *format, ... ) ;
+extern	uint8_t	AnimNumObj ;
 
 extern	void	TestCameraPosObjets( void ) ;// ..\EXTFUNC.CPP
 
@@ -15,12 +15,12 @@ extern	void	TestCameraPosObjets( void ) ;// ..\EXTFUNC.CPP
 /*══════════════════════════════════════════════════════════════════════════*/
 // retourne le Y d'apres une position x(0 à 32767), z(0 à 32767) sur la map
 
-S32	CalculAltitudeObjet( S32 x, S32 z, S32 cj )
+int32_t	CalculAltitudeObjet( int32_t x, int32_t z, int32_t cj )
 {
 	T_HALF_POLY *mappoly ;
-	S32	y0,y1,y2,y3 ;
-	S32	dx,dz;
-	S32	dz0, dz1 ;
+	int32_t	y0,y1,y2,y3 ;
+	int32_t	dx,dz;
+	int32_t	dz0, dz1 ;
 
 	dx = x>>9; // div512
 	dz = z>>9; // div512
@@ -55,7 +55,7 @@ S32	CalculAltitudeObjet( S32 x, S32 z, S32 cj )
 		}
 
 
-		cj = (U8)mappoly->CodeJeu ;
+		cj = (uint8_t)mappoly->CodeJeu ;
 	}
 //--------------------------------------------------------------
 
@@ -67,7 +67,7 @@ S32	CalculAltitudeObjet( S32 x, S32 z, S32 cj )
 	if( cj==CJ_FOOT_WATER
 	OR  cj==CJ_WATER )
 	{
-		U8	*i = &MapIntensity[dz0+dx] 	;
+		uint8_t	*i = &MapIntensity[dz0+dx] 	;
 
 		y0 += (i[0]   >>4)*-200	;
 		y1 += (i[65]  >>4)*-200	;
@@ -118,10 +118,10 @@ S32	CalculAltitudeObjet( S32 x, S32 z, S32 cj )
 // l'objet dans l'eau
 
 /*
-S32	CalculOffsetYWater( S32 x, S32 z )
+int32_t	CalculOffsetYWater( int32_t x, int32_t z )
 {
-	S32	y0,y1,y2,y3 ;
-	S32	dx,dz;
+	int32_t	y0,y1,y2,y3 ;
+	int32_t	dx,dz;
 
 	dx = x>>9; // div512
 	dz = z>>9; // div512
@@ -162,9 +162,9 @@ S32	CalculOffsetYWater( S32 x, S32 z )
 /*══════════════════════════════════════════════════════════════════════════*/
 // permet de determiner sur quel triangle d'une brick se trouve un objet
 
-S32	GiveTriangle( S32 x, S32 z )
+int32_t	GiveTriangle( int32_t x, int32_t z )
 {
-	S32	dx,dz;
+	int32_t	dx,dz;
 
 	dx = x>>9; // div512
 	dz = z>>9; // div512
@@ -191,9 +191,9 @@ S32	GiveTriangle( S32 x, S32 z )
 // demande si une coor x,z est sur un poly interdit (collision)
 // retourne true ou false
 
-S32	GiveTerrainCol( S32 x, S32 z )
+int32_t	GiveTerrainCol( int32_t x, int32_t z )
 {
-	S32	dx,dz;
+	int32_t	dx,dz;
 
 	dx = x>>9; // div512
 	dz = z>>9; // div512
@@ -207,10 +207,10 @@ S32	GiveTerrainCol( S32 x, S32 z )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-U8	GiveTerrainCodeJeu( S32 x, S32 y, S32 z )
+uint8_t	GiveTerrainCodeJeu( int32_t x, int32_t y, int32_t z )
 {
-	S32	dx,dz;
-	U8	codejeu ;
+	int32_t	dx,dz;
+	uint8_t	codejeu ;
 	T_HALF_POLY *mappoly ;
 
 	if( CalculAltitudeObjet(x,z,0)<(y-1) )	return 0 ;
@@ -243,7 +243,7 @@ U8	GiveTerrainCodeJeu( S32 x, S32 y, S32 z )
 		}
 	}
 
-	codejeu = (U8)((mappoly->CodeJeu<<4) | mappoly->SampleStep) ;
+	codejeu = (uint8_t)((mappoly->CodeJeu<<4) | mappoly->SampleStep) ;
 
 	return codejeu ;
 }
@@ -254,14 +254,14 @@ U8	GiveTerrainCodeJeu( S32 x, S32 y, S32 z )
 // camtargetx -> VueOffsetX
 // CamPosX -> CameraX (lib)
 
-S32	SearchCameraPos( S32 x, S32 y, S32 z, S32 objbeta, S32 mode )
+int32_t	SearchCameraPos( int32_t x, int32_t y, int32_t z, int32_t objbeta, int32_t mode )
 {
-	S32	n, gy, i ;
-	S32	my ;
-	S32	nbstep, step ;
-	S32	searchbeta ;
+	int32_t	n, gy, i ;
+	int32_t	my ;
+	int32_t	nbstep, step ;
+	int32_t	searchbeta ;
 	T_DECORS	*ptrdec ;
-	S32	modified = FALSE ;
+	int32_t	modified = FALSE ;
 
 	if( mode == 0 )
 	{

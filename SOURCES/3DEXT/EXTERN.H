@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-S32	LineRain(S32 x0, S32 y0, S32 z0, S32 x1, S32 y1, S32 z1, S32 coul );
+int32_t	LineRain(int32_t x0, int32_t y0, int32_t z0, int32_t x1, int32_t y1, int32_t z1, int32_t coul );
 /*
 #pragma aux LineRain	"*"				\
 	parm caller [eax] [ebx] [edi] [ecx] [edx] [esi]
@@ -28,38 +28,38 @@ S32	LineRain(S32 x0, S32 y0, S32 z0, S32 x1, S32 y1, S32 z1, S32 coul );
 
 extern	char	IslandName[ADELINE_MAX_PATH] ;
 
-extern	S32	PalLevel	;
+extern	int32_t	PalLevel	;
 
-extern	S32	CurrentCubeX	;
-extern	S32	CurrentCubeY	;
+extern	int32_t	CurrentCubeX	;
+extern	int32_t	CurrentCubeY	;
 
-extern	S32	DrawTerrain 	;
+extern	int32_t	DrawTerrain 	;
 
-extern	U8	*ScreenAux 	;
-extern	U8	*ScreenTempo 	;
+extern	uint8_t	*ScreenAux 	;
+extern	uint8_t	*ScreenTempo 	;
 
 #ifdef	MOUNFRAC
-extern	S32	MyKey ;
-extern	S32	MyJoy ;
-extern	S32	MyFire ;
-extern	S32	MyClick ;
+extern	int32_t	MyKey ;
+extern	int32_t	MyJoy ;
+extern	int32_t	MyFire ;
+extern	int32_t	MyClick ;
 
-extern	U8	CurrentPalette[768] ;
+extern	uint8_t	CurrentPalette[768] ;
 #endif
 
 #ifndef	LBA_GAME
-extern	S32	MyMouseX ;
-extern	S32	MyMouseY ;
+extern	int32_t	MyMouseX ;
+extern	int32_t	MyMouseY ;
 #endif
 
 
 // vars edition terrain
 #ifndef	LBA_GAME
-extern	S32	IndXPolySelected ;
-extern	S32	IndZPolySelected ;
+extern	int32_t	IndXPolySelected ;
+extern	int32_t	IndZPolySelected ;
 #endif
 
-extern	S32	LastTriangle ;
+extern	int32_t	LastTriangle ;
 
 // test obj animé dans decors
 
@@ -73,11 +73,11 @@ extern "C" {
 
 typedef struct
 {
-	S32	Pt_XObs;
-	S32	Pt_YObs;
-	S32	Pt_ZObs;
-	S32	Pt_UObs;
-	S32	Pt_VObs;
+	int32_t	Pt_XObs;
+	int32_t	Pt_YObs;
+	int32_t	Pt_ZObs;
+	int32_t	Pt_UObs;
+	int32_t	Pt_VObs;
 }	Struc_Point3D;
 
 

@@ -11,7 +11,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-typedef	void (Func_RotatePoint)(TYPE_MAT *Mat, S32 x, S32 y, S32 z) ;
+typedef	void (Func_RotatePoint)(TYPE_MAT *Mat, int32_t x, int32_t y, int32_t z) ;
 
 #pragma aux Arg_RotatePoint	"*"	       	\
 	parm caller	[esi] [eax] [ebx] [ecx]	\
@@ -24,7 +24,7 @@ typedef	void (Func_RotatePoint)(TYPE_MAT *Mat, S32 x, S32 y, S32 z) ;
 extern	Func_RotatePoint	*RotatePointNoMMX;
 
 #define RotatePoint RotatePoint_C
-void RotatePoint_C(TYPE_MAT *Mat, S32 x, S32 y, S32 z) ;
+void RotatePoint_C(TYPE_MAT *Mat, int32_t x, int32_t y, int32_t z) ;
 
 //****************************************************************************
 #define	WorldRotatePoint(x, y, z) RotatePoint(&MatriceWorld, x, y, z)

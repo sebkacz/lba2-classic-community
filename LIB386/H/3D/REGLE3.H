@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 RegleTrois(S32 Val1, S32 Val2, S32 NbSteps, S32 CurrentStep);
-S32 BoundRegleTrois(S32 Val1, S32 Val2, S32 NbSteps, S32 CurrentStep);
+int32_t RegleTrois(int32_t Val1, int32_t Val2, int32_t NbSteps, int32_t CurrentStep);
+int32_t BoundRegleTrois(int32_t Val1, int32_t Val2, int32_t NbSteps, int32_t CurrentStep);
 
 // =============================================================================
 #ifdef __cplusplus

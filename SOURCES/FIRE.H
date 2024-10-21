@@ -6,9 +6,9 @@ extern "C" {
 #define	FIRE_H
 
 /*
-extern	U8	Imagen ;
+extern	uint8_t	Imagen ;
 
-extern	void	DoFire( S32 y, S16 coul ) ;
+extern	void	DoFire( int32_t y, int16_t coul ) ;
 
 #pragma	aux	DoFire	"*"		\
 		parm caller []		\

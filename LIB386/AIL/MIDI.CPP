@@ -26,7 +26,7 @@
 //████████████████████████████████████████████████████████████████████████████
 typedef struct
 	{
-		S32		block_num;
+		int32_t		block_num;
 	}
 	SEQ_DESC	;
 
@@ -36,15 +36,15 @@ extern 	HMDIDRIVER	MdiDriver			;// Handle to midi driver
 	HSEQUENCE      	Midi_Handle	= NULL		;
 
 static	SEQ_DESC	Sequence[MAX_SEQUENCE]		;
-static	volatile S32	Write_Seq	= -1		;
-static	volatile S32	Read_Seq       	= 0		;
-static	volatile S32	BlockPlaying	= -1		;
-static	volatile S32	WaitReset	= FALSE		;
-static	S32		MidiPaused	= 0		;
+static	volatile int32_t	Write_Seq	= -1		;
+static	volatile int32_t	Read_Seq       	= 0		;
+static	volatile int32_t	BlockPlaying	= -1		;
+static	volatile int32_t	WaitReset	= FALSE		;
+static	int32_t		MidiPaused	= 0		;
 
 //████████████████████████████████████████████████████████████████████████████
 
-static U8 ResetMidiXMI[]=
+static uint8_t ResetMidiXMI[]=
 {
 	0x46,0x4f,0x52,0x4d,0x00,0x00,0x00,0x0e,0x58,0x44,
 	0x49,0x52,0x49,0x4e,0x46,0x4f,0x00,0x00,0x00,0x02,
@@ -91,10 +91,10 @@ VOID_FUNC	SpecialInitMidiDriver	;
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	InitMidiDriver( char *driver_name )
+int32_t	InitMidiDriver( char *driver_name )
 {
 #ifndef	_WIN32
-	S32	type ;
+	int32_t	type ;
 #endif
 
 	if( Midi_Driver_Enabled )
@@ -248,7 +248,7 @@ static void WINAPI
 #else
 static void pascal
 #endif
-TriggerCallBack(HSEQUENCE handle, S32 channel, S32 value)
+TriggerCallBack(HSEQUENCE handle, int32_t channel, int32_t value)
 {
 	// Dummy code to avoid warnings (doesn't actually generate code)
 	handle	= handle	;
@@ -347,7 +347,7 @@ void	ResetMidi()
 
 //████████████████████████████████████████████████████████████████████████████
 
-U32	PrepareMidi( void *ptrxmi, S32 seq_num, S32 volume)
+uint32_t	PrepareMidi( void *ptrxmi, int32_t seq_num, int32_t volume)
 {
 	if( !Midi_Driver_Enabled )	return FALSE ;
 
@@ -397,7 +397,7 @@ void	ClearMidi()
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	PlayBlockMidi(S32 block_num)
+void	PlayBlockMidi(int32_t block_num)
 {
 	if( !Midi_Driver_Enabled )	return 	;
 
@@ -417,9 +417,9 @@ void	PlayBlockMidi(S32 block_num)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ChainBlockMidi(S32 block_num)
+void	ChainBlockMidi(int32_t block_num)
 {
-	S32	n, m	;
+	int32_t	n, m	;
 
 	if( !Midi_Driver_Enabled )	return 	;
 
@@ -452,7 +452,7 @@ void	ChainBlockMidi(S32 block_num)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ChangeVolumeMidi(LONG volume, S32 delay)
+void	ChangeVolumeMidi(LONG volume, int32_t delay)
 {
 	if( !Midi_Driver_Enabled )	return	;
 
@@ -532,7 +532,7 @@ void	ResumeMidi( )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetBlockPlayingMidi( )
+int32_t	GetBlockPlayingMidi( )
 {
 	if( !Midi_Driver_Enabled )	return	-1;
 

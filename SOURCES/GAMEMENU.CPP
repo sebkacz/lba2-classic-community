@@ -29,21 +29,21 @@
 #define SCREEN_SAVE_WIDTH       160
 #define SCREEN_SAVE_HEIGHT      120
 
-U8      CoulTextMenu = COUL_TEXT_MENU ;
-S32     LargeurMenu = 550 ;
+uint8_t      CoulTextMenu = COUL_TEXT_MENU ;
+int32_t     LargeurMenu = 550 ;
 
 #ifdef  DEMO
-S32     FlagShowEndDemo = FALSE ;
+int32_t     FlagShowEndDemo = FALSE ;
 #endif
 
 #define MAX_MAIN_MENUS  6
 
 char	NewGameTxt[20] ;// ATTENTION: max 19 chars
 
-U16     GameMainMenu[4+MAX_MAIN_MENUS*2] ;
+uint16_t     GameMainMenu[4+MAX_MAIN_MENUS*2] ;
 
 // Menu Principal Complet permettant de construire GameMainMenu
-U16     RealGameMainMenu[] = {
+uint16_t     RealGameMainMenu[] = {
                         0,      // selected
                         6,      // nb entries
                         335,    // y center
@@ -61,7 +61,7 @@ U16     RealGameMainMenu[] = {
 #define MENU_FULL_SCREEN      	6
 #define MENU_DISPLAY_TEXT       7
 
-U16     GameOptionMenu[] = {
+uint16_t     GameOptionMenu[] = {
 			0,      // selected
 			8,      // nb entries
 			260,    // y center
@@ -77,7 +77,7 @@ U16     GameOptionMenu[] = {
 			0, 16,  // Afficher les Textes ON/OFF
 				} ;
 
-U16     SavedConfirmMenu[] = {
+uint16_t     SavedConfirmMenu[] = {
 			0,      // selected
                         2,      // nb entries
                         350,    // y center.
@@ -88,7 +88,7 @@ U16     SavedConfirmMenu[] = {
 
                                 } ;
 
-U16     GameChoiceMenu[] = {
+uint16_t     GameChoiceMenu[] = {
                         0,      // selected
                         7,      // nb entries
                         0,      // y from top. byte 8(
@@ -103,7 +103,7 @@ U16     GameChoiceMenu[] = {
                         0, 6    }       ;
 
 #ifdef  DEMO
-U16     VolumeMenu[] = {
+uint16_t     VolumeMenu[] = {
                         0,      // selected
 			4,      // nb entries
                         240,    // y center
@@ -115,9 +115,9 @@ U16     VolumeMenu[] = {
 			6, 23,  // reglage volume Master
 			} ;
 #else
-U16	*VolumeMenu	;
+uint16_t	*VolumeMenu	;
 
-U16     VolumeMenuVoice[] = { // integere volume des voix
+uint16_t     VolumeMenuVoice[] = { // integere volume des voix
                         0,      // selected
                         6,      // nb entries
                         240,    // y center
@@ -131,7 +131,7 @@ U16     VolumeMenuVoice[] = { // integere volume des voix
 			6, 23,  // reglage volume Master
 			} ;
 
-U16     VolumeMenuNoVoice[] = { // integere volume des voix
+uint16_t     VolumeMenuNoVoice[] = { // integere volume des voix
 			0,      // selected
 			5,      // nb entries
                         240,    // y center
@@ -145,11 +145,11 @@ U16     VolumeMenuNoVoice[] = { // integere volume des voix
                         } ;
 #endif
 
-U32     TimerSample ;
-S32     CursorActif = FALSE ;
-S32     CursorX, CursorY ;
+uint32_t     TimerSample ;
+int32_t     CursorActif = FALSE ;
+int32_t     CursorX, CursorY ;
 
-extern  S32     EscTimer ;
+extern  int32_t     EscTimer ;
 
 // save players games
 
@@ -161,12 +161,12 @@ char    OldGamePathname[ADELINE_MAX_PATH] ;
 char    PlayerName[MAX_SIZE_PLAYER_NAME+1] ;
 
 const char    *MenuIncrustText = NULL ;
-S32     MenuIncrustTimer = 0 ;
-S32     MenuIncrustSprite= -1 ;
+int32_t     MenuIncrustTimer = 0 ;
+int32_t     MenuIncrustSprite= -1 ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     SelectPlayer = 0 ;
+int32_t     SelectPlayer = 0 ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
@@ -205,8 +205,8 @@ void    Init3DGame()
 /*──────────────────────────────────────────────────────────────────────────*/
 void    SetDetailLevel( void )
 {
-	S32	oldmaxpolysea  = MaxPolySea 	;
-	U8	olddrawhorizon = FlagDrawHorizon;
+	int32_t	oldmaxpolysea  = MaxPolySea 	;
+	uint8_t	olddrawhorizon = FlagDrawHorizon;
 
         switch( DetailLevel )
 	{
@@ -247,7 +247,7 @@ void    SetDetailLevel( void )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    InitMenuIncrustText( const char *text, S32 sprite, S32 time )
+void    InitMenuIncrustText( const char *text, int32_t sprite, int32_t time )
 {
         ManageTime() ;
         MenuIncrustText = text ;
@@ -256,29 +256,29 @@ void    InitMenuIncrustText( const char *text, S32 sprite, S32 time )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    DrawFireBar( S32 xmin, S32 ymin, S32 xmax, S32 ymax, S32 coul )
+void    DrawFireBar( int32_t xmin, int32_t ymin, int32_t xmax, int32_t ymax, int32_t coul )
 {
         Struc_Point     TabPoint[4];
 
-        TabPoint[0].Pt_XE       = (S16)xmin;
-        TabPoint[0].Pt_YE       = (S16)ymin;
-        TabPoint[0].Pt_MapU     = (U16)0;
-        TabPoint[0].Pt_MapV     = (U16)0;
+        TabPoint[0].Pt_XE       = (int16_t)xmin;
+        TabPoint[0].Pt_YE       = (int16_t)ymin;
+        TabPoint[0].Pt_MapU     = (uint16_t)0;
+        TabPoint[0].Pt_MapV     = (uint16_t)0;
 
-        TabPoint[1].Pt_XE       = (S16)xmin;
-        TabPoint[1].Pt_YE       = (S16)ymax;
-        TabPoint[1].Pt_MapU     = (U16)0;//(16<<8);
-        TabPoint[1].Pt_MapV     = (U16)((63<<8)+250);
+        TabPoint[1].Pt_XE       = (int16_t)xmin;
+        TabPoint[1].Pt_YE       = (int16_t)ymax;
+        TabPoint[1].Pt_MapU     = (uint16_t)0;//(16<<8);
+        TabPoint[1].Pt_MapV     = (uint16_t)((63<<8)+250);
 
-        TabPoint[2].Pt_XE       = (S16)xmax;
-        TabPoint[2].Pt_YE       = (S16)ymax;
-        TabPoint[2].Pt_MapU     = (U16)(2*((63<<8)+250));//(16<<8);
-        TabPoint[2].Pt_MapV     = (U16)((63<<8)+250);
+        TabPoint[2].Pt_XE       = (int16_t)xmax;
+        TabPoint[2].Pt_YE       = (int16_t)ymax;
+        TabPoint[2].Pt_MapU     = (uint16_t)(2*((63<<8)+250));//(16<<8);
+        TabPoint[2].Pt_MapV     = (uint16_t)((63<<8)+250);
 
-        TabPoint[3].Pt_XE       = (S16)xmax;
-        TabPoint[3].Pt_YE       = (S16)ymin;
-        TabPoint[3].Pt_MapU     = (U16)(2*((63<<8)+250));
-        TabPoint[3].Pt_MapV     = (U16)0;
+        TabPoint[3].Pt_XE       = (int16_t)xmax;
+        TabPoint[3].Pt_YE       = (int16_t)ymin;
+        TabPoint[3].Pt_MapU     = (uint16_t)(2*((63<<8)+250));
+        TabPoint[3].Pt_MapV     = (uint16_t)0;
 
         RepMask = 0x3f3f; // repmask x=32 y=32
 
@@ -316,15 +316,15 @@ int my_sort_function( const void *a, const void *b)
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32 PlayerGameList(char **ptrlistname, char *listname, S32 flagnew) {
+int32_t PlayerGameList(char **ptrlistname, char *listname, int32_t flagnew) {
   struct dirent *file;
   DIR *dir;
-  S32 wlong;
+  int32_t wlong;
   char pathname[ADELINE_MAX_PATH];
-  S32 nb = 0;
-  S32 handle;
+  int32_t nb = 0;
+  int32_t handle;
   char **startptrlist = ptrlistname;
-  U8 wbyte;
+  uint8_t wbyte;
 
   GetSavePath(pathname, ADELINE_MAX_PATH, NULL);
   dir = opendir(pathname);
@@ -388,15 +388,15 @@ S32 PlayerGameList(char **ptrlistname, char *listname, S32 flagnew) {
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32 FindPlayerFile() {
+int32_t FindPlayerFile() {
   struct dirent *file;
   DIR *dir;
   char pathname[ADELINE_MAX_PATH];
   char playername[MAX_SIZE_PLAYER_NAME + 1];
-  U8 *ptr;
-  S32 handle;
-  S32 wlong;
-  U8 wbyte;
+  uint8_t *ptr;
+  int32_t handle;
+  int32_t wlong;
+  uint8_t wbyte;
 
   GetSavePath(pathname, ADELINE_MAX_PATH, NULL);
   dir = opendir(pathname);
@@ -412,7 +412,7 @@ S32 FindPlayerFile() {
           Read(handle, &wbyte, 1);             // num version
           Read(handle, &wlong, sizeof(wlong)); // num cube
 
-          ptr = (U8 *)playername;
+          ptr = (uint8_t *)playername;
           do {
             Read(handle, &wbyte, 1);
             *ptr++ = wbyte;
@@ -460,9 +460,9 @@ S32 FindPlayerFile() {
 
 #define DrawCursor()    AffGraph( 0, CursorX+4, CursorY, HQR_Get(HQRPtrSprite,9) ) ;
 
-void    DrawOneString( S32 x, S32 y, char *playername, S32 draw )
+void    DrawOneString( int32_t x, int32_t y, char *playername, int32_t draw )
 {
-        S32     x0,y0,x1,y1 ;
+        int32_t     x0,y0,x1,y1 ;
 
         x0 = x - LargeurMenu/2 ;
         x1 = x + LargeurMenu/2 ;
@@ -508,9 +508,9 @@ void    DrawOneString( S32 x, S32 y, char *playername, S32 draw )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    ClearOneString( S32 x, S32 y )
+void    ClearOneString( int32_t x, int32_t y )
 {
-        S32     x0,y0,x1,y1 ;
+        int32_t     x0,y0,x1,y1 ;
 
         x0 = x - LargeurMenu/2 ;
         x1 = x + LargeurMenu/2 ;
@@ -527,10 +527,10 @@ void    ClearOneString( S32 x, S32 y )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    DrawSingleString( S32 x, S32 y, char *string )
+void    DrawSingleString( int32_t x, int32_t y, char *string )
 {
-	S32     x0,y0,x1,y1 ;
-	S32     sf ;
+	int32_t     x0,y0,x1,y1 ;
+	int32_t     sf ;
 
 	sf = SizeFont( string ) ;
 
@@ -555,10 +555,10 @@ void    DrawSingleString( S32 x, S32 y, char *string )
 
 void	DrawCadreNewGame( void )
 {
-	S32	num = 16 ;// Logo Americain
-	S32	dx, dy	;
-	S32	x, y	;
-	U8	*ptr 	;
+	int32_t	num = 16 ;// Logo Americain
+	int32_t	dx, dy	;
+	int32_t	x, y	;
+	uint8_t	*ptr 	;
 
 	switch( DistribVersion )
 	{
@@ -568,7 +568,7 @@ void	DrawCadreNewGame( void )
 			break ;
 	}
 
-	ptr = (U8*)HQR_Get( HQRPtrSprite, num ) ;
+	ptr = (uint8_t*)HQR_Get( HQRPtrSprite, num ) ;
 
 	GetDxDyGraph( 0, &dx, &dy, ptr ) ;
 
@@ -584,16 +584,16 @@ void	DrawCadreNewGame( void )
 #define NB_GAME_CHOICE  5
 #define Y_START_CHOICE  205
 
-S32     InputPlayerName( S32 choice, char *name )
+int32_t     InputPlayerName( int32_t choice, char *name )
 {
         char    memoplayername[255] ;
-        S32     flag = 1 ;
-        S32     retval = FALSE ;
-        S32     akey ;
-        S32     memoasciimode = AsciiMode ;
-        S32     x=0, y=0;
-        S32     len ;
-        S32     timeraff, timernoaff ;
+        int32_t     flag = 1 ;
+        int32_t     retval = FALSE ;
+        int32_t     akey ;
+        int32_t     memoasciimode = AsciiMode ;
+        int32_t     x=0, y=0;
+        int32_t     len ;
+        int32_t     timeraff, timernoaff ;
 
         AsciiMode = TRUE ;
         while( GetAscii() ) ;
@@ -727,23 +727,23 @@ S32     InputPlayerName( S32 choice, char *name )
 #define TEMPO_SCREEN_SAVE       110
 #define TEMPO_REPEAT_KEY        150
 
-S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
+int32_t     ChoosePlayerName( int32_t mess, int32_t flagflip, int32_t flagnew )
 {
-        S32     flag = 3 ;
+        int32_t     flag = 3 ;
         char    *listplayername ;
         char    **ptrlist ;
-        S32     n, nb ;
-        S32     start = 0 ;
-        S32     select = 0 ;
-        S32     ys = Y_START_CHOICE ;
-        S32     retval = 0 ;
+        int32_t     n, nb ;
+        int32_t     start = 0 ;
+        int32_t     select = 0 ;
+        int32_t     ys = Y_START_CHOICE ;
+        int32_t     retval = 0 ;
         char    string[256] ;
-        U8      *ptr ;
-	S32     timerzoom ;
-        S32     timeranotherkey ;
-        S32     timerdraw = 1 ;
-        U32     draw = 1 ;
-        U32     newcube = NewCube ;
+        uint8_t      *ptr ;
+	int32_t     timerzoom ;
+        int32_t     timeranotherkey ;
+        int32_t     timerdraw = 1 ;
+        uint32_t     draw = 1 ;
+        uint32_t     newcube = NewCube ;
         char    memoplayername[MAX_SIZE_PLAYER_NAME+1] ;
 
 	strcpy( OldGamePathname, "" ) ;
@@ -947,7 +947,7 @@ S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
                         {
                                 if( select < (nb-1) )
                                 {
-                                        S32     oldselect = select ;
+                                        int32_t     oldselect = select ;
 
                                         select+=NB_GAME_CHOICE ;
                                         if( select>=nb )        select = nb-1 ;
@@ -973,7 +973,7 @@ S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
                         {
                                 if( select > 0 )
                                 {
-                                        S32     oldselect = select ;
+                                        int32_t     oldselect = select ;
 
                                         select-=NB_GAME_CHOICE ;
                                         if( select<0 )  select=0 ;
@@ -997,7 +997,7 @@ S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
                         {
                                 if( select > 0 )
                                 {
-                                        S32     oldselect = select ;
+                                        int32_t     oldselect = select ;
 
                                         select = 0 ;
 
@@ -1019,7 +1019,7 @@ S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
                 {
                         if( select < (nb-1) )
                         {
-                                S32     oldselect = select ;
+                                int32_t     oldselect = select ;
 
                                 select = nb-1 ;
 
@@ -1190,10 +1190,10 @@ S32     ChoosePlayerName( S32 mess, S32 flagflip, S32 flagnew )
 
 ////////************* TEMPO, devrait etre en LIB ?
 
-S32     HQR_GiveOffset( T_HQR_HEADER *header, S32 index )
+int32_t     HQR_GiveOffset( T_HQR_HEADER *header, int32_t index )
 {
-        S32     handle ;
-        S32     nbbloc ;
+        int32_t     handle ;
+        int32_t     nbbloc ;
 
         handle = OpenRead( header->Name )       ;
         if( !handle )   return 0                ;
@@ -1223,14 +1223,14 @@ S32     HQR_GiveOffset( T_HQR_HEADER *header, S32 index )
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     LastSampleVolume;
-S32     SampleMenu      ;
-S32     LastVoiceVolume ;
-S32     VoiceMenu      	;
-U32     PanMenu         ;
+int32_t     LastSampleVolume;
+int32_t     SampleMenu      ;
+int32_t     LastVoiceVolume ;
+int32_t     VoiceMenu      	;
+uint32_t     PanMenu         ;
 
-S32     WayChoice       ;
-S32     DeltaChoice     ;
+int32_t     WayChoice       ;
+int32_t     DeltaChoice     ;
 MOVE    MoveChoice      ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -1243,13 +1243,13 @@ void    InitShakeChoice()
 }
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    DrawOneChoice( S32 x, S32 y, S32 type, S32 num, S32 select )
+void    DrawOneChoice( int32_t x, int32_t y, int32_t type, int32_t num, int32_t select )
 {
-        S32     x2, x0,y0,x1,y1 ;
-        S32     dx              ;
+        int32_t     x2, x0,y0,x1,y1 ;
+        int32_t     dx              ;
         char    string[256] ;
-        S32     value ;
-        S32     drawslider = FALSE ;
+        int32_t     value ;
+        int32_t     drawslider = FALSE ;
 
         x0 = x - LargeurMenu/2 ;
         x1 = x + LargeurMenu/2 ;
@@ -1353,7 +1353,7 @@ void    DrawOneChoice( S32 x, S32 y, S32 type, S32 num, S32 select )
 
 							PanMenu    = 20+MyRnd(88) ;
 
-							PlaySample( (U8*)GivePtrSample(VoiceMenu), VoiceMenu, 0x1000, 1, VoiceVolume, PanMenu ) ;
+							PlaySample( (uint8_t*)GivePtrSample(VoiceMenu), VoiceMenu, 0x1000, 1, VoiceVolume, PanMenu ) ;
 						}
 						else    if( VoiceVolume!=LastVoiceVolume )
 						{
@@ -1444,13 +1444,13 @@ void    DrawOneChoice( S32 x, S32 y, S32 type, S32 num, S32 select )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    DrawGameMenu( U16 *ptrmenu, S32 justone )
+void    DrawGameMenu( uint16_t *ptrmenu, int32_t justone )
 {
-        S32     n, y ;
-        S32     nb ;
-        S32     selected, type, num ;
+        int32_t     n, y ;
+        int32_t     nb ;
+        int32_t     selected, type, num ;
 #ifdef  DEMO
-        U8      mainmenu = FALSE ;
+        uint8_t      mainmenu = FALSE ;
 
         if( ptrmenu==GameMainMenu )     mainmenu = TRUE ;
 #endif
@@ -1514,12 +1514,12 @@ void    DrawGameMenu( U16 *ptrmenu, S32 justone )
 
 #define VOLUME_TIMER_KEY        5
 
-S32     DoGameMenu( U16 *ptrmenu )
+int32_t     DoGameMenu( uint16_t *ptrmenu )
 {
-        S32     flag = 1 ;
-        U32     chrono ;
-        S32     timerkey ;
-        S16     nb, selected ;
+        int32_t     flag = 1 ;
+        uint32_t     chrono ;
+        int32_t     timerkey ;
+        int16_t     nb, selected ;
 
         selected = ptrmenu[0] ;
         nb = ptrmenu[1] ;
@@ -1633,7 +1633,7 @@ S32     DoGameMenu( U16 *ptrmenu )
                                 selected-- ;
                         }
 
-                        if( selected < 0 )      selected = (U16)(nb-1) ;
+                        if( selected < 0 )      selected = (uint16_t)(nb-1) ;
                         flag = 1 ;
                 }
 
@@ -1764,10 +1764,10 @@ S32     DoGameMenu( U16 *ptrmenu )
 
                         if( ptrmenu == GameMainMenu )
                         {
-                                U8      memonumversion = NumVersion ;
+                                uint8_t      memonumversion = NumVersion ;
                                 char    memoplayername[256] ;
                                 char    memogamepathname[256] ;
-                                U8 *ptr ;
+                                uint8_t *ptr ;
 
                                 strcpy( memoplayername, PlayerName ) ;
                                 strcpy( memogamepathname, GamePathname ) ;
@@ -1816,7 +1816,7 @@ S32     DoGameMenu( U16 *ptrmenu )
                         }
                         else
                         {
-                                S32     x  ;
+                                int32_t     x  ;
 
                                 if( (TimerRefHR&0xFF) >= 85 )   // aff 2/3 eff 1/3
                                 {
@@ -1897,10 +1897,10 @@ S32     DoGameMenu( U16 *ptrmenu )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     GereVolumeMenu( void )
+int32_t     GereVolumeMenu( void )
 {
-        S32 select ;
-        S32 flag = 0 ;
+        int32_t select ;
+        int32_t flag = 0 ;
 
         CopyScreen( Screen, Log ) ;
         BoxStaticAdd( 0, 0, ModeDesiredX-1, ModeDesiredY-1 ) ;
@@ -1951,10 +1951,10 @@ S32     GereVolumeMenu( void )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     OptionsMenu( S32 flagflip )
+int32_t     OptionsMenu( int32_t flagflip )
 {
-        S32 select ;
-        S32 flag = 0 ;
+        int32_t select ;
+        int32_t flag = 0 ;
 
 	BackupScreen( TRUE ) ;
 
@@ -1988,10 +1988,10 @@ S32     OptionsMenu( S32 flagflip )
 
         while( !flag )
         {
-                GameOptionMenu[4+0+MENU_CAMERA*2+1] = (S16)(46+AllCameras) ;
-                GameOptionMenu[4+0+MENU_STEREO*2+1] = (S16)(12+ReverseStereo) ;
-		GameOptionMenu[4+0+MENU_DISPLAY_TEXT*2+1] = (S16)(16+FlagDisplayText) ;
-		GameOptionMenu[4+0+MENU_FULL_SCREEN*2+1] = (S16)(27+VideoFullScreen) ;
+                GameOptionMenu[4+0+MENU_CAMERA*2+1] = (int16_t)(46+AllCameras) ;
+                GameOptionMenu[4+0+MENU_STEREO*2+1] = (int16_t)(12+ReverseStereo) ;
+		GameOptionMenu[4+0+MENU_DISPLAY_TEXT*2+1] = (int16_t)(16+FlagDisplayText) ;
+		GameOptionMenu[4+0+MENU_FULL_SCREEN*2+1] = (int16_t)(27+VideoFullScreen) ;
 
                 select = DoGameMenu( GameOptionMenu ) ;
 
@@ -2056,11 +2056,11 @@ S32     OptionsMenu( S32 flagflip )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
-S32     DeleteSavedGame( void )
+int32_t     DeleteSavedGame( void )
 {
-        U8      *ptr ;
-        S32     ret = -1 ;
-        S32     select ;
+        uint8_t      *ptr ;
+        int32_t     ret = -1 ;
+        int32_t     select ;
 
         DrawOneString( 320, 80, PlayerName, 2 ) ;
         ptr = LoadGameScreen( ) ;
@@ -2099,11 +2099,11 @@ S32     DeleteSavedGame( void )
 #define TIME_ZOOM_SAVE  (30*20)
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void    ZoomSavedGame( S32 x, S32 y )
+void    ZoomSavedGame( int32_t x, int32_t y )
 {
-        S32     x0=x, y0=y, x1=x+SCREEN_SAVE_WIDTH-1, y1=y+SCREEN_SAVE_HEIGHT-1 ;
-        S32     time, savetimer ;
-        S32     flag = FALSE ;
+        int32_t     x0=x, y0=y, x1=x+SCREEN_SAVE_WIDTH-1, y1=y+SCREEN_SAVE_HEIGHT-1 ;
+        int32_t     time, savetimer ;
+        int32_t     flag = FALSE ;
 
         ManageTime() ;
         savetimer = TimerRefHR ;
@@ -2138,9 +2138,9 @@ void    ZoomSavedGame( S32 x, S32 y )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void    DrawScreenSave( U8 *ptr, S32 x, S32 y )
+void    DrawScreenSave( uint8_t *ptr, int32_t x, int32_t y )
 {
-        S32     x1, y1 ;
+        int32_t     x1, y1 ;
 
         x1 = x + SCREEN_SAVE_WIDTH - 1 ;
         y1 = y + SCREEN_SAVE_HEIGHT - 1 ;
@@ -2155,9 +2155,9 @@ void    DrawScreenSave( U8 *ptr, S32 x, S32 y )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void    DrawCadreSave( S32 x, S32 y )
+void    DrawCadreSave( int32_t x, int32_t y )
 {
-        S32     x1, y1 ;
+        int32_t     x1, y1 ;
 
         x1 = x + SCREEN_SAVE_WIDTH - 1 ;
         y1 = y + SCREEN_SAVE_HEIGHT - 1 ;
@@ -2171,16 +2171,16 @@ void    DrawCadreSave( S32 x, S32 y )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32     IsExistSavedGame( void )
+int32_t     IsExistSavedGame( void )
 {
         // a optimiser
 	return PlayerGameList( (char **)BufSpeak, (char *)BufSpeak+100000L, FALSE ) ;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	FirstGame = FALSE ;
+int32_t	FirstGame = FALSE ;
 
-S32	IsFirstGameLaunched( void )
+int32_t	IsFirstGameLaunched( void )
 {
         char tmpSaveFilePath[ADELINE_MAX_PATH];
 	if( !FirstGame )
@@ -2207,15 +2207,15 @@ S32	IsFirstGameLaunched( void )
         0, 74,  // Options
         0, 75,  // Quitter
 */
-void    BuildGameMainMenu( S32 firstloop )
+void    BuildGameMainMenu( int32_t firstloop )
 {
         char    memoplayername[MAX_SIZE_PLAYER_NAME+1] ;
         char    memogamepathname[ADELINE_MAX_PATH] ;
         char    tmpSavePath[ADELINE_MAX_PATH];
-        U16     *ptrreal = RealGameMainMenu ;
-        U16     *ptrmain = GameMainMenu ;
-        U16     nb = 0 ;
-        U16     ycenter = 275 ;
+        uint16_t     *ptrreal = RealGameMainMenu ;
+        uint16_t     *ptrmain = GameMainMenu ;
+        uint16_t     nb = 0 ;
+        uint16_t     ycenter = 275 ;
 
         strcpy( memoplayername, PlayerName ) ;
         strcpy( memogamepathname, GamePathname ) ;
@@ -2275,7 +2275,7 @@ void    BuildGameMainMenu( S32 firstloop )
         *ptrmain++ = *ptrreal++ ;
         nb++ ;
 
-        if( firstloop==2 ) GameMainMenu[0] = (S16)(nb-1) ;      // selected
+        if( firstloop==2 ) GameMainMenu[0] = (int16_t)(nb-1) ;      // selected
         GameMainMenu[1] = nb ;                          // nb entries
         GameMainMenu[2] = ycenter ;                     // y center
 
@@ -2285,16 +2285,16 @@ void    BuildGameMainMenu( S32 firstloop )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     GameInProgress = FALSE ;
+int32_t     GameInProgress = FALSE ;
 
-S32     MainGameMenu( S32 load )
+int32_t     MainGameMenu( int32_t load )
 {
-        S32     select ;
-        S32     flag = 0 ;
-        S32     firstloop = TRUE ;
-        S32     savenewcube ;
-        S32     gogame = FALSE ;
-        S32     ret ;
+        int32_t     select ;
+        int32_t     flag = 0 ;
+        int32_t     firstloop = TRUE ;
+        int32_t     savenewcube ;
+        int32_t     gogame = FALSE ;
+        int32_t     ret ;
         char    tmpFilePathSave[ADELINE_MAX_PATH];
         char    tmpFilePathScreen[ADELINE_MAX_PATH];
 
@@ -2715,14 +2715,14 @@ load_game:                                      firstloop = FALSE ;
 /*──────────────────────────────────────────────────────────────────────────*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    GameAskChoice( S32 nummess )
+void    GameAskChoice( int32_t nummess )
 {
-        S32     n ;
+        int32_t     n ;
 
         GameChoiceMenu[0] = 0 ;
         GameChoiceMenu[1] = GameNbChoices ;
         GameChoiceMenu[2] = 0 ;
-        GameChoiceMenu[3] = (U16)(START_FILE_ISLAND+Island) ;
+        GameChoiceMenu[3] = (uint16_t)(START_FILE_ISLAND+Island) ;
         for(n=0; n<GameNbChoices; n++ )
         {
                 GameChoiceMenu[4+n*2+0] = 0 ;                   // type
@@ -2773,9 +2773,9 @@ void    GameAskChoice( S32 nummess )
 
 void    GameOver()
 {
-        S16     *ptr3do ;
-        S32     zoom ;
-        U32     chrono ;
+        int16_t     *ptr3do ;
+        int32_t     zoom ;
+        uint32_t     chrono ;
         char    tmpFilePath[ADELINE_MAX_PATH];
 
 	HQ_StopSample() ;
@@ -2812,7 +2812,7 @@ void    GameOver()
 	PaletteSync( PtrPal ) ;
 
         GetResPath(tmpFilePath, ADELINE_MAX_PATH, RESS_HQR_NAME);
-        ptr3do = (S16 *)LoadMalloc_HQR( tmpFilePath, RESS_GAME_OVER ) ;
+        ptr3do = (int16_t *)LoadMalloc_HQR( tmpFilePath, RESS_GAME_OVER ) ;
         if( !ptr3do )   return ;
 
 	// lance un sample ou music de game over ??
@@ -2906,7 +2906,7 @@ void    GameOver()
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 /*
-void    Help( U8 flaggame )
+void    Help( uint8_t flaggame )
 {
         if( !flaggame ) // appelé depuis les menus
         {
@@ -2914,7 +2914,7 @@ void    Help( U8 flaggame )
 
                 FlagFade = FALSE ;
 
-                EffectPcx( PCR_HELP/2, (U8*)Log, 0, flaggame ) ;
+                EffectPcx( PCR_HELP/2, (uint8_t*)Log, 0, flaggame ) ;
 
                 WaitNoInput()   ;
                 WaitInput()     ;
@@ -2925,7 +2925,7 @@ void    Help( U8 flaggame )
                 FadeMenu = TRUE ;
                 RestoreTimer()  ;
         }
-        else    EffectPcx( PCR_HELP/2, (U8*)Screen, 0, flaggame ) ;
+        else    EffectPcx( PCR_HELP/2, (uint8_t*)Screen, 0, flaggame ) ;
 }
 */
 
@@ -2936,7 +2936,7 @@ void    Help( U8 flaggame )
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    Credits( S32 mode )
+void    Credits( int32_t mode )
 {
         char tmpFilePath[ADELINE_MAX_PATH];
 
@@ -2973,18 +2973,18 @@ void    Credits( S32 mode )
 /*──────────────────────────────────────────────────────────────────────────*/
 
 // SlideShow de screenshots
-S32     SlideShow( void )
+int32_t     SlideShow( void )
 {
-	U8	pal[768+RECOVER_AREA] ;
-        S32     n ;
-        S32     endtimer ;
-        U32     nbshots  ;
-	U32     handle   ;
-	S32	ret = TRUE ;
-	S32	memofirsttime = FirstTime ;
-	U8	fadepal = FALSE ;
-	U8	memobulle = Bulle ;
-	U8	memocoul ;
+	uint8_t	pal[768+RECOVER_AREA] ;
+        int32_t     n ;
+        int32_t     endtimer ;
+        uint32_t     nbshots  ;
+	uint32_t     handle   ;
+	int32_t	ret = TRUE ;
+	int32_t	memofirsttime = FirstTime ;
+	uint8_t	fadepal = FALSE ;
+	uint8_t	memobulle = Bulle ;
+	uint8_t	memocoul ;
         char tmpScrshotFilePath[ADELINE_MAX_PATH];
 
         // recupere nombre de screen shot dans le .HQR directement
@@ -3085,8 +3085,8 @@ S32     SlideShow( void )
 
 void    SlideDemo( int argc, char *argv[] )
 {
-        S32     aff = TRUE ;
-        U32     cubedeb = 5 ;
+        int32_t     aff = TRUE ;
+        uint32_t     cubedeb = 5 ;
 
 #ifdef  DEBUG_TOOLS
         if( argc>1 )    cubedeb = atoi( argv[1] ) ;
@@ -3137,12 +3137,12 @@ void    SlideDemo( int argc, char *argv[] )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     AdelineLogo( void )
+int32_t     AdelineLogo( void )
 {
         char    tmpFilePath[ADELINE_MAX_PATH];
-        U32     endtimer ;
-        S32     ret = TRUE ;
-//      S32     volume ;
+        uint32_t     endtimer ;
+        int32_t     ret = TRUE ;
+//      int32_t     volume ;
 
         GetResPath(tmpFilePath, ADELINE_MAX_PATH, SCREEN_HQR_NAME);
         if( !Load_HQR( tmpFilePath, Log, PCR_LOGO ) )
@@ -3161,7 +3161,7 @@ S32     AdelineLogo( void )
 //      GetResPath(tmpFilePath, ADELINE_MAX_PATH, SAMPLES_HQR_NAME);
 //      if( Load_HQR( tmpFilePath, PtrZBuffer, SAMPLE_LOGO ) )
         {
-                S32     timer ;
+                int32_t     timer ;
 
                 // pause permettant d'attendre (a peu près) la synchro ecran !
                 ManageTime() ;
@@ -3220,10 +3220,10 @@ S32     AdelineLogo( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     ShowLogo( S32 numscr, S32 nsec )
+int32_t     ShowLogo( int32_t numscr, int32_t nsec )
 {
-	U32     endtimer ;
-	S32     ret = TRUE ;
+	uint32_t     endtimer ;
+	int32_t     ret = TRUE ;
         char    tmpFilePath[ADELINE_MAX_PATH];
 
         GetResPath(tmpFilePath, ADELINE_MAX_PATH, SCREEN_HQR_NAME);
@@ -3284,10 +3284,10 @@ void    DistribLogo( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32     BumperLogo( void )
+int32_t     BumperLogo( void )
 {
-/*	U32     endtimer ;
-	S32     ret = TRUE ;
+/*	uint32_t     endtimer ;
+	int32_t     ret = TRUE ;
 	chat    tmpFilePath[ADELINE_MAX_PATH];
 
 	GetResPath(tmpFilePath, ADELINE_MAX_PATH, SCREEN_HQR_NAME);
@@ -3328,8 +3328,8 @@ S32     BumperLogo( void )
 void    DemoLogo( void )
 {
 	char string[30] ;
-	S32     x0, y0, x1, y1 ;
-	S32     endtimer ;
+	int32_t     x0, y0, x1, y1 ;
+	int32_t     endtimer ;
 
 	FlagBlackPal = FALSE ;
 
@@ -3378,14 +3378,14 @@ void    DemoLogo( void )
 void    DemoBumper( void )
 {
 /*
-	U8      pal[768+RECOVER_AREA] ;
+	uint8_t      pal[768+RECOVER_AREA] ;
 	char    tmpFilePath[ADELINE_MAX_PATH];
 
 	GetResPath(tmpFilePath, ADELINE_MAX_PATH, SCREEN_HQR_NAME);
 	if( Load_HQR( tmpFilePath, Log, PCR_BUMPER )
 	AND Load_HQR( tmpFilePath, pal, PCR_BUMPER+1 ) )
 	{
-		S32     endtimer ;
+		int32_t     endtimer ;
 
 		WaitNoInput() ;
 
@@ -3420,7 +3420,7 @@ void    DemoBumper( void )
                                ▀▀    ▀▀▀▀▀ ▀   ▀
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
-void    EffectPcx( U8 numpcx, U8 *screen, U8 effect, U8 flagbcl )
+void    EffectPcx( uint8_t numpcx, uint8_t *screen, uint8_t effect, uint8_t flagbcl )
 {
         char tmpFilePath[ADELINE_MAX_PATH];
 
@@ -3449,8 +3449,8 @@ void    EffectPcx( U8 numpcx, U8 *screen, U8 effect, U8 flagbcl )
 
                 case PCX_V_SHADE:
                 {
-                        S32     x, y ;
-                        U8      *ptr = screen ;
+                        int32_t     x, y ;
+                        uint8_t      *ptr = screen ;
 
                         if( !Load_HQR( tmpFilePath, screen, numpcx ) )
                                 TheEndCheckFile( tmpFilePath ) ;
@@ -3488,10 +3488,10 @@ void    EffectPcx( U8 numpcx, U8 *screen, U8 effect, U8 flagbcl )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void    EffectPcxMess( U8 numpcx, U8 *screen, U8 effect, S32 mess )
+void    EffectPcxMess( uint8_t numpcx, uint8_t *screen, uint8_t effect, int32_t mess )
 {
 #ifdef  CDROM
-        S32     memoflagdisplaytext     ;
+        int32_t     memoflagdisplaytext     ;
 #endif
 
         SaveTimer() ;

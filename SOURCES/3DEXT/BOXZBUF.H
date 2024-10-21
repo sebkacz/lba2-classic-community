@@ -7,9 +7,9 @@
 extern	"C"	{
 #endif
 
-extern	S32	ZBufBoxOverWrite2(S32 z0, S32 z1,
-				  S32 xmin, S32 ymin,
-				  S32 xmax, S32 ymax
+extern	int32_t	ZBufBoxOverWrite2(int32_t z0, int32_t z1,
+				  int32_t xmin, int32_t ymin,
+				  int32_t xmax, int32_t ymax
 				 );
 /*
 #pragma aux	ZBufBoxOverWrite2	"*"				\

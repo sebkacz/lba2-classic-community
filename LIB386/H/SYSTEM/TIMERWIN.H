@@ -11,22 +11,22 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	volatile U32	TimerSystemHR	;
-extern	volatile U32	TimerRefHR	;
+extern	volatile uint32_t	TimerSystemHR	;
+extern	volatile uint32_t	TimerRefHR	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	volatile S32	TimerLock	;
+extern	volatile int32_t	TimerLock	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	volatile S32	CmptFrame	;
-extern	volatile S32	NbFramePerSecond;
+extern	volatile int32_t	CmptFrame	;
+extern	volatile int32_t	NbFramePerSecond;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	volatile S32	CmptMemoTimerRef;
+extern	volatile int32_t	CmptMemoTimerRef;
 
 //──────────────────────────────────────────────────────────────────────────
-extern		U32	LastTime	;
-extern		U32	LastEvaluate	;
+extern		uint32_t	LastTime	;
+extern		uint32_t	LastEvaluate	;
 
 //──────────────────────────────────────────────────────────────────────────
 extern	WINDOW_PROC	TimerWindowProc	;
@@ -50,7 +50,7 @@ extern	void	LockTimer()	;
 extern	void	UnlockTimer()	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	void	SetTimerHR(U32 timer)	;
+extern	void	SetTimerHR(uint32_t timer)	;
 
 //──────────────────────────────────────────────────────────────────────────
 #define	ManageSystem()	{ ManageEvents(); ManageTime(); }

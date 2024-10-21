@@ -21,7 +21,7 @@
 		public	C	CopyMatrixF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	CopyMatrixF(S32 *MatDst, S32 *MatSrc) ;
+;void	CopyMatrixF(int32_t *MatDst, int32_t *MatSrc) ;
 
 ;#pragma aux CopyMatrixF	"*"	\
 ;	parm		[edi] [esi]	\

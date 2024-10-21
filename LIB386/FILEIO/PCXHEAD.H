@@ -8,13 +8,13 @@ typedef	struct
 		char 	version;
 		char 	encoding;
 		char 	bits_per_pixel;
-		S16 	xmin, ymin, xmax, ymax;
-		S16 	xres, yres;
-		U8 	palette[48];
+		int16_t 	xmin, ymin, xmax, ymax;
+		int16_t 	xres, yres;
+		uint8_t 	palette[48];
 		char 	reserved;
 		char 	no_of_planes;
-		S16 	bytes_per_line;
-		S16 	palette_type;
+		int16_t 	bytes_per_line;
+		int16_t 	palette_type;
 		char 	filler[58];
 	} 	PCX_HEADER	;
 
@@ -22,7 +22,7 @@ typedef	struct
 extern	PCX_HEADER	PcxHeader;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32		Index	;
+extern	int32_t		Index	;
 
 //──────────────────────────────────────────────────────────────────────────
 

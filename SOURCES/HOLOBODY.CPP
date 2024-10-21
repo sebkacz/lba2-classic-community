@@ -7,13 +7,13 @@
 //────────────────────────────────────────────────────────────────────────────
 //────────────────────────────────────────────────────────────────────────────
 //	echelle 256 = 1
-void	ScaleRotBody3D( U8 *ptbody, S32 scale, S32 flagrot )
+void	ScaleRotBody3D( uint8_t *ptbody, int32_t scale, int32_t flagrot )
 {
-	S16	*pt	;
-	U32	i	;
-	U32	nb, off	;
-	S32 x0, y0, z0	;
-	S32 x1, y1, z1	;
+	int16_t	*pt	;
+	uint32_t	i	;
+	uint32_t	nb, off	;
+	int32_t x0, y0, z0	;
+	int32_t x1, y1, z1	;
 	T_BODY_HEADER	*pth ;
 
 //----- La ZV
@@ -36,17 +36,17 @@ void	ScaleRotBody3D( U8 *ptbody, S32 scale, S32 flagrot )
 		z1 = X0			;
 	}
 
-	pth->XMin = (S16)x0	;
-	pth->XMax = (S16)y0	;
-	pth->YMin = (S16)z0	;
-	pth->YMax = (S16)x1	;
-	pth->ZMin = (S16)y1	;
-	pth->ZMax = (S16)z1	;
+	pth->XMin = (int16_t)x0	;
+	pth->XMax = (int16_t)y0	;
+	pth->YMin = (int16_t)z0	;
+	pth->YMax = (int16_t)x1	;
+	pth->ZMin = (int16_t)y1	;
+	pth->ZMax = (int16_t)z1	;
 
 //----- Les Points 3D
 	nb  = pth->NbPoints	;//	NbObjPoint
 	off = pth->OffPoints	;//	Offset points
-	pt = (S16*)(ptbody+off);//	Jump to points
+	pt = (int16_t*)(ptbody+off);//	Jump to points
 
 	for ( i = 0 ; i < nb ; i++, pt += 4 )
 	{
@@ -59,9 +59,9 @@ void	ScaleRotBody3D( U8 *ptbody, S32 scale, S32 flagrot )
 			y0 = Z0			;
 			z0 = X0			;
 		}
-		pt[0] = (S16)x0	;
-		pt[1] = (S16)y0	;
-		pt[2] = (S16)z0	;
+		pt[0] = (int16_t)x0	;
+		pt[1] = (int16_t)y0	;
+		pt[2] = (int16_t)z0	;
 	}
 
 	if ( flagrot )
@@ -71,33 +71,33 @@ void	ScaleRotBody3D( U8 *ptbody, S32 scale, S32 flagrot )
 		nb  = pth->NbNormales	;//	Nb Normals aux points
 		off = pth->OffNormales	;//	Offset Normals
 		nb += pth->NbNormFaces	;//	Add Normals aux faces
-		pt = (S16*)(ptbody+off)	;
+		pt = (int16_t*)(ptbody+off)	;
 
 		for ( i = 0 ; i < nb ; i++, pt += 4 )
 		{
 			Rotate( pt[2], pt[1], 1024 )	;
-			pt[1] = (S16)Z0		;
-			pt[2] = (S16)X0		;
+			pt[1] = (int16_t)Z0		;
+			pt[2] = (int16_t)X0		;
 		}
 	}
 
 //----- Les Rayons des Spheres
 	nb  = pth->NbSpheres	;//	NbSpheres
 	off = pth->OffSpheres	;//	Offset Spheres
-	pt = (S16*)(ptbody+off)	;
+	pt = (int16_t*)(ptbody+off)	;
 
 	pt += 3		;//	Jump type & coul & p1
 	for ( i = 0 ; i < nb ; i++ , pt += 4 )
 	{
-		*pt = (S16)((*pt * scale)/256)	;//	Rayon
+		*pt = (int16_t)((*pt * scale)/256)	;//	Rayon
 	}
 }
 
 //────────────────────────────────────────────────────────────────────────────
-U32	GetSizeBody3D( U8 *ptbody )
+uint32_t	GetSizeBody3D( uint8_t *ptbody )
 {
 	T_BODY_HEADER *pth ;
-	U32	nb, off	;
+	uint32_t	nb, off	;
 
 	pth = (T_BODY_HEADER *)ptbody	;
 
@@ -111,17 +111,17 @@ U32	GetSizeBody3D( U8 *ptbody )
 }
 //────────────────────────────────────────────────────────────────────────────
 //	echelle 256 = 1
-void	ScaleRotAnim3D( U8 *ptanim, S32 scale, S32 flagrot )
+void	ScaleRotAnim3D( uint8_t *ptanim, int32_t scale, int32_t flagrot )
 {
-	S16	*pt	;
-	U16	nbframe	;
-	U16	nbgroup	;
-	U16	grp, frm;
-	S32	x, y, z	;
+	int16_t	*pt	;
+	uint16_t	nbframe	;
+	uint16_t	nbgroup	;
+	uint16_t	grp, frm;
+	int32_t	x, y, z	;
 
-	pt = (S16*)ptanim	;
-	nbframe = *(U16*)pt++	;
-	nbgroup = *(U16*)pt	;
+	pt = (int16_t*)ptanim	;
+	nbframe = *(uint16_t*)pt++	;
+	nbgroup = *(uint16_t*)pt	;
 	pt += 3			;
 
 	for ( frm = 0 ; frm < nbframe ; frm++ )
@@ -136,9 +136,9 @@ void	ScaleRotAnim3D( U8 *ptanim, S32 scale, S32 flagrot )
 			y = Z0		;
 			z = X0		;
 		}
-		pt[0] = (S16)x		;
-		pt[1] = (S16)y		;
-		pt[2] = (S16)z		;
+		pt[0] = (int16_t)x		;
+		pt[1] = (int16_t)y		;
+		pt[2] = (int16_t)z		;
 
 		pt += 7			;//	Jump MasterRot, al, be & ga
 
@@ -154,27 +154,27 @@ void	ScaleRotAnim3D( U8 *ptanim, S32 scale, S32 flagrot )
 				y = Z0		;
 				z = X0		;
 			}
-			pt[1] = (S16)x		;
-			pt[2] = (S16)y		;
-			pt[3] = (S16)z		;
+			pt[1] = (int16_t)x		;
+			pt[2] = (int16_t)y		;
+			pt[3] = (int16_t)z		;
 		}
 	}
 }
 //────────────────────────────────────────────────────────────────────────────
 //	echelle 256 = 1
-U32	GetSizeAnim3D( U8 *ptanim )
+uint32_t	GetSizeAnim3D( uint8_t *ptanim )
 {
-	S16	*pt	;
-	U16	nbframe	;
-	U16	nbgroup	;
+	int16_t	*pt	;
+	uint16_t	nbframe	;
+	uint16_t	nbgroup	;
 
-	pt = (S16*)ptanim	;
+	pt = (int16_t*)ptanim	;
 
-	nbframe = *(U16*)pt++	;
-	nbgroup = *(U16*)pt	;
+	nbframe = *(uint16_t*)pt++	;
+	nbgroup = *(uint16_t*)pt	;
 
 	pt += (3+(nbframe*(nbgroup+1)*4))	;
 
-	return((U32)pt-(U32)ptanim)	;
+	return((uint32_t)pt-(uint32_t)ptanim)	;
 }
 //────────────────────────────────────────────────────────────────────────────

@@ -17,8 +17,8 @@ extern "C" {
 //	Returns	: 			nothing
 //--------------------------------------------------------------------------
 void	InitSampleSynthesizer(	void *wavelib,
-				S32 sizelib,
-				S32 voices 		)	;
+				int32_t sizelib,
+				int32_t voices 		)	;
 
 //--------------------------------------------------------------------------
 //	ClearSampleSynthesizer: 	destroy the Wavetable synthesizer

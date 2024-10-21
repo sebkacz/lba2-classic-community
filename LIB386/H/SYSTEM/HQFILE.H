@@ -11,22 +11,22 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	HQF_File			;
+extern	int32_t	HQF_File			;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	HQF_Init(const char *name, S32 index)	;
+extern	uint32_t	HQF_Init(const char *name, int32_t index)	;
 
 //──────────────────────────────────────────────────────────────────────────
 extern	void	HQF_Close()			;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	U32	HQF_LoadClose(void *ptr)	;
+extern	uint32_t	HQF_LoadClose(void *ptr)	;
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	HQF_ResSize(const char *name, S32 index);
+extern	int32_t	HQF_ResSize(const char *name, int32_t index);
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	HQF_NbRes(char *name)		;
+extern	int32_t	HQF_NbRes(char *name)		;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

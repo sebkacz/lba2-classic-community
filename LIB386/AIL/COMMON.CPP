@@ -13,12 +13,12 @@
 
 //████████████████████████████████████████████████████████████████████████████
 HMDIDRIVER	MdiDriver		= NULL		;// Handle to midi driver
-S32	       	Midi_Driver_Enabled	= FALSE		;
-S32	       	Midi_Driver_Type	= MIDI		;
+int32_t	       	Midi_Driver_Enabled	= FALSE		;
+int32_t	       	Midi_Driver_Type	= MIDI		;
 
 HDIGDRIVER	DigDriver		= NULL		;// Handle to digital audio driver
-S32	       	Sample_Driver_Enabled	= FALSE		;
-S32		SamplingRate		= 22050		;
+int32_t	       	Sample_Driver_Enabled	= FALSE		;
+int32_t		SamplingRate		= 22050		;
 
 char		MidiDriverName[_MAX_PATH]=""		;
 char		SampleDriverName[_MAX_PATH]=""		;

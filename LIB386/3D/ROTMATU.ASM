@@ -27,7 +27,7 @@
 		public	C	RotateMatrixU
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	RotateMatrixU(S32 *MatDst, S32 *MatSrc, S32 alpha, S32 beta, S32 gamma) ;
+;void	RotateMatrixU(int32_t *MatDst, int32_t *MatSrc, int32_t alpha, int32_t beta, int32_t gamma) ;
 
 ;#pragma aux RotateMatrixU				\
 ;	parm		[edi] [esi] [eax] [ebx] [ecx]

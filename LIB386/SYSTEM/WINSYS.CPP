@@ -20,11 +20,11 @@ static long FAR PASCAL WrapWindowProc(	HWND hWnd, UINT message,
 			   		WPARAM wParam, LPARAM lParam)	;
 
 //----------------------------------------------------------------------------
-S32		AppActive	= FALSE		;
-S32		AppLive		= TRUE		;
+int32_t		AppActive	= FALSE		;
+int32_t		AppLive		= TRUE		;
 
 //----------------------------------------------------------------------------
-U32		AutoPlayMessage	= 0		;
+uint32_t		AutoPlayMessage	= 0		;
 
 //----------------------------------------------------------------------------
 VOID_FUNC       *PauseMiles	= NULL		;
@@ -141,7 +141,7 @@ void	InitWindow( HINSTANCE hinstance, int nCmdShow, const char *title)
 }
 
 //----------------------------------------------------------------------------
-S32 SystemWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+int32_t SystemWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	DWORD	dwstyle	;
 
@@ -204,7 +204,7 @@ static long FAR PASCAL WrapWindowProc(	HWND hWnd, UINT message,
 
 /*void	ManageEvents()
 {
-	U32	milespaused = FALSE	;
+	uint32_t	milespaused = FALSE	;
 	MSG	msg			;
 
 	if(ManageProc)

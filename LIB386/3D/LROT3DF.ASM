@@ -31,7 +31,7 @@
 		public	C	LongRotatePointF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LongRotatePointF(S32 *Mat, S32 x, S32 y, S32 z)	;
+;void	LongRotatePointF(int32_t *Mat, int32_t x, int32_t y, int32_t z)	;
 
 ;#pragma aux LongRotatePointF			\
 ;	parm caller	[esi] [eax] [ebx] [ecx]	\

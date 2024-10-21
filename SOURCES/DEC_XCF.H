@@ -15,7 +15,7 @@ void	XCF_InitDecompressor();
 		modify [eax ecx edx]
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	XCF_DecompressorHeight(U32 height);
+void	XCF_DecompressorHeight(uint32_t height);
 
 #pragma	aux	XCF_DecompressorHeight	"*"	\
 		parm caller []			\
@@ -32,19 +32,19 @@ void	XCF_Decompressor();
 
 typedef	struct
 	{
-		U32	struct_size	;
-		U32	DeltaX		;
-		U32	DeltaY		;
-		U32	FrameSize	;
-		U32	KeySize		;
-		U32	KeyRate		;
-		U32	PlayRate	;
+		uint32_t	struct_size	;
+		uint32_t	DeltaX		;
+		uint32_t	DeltaY		;
+		uint32_t	FrameSize	;
+		uint32_t	KeySize		;
+		uint32_t	KeyRate		;
+		uint32_t	PlayRate	;
 
-		U32	SamplingRate	;
-		U32	SampleType	;
-		U32	SampleFlags	;
+		uint32_t	SamplingRate	;
+		uint32_t	SampleType	;
+		uint32_t	SampleFlags	;
 
-		U32	Compressor	;
+		uint32_t	Compressor	;
 	}	FORMAT;
 
 #ifdef __cplusplus

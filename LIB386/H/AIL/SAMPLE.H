@@ -10,20 +10,20 @@ extern "C" {
 //--------------------------------------------------------------------------
 extern	char		SampleDriverName[]	;
 
-extern	S32		Sample_Driver_Enabled	;
+extern	int32_t		Sample_Driver_Enabled	;
 
-extern	S32		SamplingRate		;
+extern	int32_t		SamplingRate		;
 
-extern	S32		SampleOverflow		;
+extern	int32_t		SampleOverflow		;
 
 //--------------------------------------------------------------------------
 typedef	struct {
-		S32	Usernum	;
-		S32	Pitch  	;
-		U8	Repeat	;
-		U8	Volume	;
-		U8	Pan	;
-		U8	Dummy	;
+		int32_t	Usernum	;
+		int32_t	Pitch  	;
+		uint8_t	Repeat	;
+		uint8_t	Volume	;
+		uint8_t	Pan	;
+		uint8_t	Dummy	;
 	}	SAMPLE_PLAYING	;
 
 //--------------------------------------------------------------------------
@@ -32,10 +32,10 @@ extern	VOID_FUNC	PauseSamples		;
 extern	VOID_FUNC	ResumeSamples		;
 
 //--------------------------------------------------------------------------
-extern	S32		UseWaveMixer		;
+extern	int32_t		UseWaveMixer		;
 
 //--------------------------------------------------------------------------
-S32	InitSampleDriver(	char *driver_name	)	;
+int32_t	InitSampleDriver(	char *driver_name	)	;
 
 //--------------------------------------------------------------------------
 //	SetMasterVolumeSample :		Set master volume for all samples
@@ -44,14 +44,14 @@ S32	InitSampleDriver(	char *driver_name	)	;
 //
 //	Returns	: 			Nothing
 //--------------------------------------------------------------------------
-void	SetMasterVolumeSample(	S32 volume 		)	;
+void	SetMasterVolumeSample(	int32_t volume 		)	;
 
 //--------------------------------------------------------------------------
 //	GetMasterVolumeSample :		Get master volume for all samples
 //
 //	Returns	: 			Master Volume
 //--------------------------------------------------------------------------
-S32	GetMasterVolumeSample(	void			)	;
+int32_t	GetMasterVolumeSample(	void			)	;
 
 //--------------------------------------------------------------------------
 //	FadeOutSamples :		Fade out all samples (except stream)
@@ -60,7 +60,7 @@ S32	GetMasterVolumeSample(	void			)	;
 //
 //	Returns	: 			scaling factor (from delay to 0)
 //--------------------------------------------------------------------------
-S32	FadeOutSamples(		S32 delay 		)	;
+int32_t	FadeOutSamples(		int32_t delay 		)	;
 
 //--------------------------------------------------------------------------
 //	FadeInSamples :			Fade in all samples (except stream)
@@ -69,7 +69,7 @@ S32	FadeOutSamples(		S32 delay 		)	;
 //
 //	Returns	: 			scaling factor (from 0 to delay)
 //--------------------------------------------------------------------------
-S32	FadeInSamples(		S32 delay 		)	;
+int32_t	FadeInSamples(		int32_t delay 		)	;
 
 //--------------------------------------------------------------------------
 //	InverseStereoSample :		Reverse left and right channels
@@ -78,7 +78,7 @@ S32	FadeInSamples(		S32 delay 		)	;
 //
 //	Returns	: 			Nothing
 //--------------------------------------------------------------------------
-void	InverseStereoSample(	S32 inverse 		)	;
+void	InverseStereoSample(	int32_t inverse 		)	;
 
 //--------------------------------------------------------------------------
 //	PlaySample : 			Play a Sample
@@ -92,12 +92,12 @@ void	InverseStereoSample(	S32 inverse 		)	;
 //
 //	Returns	: 			lib sample handle
 //--------------------------------------------------------------------------
-U32	PlaySample( 		void *buffer,
-				U32 userhandle,
-				S32 pitchbend,
-				S32 repeat,
-				S32 volume,
-				S32 pan		)	;
+uint32_t	PlaySample( 		void *buffer,
+				uint32_t userhandle,
+				int32_t pitchbend,
+				int32_t repeat,
+				int32_t volume,
+				int32_t pan		)	;
 
 //--------------------------------------------------------------------------
 //	TimerPlaySample :		Play a Sample and repeat with period
@@ -112,13 +112,13 @@ U32	PlaySample( 		void *buffer,
 //
 //	Returns	: 			TRUE / FALSE
 //--------------------------------------------------------------------------
-U32	TimerPlaySample(	void *ptrsample,
-				U32 usernum,
-				S32 pitchbend,
-				S32 nbrepeat,
-				S32 volume,
-				S32 pan,
-				S32 period	);
+uint32_t	TimerPlaySample(	void *ptrsample,
+				uint32_t usernum,
+				int32_t pitchbend,
+				int32_t nbrepeat,
+				int32_t volume,
+				int32_t pan,
+				int32_t period	);
 
 //--------------------------------------------------------------------------
 //	TimerStopSample :		stop TimerPlaySample
@@ -135,8 +135,8 @@ void	TimerStopSample(	void		)	;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ChangePitchbendSample(	U32 sample,
-				S32 pitchbend	)	;
+void	ChangePitchbendSample(	uint32_t sample,
+				int32_t pitchbend	)	;
 
 //--------------------------------------------------------------------------
 //	ChangeVolumePanSample :		Change a sample	volume and paning
@@ -147,9 +147,9 @@ void	ChangePitchbendSample(	U32 sample,
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ChangeVolumePanSample(	U32 sample,
-				S32 volume,
-				S32 pan		)	;
+void	ChangeVolumePanSample(	uint32_t sample,
+				int32_t volume,
+				int32_t pan		)	;
 
 //--------------------------------------------------------------------------
 //	GetSampleMSSHandle :		return MSS handle for a sample
@@ -158,7 +158,7 @@ void	ChangeVolumePanSample(	U32 sample,
 //
 //	Returns	:			HSAMPLE (see MSS doc)
 //--------------------------------------------------------------------------
-void*	GetSampleMSSHandle( 	U32 sample 	)	;
+void*	GetSampleMSSHandle( 	uint32_t sample 	)	;
 
 //--------------------------------------------------------------------------
 //	StopOneSample :			stop a sample
@@ -167,7 +167,7 @@ void*	GetSampleMSSHandle( 	U32 sample 	)	;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	StopOneSample( 		U32 sample 		)	;
+void	StopOneSample( 		uint32_t sample 		)	;
 
 //--------------------------------------------------------------------------
 //	StopSample :			stop all samples
@@ -183,7 +183,7 @@ void	StopSamples(		void			)	;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	PauseOneSample(		U32 sample 		)	;
+void	PauseOneSample(		uint32_t sample 		)	;
 
 //--------------------------------------------------------------------------
 //	ResumeOneSample :		resume a sample
@@ -192,7 +192,7 @@ void	PauseOneSample(		U32 sample 		)	;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ResumeOneSample(	U32 sample 		)	;
+void	ResumeOneSample(	uint32_t sample 		)	;
 
 //--------------------------------------------------------------------------
 //	PauseSample :			pause all samples
@@ -216,8 +216,8 @@ void	ResumeSamples(		void			)	;
 //
 //	Returns	:			number of samples playing
 //--------------------------------------------------------------------------
-S32	GetPlayingSamples(	SAMPLE_PLAYING tab[],
-				S32 max			)	;
+int32_t	GetPlayingSamples(	SAMPLE_PLAYING tab[],
+				int32_t max			)	;
 
 //--------------------------------------------------------------------------
 //	IsSamplePlaying :		check if a sample is playing
@@ -226,7 +226,7 @@ S32	GetPlayingSamples(	SAMPLE_PLAYING tab[],
 //
 //	Returns	:			FALSE or starting TimerRefHR
 //--------------------------------------------------------------------------
-U32	IsSamplePlaying( 	U32 sample 		)	;
+uint32_t	IsSamplePlaying( 	uint32_t sample 		)	;
 
 //--------------------------------------------------------------------------
 //	GetSamplePostion :		get sample number currently playing
@@ -235,14 +235,14 @@ U32	IsSamplePlaying( 	U32 sample 		)	;
 //
 //	Returns	:			sample position
 //--------------------------------------------------------------------------
-S32	GetSamplePosition( U32 sample )				;
+int32_t	GetSamplePosition( uint32_t sample )				;
 
 //--------------------------------------------------------------------------
 //	GetSamplePostion :		get sample polyphonie
 //
 //	Returns	:			number of samples playing
 //--------------------------------------------------------------------------
-S32	GetSamplePoly( void )					;
+int32_t	GetSamplePoly( void )					;
 
 //--------------------------------------------------------------------------
 //	GetSamplePostion :		get a piece of data
@@ -253,7 +253,7 @@ S32	GetSamplePoly( void )					;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	SetDataSample( U32 sample, S32 index, S32 value )	;
+void	SetDataSample( uint32_t sample, int32_t index, int32_t value )	;
 
 //--------------------------------------------------------------------------
 //	GetSamplePostion :		get a piece of data
@@ -263,7 +263,7 @@ void	SetDataSample( U32 sample, S32 index, S32 value )	;
 //
 //	Returns	:			value
 //--------------------------------------------------------------------------
-S32	GetDataSample( U32 sample, S32 index )			;
+int32_t	GetDataSample( uint32_t sample, int32_t index )			;
 
 //--------------------------------------------------------------------------
 #ifdef __cplusplus

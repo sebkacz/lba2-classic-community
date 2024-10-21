@@ -8,7 +8,7 @@
 
 #define	SHADE_INVENT_LVL	8
 
-extern	S32	FlagAnimWhoSpeak	;	// MESSAGE.CPP
+extern	int32_t	FlagAnimWhoSpeak	;	// MESSAGE.CPP
 
 /*══════════════════════════════════════════════════════════════════════════*
 	      █    ██▄ █ █   █ █▀▀▀▀ ██▄ █ ▀▀█▀▀ █▀▀▀█ █▀▀▀█ █  ▄▀
@@ -25,22 +25,22 @@ extern	S32	FlagAnimWhoSpeak	;	// MESSAGE.CPP
 // TIME_BEFORE_ZOOM : Time in 50eme to wait before zoom
 // TIME_ZOOM : Time before completely zoomed
 /*
-S32	MyMagicLevel = 50	;// "My" tempo
-S32	MaxMagicLevel = 75	;
+int32_t	MyMagicLevel = 50	;// "My" tempo
+int32_t	MaxMagicLevel = 75	;
 #define	MAX_MAGIC_LEVEL	100
 */
 void	DrawInventoryScreen(void);
 void	ClearNearAllBox(void)	;
-S32	FlagZoomed=0		;
-U32	MemoTimerZoom		;
+int32_t	FlagZoomed=0		;
+uint32_t	MemoTimerZoom		;
 #define	TIME_BEFORE_ZOOM	(50*20)
 #define TIME_ZOOM		(25*20)
-U32	TimerRot		;
-S32	OldX0=0, OldY0=0, OldX1=5, OldY1=5	;
-S32	InvSelect = 0 			;
-S32	InvCoul = COUL_SELECT_MENU 	;
+uint32_t	TimerRot		;
+int32_t	OldX0=0, OldY0=0, OldX1=5, OldY1=5	;
+int32_t	InvSelect = 0 			;
+int32_t	InvCoul = COUL_SELECT_MENU 	;
 
-U8	PingouinActif = FALSE ;
+uint8_t	PingouinActif = FALSE ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 T_INV_OBJ	TabInv[MAX_INVENTORY] ;
@@ -49,367 +49,367 @@ T_INV_OBJ	InitTabInv[MAX_INVENTORY] =
 {
 {
 //	0: FLAG_HOLOMAP,
-	2,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 0, 0, 0, 0 }		//	U8 TabObj3D[4]
+	2,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 0, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	1: FLAG_BALLE_MAGIQUE,
-	0,			//	S32 Box
-	0,			//	S32 BetaObj
-	4, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 1, 40, 41, 42 }	//	U8 TabObj3D[4]
+	0,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	4, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 1, 40, 41, 42 }	//	uint8_t TabObj3D[4]
 },
 {
 //	2: FLAG_DART,
-	5,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	FLAG_INV_FEWER,		//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 2, 0, 0, 0 }		//	U8 TabObj3D[4]
+	5,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	FLAG_INV_FEWER,		//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 2, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	3: FLAG_BOULE_SENDELL
-	6,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 3, 0, 0, 0 }		//	U8 TabObj3D[4]
+	6,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 3, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	4: FLAG_TUNIQUE
-	1,			//	S32 Box
-	0,			//	S32 BetaObj
-	10, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 4, 47, 0, 0 }		//	U8 TabObj3D[4]
+	1,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	10, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 4, 47, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	5: FLAG_PERLE, PUIS FLAG_DISQUE_DE_ROUTE
-	23,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 5, 24, 0, 0 }		//	U8 TabObj3D[4]
+	23,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 5, 24, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	6: FLAG_CLEF_PYRAMID,
-	29,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 6, 0, 0, 0 }		//	U8 TabObj3D[4]
+	29,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 6, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	7: FLAG_VOLANT,
-	17,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 7, 0, 0, 0 }		//	U8 TabObj3D[4]
+	17,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 7, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	8: FLAG_MONEY,	(Kashes ou Zlitos)
-	27,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	FLAG_INV_FEWER,		//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 8, 43, 0, 0 }		//	U8 TabObj3D[4]
+	27,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	FLAG_INV_FEWER,		//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 8, 43, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	9: FLAG_PISTOLASER,
-	25,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 49, 9, 50, 0 }	//	U8 TabObj3D[4]
+	25,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 49, 9, 50, 0 }	//	uint8_t TabObj3D[4]
 },
 {
 //	10: FLAG_SABRE,
-	30,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 10, 0, 0, 0 }		//	U8 TabObj3D[4]
+	30,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 10, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	11: FLAG_GANT,
-	20,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 11, 0, 0, 0 }		//	U8 TabObj3D[4]
+	20,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 11, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	12: FLAG_PROTOPACK,
-	7,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 12, 48, 0, 0 }	//	U8 TabObj3D[4]
+	7,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 12, 48, 0, 0 }	//	uint8_t TabObj3D[4]
 },
 {
 //	13: FLAG_TICKET_FERRY,
-	24,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 13, 0, 0, 0 }		//	U8 TabObj3D[4]
+	24,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 13, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	14: FLAG_MECA_PINGOUIN,
-	22,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	FLAG_INV_FEWER,		//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 14, 0, 0, 0 }		//	U8 TabObj3D[4]
+	22,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	FLAG_INV_FEWER,		//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 14, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	15: FLAG_GAZOGEM,
-	4,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 15, 0, 0, 0 }		//	U8 TabObj3D[4]
+	4,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 15, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	16: FLAG_DEMI_MEDAILLON,
-	9,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 16, 0, 0, 0 }		//	U8 TabObj3D[4]
+	9,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 16, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	17: FLAG_ACIDE_GALLIQUE,
-	28,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 17, 0, 0, 0 }		//	U8 TabObj3D[4]
+	28,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 17, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	18: FLAG_CHANSON	//
-	3,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 18, 0, 0, 0 }		//	U8 TabObj3D[4]
+	3,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 18, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	19: FLAG_ANNEAU_FOUDRE,
-	11,			//	S32 Box
-	0,			//	S32 BetaObj
-	25, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 19, 51, 52, 53 }	//	U8 TabObj3D[4]
+	11,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	25, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 19, 51, 52, 53 }	//	uint8_t TabObj3D[4]
 },
 {
 //	20: FLAG_PARAPLUIE,
-	14,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 20, 0, 0, 0 }		//	U8 TabObj3D[4]
+	14,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 20, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	21: FLAG_GEMME,
-	18,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	FLAG_INV_FEWER,		//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 21, 0, 0, 0 }		//	U8 TabObj3D[4]
+	18,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	FLAG_INV_FEWER,		//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 21, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	22: FLAG_CONQUE,
-	15,			//	S32 Box
-	0,			//	S32 BetaObj
-	50, 			//	S32 PtMagie
-	FLAG_INV_VALUE,		//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 22, 0, 0, 0 }		//	U8 TabObj3D[4]
+	15,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	50, 			//	int32_t PtMagie
+	FLAG_INV_VALUE,		//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 22, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	23: FLAG_SARBACANE,
-	10,			//	S32 Box
-	0,			//	S32 BetaObj
-	2, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 23, 46, 0, 0 }	//	U8 TabObj3D[4]
+	10,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	2, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 23, 46, 0, 0 }	//	uint8_t TabObj3D[4]
 },
 {
 //	24: VISIONNEUSE
-	19,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 45, 0, 0, 0 }		//	U8 TabObj3D[4]
+	19,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 45, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	25: FLAG_TART_LUCI,
-	8,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 25, 0, 0, 0 }		//	U8 TabObj3D[4]
+	8,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 25, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	26: FLAG_RADIO,
-	12,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 26, 0, 0, 0 }		//	U8 TabObj3D[4]
+	12,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 26, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	27: FLAG_FLEUR,
-	13,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 27, 0, 0, 0 }		//	U8 TabObj3D[4]
+	13,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 27, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	28: FLAG_ARDOISE,
-	21,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 28, 0, 0, 0 }		//	U8 TabObj3D[4]
+	21,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 28, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	29: FLAG_TRADUCTEUR,    //	(REMPLACE le VOLANT)
-	17,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	FLAG_INV_AUTO_USE,	//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 29, 0, 0, 0 }		//	U8 TabObj3D[4]
+	17,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	FLAG_INV_AUTO_USE,	//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 29, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	30: FLAG_DIPLOME,
-	26,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 30, 0, 0, 0 }		//	U8 TabObj3D[4]
+	26,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 30, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	31: FLAG_DMKEY_KNARTA, FLAG_DMKEY
-	31,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 31, 44, 0, 0 }	//	U8 TabObj3D[4]
+	31,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 31, 44, 0, 0 }	//	uint8_t TabObj3D[4]
 },
 {
 //	32: FLAG_DMKEY_SUP,
-	32,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 32, 0, 0, 0 }		//	U8 TabObj3D[4]
+	32,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 32, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	33: FLAG_DMKEY_MOSQUI,
-	33,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 33, 0, 0, 0 }		//	U8 TabObj3D[4]
+	33,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 33, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	34: FLAG_DMKEY_BLAFARD,
-	34,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 34, 0, 0, 0 }		//	U8 TabObj3D[4]
+	34,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 34, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	35: FLAG_CLE_REINE (REMPLACE LA FLEUR)
-	13,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 35, 0, 0, 0 }		//	U8 TabObj3D[4]
+	13,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 35, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	36: FLAG_PIOCHE (REMPLACE L'ACIDE GALLIQUE)
-	28,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 36, 0, 0, 0 }		//	U8 TabObj3D[4]
+	28,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 36, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	37: FLAG_CLEF_BOURGMESTRE (REMPLACE Clef pyramidale )
-	29,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 37, 0, 0, 0 }		//	U8 TabObj3D[4]
+	29,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 37, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	38: FLAG_NOTE_BOURGMESTRE (REMPLACE Clef Bourgmestre )
-	29,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 38, 0, 0, 0 }		//	U8 TabObj3D[4]
+	29,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 38, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 },
 {
 //	39: FLAG_PROTECTION
-	16,			//	S32 Box
-	0,			//	S32 BetaObj
-	0, 			//	S32 PtMagie
-	0,			//	S32 FlagInv
-	0,			//	S32 IdObj3D
-	{ 39, 0, 0, 0 }		//	U8 TabObj3D[4]
+	16,			//	int32_t Box
+	0,			//	int32_t BetaObj
+	0, 			//	int32_t PtMagie
+	0,			//	int32_t FlagInv
+	0,			//	int32_t IdObj3D
+	{ 39, 0, 0, 0 }		//	uint8_t TabObj3D[4]
 }
 } ;
 
-U8	TabIndir[MAX_BOX_INVENTORY]	;
+uint8_t	TabIndir[MAX_BOX_INVENTORY]	;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	InitInventory()
@@ -421,7 +421,7 @@ void	InitInventory()
 
 //		Voila, j'avais raison...
 
-	S32	i	;
+	int32_t	i	;
 
 
 	pt = TabInv	;
@@ -441,8 +441,8 @@ void	InitInventory()
 void	InitTabIndir()//	NEW
 {
 	T_INV_OBJ *pt	;
-	S32	i	;
-	S32	num	;
+	int32_t	i	;
+	int32_t	num	;
 
 	if( Planet>=2 )
 	{
@@ -456,17 +456,17 @@ void	InitTabIndir()//	NEW
 	}
 
 #ifdef	LBA_EDITOR
-	ListVarGame[FLAG_MONEY].Value = (S16)num ;
+	ListVarGame[FLAG_MONEY].Value = (int16_t)num ;
 #else
-	ListVarGame[FLAG_MONEY] = (S16)num ;
+	ListVarGame[FLAG_MONEY] = (int16_t)num ;
 #endif
 
 	// positionne balle de la bonne couleur dans
 	// l'inventaire
 	if( MagicLevel>0 )
 	{
-		TabInv[FLAG_BALLE_MAGIQUE].IdObj3D = (S16)(MagicLevel-1) ;
-		TabInv[FLAG_ANNEAU_FOUDRE].IdObj3D = (S16)(MagicLevel-1) ;
+		TabInv[FLAG_BALLE_MAGIQUE].IdObj3D = (int16_t)(MagicLevel-1) ;
+		TabInv[FLAG_ANNEAU_FOUDRE].IdObj3D = (int16_t)(MagicLevel-1) ;
 
 		// Sort de foudre
 		if( MagicPoint>=(MagicLevel*20) )
@@ -510,15 +510,15 @@ void	InitTabIndir()//	NEW
 		if ( ListVarGame[i] )
 #endif
 		{
-			TabIndir[pt->Box] = (U8)i	;//	Table d'indirection
+			TabIndir[pt->Box] = (uint8_t)i	;//	Table d'indirection
 		}
 	}
 }
 /*──────────────────────────────────────────────────────────────────────────*/
 #ifdef	DEBUG_TOOLS
-S32	TricheInventory( S32 ret )
+int32_t	TricheInventory( int32_t ret )
 {
-	U32	i	;
+	uint32_t	i	;
 
 	if ( Key == K_A )//	for All objects
 	{
@@ -560,7 +560,7 @@ S32	TricheInventory( S32 ret )
 #endif
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	DrawObjInventory( S32 x, S32 y, S16 *ptrobj, S32 beta, S32 lfactor, S32 zoom )
+void	DrawObjInventory( int32_t x, int32_t y, int16_t *ptrobj, int32_t beta, int32_t lfactor, int32_t zoom )
 {
 	SetProjection( x,y,128,lfactor,lfactor );
 
@@ -570,10 +570,10 @@ void	DrawObjInventory( S32 x, S32 y, S16 *ptrobj, S32 beta, S32 lfactor, S32 zoo
 }
 /*──────────────────────────────────────────────────────────────────────────*/
 /*
-void	AffMagicBar( S32 x0, S32 y0, S32 x1, S32 y1, S32 magie )
+void	AffMagicBar( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t magie )
 {
-	S32	startx, starty	;
-	S32	x, dx, dy	;
+	int32_t	startx, starty	;
+	int32_t	x, dx, dy	;
 
 	dx = x1-x0		;
 	dy = y1-y0		;
@@ -595,10 +595,10 @@ void	AffMagicBar( S32 x0, S32 y0, S32 x1, S32 y1, S32 magie )
 }
 */
 /*──────────────────────────────────────────────────────────────────────────*/
-void	AffValueBar( S32 x0, S32 y0, S32 x1, S32 y1, S32 value )
+void	AffValueBar( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t value )
 {
-	S32	startx, starty	;
-	S32	x, dx, dy	;
+	int32_t	startx, starty	;
+	int32_t	x, dx, dy	;
 
 	dx = x1-x0		;
 	dy = y1-y0		;
@@ -613,9 +613,9 @@ void	AffValueBar( S32 x0, S32 y0, S32 x1, S32 y1, S32 value )
 	Rect( x0+startx, y1-starty-starty, x1-startx, y1-starty, LBAWHITE )		;
 }
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	S_X0, S_Y0, S_X1, S_Y1	;
+int32_t	S_X0, S_Y0, S_X1, S_Y1	;
 /*──────────────────────────────────────────────────────────────────────────*/
-void	SaveBackground( S32 x0, S32 y0, S32 x1, S32 y1 )
+void	SaveBackground( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
 	S_X0 = x0	;
 	S_Y0 = y0	;
@@ -628,19 +628,19 @@ void	RestoreBackground()
 	CopyBlock( S_X0, S_Y0, S_X1, S_Y1, Screen, S_X0, S_Y0, Log )	   ;
 }
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	XObj0, YObj0, XObj1, YObj1, LFactor, MemoLFactor	;
+int32_t	XObj0, YObj0, XObj1, YObj1, LFactor, MemoLFactor	;
 /*──────────────────────────────────────────────────────────────────────────*/
 
 
-U32	DrawOneInventory( S32 numbox )
+uint32_t	DrawOneInventory( int32_t numbox )
 {
-	S32	x, y, x0, y0, x1, y1 	;
-	S16	*ptrobj 		;
-	S32	coul=0, step		;
-	S32	beta			;
-	S32	flagshade = FALSE	;
-	S32	numinv			;
-	U32	flags = ALL_ANGLES	;
+	int32_t	x, y, x0, y0, x1, y1 	;
+	int16_t	*ptrobj 		;
+	int32_t	coul=0, step		;
+	int32_t	beta			;
+	int32_t	flagshade = FALSE	;
+	int32_t	numinv			;
+	uint32_t	flags = ALL_ANGLES	;
 
 	numinv = TabIndir[numbox]	;
 
@@ -780,7 +780,7 @@ U32	DrawOneInventory( S32 numbox )
 			flagshade = TRUE ;
 		}
 
-		ptrobj = (S16 *)GivePtrObjFix( TabInv[numinv].TabObj3D[TabInv[numinv].IdObj3D] ) 	;
+		ptrobj = (int16_t *)GivePtrObjFix( TabInv[numinv].TabObj3D[TabInv[numinv].IdObj3D] ) 	;
 
 		beta = TabInv[numinv].BetaObj + (TimerRefHR-TimerRot);
 
@@ -789,7 +789,7 @@ U32	DrawOneInventory( S32 numbox )
 		if (( TabInv[numinv].FlagInv & FLAG_INV_FEWER )// Fuel, etc.
 		AND ( FlagZoomed < 4 ))
 		{
-			S32	xt ;
+			int32_t	xt ;
 			char	string[10] ;
 
 			ColorFont( LBAWHITE ) ;
@@ -883,7 +883,7 @@ U32	DrawOneInventory( S32 numbox )
 /*──────────────────────────────────────────────────────────────────────────*/
 void	DrawInventoryScreen()
 {
-	S32	n	;
+	int32_t	n	;
 
 //----- Avoid Flash ( compilator put direct value )
 	OldX0 =	INV_START_X + INV_INTER_X
@@ -907,8 +907,8 @@ void	DrawInventoryScreen()
 /*──────────────────────────────────────────────────────────────────────────*/
 void	OpenInventory()
 {
-	S32	x0, y0, x1, y1 	;
-	S32	savetimer, step	;
+	int32_t	x0, y0, x1, y1 	;
+	int32_t	savetimer, step	;
 
 	x0 = INV_START_X	;
 	y0 = INV_START_Y	;
@@ -964,7 +964,7 @@ void	OpenInventory()
 
 void	EmptyBlockInventory()
 {
-	S32	x0, y0, x1, y1	;
+	int32_t	x0, y0, x1, y1	;
 
 
 	x0 =	INV_START_X + INV_INTER_X
@@ -1003,9 +1003,9 @@ void	RestoreInventoryScreen()
 	BoxStaticAdd( INV_START_X, INV_START_Y, INV_END_X, INV_END_Y )	;
 }
 /*──────────────────────────────────────────────────────────────────────────*/
-void	AffObjName( S32 num )
+void	AffObjName( int32_t num )
 {
-	S32	x, dx, t, i	;
+	int32_t	x, dx, t, i	;
 
 	CopyBlock( INV_NAME_X0, INV_NAME_Y0, INV_NAME_X1, INV_NAME_Y1,
 		       BufSpeak, INV_NAME_X0, INV_NAME_Y0, Screen ) 	;
@@ -1045,19 +1045,19 @@ void	CheckProtoPack( void )
 	}
 }
 /*──────────────────────────────────────────────────────────────────────────*/
-U32	NextBox = 0	;
+uint32_t	NextBox = 0	;
 
-void	MenuInventory( U32 tempo )
+void	MenuInventory( uint32_t tempo )
 {
-	S32	flag = 1, t, i 	;
-	S32	flagname = 1 	;
-	S32	oldselect 	;
-	S32	memoalphalight, memobetalight ;
-	U32	timerzoom	;
-	U32	timerslide	;	// Demo Slide Show
-	U32	myinput	= Input	;
-	S32	flagproto = FALSE ;
-	U8	memobulle	;
+	int32_t	flag = 1, t, i 	;
+	int32_t	flagname = 1 	;
+	int32_t	oldselect 	;
+	int32_t	memoalphalight, memobetalight ;
+	uint32_t	timerzoom	;
+	uint32_t	timerslide	;	// Demo Slide Show
+	uint32_t	myinput	= Input	;
+	int32_t	flagproto = FALSE ;
+	uint8_t	memobulle	;
 
 	// au cas ou l'on soit appelé pendant un eclair
 	Palette( PtrPal ) ;
@@ -1389,42 +1389,42 @@ void	MenuInventory( U32 tempo )
 #define	FOUND_XO	((256+384)/2)
 #define	FOUND_YO	((48+178)/2)
 
-extern	S32	Dial_Y0	;
+extern	int32_t	Dial_Y0	;
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	DoFoundObj( S32 numvar )
+void	DoFoundObj( int32_t numvar )
 {
 #ifndef	COMPILATOR
-	S16	*ptr3do 	;
+	int16_t	*ptr3do 	;
 	T_OBJET	*ptrobj 	;
-	S32	x0, y0, x1, y1 ;
-	S32	dialstat 	;
-	S32	flag 		;
-	S32	numanim 	;
+	int32_t	x0, y0, x1, y1 ;
+	int32_t	dialstat 	;
+	int32_t	flag 		;
+	int32_t	numanim 	;
 /*
 #ifdef	CDROM
-	S32	memoflagspeak 	;
-	S32	speakfromcd  	;
+	int32_t	memoflagspeak 	;
+	int32_t	speakfromcd  	;
 #endif
 */
-	S32	sb		;
-	U32	savetimer, organi;
-	S32	end		;
+	int32_t	sb		;
+	uint32_t	savetimer, organi;
+	int32_t	end		;
 #ifdef	LBA_EDITOR
 	char	genanim[50]	;
 #else
-	U8	genanim	;
+	uint8_t	genanim	;
 #endif
-	U32	workflag	;
-	S32	xo, yo, step	;
-	S32	zoom	;
-	S32	endtimer ;
-	S32	keypress = FALSE ;
-	S32	keyreleased = FALSE ;
-	S32	numobj 		;
-	S32	saveyclip 	;
-	U8	memobulle = Bulle ;
-//	U8	esc = FALSE ;
+	uint32_t	workflag	;
+	int32_t	xo, yo, step	;
+	int32_t	zoom	;
+	int32_t	endtimer ;
+	int32_t	keypress = FALSE ;
+	int32_t	keyreleased = FALSE ;
+	int32_t	numobj 		;
+	int32_t	saveyclip 	;
+	uint8_t	memobulle = Bulle ;
+//	uint8_t	esc = FALSE ;
 
 #ifndef	LBA_EDITOR
 	ClearIncrusts( INCRUST_SYS_TEXT ) ;
@@ -1526,7 +1526,7 @@ void	DoFoundObj( S32 numvar )
 //	}
 #endif
 
-	ptr3do = (S16 *)GivePtrObjFix( numobj ) ;
+	ptr3do = (int16_t *)GivePtrObjFix( numobj ) ;
 
 #ifdef	LBA_EDITOR
 	strcpy( genanim, GEN_ANIM_GAUCHE ) ;
@@ -1550,7 +1550,7 @@ void	DoFoundObj( S32 numvar )
 	}
 	else
 	{
-		S32	diff ;
+		int32_t	diff ;
 
 		end = GetAngle2D( ptrobj->Obj.X, ptrobj->Obj.Z,
 				CameraX, CameraZ ) ;
@@ -1793,7 +1793,7 @@ void	DoFoundObj( S32 numvar )
 			if( ListVarGame[Weapon]==0 )
 #endif
 			{
-				Weapon = (U8)numobj ;
+				Weapon = (uint8_t)numobj ;
 			}
 			break ;
 
@@ -1877,16 +1877,16 @@ void	DrawArdoiseArrows( )
 
 void    RouleauRight()
 {
-	S32     x, xold,l;
-	S32     min;
-	S32	dep_timer ;
-	S32	col ;
-	S32	time = 2*1000 ;
-	S32	larg = PLAN_X1-PLAN_X0+ROULEAU_WIDTH-1 ;
-	S32	start = PLAN_X1+ROULEAU_WIDTH-1 ;
-	S32	key = FALSE ;
-	S32	cshade ;
-	S32	shade[ROULEAU_WIDTH] ;
+	int32_t     x, xold,l;
+	int32_t     min;
+	int32_t	dep_timer ;
+	int32_t	col ;
+	int32_t	time = 2*1000 ;
+	int32_t	larg = PLAN_X1-PLAN_X0+ROULEAU_WIDTH-1 ;
+	int32_t	start = PLAN_X1+ROULEAU_WIDTH-1 ;
+	int32_t	key = FALSE ;
+	int32_t	cshade ;
+	int32_t	shade[ROULEAU_WIDTH] ;
 
 	MemoClip() ;
 	SetClip( PLAN_X0, PLAN_Y0, PLAN_X1, PLAN_Y1 ) ;
@@ -1944,8 +1944,8 @@ void    RouleauRight()
 				if( col>=PLAN_X0 )
 				{
 					CopyBlockShade( col, PLAN_Y0,
-						   col, PLAN_Y1, (U8*)Screen,
-						   l, PLAN_Y0, (U8*)Log,
+						   col, PLAN_Y1, (uint8_t*)Screen,
+						   l, PLAN_Y0, (uint8_t*)Log,
 						   shade[cshade] );
 
 				}
@@ -1983,16 +1983,16 @@ void    RouleauRight()
 
 void    RouleauLeft()
 {
-	S32     x, xold,l;
-	S32     max;
-	S32	dep_timer ;
-	S32	col ;
-	S32	cshade ;
-	S32	time = 2*1000 ;
-	S32     shade[ROULEAU_WIDTH];
-	S32	start = PLAN_X0-ROULEAU_WIDTH+1 ;
-	S32	larg = PLAN_X1-PLAN_X0 ;
-	S32	key = 0 ;
+	int32_t     x, xold,l;
+	int32_t     max;
+	int32_t	dep_timer ;
+	int32_t	col ;
+	int32_t	cshade ;
+	int32_t	time = 2*1000 ;
+	int32_t     shade[ROULEAU_WIDTH];
+	int32_t	start = PLAN_X0-ROULEAU_WIDTH+1 ;
+	int32_t	larg = PLAN_X1-PLAN_X0 ;
+	int32_t	key = 0 ;
 
 	MemoClip() ;
 	SetClip( PLAN_X0, PLAN_Y0, PLAN_X1, PLAN_Y1 ) ;
@@ -2050,8 +2050,8 @@ void    RouleauLeft()
 				if( col<=PLAN_X1 )
 				{
 					CopyBlockShade( col, PLAN_Y0,
-						   col, PLAN_Y1, (U8*)Screen,
-						   l, PLAN_Y0, (U8*)Log,
+						   col, PLAN_Y1, (uint8_t*)Screen,
+						   l, PLAN_Y0, (uint8_t*)Log,
 						   shade[cshade] ) ;
 				}
 				else	Line( l, PLAN_Y0, l, PLAN_Y1, 48 ) ;
@@ -2086,9 +2086,9 @@ void    RouleauLeft()
 	RestoreClip();
 }
 
-void	ChangeArdoise( S32 left )	// 0:right, 1:left
+void	ChangeArdoise( int32_t left )	// 0:right, 1:left
 {
-	S32 savetimer ;
+	int32_t savetimer ;
 	char tmpFilePath[ADELINE_MAX_PATH];
 
 	// Chargement pcx
@@ -2154,7 +2154,7 @@ void	DrawArdoise( )
 
 void	ResetArdoise( void )
 {
-	S32	n ;
+	int32_t	n ;
 
 	for( n=0; n<MAX_ARDOISE; n++ )
 	{
@@ -2168,7 +2168,7 @@ void	ResetArdoise( void )
 void	GereArdoise()
 {
 #ifndef	COMPILATOR
-	S32	savetimer ;
+	int32_t	savetimer ;
 
 	InitWaitNoInput( ALL_INPUTS ) ;	// fait dans la boucle
 	InitWaitNoKey() ;
@@ -2243,21 +2243,21 @@ void	GereArdoise()
 
 //──────────────────────────────────────────────────────────────────────────
 
-void	BackupAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
+void	BackupAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
-	U8	*dest = PtrBackupAngles ;
-	U8	*src ;
+	uint8_t	*dest = PtrBackupAngles ;
+	uint8_t	*src ;
 
 //----- Angle Superieur Gauche
-	src = (U8*)Log + TabOffLine[y0] + x0 ;
+	src = (uint8_t*)Log + TabOffLine[y0] + x0 ;
 
-	*(U32*)dest = *(U32*)src;		// 1ere ligne
+	*(uint32_t*)dest = *(uint32_t*)src;		// 1ere ligne
 	dest[4] = src[4] 	;
 
 	dest[5] = src[640]		;	// 2nd ligne
-	*(S16*)(dest+6) = *(S16*)(src+640+1);
+	*(int16_t*)(dest+6) = *(int16_t*)(src+640+1);
 
-	*(S16*)(dest+8) = *(S16*)(src+640*2);	// 3eme ligne
+	*(int16_t*)(dest+8) = *(int16_t*)(src+640*2);	// 3eme ligne
 
 	dest[10] = src[640*3] ;			// 4eme ligne
 	dest[11] = src[640*4] ;			// 5eme ligne
@@ -2265,31 +2265,31 @@ void	BackupAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
 	dest += 12 ;
 
 //----- Angle Inferieur Gauche
-	src = (U8*)Log + TabOffLine[y1-4] + x0 ;
+	src = (uint8_t*)Log + TabOffLine[y1-4] + x0 ;
 
 	dest[0] = src[0]   ;			// 1ere ligne
 	dest[1] = src[640] ;			// 2eme ligne
 
-	*(S16*)(dest+2) = *(S16*)(src+640*2);	// 3eme ligne
+	*(int16_t*)(dest+2) = *(int16_t*)(src+640*2);	// 3eme ligne
 
-	*(S16*)(dest+4) = *(S16*)(src+640*3);	// 4eme ligne
+	*(int16_t*)(dest+4) = *(int16_t*)(src+640*3);	// 4eme ligne
 	dest[6] = src[640*3+2]		;
 
 	dest[7] = src[640*4] ;			// 5eme ligne
-	*(U32*)(dest+8) = *(U32*)(src+640*4+1);
+	*(uint32_t*)(dest+8) = *(uint32_t*)(src+640*4+1);
 
 	dest += 12 ;
 
 //----- Angle Superieur Droit
-	src = (U8*)Log + TabOffLine[y0] + x1 ;
+	src = (uint8_t*)Log + TabOffLine[y0] + x1 ;
 
-	*(U32*)dest = *(U32*)(src-4);		// 1ere ligne
+	*(uint32_t*)dest = *(uint32_t*)(src-4);		// 1ere ligne
 	dest[4] = src[0] 	;
 
 	dest[5] = src[640-2]		;	// 2nd ligne
-	*(S16*)(dest+6) = *(S16*)(src+640-1);
+	*(int16_t*)(dest+6) = *(int16_t*)(src+640-1);
 
-	*(S16*)(dest+8) = *(S16*)(src+640*2-1);	// 3eme ligne
+	*(int16_t*)(dest+8) = *(int16_t*)(src+640*2-1);	// 3eme ligne
 
 	dest[10] = src[640*3] ;			// 4eme ligne
 	dest[11] = src[640*4] ;			// 5eme ligne
@@ -2297,37 +2297,37 @@ void	BackupAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
 	dest += 12 ;
 
 //----- Angle Inferieur Droit
-	src = (U8*)Log + TabOffLine[y1-4] + x1 ;
+	src = (uint8_t*)Log + TabOffLine[y1-4] + x1 ;
 
 	dest[0] = src[0]   ;			// 1ere ligne
 	dest[1] = src[640] ;			// 2eme ligne
 
-	*(S16*)(dest+2) = *(S16*)(src+640*2-1);	// 3eme ligne
+	*(int16_t*)(dest+2) = *(int16_t*)(src+640*2-1);	// 3eme ligne
 
-	*(S16*)(dest+4) = *(S16*)(src+640*3-1);	// 4eme ligne
+	*(int16_t*)(dest+4) = *(int16_t*)(src+640*3-1);	// 4eme ligne
 	dest[6] = src[640*3-2]		;
 
 	dest[7] = src[640*4-4] ;		// 5eme ligne
-	*(U32*)(dest+8) = *(U32*)(src+640*4-3);
+	*(uint32_t*)(dest+8) = *(uint32_t*)(src+640*4-3);
 }
 
 //──────────────────────────────────────────────────────────────────────────
 
-void	RestoreAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
+void	RestoreAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
-	U8	*src = PtrBackupAngles ;
-	U8	*dest ;
+	uint8_t	*src = PtrBackupAngles ;
+	uint8_t	*dest ;
 
 //----- Angle Superieur Gauche
-	dest = (U8*)Log + TabOffLine[y0] + x0 ;
+	dest = (uint8_t*)Log + TabOffLine[y0] + x0 ;
 
-	*(U32*)dest = *(U32*)src;		// 1ere ligne
+	*(uint32_t*)dest = *(uint32_t*)src;		// 1ere ligne
 	dest[4] = src[4] 	;
 
 	dest[640] = src[5]		;	// 2nd ligne
-	*(S16*)(dest+640+1) = *(S16*)(src+6);
+	*(int16_t*)(dest+640+1) = *(int16_t*)(src+6);
 
-	*(S16*)(dest+640*2) = *(S16*)(src+8);	// 3eme ligne
+	*(int16_t*)(dest+640*2) = *(int16_t*)(src+8);	// 3eme ligne
 
 	dest[640*3] = src[10] ;			// 4eme ligne
 	dest[640*4] = src[11] ;			// 5eme ligne
@@ -2335,31 +2335,31 @@ void	RestoreAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
 	src += 12 ;
 
 //----- Angle Inferieur Gauche
-	dest = (U8*)Log + TabOffLine[y1-4] + x0 ;
+	dest = (uint8_t*)Log + TabOffLine[y1-4] + x0 ;
 
 	dest[0] = src[0]   ;			// 1ere ligne
 	dest[640] = src[1] ;			// 2eme ligne
 
-	*(S16*)(dest+640*2) = *(S16*)(src+2);	// 3eme ligne
+	*(int16_t*)(dest+640*2) = *(int16_t*)(src+2);	// 3eme ligne
 
-	*(S16*)(dest+640*3) = *(S16*)(src+4);	// 4eme ligne
+	*(int16_t*)(dest+640*3) = *(int16_t*)(src+4);	// 4eme ligne
 	dest[640*3+2] = src[6]		;
 
 	dest[640*4] = src[7] ;			// 5eme ligne
-	*(U32*)(dest+640*4+1) = *(U32*)(src+8);
+	*(uint32_t*)(dest+640*4+1) = *(uint32_t*)(src+8);
 
 	src += 12 ;
 
 //----- Angle Superieur Droit
-	dest = (U8*)Log + TabOffLine[y0] + x1 ;
+	dest = (uint8_t*)Log + TabOffLine[y0] + x1 ;
 
-	*(U32*)(dest-4) = *(U32*)src;		// 1ere ligne
+	*(uint32_t*)(dest-4) = *(uint32_t*)src;		// 1ere ligne
 	dest[0] = src[4] 	;
 
 	dest[640-2] = src[5]		;	// 2nd ligne
-	*(S16*)(dest+640-1) = *(S16*)(src+6);
+	*(int16_t*)(dest+640-1) = *(int16_t*)(src+6);
 
-	*(S16*)(dest+640*2-1) = *(S16*)(src+8);	// 3eme ligne
+	*(int16_t*)(dest+640*2-1) = *(int16_t*)(src+8);	// 3eme ligne
 
 	dest[640*3] = src[10] ;			// 4eme ligne
 	dest[640*4] = src[11] ;			// 5eme ligne
@@ -2367,18 +2367,18 @@ void	RestoreAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
 	src += 12 ;
 
 //----- Angle Inferieur Droit
-	dest = (U8*)Log + TabOffLine[y1-4] + x1 ;
+	dest = (uint8_t*)Log + TabOffLine[y1-4] + x1 ;
 
 	dest[0] = src[0]   ;			// 1ere ligne
 	dest[640] = src[1] ;			// 2eme ligne
 
-	*(S16*)(dest+640*2-1) = *(S16*)(src+2);	// 3eme ligne
+	*(int16_t*)(dest+640*2-1) = *(int16_t*)(src+2);	// 3eme ligne
 
-	*(S16*)(dest+640*3-1) = *(S16*)(src+4);	// 4eme ligne
+	*(int16_t*)(dest+640*3-1) = *(int16_t*)(src+4);	// 4eme ligne
 	dest[640*3-2] = src[6]		;
 
 	dest[640*4-4] = src[7] ;		// 5eme ligne
-	*(U32*)(dest+640*4-3) = *(U32*)(src+8);
+	*(uint32_t*)(dest+640*4-3) = *(uint32_t*)(src+8);
 }
 
 //──────────────────────────────────────────────────────────────────────────
@@ -2389,10 +2389,10 @@ void	RestoreAngles( S32 x0, S32 y0, S32 x1, S32 y1 )
 #define	COUL_DOWN_RED	((4*16)+9)	//  4 --> Banque rouge
 #define	COUL_UP_RED     ((4*16)+15)	//  4 --> Banque rouge
 
-U8	CadreCoulDown = COUL_DOWN_BLUE	;
-U8	CadreCoulUp   = COUL_UP_BLUE	;
+uint8_t	CadreCoulDown = COUL_DOWN_BLUE	;
+uint8_t	CadreCoulUp   = COUL_UP_BLUE	;
 
-void	DrawAngles( S32 x0, S32 y0, S32 x1, S32 y1, U32 type )
+void	DrawAngles( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint32_t type )
 {
 	if( type&BACKUP_ANGLES )
 	{
@@ -2486,7 +2486,7 @@ void	DrawAngles( S32 x0, S32 y0, S32 x1, S32 y1, U32 type )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void	DrawCadre( S32 x0, S32 y0, S32 x1, S32 y1, U32 type )
+void	DrawCadre( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint32_t type )
 {
 	if( type&CADRE_RED )
 	{
@@ -2516,7 +2516,7 @@ void	DrawCadre( S32 x0, S32 y0, S32 x1, S32 y1, U32 type )
 	CadreCoulUp	= COUL_UP_BLUE		;
 }
 //──────────────────────────────────────────────────────────────────────────
-void	DrawCadreBox( S32 x0, S32 y0, S32 x1, S32 y1, S32 color )
+void	DrawCadreBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color )
 {
 	Line( x0+5, y0+1, x1-5, y0+1, color )	;
 	Line( x0+3, y0+2, x1-3, y0+2, color )	;
@@ -2530,7 +2530,7 @@ void	DrawCadreBox( S32 x0, S32 y0, S32 x1, S32 y1, S32 color )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void	DrawCadreShade( S32 x0, S32 y0, S32 x1, S32 y1, S32 color )
+void	DrawCadreShade( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color )
 {
 	ShadeBoxBlk( x0+5, y0+1, x1-5, y0+1, color )	;
 	ShadeBoxBlk( x0+3, y0+2, x1-3, y0+2, color )	;
@@ -2554,7 +2554,7 @@ void	DrawCadreShade( S32 x0, S32 y0, S32 x1, S32 y1, S32 color )
 /*──────────────────────────────────────────────────────────────────────────*/
 
 //──────────────────────────────────────────────────────────────────────────
-void	BackupScreen( S32 flagscreen )
+void	BackupScreen( int32_t flagscreen )
 {
 	CopyScreen( Screen, ScreenAux ) ;	// decors only
 
@@ -2570,7 +2570,7 @@ void	BackupScreen( S32 flagscreen )
 //──────────────────────────────────────────────────────────────────────────
 void	RestoreScreen( void )
 {
-	S32	saveflagfade	;
+	int32_t	saveflagfade	;
 
 	CopyScreen( ScreenAux, Screen )	;
 	CopyScreen( ScreenAux, Log ) 	;
@@ -2600,7 +2600,7 @@ void	RestoreScreen( void )
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32		ProtectActif	= FALSE ;
+int32_t		ProtectActif	= FALSE ;
 
 //──────────────────────────────────────────────────────────────────────────
 
@@ -2627,7 +2627,7 @@ void	ToggleSortProtection( void )
 
 void	PlayProtectSamples( T_EXTRA *ptrextra )
 {
-	S32 x, y, z ;
+	int32_t x, y, z ;
 
 	x = ptrextra->PosX ;
 	y = ptrextra->PosY ;

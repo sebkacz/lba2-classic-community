@@ -11,10 +11,10 @@ extern "C" {
 #define MALLOC_MASK (~(MALLOC_ALIGN - 1))
 
 // -----------------------------------------------------------------------------
-void *NormMalloc(U32 size) {
-  S32 addr, temp;
+void *NormMalloc(uint32_t size) {
+  int32_t addr, temp;
 
-  temp = (S32)malloc(size + MALLOC_ALIGN);
+  temp = (int32_t)malloc(size + MALLOC_ALIGN);
 
   if (!temp) {
     return NULL;
@@ -22,18 +22,18 @@ void *NormMalloc(U32 size) {
 
   addr = (temp + MALLOC_ALIGN) & MALLOC_MASK;
 
-  *((S8 *)addr - 2) = 0;
-  *((S8 *)addr - 1) = (S8)(addr - temp);
+  *((int8_t *)addr - 2) = 0;
+  *((int8_t *)addr - 1) = (int8_t)(addr - temp);
 
   return (void *)addr;
 }
 
 void NormFree(void *addr) {
-  addr = (void *)((S32)addr - *((S8 *)addr - 1));
+  addr = (void *)((int32_t)addr - *((int8_t *)addr - 1));
   free(addr);
 }
 
-void *NormMshrink(void *addr, U32 size) {
+void *NormMshrink(void *addr, uint32_t size) {
   // There is no portable equivalent to '_expand' without changing
   //   code that uses this function, making it fail is valid according to
   //   the "contract" of the function

@@ -10,9 +10,9 @@ extern Func_TransNumPtr GivePtrBody ;
 /*--------------------------------------------------------------------------*/
 extern void InitSysText( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void InitObject(U8 numobj);
+extern void InitObject(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern void StartInitObj(U8 numobj);
+extern void StartInitObj(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 extern void StartInitAllObjs(void);
 /*--------------------------------------------------------------------------*/
@@ -24,7 +24,7 @@ extern void InitPerso(void);
 /*--------------------------------------------------------------------------*/
 extern void UseOneClover( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void SetComportement(U8 comportement);
+extern void SetComportement(uint8_t comportement);
 /*--------------------------------------------------------------------------*/
 extern void RestartPerso(void);
 /*--------------------------------------------------------------------------*/
@@ -40,45 +40,45 @@ extern void LoadFile3dObjects(void);
 /*--------------------------------------------------------------------------*/
 extern void ChangeCube(void);
 /*--------------------------------------------------------------------------*/
-extern void HitObj(U8 numhitter,U8 num,S32 hitforce,S32 beta);
+extern void HitObj(uint8_t numhitter,uint8_t num,int32_t hitforce,int32_t beta);
 /*--------------------------------------------------------------------------*/
-extern void FoudroieObj( U8 numhitter, U8 num, S32 armure ) ;
+extern void FoudroieObj( uint8_t numhitter, uint8_t num, int32_t armure ) ;
 /*--------------------------------------------------------------------------*/
-extern S32  CheckZvOnZv(U8 numobj,U8 numobjt);
+extern int32_t  CheckZvOnZv(uint8_t numobj,uint8_t numobjt);
 /*--------------------------------------------------------------------------*/
-extern S32  CheckObjCol(U8 numobj);
+extern int32_t  CheckObjCol(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern U8   IsObjCol( U8 numobj ) ;
+extern uint8_t   IsObjCol( uint8_t numobj ) ;
 /*--------------------------------------------------------------------------*/
-extern void CheckCarrier(U8 numobj);
+extern void CheckCarrier(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern S32  CheckValidObjPos(U8 numobj,U8 owner);
+extern int32_t  CheckValidObjPos(uint8_t numobj,uint8_t owner);
 /*--------------------------------------------------------------------------*/
-extern void PosObjetAroundAnother( U8 numsrc, U8 numtopos ) ;
+extern void PosObjetAroundAnother( uint8_t numsrc, uint8_t numtopos ) ;
 /*--------------------------------------------------------------------------*/
-extern	U8  ChoiceHeroBody( U8 genbody ) ;
+extern	uint8_t  ChoiceHeroBody( uint8_t genbody ) ;
 /*--------------------------------------------------------------------------*/
-extern void InitBody(U8 gennewbody,U8 numobj);
+extern void InitBody(uint8_t gennewbody,uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern void InitSprite(S32 newsprite,T_OBJET *numobj);
+extern void InitSprite(int32_t newsprite,T_OBJET *numobj);
 /*--------------------------------------------------------------------------*/
-extern void SetAnim(U8 numobj,U16 anim);
+extern void SetAnim(uint8_t numobj,uint16_t anim);
 /*--------------------------------------------------------------------------*/
-extern S32  InitAnim(U16 gennewanim,U8 flag,U8 numobj);
+extern int32_t  InitAnim(uint16_t gennewanim,uint8_t flag,uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 extern Func_ReajustPos ReajustPos ;
 /*--------------------------------------------------------------------------*/
 extern void ReceptionObj(void);
 /*--------------------------------------------------------------------------*/
-extern void DoCornerReajust(S32 nx,S32 ny,S32 nz);
+extern void DoCornerReajust(int32_t nx,int32_t ny,int32_t nz);
 /*--------------------------------------------------------------------------*/
-extern S32  DoCornerReajustTwinsen(S32 nx,S32 ny,S32 nz);
+extern int32_t  DoCornerReajustTwinsen(int32_t nx,int32_t ny,int32_t nz);
 /*--------------------------------------------------------------------------*/
-extern S32  CheckCarryBy(U8 numobj);
+extern int32_t  CheckCarryBy(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern S32 GereCodesJeu( U8 numobj ) ;
+extern int32_t GereCodesJeu( uint8_t numobj ) ;
 /*--------------------------------------------------------------------------*/
-extern void GereObjAnim(U8 numobj);
+extern void GereObjAnim(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 extern Func_DoAnim DoAnim ;
 /*--------------------------------------------------------------------------*/
@@ -90,27 +90,27 @@ extern void ThrowMecaPingouin( void ) ;
 /*--------------------------------------------------------------------------*/
 extern void ExplodeMecaPingouin( void );
 /*--------------------------------------------------------------------------*/
-extern void DoDir(U8 numobj);
+extern void DoDir(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 extern void ResetCinemaMode( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void FixeCinemaMode( S32 flagflip ) ;
+extern void FixeCinemaMode( int32_t flagflip ) ;
 /*--------------------------------------------------------------------------*/
 extern void RestoreCinemaMode( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void InsertChainBeforeEntry(S32 list0,T_SORT *pt0,S32 list1,T_SORT *pt1);
+extern void InsertChainBeforeEntry(int32_t list0,T_SORT *pt0,int32_t list1,T_SORT *pt1);
 /*--------------------------------------------------------------------------*/
-extern void InsertChainAfterEntry(S32 list0,T_SORT *pt1);
+extern void InsertChainAfterEntry(int32_t list0,T_SORT *pt1);
 /*--------------------------------------------------------------------------*/
 extern Func_TreeInsert TreeInsert2 ;
 /*--------------------------------------------------------------------------*/
-extern S32 AffOneObject(T_SORT *pt);
+extern int32_t AffOneObject(T_SORT *pt);
 /*--------------------------------------------------------------------------*/
-extern void AffScene(S32 flagflip);
+extern void AffScene(int32_t flagflip);
 /*--------------------------------------------------------------------------*/
 extern void SetZoneCamera(T_ZONE *ptrz);
 /*--------------------------------------------------------------------------*/
-extern void CheckZoneSce(T_OBJET *ptrobj,U8 numobj);
+extern void CheckZoneSce(T_OBJET *ptrobj,uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 extern void CheckBuggyZoneGiver( T_OBJET *ptrobj ) ;
 /*--------------------------------------------------------------------------*/

@@ -7,15 +7,15 @@
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	InitIncrustDisp(	S16 type,
-				S16 num,
-				S32 x, S32 y,
-				S16 info,
-				S16 move,
-				S32 timeout	)
+int32_t	InitIncrustDisp(	int16_t type,
+				int16_t num,
+				int32_t x, int32_t y,
+				int16_t info,
+				int16_t move,
+				int32_t timeout	)
 {
 	T_INCRUST_DISP	*ptrdisp ;
-	S32	n ;
+	int32_t	n ;
 
 	// Liés aux objets de l'inventaire changeant d'état
 	if( (type&0xFF)==INCRUST_INVENTORY )
@@ -33,8 +33,8 @@ S32	InitIncrustDisp(	S16 type,
 			if( ptrdisp->Num==-1
 			OR  ptrdisp->Type!=type )
 			{
-				ptrdisp->X = (S16)x ;
-				ptrdisp->Y = (S16)y ;
+				ptrdisp->X = (int16_t)x ;
+				ptrdisp->Y = (int16_t)y ;
 			}
 
 			if( (type&0xff)==INCRUST_CMPT )
@@ -64,12 +64,12 @@ S32	InitIncrustDisp(	S16 type,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	PosObjIncrust( T_INCRUST_DISP *ptrdisp, S32 num )
+void	PosObjIncrust( T_INCRUST_DISP *ptrdisp, int32_t num )
 {
 	// au cas ou on ait plusieurs objets 3D tournant en même temps !
-	S32	x = 10 ;
-	S32	n ;
-	S32	type ;
+	int32_t	x = 10 ;
+	int32_t	n ;
+	int32_t	type ;
 	T_INCRUST_DISP *listdisp = ListIncrustDisp ;
 
 	type = (ptrdisp->Type&0xFF) ;
@@ -93,17 +93,17 @@ void	PosObjIncrust( T_INCRUST_DISP *ptrdisp, S32 num )
 		}
 
 		ptrdisp->Y = 10 	;
-		ptrdisp->X = (S16)x 	;
+		ptrdisp->X = (int16_t)x 	;
 	}
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	ChangeIncrustPos( S32 xp0, S32 yp0, S32 xp1, S32 yp1 )
+void	ChangeIncrustPos( int32_t xp0, int32_t yp0, int32_t xp1, int32_t yp1 )
 {
 	T_INCRUST_DISP	*ptrdisp ;
-	S32	n ;
-	S32	dx, dy ;
+	int32_t	n ;
+	int32_t	dx, dy ;
 
 	dx = xp1 - xp0 ;
 	dy = yp1 - yp0 ;
@@ -122,10 +122,10 @@ void	ChangeIncrustPos( S32 xp0, S32 yp0, S32 xp1, S32 yp1 )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	ClearIncrusts( S32 type )
+void	ClearIncrusts( int32_t type )
 {
 	T_INCRUST_DISP	*ptrdisp ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrdisp = ListIncrustDisp ;
 
@@ -140,12 +140,12 @@ void	ClearIncrusts( S32 type )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	LastNumBulle = -1 ;
-S32	SpriteBulle = SPRITE_BULLE_RIGHT ;
+int32_t	LastNumBulle = -1 ;
+int32_t	SpriteBulle = SPRITE_BULLE_RIGHT ;
 
 #define	DX_BULLE	45	// Valeur saisie dans Volgraf
 
-void	DrawBulle( S32 numobj )
+void	DrawBulle( int32_t numobj )
 {
 	PtrProjectPoint(	ListObjet[numobj].Obj.X,
 				ListObjet[numobj].Obj.Y + ListObjet[numobj].YMax,

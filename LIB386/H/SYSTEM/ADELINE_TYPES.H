@@ -8,26 +8,26 @@ extern "C" {
 #endif
 
 //------------------------------------------------------------------------------
-typedef uint8_t  U8;
-typedef int8_t   S8;
-typedef uint16_t U16;
-typedef int16_t  S16;
-typedef uint32_t U32;
-typedef int32_t  S32;
-typedef uint64_t U64;
-typedef int64_t  S64;
+typedef uint8_t  uint8_t;
+typedef int8_t   int8_t;
+typedef uint16_t uint16_t;
+typedef int16_t  int16_t;
+typedef uint32_t uint32_t;
+typedef int32_t  int32_t;
+typedef uint64_t uint64_t;
+typedef int64_t  int64_t;
 //typedef int32_t  LONG;
 
 //------------------------------------------------------------------------------
 typedef void  *PTR_VOID;
-typedef U64   *PTR_U64;
-typedef S64   *PTR_S64;
-typedef U32   *PTR_U32;
-typedef S32   *PTR_S32;
-typedef U16   *PTR_U16;
-typedef S16   *PTR_S16;
-typedef U8    *PTR_U8;
-typedef S8    *PTR_S8;
+typedef uint64_t   *PTR_uint64_t;
+typedef int64_t   *PTR_int64_t;
+typedef uint32_t   *PTR_uint32_t;
+typedef int32_t   *PTR_int32_t;
+typedef uint16_t   *PTR_uint16_t;
+typedef int16_t   *PTR_int16_t;
+typedef uint8_t    *PTR_uint8_t;
+typedef int8_t    *PTR_int8_t;
 
 typedef void(VOID_FUNC)();
 typedef VOID_FUNC *PTR_VOID_FUNC;
@@ -35,10 +35,10 @@ typedef VOID_FUNC *PTR_VOID_FUNC;
 //------------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct STR_T_BOX {
-  S16 x0;
-  S16 y0;
-  S16 x1;
-  S16 y1;
+  int16_t x0;
+  int16_t y0;
+  int16_t x1;
+  int16_t y1;
   struct STR_T_BOX *pBoxNext;
 } T_BOX;
 #pragma pack(pop)

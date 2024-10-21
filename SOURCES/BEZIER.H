@@ -3,32 +3,32 @@
 
 #define ALTITUDE_MAX	200
 
-#define FTOW(x) (S16)(((x)+32767) >> 16)
-#define WTOF(x) (S32)((S32)(x) << 16)
+#define FTOW(x) (int16_t)(((x)+32767) >> 16)
+#define WTOF(x) (int32_t)((int32_t)(x) << 16)
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-typedef	S32	(Func_ProjectShadow)( T_SORT *,S32 ) ;
+typedef	int32_t	(Func_ProjectShadow)( T_SORT *,int32_t ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 
-extern	S32	XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;
-extern	S32	ShadowTestObject ;
+extern	int32_t	XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;
+extern	int32_t	ShadowTestObject ;
 
 /*--------------------------------------------------------------------------*/
-void 	CalculeLigneOmbre( S32 x1, S32 y1, S32 x2, S32 y2 ) ;
+void 	CalculeLigneOmbre( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) ;
 /*--------------------------------------------------------------------------*/
-void	DrawOmbre(S32 x0,S32 y0,S32 x1,S32 y1,S32 x2,S32 y2,S32 x3,S32 y3) ;
+void	DrawOmbre(int32_t x0,int32_t y0,int32_t x1,int32_t y1,int32_t x2,int32_t y2,int32_t x3,int32_t y3) ;
 /*--------------------------------------------------------------------------*/
-void	DrawLineShade(	S32 x0, S32 z0, S32 x1, S32 z1, S32 x2, S32 z2, S32 x3, S32 z3 ) ;
+void	DrawLineShade(	int32_t x0, int32_t z0, int32_t x1, int32_t z1, int32_t x2, int32_t z2, int32_t x3, int32_t z3 ) ;
 /*--------------------------------------------------------------------------*/
-S32	TestZVDecorsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_DECORS *objet ) ;
+int32_t	TestZVDecorsXZFull( int32_t xw, int32_t zw, int32_t y0, int32_t y1, T_DECORS *objet ) ;
 /*--------------------------------------------------------------------------*/
-S32	TestZVObjectsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_OBJET *objet ) ;
+int32_t	TestZVObjectsXZFull( int32_t xw, int32_t zw, int32_t y0, int32_t y1, T_OBJET *objet ) ;
 /*--------------------------------------------------------------------------*/
-S32	AdjustShadowDecors( S32 xw, S32 zw, S32 y0, S32 y1 ) ;
+int32_t	AdjustShadowDecors( int32_t xw, int32_t zw, int32_t y0, int32_t y1 ) ;
 /*--------------------------------------------------------------------------*/
-S32	AdjustShadowObjects( S32 xw, S32 zw, S32 y0, S32 y1 ) ;
+int32_t	AdjustShadowObjects( int32_t xw, int32_t zw, int32_t y0, int32_t y1 ) ;
 /*--------------------------------------------------------------------------*/
 extern	Func_ProjectShadow	ProjectShadowExt ;
 /*--------------------------------------------------------------------------*/

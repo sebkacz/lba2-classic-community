@@ -10,7 +10,7 @@ extern void AffDebugMenu(void);
 /*--------------------------------------------------------------------------*/
 extern void CheckSavePcx(void);
 /*--------------------------------------------------------------------------*/
-extern void CheckSaveLogPcx( U8 *pal );
+extern void CheckSaveLogPcx( uint8_t *pal );
 /*--------------------------------------------------------------------------*/
 extern void LoadListAnim3DS( void );
 /*--------------------------------------------------------------------------*/
@@ -20,21 +20,21 @@ extern void InitGame(int argc);
 /*--------------------------------------------------------------------------*/
 extern void Introduction(void);
 /*--------------------------------------------------------------------------*/
-extern void GamePaused(U32 flags);
+extern void GamePaused(uint32_t flags);
 /*--------------------------------------------------------------------------*/
-extern S32  MainLoop(void);
+extern int32_t  MainLoop(void);
 /*--------------------------------------------------------------------------*/
 extern void InitProgram();
 /*--------------------------------------------------------------------------*/
 extern void TheEndCheckFile(const char *filename);
 /*--------------------------------------------------------------------------*/
-extern void InitTheEnd(S32 num,char *error);
+extern void InitTheEnd(int32_t num,char *error);
 /*--------------------------------------------------------------------------*/
-extern void TheEnd(S32 num, const char *error);
+extern void TheEnd(int32_t num, const char *error);
 /*--------------------------------------------------------------------------*/
 extern void TheEndInfo(void);
 /*--------------------------------------------------------------------------*/
-extern void Message(const char *mess,S32 flag);
+extern void Message(const char *mess,int32_t flag);
 /*--------------------------------------------------------------------------*/
 
 #endif	// PERSO_H

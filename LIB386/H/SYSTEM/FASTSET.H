@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-typedef	void	Func_FastSet(void *dst, S32 val, U32 len) ;
+typedef	void	Func_FastSet(void *dst, int32_t val, uint32_t len) ;
 
 #pragma aux	Arg_FastSet	"*"	\
 	parm caller	[edi] [eax] [ecx]	\

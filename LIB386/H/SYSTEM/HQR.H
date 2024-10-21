@@ -9,9 +9,9 @@ extern	"C"	{
 
 //──────────────────────────────────────────────────────────────────────────
 typedef struct
-	{	U32	SizeFile		;
-		U32	CompressedSizeFile	;
-		S16	CompressMethod 		;// 0 stored, 1 LZSS, 2 LZMIT
+	{	uint32_t	SizeFile		;
+		uint32_t	CompressedSizeFile	;
+		int16_t	CompressMethod 		;// 0 stored, 1 LZSS, 2 LZMIT
 	}	COMPRESSED_HEADER ;
 
 //──────────────────────────────────────────────────────────────────────────

@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-extern	S32	HQRM_Load(char *name, S32 index, void **handle)	;
+extern	int32_t	HQRM_Load(char *name, int32_t index, void **handle)	;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef	__cplusplus

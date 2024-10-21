@@ -31,7 +31,7 @@ void	PlayStream(char *name)		;
 //
 //	Returns	:			nothing
 //--------------------------------------------------------------------------
-void	ChangeVolumeStream(S32 volume)	;
+void	ChangeVolumeStream(int32_t volume)	;
 
 //--------------------------------------------------------------------------
 //	GetVolumeStream :		get the volume of the playing
@@ -39,7 +39,7 @@ void	ChangeVolumeStream(S32 volume)	;
 //
 //	Returns	:			stream volume (0-127)
 //--------------------------------------------------------------------------
-S32	GetVolumeStream()		;
+int32_t	GetVolumeStream()		;
 
 //--------------------------------------------------------------------------
 //	StopStream :			stop playing stream
@@ -69,7 +69,7 @@ void	ResumeStream()			;
 //
 //	Returns	:			TRUE/FALSE
 //--------------------------------------------------------------------------
-S32	IsStreamPlaying()		;
+int32_t	IsStreamPlaying()		;
 
 //--------------------------------------------------------------------------
 //	StreamName :			return the name of the playing stream

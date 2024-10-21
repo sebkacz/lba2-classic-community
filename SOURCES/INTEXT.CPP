@@ -16,12 +16,12 @@
 
 extern	T_OBJET	*APtObj ;	// dans OBJECT.CPP
 
-S32	SaveVueOffsetX, SaveVueOffsetY, SaveVueOffsetZ ;
-S32	SaveAlphaCam, SaveBetaCam, SaveGammaCam ;
-S32	SaveVueDistance ;
-S32	SaveAlphaLight, SaveBetaLight ;
+int32_t	SaveVueOffsetX, SaveVueOffsetY, SaveVueOffsetZ ;
+int32_t	SaveAlphaCam, SaveBetaCam, SaveGammaCam ;
+int32_t	SaveVueDistance ;
+int32_t	SaveAlphaLight, SaveBetaLight ;
 
-S32	AddBetaCam = 0 ;
+int32_t	AddBetaCam = 0 ;
 
 // Pointeurs de fonctions communs au deux mondes
 Func_ReajustPos	*PtrReajustPos 	= ReajustPos 	;
@@ -71,9 +71,9 @@ void	PtrInit3DGame()
 
 // Routine de recouvrement: trouver le moyen de passer les mêmes paramètres
 // en extérieur et en intérieur pour optimiser avec un pointeur de fonction
-S32	DrawRecover( S32 xw, S32 yw, S32 zw, S32 ymax, S32 zvmax )
+int32_t	DrawRecover( int32_t xw, int32_t yw, int32_t zw, int32_t ymax, int32_t zvmax )
 {
-	S32	flagbox ;
+	int32_t	flagbox ;
 
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -87,7 +87,7 @@ S32	DrawRecover( S32 xw, S32 yw, S32 zw, S32 ymax, S32 zvmax )
 	}
 	else
 	{
-		S32	z0, z1 ;
+		int32_t	z0, z1 ;
 
 		LongWorldRotatePoint( xw, yw, zw ) ;
 
@@ -111,9 +111,9 @@ S32	DrawRecover( S32 xw, S32 yw, S32 zw, S32 ymax, S32 zvmax )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Routine de recouvrement des sprites: trouver le moyen de passer les mêmes paramètres
 // en extérieur et en intérieur pour optimiser avec un pointeur de fonction
-void	DrawRecover3( S32 xw, S32 yw, S32 zw, S32 ymax, S32 zvmax )
+void	DrawRecover3( int32_t xw, int32_t yw, int32_t zw, int32_t ymax, int32_t zvmax )
 {
-	S32	flagbox ;
+	int32_t	flagbox ;
 
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -126,7 +126,7 @@ void	DrawRecover3( S32 xw, S32 yw, S32 zw, S32 ymax, S32 zvmax )
 	}
 	else
 	{
-		S32	z0 ;
+		int32_t	z0 ;
 
 		LongWorldRotatePoint( xw, yw, zw ) ;
 
@@ -194,7 +194,7 @@ void	RefreshClippedGrille()
 /*──────────────────────────────────────────────────────────────────────────*/
 // Recupere numero code jeu ou sample en xw,yw,zw
 
-U8	PtrWorldCodeBrick( S32 xw, S32 yw, S32 zw )
+uint8_t	PtrWorldCodeBrick( int32_t xw, int32_t yw, int32_t zw )
 {
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -210,10 +210,10 @@ U8	PtrWorldCodeBrick( S32 xw, S32 yw, S32 zw )
 	{
 		if( APtObj->CarryBy!=-1 )
 		{
-			S32	numdec = APtObj->CarryBy&~(CARRY_BY_DECORS) ;
+			int32_t	numdec = APtObj->CarryBy&~(CARRY_BY_DECORS) ;
 
 			if( APtObj->CarryBy&CARRY_BY_DECORS )
-				return( (U8)(ListDecors[APtObj->CarryBy&~(CARRY_BY_DECORS)].CodeJeu) ) ;
+				return( (uint8_t)(ListDecors[APtObj->CarryBy&~(CARRY_BY_DECORS)].CodeJeu) ) ;
 			else	return 0 ;	// porté par un objet scénarique
 		}
 		else if( !(APtObj->WorkFlags&FALLING)
@@ -245,7 +245,7 @@ void	PtrSearchFirstPseudo()
 /*──────────────────────────────────────────────────────────────────────────*/
 // Recupere les coordonnees brick a la position ecran xp,yp (pour la souris)
 // dans X0, Y0 et Z0
-S32	PtrGetScreenBrick( S32 xp, S32 yp )
+int32_t	PtrGetScreenBrick( int32_t xp, int32_t yp )
 {
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -273,10 +273,10 @@ S32	PtrGetScreenBrick( S32 xp, S32 yp )
  *══════════════════════════════════════════════════════════════════════════*/
 
 // Calcule les coordonnees du sprite (SCENARIQUE) suivant le mode
-void	PtrProjectSprite( S32 xw, S32 yw, S32 zw, S32 sprite )
+void	PtrProjectSprite( int32_t xw, int32_t yw, int32_t zw, int32_t sprite )
 {
-	S32	mindx, mindy ;
-	S16		*zvptr	;
+	int32_t	mindx, mindy ;
+	int16_t		*zvptr	;
 
 	PtrProjectPoint( xw, yw, zw ) ;
 
@@ -300,9 +300,9 @@ void	PtrProjectSprite( S32 xw, S32 yw, S32 zw, S32 sprite )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Calcule la taille du sprite suivant le mode
-void	PtrGetDxDyGraph( S32 sprite, S32 *dx, S32 *dy )
+void	PtrGetDxDyGraph( int32_t sprite, int32_t *dx, int32_t *dy )
 {
-	S16	*zvptr	;
+	int16_t	*zvptr	;
 
 	// ne tient pas compte, pour l'instant en tout cas, du
 	// ScaleSprite
@@ -324,7 +324,7 @@ void	PtrGetDxDyGraph( S32 sprite, S32 *dx, S32 *dy )
 // Affiche un sprite (GPH en intérieur, RAW en extérieur pour le zoomer).
 // Trouver un moyen pour avoir les mêmes paramètres pour optimiser avec
 // un pointeur de fonction (aligner la fonction intérieur sur extérieur)
-void	PtrAffGraph( S32 xp, S32 yp, S32 sprite )
+void	PtrAffGraph( int32_t xp, int32_t yp, int32_t sprite )
 {
 	if( sprite>=100 )	// c'est un sprite goodies (interieur)
 	{
@@ -337,15 +337,15 @@ void	PtrAffGraph( S32 xp, S32 yp, S32 sprite )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U8	*GetPtrSprite( S32 sprite )
+uint8_t	*GetPtrSprite( int32_t sprite )
 {
 	if( sprite>=100 )
 	{
-		return( (U8 *)HQR_Get( HQRPtrSprite, sprite ) ) ;
+		return( (uint8_t *)HQR_Get( HQRPtrSprite, sprite ) ) ;
 	}
 	else
 	{
-		return( (U8 *)HQR_Get( HQRPtrSpriteRaw, sprite ) ) ;
+		return( (uint8_t *)HQR_Get( HQRPtrSpriteRaw, sprite ) ) ;
 	}
 }
 
@@ -358,7 +358,7 @@ U8	*GetPtrSprite( S32 sprite )
 // Project un point dans l'espace. Comment faire pour passer ici par un
 // pointeur de fonction vu que LongProjectPoint est déclaré en passage de
 // paramètres par registres (voir lib_3D)
-S32	PtrProjectPoint( S32 xw, S32 yw, S32 zw )
+int32_t	PtrProjectPoint( int32_t xw, int32_t yw, int32_t zw )
 {
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -381,10 +381,10 @@ S32	PtrProjectPoint( S32 xw, S32 yw, S32 zw )
 //		      compte de AddBetaCam (cameras orientees)
 //		3 --> Don't touch Globales. Juste appel des fonctions Caméras
 
-void	CameraCenter( S32 flagbeta )
+void	CameraCenter( int32_t flagbeta )
 {
 	T_OBJ_3D	*ptr3d = &ListObjet[NumObjFollow].Obj ;
-	S32	newbeta ;
+	int32_t	newbeta ;
 
 	switch( flagbeta )
 	{
@@ -487,12 +487,12 @@ void	CameraCenter( S32 flagbeta )
 
 
 #ifdef	LBA_EDITOR
-void	FlyCamera( 	S32 offx, S32 offy, S32 offz,
-			S32 alpha, S32 beta, S32 gamma, S32 distance,
-			S32 delay )
+void	FlyCamera( 	int32_t offx, int32_t offy, int32_t offz,
+			int32_t alpha, int32_t beta, int32_t gamma, int32_t distance,
+			int32_t delay )
 {
-	S32	time = 0 ;
-	S32	savetimer ;
+	int32_t	time = 0 ;
+	int32_t	savetimer ;
 
 	SaveTimer() ;
 	SaveCamera() ;
@@ -615,7 +615,7 @@ void	RestoreCamera()
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Calculte la hauteur du decors sous un point 3D
-S32	PtrCalculAltitudeY( S32 x, S32 z )
+int32_t	PtrCalculAltitudeY( int32_t x, int32_t z )
 {
 	if( CubeMode==CUBE_INTERIEUR )
 	{
@@ -703,7 +703,7 @@ void	GereBrickMouse()
 			}
 			else
 			{
-				S32	xi, yi, zi ;
+				int32_t	xi, yi, zi ;
 
 				xi = IndXPolySelected ;
 				zi = IndZPolySelected ;
@@ -738,7 +738,7 @@ void	GereBrickMouse()
 /*──────────────────────────────────────────────────────────────────────────*/
 // La gestion des touches est différente suivant le mode du cube.
 // Mettre un pointeur de fonction ? Bof, c'est juste pour l'outil !
-S32	PtrGereKeys( U32 key, U32 flagmenu )
+int32_t	PtrGereKeys( uint32_t key, uint32_t flagmenu )
 {
 	if( CubeMode==CUBE_INTERIEUR )
 	{

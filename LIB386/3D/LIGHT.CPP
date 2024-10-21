@@ -22,16 +22,16 @@ extern "C" {
 #define NORMAL_UNIT 16384
 
 // -----------------------------------------------------------------------------
-S32 AlphaLight = 0, BetaLight = 0, GammaLight = 0;
-S32 NormalXLight = LIB_NORMAL_UNIT, NormalYLight = 0, NormalZLight = 0;
-S32 CameraXLight = LIB_NORMAL_UNIT, CameraYLight = 0, CameraZLight = 0;
-S32 PosXLight = 0, PosYLight = 0, PosZLight = 0;
-S32 TargetXLight = 0, TargetYLight = 0, TargetZLight = 0;
-S32 LightNormalUnit = LIB_NORMAL_UNIT;
+int32_t AlphaLight = 0, BetaLight = 0, GammaLight = 0;
+int32_t NormalXLight = LIB_NORMAL_UNIT, NormalYLight = 0, NormalZLight = 0;
+int32_t CameraXLight = LIB_NORMAL_UNIT, CameraYLight = 0, CameraZLight = 0;
+int32_t PosXLight = 0, PosYLight = 0, PosZLight = 0;
+int32_t TargetXLight = 0, TargetYLight = 0, TargetZLight = 0;
+int32_t LightNormalUnit = LIB_NORMAL_UNIT;
 float FactorLight = 1.52587890625E-5f; // 1.0 / 65536.0
 
 // -----------------------------------------------------------------------------
-void SetLightVector(S32 alpha, S32 beta, S32 /*gamma*/) {
+void SetLightVector(int32_t alpha, int32_t beta, int32_t /*gamma*/) {
   assert(alpha > 0);
   assert(beta > 0);
 

@@ -50,7 +50,7 @@ ENDIF
 		PUBLIC	C	ClearObjects
 
 ;*──────────────────────────────────────────────────────────────────────────*
-;void	InitObjects(void *buffer, U32 size, TRANS_FUNC *fctbody, TRANS_FUNC *fctanim)
+;void	InitObjects(void *buffer, uint32_t size, TRANS_FUNC *fctbody, TRANS_FUNC *fctanim)
 
 ;#pragma aux InitObjects	       		\
 ;	parm		[eax] [ecx] [edx] [ebx]	\

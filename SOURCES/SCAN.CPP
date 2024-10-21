@@ -7,10 +7,10 @@
 #endif
 
 //──────────────────────────────────────────────────────────────────────────
-static  U8      KeyState[256+16*8]   ;
+static  uint8_t      KeyState[256+16*8]   ;
 
 //──────────────────────────────────────────────────────────────────────────
-U32 GetBit(U32 val) {
+uint32_t GetBit(uint32_t val) {
   if (val == 0) {
     return 0;
   }
@@ -25,23 +25,23 @@ U32 GetBit(U32 val) {
 }
 
 //──────────────────────────────────────────────────────────────────────────
-S32     KeyDown()
+int32_t     KeyDown()
 {
-        S32     i       ;
-        S32     found   ;
-        U32     *Joys, *OldJoys ;
+        int32_t     i       ;
+        int32_t     found   ;
+        uint32_t     *Joys, *OldJoys ;
 
 	DetectJoys()	;
-        GetJoys((U32*)(TabKeys+256))    ;
+        GetJoys((uint32_t*)(TabKeys+256))    ;
         ManageKeyboard();
 
         found = 0       ;
 
         for(i=255; i>=0; i--)
         {
-                U8      key     ;
+                uint8_t      key     ;
 
-                key = (U8)(~KeyState[i]&0x80);
+                key = (uint8_t)(~KeyState[i]&0x80);
 
                 KeyState[i] = TabKeys[i];
 
@@ -58,12 +58,12 @@ S32     KeyDown()
                 }
         }
 
-        OldJoys = (U32*)&KeyState[256]  ;
-        Joys = (U32*)&TabKeys[256]      ;
+        OldJoys = (uint32_t*)&KeyState[256]  ;
+        Joys = (uint32_t*)&TabKeys[256]      ;
 
         for(i=0; i<2*16; i++)
         {
-                U32 bits        ;
+                uint32_t bits        ;
 
                 bits = ~OldJoys[i]      ;
                 OldJoys[i] = Joys[i]    ;

@@ -3,7 +3,7 @@
 
 #define	CRITICAL_ERROR_COUNT_FAILURE	50
 
-extern	S32	CriticalErrorCount ;
+extern	int32_t	CriticalErrorCount ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 extern	int __far CriticalErrorHandler(	unsigned int deverr,

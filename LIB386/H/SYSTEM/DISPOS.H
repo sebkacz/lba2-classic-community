@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // --- Public state ------------------------------------------------------------
-extern U32 OSType;
+extern uint32_t OSType;
 
 // --- Interface ---------------------------------------------------------------
 void DisplayOS();

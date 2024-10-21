@@ -46,8 +46,8 @@
 #define CFG_TXT_OK      5
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32     SelectConfig = 0 ;
-S32     SelectKey    = 0 ;
+int32_t     SelectConfig = 0 ;
+int32_t     SelectKey    = 0 ;
 
 #define CFG_X0  10
 #define CFG_Y0  10
@@ -91,7 +91,7 @@ S32     SelectKey    = 0 ;
 char    KeyStrings[MAX_INPUT*2][50] ;   // 14 char max
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-U8      ScanKnown[] =
+uint8_t      ScanKnown[] =
 {
         K_NUMPAD_1      ,
         K_NUMPAD_2      ,
@@ -176,29 +176,29 @@ U8      ScanKnown[] =
 } ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawConfigFire( S32 xmin, S32 ymin, S32 xmax, S32 ymax, S32 coul )
+void    DrawConfigFire( int32_t xmin, int32_t ymin, int32_t xmax, int32_t ymax, int32_t coul )
 {
         Struc_Point     TabPoint[4];
 
-        TabPoint[0].Pt_XE       = (S16)xmin;
-        TabPoint[0].Pt_YE       = (S16)ymin;
-        TabPoint[0].Pt_MapU     = (U16)0;
-        TabPoint[0].Pt_MapV     = (U16)0;
+        TabPoint[0].Pt_XE       = (int16_t)xmin;
+        TabPoint[0].Pt_YE       = (int16_t)ymin;
+        TabPoint[0].Pt_MapU     = (uint16_t)0;
+        TabPoint[0].Pt_MapV     = (uint16_t)0;
 
-        TabPoint[1].Pt_XE       = (S16)xmin;
-        TabPoint[1].Pt_YE       = (S16)ymax;
-        TabPoint[1].Pt_MapU     = (U16)0;//(16<<8);
-        TabPoint[1].Pt_MapV     = (U16)((63<<8)+250);
+        TabPoint[1].Pt_XE       = (int16_t)xmin;
+        TabPoint[1].Pt_YE       = (int16_t)ymax;
+        TabPoint[1].Pt_MapU     = (uint16_t)0;//(16<<8);
+        TabPoint[1].Pt_MapV     = (uint16_t)((63<<8)+250);
 
-        TabPoint[2].Pt_XE       = (S16)xmax;
-        TabPoint[2].Pt_YE       = (S16)ymax;
-        TabPoint[2].Pt_MapU     = (U16)(2*((63<<8)+250));//(16<<8);
-        TabPoint[2].Pt_MapV     = (U16)((63<<8)+250);
+        TabPoint[2].Pt_XE       = (int16_t)xmax;
+        TabPoint[2].Pt_YE       = (int16_t)ymax;
+        TabPoint[2].Pt_MapU     = (uint16_t)(2*((63<<8)+250));//(16<<8);
+        TabPoint[2].Pt_MapV     = (uint16_t)((63<<8)+250);
 
-        TabPoint[3].Pt_XE       = (S16)xmax;
-        TabPoint[3].Pt_YE       = (S16)ymin;
-        TabPoint[3].Pt_MapU     = (U16)(2*((63<<8)+250));
-        TabPoint[3].Pt_MapV     = (U16)0;
+        TabPoint[3].Pt_XE       = (int16_t)xmax;
+        TabPoint[3].Pt_YE       = (int16_t)ymin;
+        TabPoint[3].Pt_MapU     = (uint16_t)(2*((63<<8)+250));
+        TabPoint[3].Pt_MapV     = (uint16_t)0;
 
         RepMask = 0x3f3f; // repmask x=32 y=32
 
@@ -222,7 +222,7 @@ void    DrawConfigFire( S32 xmin, S32 ymin, S32 xmax, S32 ymax, S32 coul )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void GetKeyText(char *string, U32 scan) {
+void GetKeyText(char *string, uint32_t scan) {
   if (scan == 0) {
     strcpy(string, KEY_STRING_EMPTY);
     return;
@@ -231,8 +231,8 @@ void GetKeyText(char *string, U32 scan) {
   if (scan < 256) {
     GetKeyScancodeName(string, 14, scan);
   } else {
-    S32 joy;
-    S32 button;
+    int32_t joy;
+    int32_t button;
     char rest[30];
 
     scan -= 256;
@@ -289,7 +289,7 @@ void GetKeyText(char *string, U32 scan) {
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void    InitKeyStrings( void )
 {
-        S32     n ;
+        int32_t     n ;
 
         for( n=0; n<MAX_INPUT; n++ )
         {
@@ -299,12 +299,12 @@ void    InitKeyStrings( void )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawOneConfig( S32 n )
+void    DrawOneConfig( int32_t n )
 {
         char    string[100] ;
-        S32     y = CFG_Y0+30+n*10 ;
-        S32     x = ACTION_X ;
-        S32     x0, y0, x1, y1 ;
+        int32_t     y = CFG_Y0+30+n*10 ;
+        int32_t     x = ACTION_X ;
+        int32_t     x0, y0, x1, y1 ;
 
         // Action
 
@@ -409,11 +409,11 @@ void    DrawOneConfig( S32 n )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawOneConfigMenu( S32 n )
+void    DrawOneConfigMenu( int32_t n )
 {
         char    txt[100] ;
-        S32     x0, y0, x1, y1 ;
-        S32     y ;
+        int32_t     x0, y0, x1, y1 ;
+        int32_t     y ;
 
         if( n<MAX_INPUT )
         {
@@ -457,7 +457,7 @@ void    DrawOneConfigMenu( S32 n )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawCadreConfig( S32 x0, S32 y0, S32 x1, S32 y1, S32 flagclean )
+void    DrawCadreConfig( int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t flagclean )
 {
         if( flagclean )
         {
@@ -482,7 +482,7 @@ void    DrawCadreConfig( S32 x0, S32 y0, S32 x1, S32 y1, S32 flagclean )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawStatusConfig( S32 num )
+void    DrawStatusConfig( int32_t num )
 {
         char txt[100] ;
 
@@ -505,7 +505,7 @@ void    DrawStatusConfig( S32 num )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void    DrawScreenConfig( void )
 {
-        S32     n ;
+        int32_t     n ;
         char    string[100] ;
 
         CopyScreen( Screen, Log ) ;
@@ -553,9 +553,9 @@ void    DrawScreenConfig( void )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32     CheckKeyConfig( S32 key )
+int32_t     CheckKeyConfig( int32_t key )
 {
-        S32     n ;
+        int32_t     n ;
 
         for( n=0; n<MAX_INPUT; n++ )
         {
@@ -576,11 +576,11 @@ S32     CheckKeyConfig( S32 key )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void    MenuConfig( void )
 {
-        S32     oldselect ;
-        U32     lasttime  ;
-        U32     repeattime;
-	S32     ok = FALSE ;
-	S32	memoclipwindow = FALSE ;
+        int32_t     oldselect ;
+        uint32_t     lasttime  ;
+        uint32_t     repeattime;
+	int32_t     ok = FALSE ;
+	int32_t	memoclipwindow = FALSE ;
 
 	if( ClipWindowYMin>0 )
 	{
@@ -609,8 +609,8 @@ void    MenuConfig( void )
 
         while( !ok )
         {
-                S32     oldkey  ;
-                S32     time    ;
+                int32_t     oldkey  ;
+                int32_t     time    ;
 
                 DrawOneConfigMenu( SelectConfig ) ;
 
@@ -702,10 +702,10 @@ void    MenuConfig( void )
 
                 if(!MyKey)
                 {
-                        S32     i       ;
-                        U32     *joys   ;
+                        int32_t     i       ;
+                        uint32_t     *joys   ;
 
-                        joys = (U32*)&TabKeys[256]      ;
+                        joys = (uint32_t*)&TabKeys[256]      ;
 
                         for(i=0; i<16*2; i+=2)
                         {
@@ -783,8 +783,8 @@ void    MenuConfig( void )
                 {
                         if( SelectConfig<MAX_INPUT )
                         {
-                                S32     memokey ;
-                                U32     *ptr ;
+                                int32_t     memokey ;
+                                uint32_t     *ptr ;
 
                                 // define new key
                                 if( SelectKey==0 )
@@ -963,7 +963,7 @@ endloop:
 #define CONFIRM_SHADE_LVL        15
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DetourGraphPrintf( S32 flip, S32 coul, S32 x, S32 y, char *txt )
+void    DetourGraphPrintf( int32_t flip, int32_t coul, int32_t x, int32_t y, char *txt )
 {
         CoulText( 0, -1 ) ;
 
@@ -981,7 +981,7 @@ void    DetourGraphPrintf( S32 flip, S32 coul, S32 x, S32 y, char *txt )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawCadreConfirm( S32 x0, S32 y0, S32 x1, S32 y1 )
+void    DrawCadreConfirm( int32_t x0, int32_t y0, int32_t x1, int32_t y1 )
 {
         BackupAngles( x0, y0, x1, y1 ) ;
         ShadeBoxBlk( x0, y0, x1, y1, CONFIRM_SHADE_LVL ) ;
@@ -991,9 +991,9 @@ void    DrawCadreConfirm( S32 x0, S32 y0, S32 x1, S32 y1 )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void    DrawConfirmChoice( S32 xlen, S32 y0, char *txt, S32 select )
+void    DrawConfirmChoice( int32_t xlen, int32_t y0, char *txt, int32_t select )
 {
-        S32     x0, x1, y1, coul = COUL_MENU ;
+        int32_t     x0, x1, y1, coul = COUL_MENU ;
 
         x0 = 320-xlen ;
         x1 = 320+xlen ;
@@ -1016,17 +1016,17 @@ void    DrawConfirmChoice( S32 xlen, S32 y0, char *txt, S32 select )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32     ConfirmMenu( char *ask, char *ok, char *cancel )
+int32_t     ConfirmMenu( char *ask, char *ok, char *cancel )
 {
         char    *ptr            ;
-        S32     larg = (strlen(ask)+6)*SizeChar ;
-        S32     haut = 4*SizeChar ;
-        S32     x0, y0, x1, y1  ;
-        S32     by0, by1        ;// boutons y
-        S32     blen            ;// boutons lenght
-        S32     select = 0      ;
-        S32     oldselect = 1   ;
-        S32     flag = -1       ;
+        int32_t     larg = (strlen(ask)+6)*SizeChar ;
+        int32_t     haut = 4*SizeChar ;
+        int32_t     x0, y0, x1, y1  ;
+        int32_t     by0, by1        ;// boutons y
+        int32_t     blen            ;// boutons lenght
+        int32_t     select = 0      ;
+        int32_t     oldselect = 1   ;
+        int32_t     flag = -1       ;
 
         x0 = 320-larg/2 ;
         x1 = 320+larg/2 ;
@@ -1107,9 +1107,9 @@ S32     ConfirmMenu( char *ask, char *ok, char *cancel )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32     AskForCD( void )
+int32_t     AskForCD( void )
 {
-        S32     ret             ;
+        int32_t     ret             ;
         char    ask_txt[255]    ;
         char    ok_txt[20]      ;
         char    cancel_txt[20]  ;

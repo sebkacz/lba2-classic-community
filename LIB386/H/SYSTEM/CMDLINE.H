@@ -8,13 +8,13 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 ArgC;
+extern int32_t ArgC;
 extern char *ArgV[];
 
 // -----------------------------------------------------------------------------
-void RemoveParam(S32 param);
-S32 FindAndRemoveParam(const char *str);
-void GetCmdLine(S32 argc, char *argv[]);
+void RemoveParam(int32_t param);
+int32_t FindAndRemoveParam(const char *str);
+void GetCmdLine(int32_t argc, char *argv[]);
 
 // =============================================================================
 #ifdef __cplusplus

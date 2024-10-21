@@ -2,12 +2,12 @@
 
 #include <SYSTEM/ADELINE.H>
 
-S32 Min3(S32 a, S32 b, S32 c) {
-  S32 tmp = ade_min(a, b);
+int32_t Min3(int32_t a, int32_t b, int32_t c) {
+  int32_t tmp = ade_min(a, b);
   return ade_min(tmp, c);
 }
 
-S32 Max3(S32 a, S32 b, S32 c) {
-  S32 tmp = ade_max(a, b);
+int32_t Max3(int32_t a, int32_t b, int32_t c) {
+  int32_t tmp = ade_max(a, b);
   return ade_max(tmp, c);
 }

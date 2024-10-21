@@ -31,14 +31,14 @@ static	char		SDir[_MAX_DIR] ;
 static	char		SName[_MAX_FNAME] ;
 static	char		SExt[_MAX_EXT] ;
 
-static	S32		NbFiles ;
+static	int32_t		NbFiles ;
 static	char		*ListFiles ;
 static	char		**IndexFiles ;
-static	S32		NbDirs ;
+static	int32_t		NbDirs ;
 static	char		*ListDirs ;
 static	char		**IndexDirs ;
 
-static	S32		StartFile = 0 ;
+static	int32_t		StartFile = 0 ;
 
 static	char		SearchPathname[_MAX_PATH] ;
 
@@ -47,7 +47,7 @@ static	T_MENU		Selector ;
 static	T_WINLIST	FilesWindow ;
 static	T_WINLIST	DirsWindow ;
 
-static	S32		FlagScanDir = 0 ;
+static	int32_t		FlagScanDir = 0 ;
 
 //──────────────────────────────────────────────────────────────────────────
 void	CutFileName( char *filename )
@@ -67,9 +67,9 @@ void	CutFileName( char *filename )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-static void	DrawListFiles( S32 flag )
+static void	DrawListFiles( int32_t flag )
 {
-	S32	nb ;
+	int32_t	nb ;
 
 	GetWindowButton( &Selector, 10, &FilesWindow ) ;
 
@@ -91,7 +91,7 @@ static void	DrawListFiles( S32 flag )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-static void	ScanFiles( char *selection, S32 flag )
+static void	ScanFiles( char *selection, int32_t flag )
 {
 	_finddata_t	fileinfo ;
 	intptr_t	rc ;
@@ -130,7 +130,7 @@ static void	ScanFiles( char *selection, S32 flag )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-static inline S32 ThereIsFiles( char *path )
+static inline int32_t ThereIsFiles( char *path )
 {
 	_finddata_t	fileinfo ;
 	intptr_t	rc ;
@@ -145,7 +145,7 @@ static void	ScanDirs( char *selection )
 	_finddata_t	fileinfo ;
 	intptr_t	rc ;
 	char	*ptr ;
-	S32	n ;
+	int32_t	n ;
 	char	path[_MAX_PATH] ;
 
 	rc = _findfirst( "*.*", &fileinfo );
@@ -205,7 +205,7 @@ static void	ScanDrives()
 {
 	int	        drive ;
 	int	        orgdrive ;
-	S32		n ;
+	int32_t		n ;
  	char		*ptr ;
 
 	orgdrive = _getdrive();
@@ -232,20 +232,20 @@ static void	ScanDrives()
 }
 
 //──────────────────────────────────────────────────────────────────────────
-S32	FileSelector(	char *titre,
+int32_t	FileSelector(	char *titre,
 			char *selection,
 			char *defaultname,
-			S32 flags )
+			int32_t flags )
 {
-	S32		n, num ;
-	S32		flag, handle ;
-	S32		mode = 0 ;
+	int32_t		n, num ;
+	int32_t		flag, handle ;
+	int32_t		mode = 0 ;
 	int		testdrive = 0 ;
-	S32		rcode ;
-	S32		oldnum = -1 ;
+	int32_t		rcode ;
+	int32_t		oldnum = -1 ;
 	char		memopath[_MAX_PATH] ;
 	char		workstring[256] ;
-	S32		memoasciimode ;
+	int32_t		memoasciimode ;
 
 	// inits
 

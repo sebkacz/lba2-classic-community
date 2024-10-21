@@ -14,8 +14,8 @@ extern	"C"	{
 #endif
 
 //----------------------------------------------------------------------------
-extern	U32	Log2File;
-extern	U32	QuietLog; ///< If TRUE then will not write to console, only to file
+extern	uint32_t	Log2File;
+extern	uint32_t	QuietLog; ///< If TRUE then will not write to console, only to file
 
 //----------------------------------------------------------------------------
 extern	void	CreateLog(const char *filePath);

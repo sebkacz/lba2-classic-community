@@ -2,11 +2,11 @@
 #define	GERETRAK_H
 
 /*--------------------------------------------------------------------------*/
-extern S16  SearchOffsetTrack( T_OBJET *ptrobj, U8 label ) ;
+extern int16_t  SearchOffsetTrack( T_OBJET *ptrobj, uint8_t label ) ;
 /*--------------------------------------------------------------------------*/
 extern void Track_SetLabel( T_OBJET *ptrobj ) ;
 /*--------------------------------------------------------------------------*/
-extern void DoTrack(U8 numobj);
+extern void DoTrack(uint8_t numobj);
 /*--------------------------------------------------------------------------*/
 
 #endif	// GERETRAK_H

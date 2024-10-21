@@ -15,7 +15,7 @@ extern "C" {
 #define MAX_EXTRA_CMD 256
 
 // --- Public state ------------------------------------------------------------
-S32 ArgC;
+int32_t ArgC;
 char *ArgV[MAX_ARGC + 1];
 
 // --- Private state -----------------------------------------------------------
@@ -87,7 +87,7 @@ static void ParseString(char *str) {
 }
 
 // --- Interface ---------------------------------------------------------------
-void RemoveParam(S32 param) {
+void RemoveParam(int32_t param) {
   if (param >= ArgC)
     return;
 
@@ -98,8 +98,8 @@ void RemoveParam(S32 param) {
   ArgC--;
 }
 
-S32 FindAndRemoveParam(const char *str) {
-  S32 i, res;
+int32_t FindAndRemoveParam(const char *str) {
+  int32_t i, res;
 
   res = FALSE;
 
@@ -115,7 +115,7 @@ restart:
   return res;
 }
 
-void GetCmdLine(S32 argc, char *argv[]) {
+void GetCmdLine(int32_t argc, char *argv[]) {
   char *ptr;
 
   ArgV[0] = argv[0];

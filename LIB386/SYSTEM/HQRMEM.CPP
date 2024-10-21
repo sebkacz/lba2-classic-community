@@ -8,30 +8,30 @@
 
 //──────────────────────────────────────────────────────────────────────────
 // retourne un pointeur sur un bloc demande(index) d'un hqr chargé en mémoire
-COMPRESSED_HEADER *GetPtrBlockMemoryHQR(void *ptrhqr, S32 index)
+COMPRESSED_HEADER *GetPtrBlockMemoryHQR(void *ptrhqr, int32_t index)
 {
-	U32		seekindex 	;
+	uint32_t		seekindex 	;
 
 	index	*= 4			;
 
 	// si num bloc demande > num bloc dans hqr exit
-	if( index >= *(U32*)ptrhqr )
+	if( index >= *(uint32_t*)ptrhqr )
 	{
 		return NULL 		;
 	}
 
 	// recupere offset bloc
-	seekindex	= *(U32*)((U8*)ptrhqr + index)	;
+	seekindex	= *(uint32_t*)((uint8_t*)ptrhqr + index)	;
 
 	// saute header
-	return	(COMPRESSED_HEADER*)((U8*)ptrhqr + seekindex + sizeof(T_HQR_HEADER));
+	return	(COMPRESSED_HEADER*)((uint8_t*)ptrhqr + seekindex + sizeof(T_HQR_HEADER));
 }
 
 //──────────────────────────────────────────────────────────────────────────
 // decompresse un bloc d'un hqr charge en mémoire
 // retourne:	taille du bloc(decompressé) si Ok
 //		0 si bloc_demande>bloc existant
-U32	LoadMemoryHQR( void *ptrhqr, void *ptrdest, S32 index )
+uint32_t	LoadMemoryHQR( void *ptrhqr, void *ptrdest, int32_t index )
 {
 	COMPRESSED_HEADER	*header	;
 

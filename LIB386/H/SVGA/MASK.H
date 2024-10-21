@@ -9,13 +9,13 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern U8 ColMask;
+extern uint8_t ColMask;
 
 // -----------------------------------------------------------------------------
-S32 AffMask(S32 nummask, S32 x, S32 y, void *bankmask);
+int32_t AffMask(int32_t nummask, int32_t x, int32_t y, void *bankmask);
 
 // -----------------------------------------------------------------------------
-#define ColorMask(color) ColMask = (U8)(color)
+#define ColorMask(color) ColMask = (uint8_t)(color)
 
 #define GetDxDyMask(nummask, px, py, bankmask)                                 \
   GetDxDyGraph(nummask, px, py, bankmask)

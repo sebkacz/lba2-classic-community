@@ -14,45 +14,45 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 LFactorX = 0;
-S32 LFactorY = 0;
+int32_t LFactorX = 0;
+int32_t LFactorY = 0;
 
-S32 CameraAlpha = 0;
-S32 CameraBeta = 0;
-S32 CameraGamma = 0;
+int32_t CameraAlpha = 0;
+int32_t CameraBeta = 0;
+int32_t CameraGamma = 0;
 
-S32 CameraX = 0;
-S32 CameraY = 0;
-S32 CameraZ = 0;
+int32_t CameraX = 0;
+int32_t CameraY = 0;
+int32_t CameraZ = 0;
 
-S32 CameraXr = 0;
-S32 CameraYr = 0;
-S32 CameraZr = 0;
+int32_t CameraXr = 0;
+int32_t CameraYr = 0;
+int32_t CameraZr = 0;
 
-S32 CameraZrClip = 0;
+int32_t CameraZrClip = 0;
 
-S32 NearClip = 1;
+int32_t NearClip = 1;
 
-S32 XCentre = 0;
-S32 YCentre = 0;
+int32_t XCentre = 0;
+int32_t YCentre = 0;
 
-S32 Xp = 0;
-S32 Yp = 0;
+int32_t Xp = 0;
+int32_t Yp = 0;
 
-S32 X0 = 0;
-S32 Y0 = 0;
-S32 Z0 = 0;
+int32_t X0 = 0;
+int32_t Y0 = 0;
+int32_t Z0 = 0;
 
-S32 TypeProj = TYPE_3D;
+int32_t TypeProj = TYPE_3D;
 
 float FRatioX = 0.0f;
 float FRatioY = 0.0f;
 
-U64 MMX_DEMI = (8192LL << 32) | 8192LL;
-U64 MMX_DEMI2 = (4096LL << 32) | 4096LL;
+uint64_t MMX_DEMI = (8192LL << 32) | 8192LL;
+uint64_t MMX_DEMI2 = (4096LL << 32) | 4096LL;
 
 // -----------------------------------------------------------------------------
-void SetCamera(S32 x, S32 y, S32 z) {
+void SetCamera(int32_t x, int32_t y, int32_t z) {
   if (TypeProj != TYPE_3D) {
     // iso:
     CameraXr = x;
@@ -69,7 +69,7 @@ void SetCamera(S32 x, S32 y, S32 z) {
   }
 }
 
-void SetTargetCamera(S32 x, S32 y, S32 z, S32 gamma) {
+void SetTargetCamera(int32_t x, int32_t y, int32_t z, int32_t gamma) {
   y -= CameraZ;
   z -= CameraY;
   x -= CameraX;
@@ -78,7 +78,7 @@ void SetTargetCamera(S32 x, S32 y, S32 z, S32 gamma) {
   SetAngleCamera(X0, Y0, gamma);
 }
 
-void SetAngleCamera(S32 alpha, S32 beta, S32 gamma) {
+void SetAngleCamera(int32_t alpha, int32_t beta, int32_t gamma) {
   if (TypeProj != TYPE_3D) {
     // tiso:
     alpha = 0;
@@ -101,15 +101,15 @@ void SetAngleCamera(S32 alpha, S32 beta, S32 gamma) {
   SetCamera(CameraX, CameraY, CameraZ);
 }
 
-void SetPosCamera(S32 x, S32 y, S32 z) {
+void SetPosCamera(int32_t x, int32_t y, int32_t z) {
   CameraX = x;
   CameraY = y;
   CameraZ = z;
   SetCamera(x, y, z);
 }
 
-void SetFollowCamera(S32 targetx, S32 targety, S32 targetz, S32 alpha, S32 beta,
-                     S32 gamma, S32 camzoom) {
+void SetFollowCamera(int32_t targetx, int32_t targety, int32_t targetz, int32_t alpha, int32_t beta,
+                     int32_t gamma, int32_t camzoom) {
   CameraX = targetx;
   CameraY = targety;
   CameraZ = targetz;

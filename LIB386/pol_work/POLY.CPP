@@ -8,12 +8,12 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 INV64(S32 a) { return LONG_MIN / a; }
+int32_t INV64(int32_t a) { return LONG_MIN / a; }
 
 #undef Fill_Poly
-S32 Fill_Poly_C(S32 Type_Poly, S32 Color_Poly, S32 Nb_Points,
+int32_t Fill_Poly_C(int32_t Type_Poly, int32_t Color_Poly, int32_t Nb_Points,
                 Struc_Point *Ptr_Points) {
-  S32 returnValue;
+  int32_t returnValue;
 
 #ifdef __MSC_VER
   __asm {
@@ -48,7 +48,7 @@ S32 Fill_Poly_C(S32 Type_Poly, S32 Color_Poly, S32 Nb_Points,
   return returnValue;
 }
 
-void Switch_Fillers_C(U32 Bank) {
+void Switch_Fillers_C(uint32_t Bank) {
 #ifdef __MSC_VER
   __asm {
 		pusha
@@ -57,7 +57,7 @@ void Switch_Fillers_C(U32 Bank) {
 		popa
   }
 #elif __GNUC__
-  typedef void(FUNC_SWITCH_FILLERS)(U32);
+  typedef void(FUNC_SWITCH_FILLERS)(uint32_t);
   FUNC_SWITCH_FILLERS *fn = &Switch_Fillers_ASM;
 
   __asm__ __volatile__("pusha\n\t"

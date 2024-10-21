@@ -6,13 +6,13 @@
 #include	<SYSTEM/HQFILE.H>
 
 /*──────────────────────────────────────────────────────────────────────────*/
-	S32			HQF_File	;
+	int32_t			HQF_File	;
 static	COMPRESSED_HEADER 	HQF_header	;
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U32	HQF_Init(const char *name, S32 index)
+uint32_t	HQF_Init(const char *name, int32_t index)
 {
-	S32	nbbloc	;
+	int32_t	nbbloc	;
 
 	HQF_File = OpenRead( name ) 		;
 	if( !HQF_File )	return 0		;
@@ -51,7 +51,7 @@ void	HQF_Close()
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U32	HQF_LoadClose(void *ptr)
+uint32_t	HQF_LoadClose(void *ptr)
 {
 	if(!HQF_File)
 	{
@@ -67,7 +67,7 @@ U32	HQF_LoadClose(void *ptr)
 	{
 		void	*ptrdecomp	;
 
-		ptrdecomp = (void*)((U8*)ptr + HQF_header.SizeFile - HQF_header.CompressedSizeFile + RECOVER_AREA) ;
+		ptrdecomp = (void*)((uint8_t*)ptr + HQF_header.SizeFile - HQF_header.CompressedSizeFile + RECOVER_AREA) ;
 
 		Read(HQF_File, ptrdecomp, HQF_header.CompressedSizeFile)	;
 
@@ -84,9 +84,9 @@ U32	HQF_LoadClose(void *ptr)
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	HQF_ResSize(const char *name, S32 index)
+int32_t	HQF_ResSize(const char *name, int32_t index)
 {
-	U32	size			;
+	uint32_t	size			;
 
 	size = HQF_Init(name, index)	;
 	HQF_Close()			;
@@ -96,10 +96,10 @@ S32	HQF_ResSize(const char *name, S32 index)
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // retourne le nombre de bloc d'un HQR ( 0 si HQR non trouvé )
-S32	HQF_NbRes(char *name)
+int32_t	HQF_NbRes(char *name)
 {
-	S32	handle			;
-	S32	nbbloc			;
+	int32_t	handle			;
+	int32_t	nbbloc			;
 
 	handle = OpenRead(name)		;
 	if(!handle)

@@ -14,7 +14,7 @@ BlockSize DWORD 2
 			public	C	ExpandLZ
 
 ;*──────────────────────────────────────────────────────────────────────────*
-;void	ExpandLZ(void *Dst, void *Src, U32 DecompSize, U32 MinBloc)
+;void	ExpandLZ(void *Dst, void *Src, uint32_t DecompSize, uint32_t MinBloc)
 
 ;#pragma aux ExpandLZ			\
 ;	parm	[edi] [ebx] [ecx] [eax]	\

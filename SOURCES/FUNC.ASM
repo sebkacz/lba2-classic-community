@@ -39,7 +39,7 @@ endif
 
 ;*══════════════════════════════════════════════════════════════════════════*
 ;----------------------------------------------------------------------------
-;		U8 SearchBoundColRGB( U8 Rouge, U8 Vert, U8 Bleu, (U8*)Palette )
+;		uint8_t SearchBoundColRGB( uint8_t Rouge, uint8_t Vert, uint8_t Bleu, (uint8_t*)Palette )
 ;
 
 SearchBoundColRGB	PROC	Rouge: DWORD, Vert: DWORD, Bleu: DWORD, Palette: DWORD,\

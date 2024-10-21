@@ -11,7 +11,7 @@
 
 #ifdef	CDROM
 const char*		CDDrive = "Z"	;// Z by default
-U32		CDVolume     = DEF_CD_VOLUME	;
+uint32_t		CDVolume     = DEF_CD_VOLUME	;
 
 #ifndef	LBA_EDITOR
 void	InitTabTracks( void ) ;// voir plus bas...
@@ -19,7 +19,7 @@ void	InitTabTracks( void ) ;// voir plus bas...
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	InitCD( char *name )
+int32_t	InitCD( char *name )
 {
 #ifndef	LBA_EDITOR
 	InitTabTracks() ;
@@ -44,7 +44,7 @@ S32	InitCD( char *name )
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U32	JingleVolume = DEF_JINGLE_VOLUME ;
+uint32_t	JingleVolume = DEF_JINGLE_VOLUME ;
 
 #define	FIRST_JINGLE	2
 #define	LAST_JINGLE	26
@@ -89,10 +89,10 @@ void InitJingle(void) {
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	GetNumJingle( char *name )
+int32_t	GetNumJingle( char *name )
 {
 	char	filename[9] ;
-	S32	n ;
+	int32_t	n ;
 
 	if( name AND strcmp(name,"") )
 	{
@@ -112,7 +112,7 @@ S32	GetNumJingle( char *name )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void PlayJingle(S32 num) {
+void PlayJingle(int32_t num) {
   if (num >= FIRST_JINGLE AND num <= LAST_JINGLE AND JingleVolume > 0) {
     LockTimer();
 
@@ -151,9 +151,9 @@ void PlayJingle(S32 num) {
 #define	FIRST_CD_TRACK		6
 #define	FIRST_CD_TRACK_US	0
 
-U8	FirstCDTrack = FIRST_CD_TRACK ;
+uint8_t	FirstCDTrack = FIRST_CD_TRACK ;
 
-U8	TrackCD[] = {
+uint8_t	TrackCD[] = {
 JINGLE| 2,	// Track01.wav
 JINGLE| 3,	// Track02.wav
 JINGLE| 4,	// Track03.wav
@@ -181,7 +181,7 @@ JINGLE|25,	// Jingle18.wav
 JINGLE|26,	// LogAdpcm.wav
 	} ;
 
-U8	TrackCDUS[] = {
+uint8_t	TrackCDUS[] = {
 	2,	// Track01.wav
 	3,	// Track02.wav
 	4,	// Track03.wav
@@ -209,13 +209,13 @@ JINGLE|25,	// Jingle18.wav
 JINGLE|26,	// LogAdpcm.wav
 	} ;
 
-U8	*PtrTrackCD ;
+uint8_t	*PtrTrackCD ;
 
 #define	TEST_MUSIC_TEMPO	(2*1000)	// 2s
 
-S32	NextMusic = -1 ;
-S32	StopLastMusic = FALSE ;
-S32	NextMusicTimer ;
+int32_t	NextMusic = -1 ;
+int32_t	StopLastMusic = FALSE ;
+int32_t	NextMusicTimer ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 #if defined(CDROM)&&!defined(LBA_EDITOR)
@@ -240,13 +240,13 @@ void	InitTabTracks( void )
 // Cette fonction doit orienter la musique soit sur une Track Audio, soit
 // sur du Streaming ADPCM
 
-void	PlayMusic( S32 num, S32 playit )
+void	PlayMusic( int32_t num, int32_t playit )
 {
 	NextMusic = -1 ;
 
 	if( num!=-1 )
 	{
-		S32 cur ;
+		int32_t cur ;
 
 		LockTimer() ;
 
@@ -295,9 +295,9 @@ void	PlayMusic( S32 num, S32 playit )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	GetMusic( void )
+int32_t	GetMusic( void )
 {
-	S32	num ;
+	int32_t	num ;
 
 #ifdef	CDROM
 	num = IsCDPlaying() ;
@@ -326,7 +326,7 @@ void	StopMusic( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	PauseMusic( S32 fade )
+void	PauseMusic( int32_t fade )
 {
 	SaveTimer() ;
 
@@ -350,7 +350,7 @@ void	PauseMusic( S32 fade )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	ResumeMusic( S32 fade )
+void	ResumeMusic( int32_t fade )
 {
 	SaveTimer() ;
 
@@ -382,10 +382,10 @@ void	ResumeMusic( S32 fade )
 
 void	FadeOutVolumeMusic( void )
 {
-	S32	timer ;
-	U32	startjvol, jvolume, oldjvol ;
+	int32_t	timer ;
+	uint32_t	startjvol, jvolume, oldjvol ;
 #ifdef	CDROM
-	U32	startcdvol, cdvolume, oldcdvol ;
+	uint32_t	startcdvol, cdvolume, oldcdvol ;
 #endif
 
 	ManageTime();
@@ -438,10 +438,10 @@ void	FadeOutVolumeMusic( void )
 
 void	FadeInVolumeMusic( void )
 {
-	S32	timer ;
-	U32	startjvol, jvolume, oldjvol ;
+	int32_t	timer ;
+	uint32_t	startjvol, jvolume, oldjvol ;
 #ifdef	CDROM
-	U32	startcdvol, cdvolume, oldcdvol ;
+	uint32_t	startcdvol, cdvolume, oldcdvol ;
 #endif
 
 	ManageTime();

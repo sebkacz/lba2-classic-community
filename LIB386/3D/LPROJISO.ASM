@@ -31,7 +31,7 @@
 		public	C	LongProjectPointIso
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LongProjectPointIso(S32 x, S32 y, S32 z)		;
+;void	LongProjectPointIso(int32_t x, int32_t y, int32_t z)		;
 
 ;#pragma aux LongProjectPointIso		\
 ;	parm		[eax] [ebx] [ecx]	\

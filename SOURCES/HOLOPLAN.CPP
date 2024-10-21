@@ -11,7 +11,7 @@
 #define	ZOOM_E	128
 #define	ZOOM_F	96
 
-S32	BodyFactorScale[MAX_ISLAND] =
+int32_t	BodyFactorScale[MAX_ISLAND] =
 {
 	ZOOM_A,	//  0	Citadelle
 	ZOOM_A,	//  1	Puit Sendell
@@ -27,7 +27,7 @@ S32	BodyFactorScale[MAX_ISLAND] =
 	ZOOM_B	// 11	Under Celebration
 } ;
 
-S32	ArrowFactorScale[MAX_ISLAND] =
+int32_t	ArrowFactorScale[MAX_ISLAND] =
 {
 	ZOOM_D,	//  0	Citadelle
 	ZOOM_D,	//  1	Puit Sendell
@@ -62,14 +62,14 @@ void	DrawTwinsenPlan( T_SORT *ptt )
 /*
 void	DrawObjFix(T_SORT *ptt)
 {
-	S16	ymin	;
-	S16	ymax	;
-	S16	*buf	;
+	int16_t	ymin	;
+	int16_t	ymax	;
+	int16_t	*buf	;
 
 	SetClip( 0, 0, ModeDesiredX-1, Dial_Y0-1 )	;
 
-//	buf = (S16*)HQR_Get( HQR_ObjFix, ptt->NumObj );
-	buf = (S16*)GivePtrObjFix( ptt->NumObj );
+//	buf = (int16_t*)HQR_Get( HQR_ObjFix, ptt->NumObj );
+	buf = (int16_t*)GivePtrObjFix( ptt->NumObj );
 	if ( !buf )	return			;
 
 	ymin = *(buf+3)	;
@@ -88,7 +88,7 @@ void	DrawObjFix(T_SORT *ptt)
 void	DrawArrowPlan(T_SORT *ptt)
 {
 	T_BODY_HEADER	*buf	;
-	S32	ymax	;
+	int32_t	ymax	;
 
 	SetClip( 0, 0, ModeDesiredX-1, Dial_Y0-1 )	;
 
@@ -110,7 +110,7 @@ void	DrawArrowPlan(T_SORT *ptt)
 //----------------------------------------------------------------------------
 void	DrawBuggyPlan(T_SORT *ptt)
 {
-	S32	a, b, g	;
+	int32_t	a, b, g	;
 
 	SetClip( 0, 0, ModeDesiredX-1, Dial_Y0-1 )	;
 
@@ -132,9 +132,9 @@ void	DrawDynoPlan(T_SORT *ptt)
 	BoxMovingAdd( ClipXMin, ClipYMin, ClipXMax, ClipYMax )	;
 }
 //────────────────────────────────────────────────────────────────────────────
-S32	RecupCoorTwinsen( S32 *xt, S32 *yt, S32 *zt )
+int32_t	RecupCoorTwinsen( int32_t *xt, int32_t *yt, int32_t *zt )
 {
-	S32	mode=0	;
+	int32_t	mode=0	;
 
 	if ( TabArrow[MAX_OBJECTIF+NumCube].FlagHolo & 4 )// Exterieur
 	{
@@ -169,37 +169,37 @@ S32	RecupCoorTwinsen( S32 *xt, S32 *yt, S32 *zt )
 /*
 typedef struct {
 
-	S32	X ;
-	S32	Y ;
-	S32	Z ;
-	S32	Cube ;
-	S32	Beta	;
-	S32	Alpha	;
-	S32     Gamma	;
+	int32_t	X ;
+	int32_t	Y ;
+	int32_t	Z ;
+	int32_t	Cube ;
+	int32_t	Beta	;
+	int32_t	Alpha	;
+	int32_t     Gamma	;
 
 	S_ONE_WHEEL	Wheel[4] ;
 
-	S32		BetaWheel ;
+	int32_t		BetaWheel ;
 
-	S32		SpeedInc ;
-	S32		SpeedRot ;
+	int32_t		SpeedInc ;
+	int32_t		SpeedRot ;
 
-	S32		Speed ;
+	int32_t		Speed ;
 
-//	S32		YSpeed ;
-//	S32		LastYs ;
-//	S32		LastSpeedLevel ;
+//	int32_t		YSpeed ;
+//	int32_t		LastYs ;
+//	int32_t		LastSpeedLevel ;
 
-	S32		LastTimer ;
+	int32_t		LastTimer ;
 
 		} S_BUGGY ;
 */
 
 //	Le buggy ne peut se trouver que dans le cube 49 sur la citadelle,
 //	et dans les cubes 55 a 73 sur le desert ( dans ce cas, on l'affiche ).
-S32	RecupCoorBuggy( S32 *xb, S32 *yb, S32 *zb )
+int32_t	RecupCoorBuggy( int32_t *xb, int32_t *yb, int32_t *zb )
 {
-	S32	cube, cx, cz	;
+	int32_t	cube, cx, cz	;
 
 	if (( !NumBuggy )
 	OR ( ListObjet[0].WorkFlags & MANUAL_INTER_FRAME ))
@@ -224,11 +224,11 @@ S32	RecupCoorBuggy( S32 *xb, S32 *yb, S32 *zb )
 #define	MAX_DYNO_POS	4
 typedef	struct
 {
-	S32	Ile	;
-	S32	X	;
-	S32	Y	;
-	S32	Z	;
-	S32	Beta	;
+	int32_t	Ile	;
+	int32_t	X	;
+	int32_t	Y	;
+	int32_t	Z	;
+	int32_t	Beta	;
 
 } T_DYNO_POS	;
 T_DYNO_POS	TabDynoPos[MAX_DYNO_POS] =
@@ -239,9 +239,9 @@ T_DYNO_POS	TabDynoPos[MAX_DYNO_POS] =
 	2, 22203+(10*SCE), 4791, 13591+(11*SCE), 431  // Desert Ilot, 73
 } ;
 //────────────────────────────────────────────────────────────────────────────
-S32	RecupCoorDyno( S32 *xd, S32 *yd, S32 *zd )
+int32_t	RecupCoorDyno( int32_t *xd, int32_t *yd, int32_t *zd )
 {
-	S32	dyno	;
+	int32_t	dyno	;
 #ifdef	LBA_EDITOR
 	dyno = ListVarGame[FLAG_DINO_VOYAGE].Value-1	;
 #else
@@ -259,16 +259,16 @@ S32	RecupCoorDyno( S32 *xd, S32 *yd, S32 *zd )
 //────────────────────────────────────────────────────────────────────────────
 void	DrawListHoloPlan()
 {
-	S32	xt, yt, zt	;
-	S32	xb, yb, zb	;
-	S32	xd, yd, zd	;
-	S32	alt	;
+	int32_t	xt, yt, zt	;
+	int32_t	xb, yb, zb	;
+	int32_t	xd, yd, zd	;
+	int32_t	alt	;
 	T_ARROW *pt	;
 	T_SORT	*ptt	;
-	S32	arrow	;
-	S32	nbtri=0	;
-	U32	timer	;
-	U32	angle	;
+	int32_t	arrow	;
+	int32_t	nbtri=0	;
+	uint32_t	timer	;
+	uint32_t	angle	;
 
 	timer = TimerRefHR*2	;
 
@@ -401,20 +401,20 @@ void	DrawListHoloPlan()
 //════════════════════════════════════════════════════════════════════════════
 void	InitHoloPlan()
 {
-	S32	buffer[20]	;//	M3D  36 octets, 9 LONG
-	S32	*pt		;
-	S32	orgmx, orgmz 	;
-	S32	offx, offz 	;
-	S32	alpha, beta	;
-	S32	lalpha, lbeta	;
-	S32	distance	;
-	S32	id		;
+	int32_t	buffer[20]	;//	M3D  36 octets, 9 LONG
+	int32_t	*pt		;
+	int32_t	orgmx, orgmz 	;
+	int32_t	offx, offz 	;
+	int32_t	alpha, beta	;
+	int32_t	lalpha, lbeta	;
+	int32_t	distance	;
+	int32_t	id		;
 	char	tmpFilePath[ADELINE_MAX_PATH];
 
 	InitHoloMalloc()	;
 
-	BufBodyTempo = (U8*)HoloMalloc(SizeCurrentBody)	;
-	BufAnimTempo = (U8*)HoloMalloc(SizeCurrentAnim)	;
+	BufBodyTempo = (uint8_t*)HoloMalloc(SizeCurrentBody)	;
+	BufAnimTempo = (uint8_t*)HoloMalloc(SizeCurrentAnim)	;
 
 	if (( ZoomedIsland == 0 ) AND ( TEMPETE_FINIE ))
 	{
@@ -461,10 +461,10 @@ void	InitHoloPlan()
 	orgmx = (orgmx*SCE)+offx;
 	orgmz = (orgmz*SCE)+offz;
 
-	BufFleche = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_FLECHE )	;
-	BufLoFleche = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_LOFLECHE );
-	BufBuggy = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_BUGGY )	;
-	BufDyno = (U8*)LoadHoloMalloc_HQR( tmpFilePath, HQR_DYNO )	;
+	BufFleche = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_FLECHE )	;
+	BufLoFleche = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_LOFLECHE );
+	BufBuggy = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_BUGGY )	;
+	BufDyno = (uint8_t*)LoadHoloMalloc_HQR( tmpFilePath, HQR_DYNO )	;
 
 	ScaleRotBody3D( BufFleche, ArrowFactorScale[ZoomedIsland], FALSE )  ;
 	ScaleRotBody3D( BufLoFleche, ArrowFactorScale[ZoomedIsland], FALSE );
@@ -516,7 +516,7 @@ void	ClearHoloPlan()
 //	Oblige to found one, because user can zoom on this island
 void	SearchFirstValidObjectifIsland()
 {
-	S32 	i	;
+	int32_t 	i	;
 	T_ARROW	*pt	;
 
 	pt = &TabArrow[MAX_OBJECTIF]	;
@@ -533,13 +533,13 @@ void	SearchFirstValidObjectifIsland()
 }
 //════════════════════════════════════════════════════════════════════════════
 //	Oblige to found one, because user can zoom on this island
-S32	FindNearestOutsideArrow( S32 xt, S32 yt, S32 zt )
+int32_t	FindNearestOutsideArrow( int32_t xt, int32_t yt, int32_t zt )
 {
-	S32 	i	;
+	int32_t 	i	;
 	T_ARROW	*pt	;
-	S32	min=9999;
-	S32	dist	;
-	S32	arrow=-1;
+	int32_t	min=9999;
+	int32_t	dist	;
+	int32_t	arrow=-1;
 
 	pt = &TabArrow[MAX_OBJECTIF]	;
 
@@ -566,8 +566,8 @@ S32	FindNearestOutsideArrow( S32 xt, S32 yt, S32 zt )
 
 void	InitObjectifIsland()
 {
-	S32	xt,yt,zt;
-	S32	arrow	;
+	int32_t	xt,yt,zt;
+	int32_t	arrow	;
 	T_ARROW	*pt	;
 
 	NumObjectif = -1	;//	None by default
@@ -624,7 +624,7 @@ void	InitObjectifIsland()
 //════════════════════════════════════════════════════════════════════════════
 void	InitAngleArrow()
 {
-	S32	arrow	;
+	int32_t	arrow	;
 
 	for ( arrow = 0 ; arrow < MAX_OBJECTIF+MAX_ARROW ; arrow++ )
 	{
@@ -633,15 +633,15 @@ void	InitAngleArrow()
 }
 //════════════════════════════════════════════════════════════════════════════
 //	0:Left  1:Up  2:Right  3:Down
-void	SearchObjectifIsland(S32 dir)
+void	SearchObjectifIsland(int32_t dir)
 {
 	T_ARROW	*pt	;
-	S32	i, next	;
-	S32	x, y, dd;
-//	S32	dx, dy	;
-	S32	min=9999;
-	S32	xt,yt,zt;
-	S32	flag=0	;
+	int32_t	i, next	;
+	int32_t	x, y, dd;
+//	int32_t	dx, dy	;
+	int32_t	min=9999;
+	int32_t	xt,yt,zt;
+	int32_t	flag=0	;
 
 	next = -1	;
 
@@ -745,14 +745,14 @@ void	SearchObjectifIsland(S32 dir)
 	YpObjectif = y			;
 }
 //════════════════════════════════════════════════════════════════════════════
-void	HoloPlan(S32 numplan)
+void	HoloPlan(int32_t numplan)
 {
-	S32	x0, y0, x1, y1	;
-	S32	testrelease=0	;
-	S32	testnofire=TRUE	;
-//	U32	mkey=0, mfire=0	;
-//	U32	mjoy=0, dir	;
-	U32	dir, timer	;
+	int32_t	x0, y0, x1, y1	;
+	int32_t	testrelease=0	;
+	int32_t	testnofire=TRUE	;
+//	uint32_t	mkey=0, mfire=0	;
+//	uint32_t	mjoy=0, dir	;
+	uint32_t	dir, timer	;
 
 	UnsetClip()		;
 

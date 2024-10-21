@@ -10,13 +10,13 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 extern void *PtrFont;
-extern S32 InterLeave;
-extern S32 InterSpace;
+extern int32_t InterLeave;
+extern int32_t InterSpace;
 
 // -----------------------------------------------------------------------------
-extern S32 SizeFont(char *str);
-extern S32 CarFont(S32 x, S32 y, char c);
-extern S32 Font(S32 x, S32 y, const char *str);
+extern int32_t SizeFont(char *str);
+extern int32_t CarFont(int32_t x, int32_t y, char c);
+extern int32_t Font(int32_t x, int32_t y, const char *str);
 
 // -----------------------------------------------------------------------------
 #define ColorFont(color) ColorMask(color)

@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-void Rect(S32 x0, S32 y0, S32 x1, S32 y1, S32 coul) {
+void Rect(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t coul) {
   Line(x0, y0, x1, y0, coul);
   Line(x0, y1, x1, y1, coul);
   Line(x0, y0, x0, y1, coul);

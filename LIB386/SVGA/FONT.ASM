@@ -41,7 +41,7 @@ InterSpace		dd	10
 ;}
 
 ;----------------------------------------------------------------------------
-;S32	SizeFont(char *str)	;
+;int32_t	SizeFont(char *str)	;
 
 ;#pragma aux SizeFont	"*"	\
 ;	parm	[esi]		\
@@ -81,7 +81,7 @@ EndSizeFont:
 SizeFont		endp
 
 ;----------------------------------------------------------------------------
-;S32	CarFont(S32 x, S32 y, char c)	;
+;int32_t	CarFont(int32_t x, int32_t y, char c)	;
 
 ;#pragma aux CarFont	"*"		\
 ;	parm	[ebx] [ecx] [eax]	\
@@ -120,7 +120,7 @@ Space:
 CarFont			endp
 
 ;----------------------------------------------------------------------------
-;S32	Font(S32 x, S32 y, char *str);
+;int32_t	Font(int32_t x, int32_t y, char *str);
 
 ;#pragma aux Font	"*"		\
 ;	parm	[ebx] [ecx] [esi]	\

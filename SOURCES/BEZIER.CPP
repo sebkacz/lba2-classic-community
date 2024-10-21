@@ -15,19 +15,19 @@
 
 /*──────────────────────────────────────────────────────────────────────────*/
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32		TabCoorPoint[480][4];
-S32		TabNbPoint[480];
-S32		MinYTabPoint,MaxYTabPoint;
+int32_t		TabCoorPoint[480][4];
+int32_t		TabNbPoint[480];
+int32_t		MinYTabPoint,MaxYTabPoint;
 
-S32		XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;
+int32_t		XS0,YS0,XS1,YS1,XS2,YS2,XS3,YS3 ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void CalculeLigneOmbre( S32 x1, S32 y1, S32 x2, S32 y2 )
+void CalculeLigneOmbre( int32_t x1, int32_t y1, int32_t x2, int32_t y2 )
 {
-	S32 temp;
-	S32 ix;
-	S32 x,y;
-	S32 hauteur;
+	int32_t temp;
+	int32_t ix;
+	int32_t x,y;
+	int32_t hauteur;
 
 	if( y1 > y2 )
 	{
@@ -75,30 +75,30 @@ void CalculeLigneOmbre( S32 x1, S32 y1, S32 x2, S32 y2 )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	DrawOmbre(S32 x0,S32 y0,S32 x1,S32 y1,S32 x2,S32 y2,S32 x3,S32 y3)
+void	DrawOmbre(int32_t x0,int32_t y0,int32_t x1,int32_t y1,int32_t x2,int32_t y2,int32_t x3,int32_t y3)
 {
-	S32	start_x,start_y;
+	int32_t	start_x,start_y;
 
-	S32	qx[5];
-	S32	qy[5];
+	int32_t	qx[5];
+	int32_t	qy[5];
 
-	S32	x[4];
-	S32	y[4];
+	int32_t	x[4];
+	int32_t	y[4];
 
-	S32	ax;
-	S32	ay;
+	int32_t	ax;
+	int32_t	ay;
 
-	S32	b1x,b2x;
-	S32	b1y,b2y;
+	int32_t	b1x,b2x;
+	int32_t	b1y,b2y;
 
-	S32	c1x,c2x,c3x,c4x;
-	S32	c1y,c2y,c3y,c4y;
+	int32_t	c1x,c2x,c3x,c4x;
+	int32_t	c1y,c2y,c3y,c4y;
 
-	S32	firstx,inter1x,midx,inter2x,lastx;
-	S32	firsty,inter1y,midy,inter2y,lasty;
+	int32_t	firstx,inter1x,midx,inter2x,lastx;
+	int32_t	firsty,inter1y,midy,inter2y,lasty;
 
 
-	S32	n,i;
+	int32_t	n,i;
 
 	x[0] = WTOF(x0);
 	y[0] = WTOF(y0);
@@ -204,10 +204,10 @@ void	DrawOmbre(S32 x0,S32 y0,S32 x1,S32 y1,S32 x2,S32 y2,S32 x3,S32 y3)
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	DrawLineShade(	S32 x0, S32 z0, S32 x1, S32 z1, S32 x2, S32 z2, S32 x3, S32 z3 )
+void	DrawLineShade(	int32_t x0, int32_t z0, int32_t x1, int32_t z1, int32_t x2, int32_t z2, int32_t x3, int32_t z3 )
 {
-	S32	y,j,k;
-	S32	temp;
+	int32_t	y,j,k;
+	int32_t	temp;
 
 	MinYTabPoint=ClipYMax;
 	MaxYTabPoint=ClipYMin;
@@ -255,7 +255,7 @@ void	DrawLineShade(	S32 x0, S32 z0, S32 x1, S32 z1, S32 x2, S32 z2, S32 x3, S32 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 // Version ZVs absolues précalculées
-S32	TestZVDecorsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_DECORS *objet )
+int32_t	TestZVDecorsXZFull( int32_t xw, int32_t zw, int32_t y0, int32_t y1, T_DECORS *objet )
 {
 	if( objet->Body & DEC_INVISIBLE )	return FALSE ;
 
@@ -272,9 +272,9 @@ S32	TestZVDecorsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_DECORS *objet )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	TestZVObjectsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_OBJET *objet )
+int32_t	TestZVObjectsXZFull( int32_t xw, int32_t zw, int32_t y0, int32_t y1, T_OBJET *objet )
 {
-	S32	ymin,ymax ;
+	int32_t	ymin,ymax ;
 
 	ymin = objet->Obj.Y + objet->YMin ;
 	ymax = objet->Obj.Y + objet->YMax ;
@@ -295,11 +295,11 @@ S32	TestZVObjectsXZFull( S32 xw, S32 zw, S32 y0, S32 y1, T_OBJET *objet )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	ShadowTestDecors = 0 ;
+int32_t	ShadowTestDecors = 0 ;
 
-S32	AdjustShadowDecors( S32 xw, S32 zw, S32 y0, S32 y1 )
+int32_t	AdjustShadowDecors( int32_t xw, int32_t zw, int32_t y0, int32_t y1 )
 {
-	S32	i ;
+	int32_t	i ;
 	T_DECORS       	*ptrd ;
 	T_LIST_TRI	*ptrtri = ListTriExt ;
 
@@ -321,11 +321,11 @@ S32	AdjustShadowDecors( S32 xw, S32 zw, S32 y0, S32 y1 )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	ShadowTestObject = 0 ;
+int32_t	ShadowTestObject = 0 ;
 
-S32	AdjustShadowObjects( S32 xw, S32 zw, S32 y0, S32 y1 )
+int32_t	AdjustShadowObjects( int32_t xw, int32_t zw, int32_t y0, int32_t y1 )
 {
-	S32	i ;
+	int32_t	i ;
 	T_OBJET	*ptrobj = ListObjet ;
 
 	ShadowTestObject = -1 ;
@@ -347,12 +347,12 @@ S32	AdjustShadowObjects( S32 xw, S32 zw, S32 y0, S32 y1 )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	ProjectShadowExt( T_SORT *ptrs, S32 beta )
+int32_t	ProjectShadowExt( T_SORT *ptrs, int32_t beta )
 {
-	S32	xmin, zmin, xmax, zmax, xw, yw, zw ;
-	S32	cy		;
-	S32	altitude_ref	;
-	S32	dx2, dz2 	;
+	int32_t	xmin, zmin, xmax, zmax, xw, yw, zw ;
+	int32_t	cy		;
+	int32_t	altitude_ref	;
+	int32_t	dx2, dz2 	;
 
 	ClearScreenMinMax();
 

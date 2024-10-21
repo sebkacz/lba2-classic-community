@@ -8,9 +8,9 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 AffGraph(S32 numgraph, S32 x, S32 y, const void *bankgraph);
-S32 GetDxDyGraph(S32 numgraph, S32 *x, S32 *y, const void *bankgraph);
-S32 GetBoxGraph(S32 numgraph, S32 *x0, S32 *y0, S32 *x1, S32 *y1,
+int32_t AffGraph(int32_t numgraph, int32_t x, int32_t y, const void *bankgraph);
+int32_t GetDxDyGraph(int32_t numgraph, int32_t *x, int32_t *y, const void *bankgraph);
+int32_t GetBoxGraph(int32_t numgraph, int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1,
                 const void *bankgraph);
 
 // =============================================================================

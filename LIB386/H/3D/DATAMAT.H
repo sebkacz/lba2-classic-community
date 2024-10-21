@@ -25,60 +25,60 @@ typedef union {
     float TZ;
   } F;
   struct {
-    S32 M11;
-    S32 M12;
-    S32 M13;
-    S32 M21;
-    S32 M22;
-    S32 M23;
-    S32 M31;
-    S32 M32;
-    S32 M33;
-    S32 TX;
-    S32 TY;
-    S32 TZ;
+    int32_t M11;
+    int32_t M12;
+    int32_t M13;
+    int32_t M21;
+    int32_t M22;
+    int32_t M23;
+    int32_t M31;
+    int32_t M32;
+    int32_t M33;
+    int32_t TX;
+    int32_t TY;
+    int32_t TZ;
   } I;
   struct {
-    S16 M11;
-    S16 M12;
-    S16 M13;
-    S16 M14;
-    S16 M21;
-    S16 M22;
-    S16 M23;
-    S16 M24;
-    S16 M31;
-    S16 M32;
-    S16 M33;
-    S16 M34;
-    S16 TX;
-    S16 TY;
-    S16 TZ;
+    int16_t M11;
+    int16_t M12;
+    int16_t M13;
+    int16_t M14;
+    int16_t M21;
+    int16_t M22;
+    int16_t M23;
+    int16_t M24;
+    int16_t M31;
+    int16_t M32;
+    int16_t M33;
+    int16_t M34;
+    int16_t TX;
+    int16_t TY;
+    int16_t TZ;
   } M;
 } TYPE_MAT;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct {
-  S16 X;
-  S16 Y;
-  S16 Z;
-  S16 Grp;
+  int16_t X;
+  int16_t Y;
+  int16_t Z;
+  int16_t Grp;
 } TYPE_VT16;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct {
-  S32 X;
-  S32 Y;
-  S32 Z;
+  int32_t X;
+  int32_t Y;
+  int32_t Z;
 } TYPE_VT32;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct {
-  S16 X;
-  S16 Y;
+  int16_t X;
+  int16_t Y;
 } TYPE_PT;
 #pragma pack(pop)
 

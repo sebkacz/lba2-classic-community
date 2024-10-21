@@ -1,14 +1,14 @@
 #include	"C_EXTERN.H"
 
 // Input
-U32		WaitNoKey	= 0	;
+uint32_t		WaitNoKey	= 0	;
 
 #ifdef	LBA_EDITOR
-U32		WaitNoClick	= 0	;
+uint32_t		WaitNoClick	= 0	;
 #endif
 
-U32             LastInput       = 0     ;
-U32		NbInput	= MAX_INPUT ;
+uint32_t             LastInput       = 0     ;
+uint32_t		NbInput	= MAX_INPUT ;
 
 T_DEF_KEY      	DefKeysDefault[MAX_INPUT+1] =
 		{
@@ -53,7 +53,7 @@ T_DEF_KEY      	DefKeysDefault[MAX_INPUT+1] =
 T_DEF_KEY      	DefKeys[MAX_INPUT+1] ;
 
 // tableau de configuration des touches utilisé au cours du jeux
-U32		TabInputBit[MAX_INPUT+1]  ;
+uint32_t		TabInputBit[MAX_INPUT+1]  ;
 
 
 /*══════════════════════════════════════════════════════════════════════════*
@@ -68,9 +68,9 @@ U32		TabInputBit[MAX_INPUT+1]  ;
 //-------------------------------------------------------------------------
 void	InitInput( void )
 {
-	U32	key ;
-	U32	shift = 0 ;
-	U32	shiftbit = 0 ;
+	uint32_t	key ;
+	uint32_t	shift = 0 ;
+	uint32_t	shiftbit = 0 ;
 
 	for( NbInput=0; NbInput<MAX_INPUT; )
 	{
@@ -116,15 +116,15 @@ void	InitInput( void )
 			break ;
 	}
 
-	DefineInputKeys( NbInput, (U32*)DefKeys, TabInputBit ) ;
+	DefineInputKeys( NbInput, (uint32_t*)DefKeys, TabInputBit ) ;
 }
 
 //-------------------------------------------------------------------------
 void	ReadInputConfig( void )
 {
-	S32	initkeys = FALSE ;
-	S32	winmode ;
-	S32	n ;
+	int32_t	initkeys = FALSE ;
+	int32_t	winmode ;
+	int32_t	n ;
 	char	id[50] ;
 
 	winmode = DefFileBufferReadValueDefault( "WinMode", FALSE ) ;
@@ -163,7 +163,7 @@ void	ReadInputConfig( void )
 //-------------------------------------------------------------------------
 void	WriteInputConfig( void )
 {
-	S32	n ;
+	int32_t	n ;
 	char	id[50] ;
 
 	if( !FileSize(PathConfigFile ) )	return ;

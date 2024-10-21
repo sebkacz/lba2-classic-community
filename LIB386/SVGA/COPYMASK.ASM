@@ -52,7 +52,7 @@ comment @
 			PUBLIC  C      CopyMask
 
 ;----------------------------------------------------------------------------
-;S32	CopyMask(S32 nummask, S32 x, S32 y, void *bankmask, void *src)	;
+;int32_t	CopyMask(int32_t nummask, int32_t x, int32_t y, void *bankmask, void *src)	;
 
 ;#pragma aux CopyMask	"*"			\
 ;	parm	[eax] [ebx] [ecx] [esi] [edx]	\

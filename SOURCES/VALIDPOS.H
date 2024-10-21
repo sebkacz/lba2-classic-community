@@ -3,14 +3,14 @@
 
 #define	SIZE_BUFFER_VALIDE_POS	50000L	// a reajuster
 
-extern	S32	ValideCube		;
+extern	int32_t	ValideCube		;
 
-extern	S32	ValidePos		;
-extern	S32	LastValidePos		;
+extern	int32_t	ValidePos		;
+extern	int32_t	LastValidePos		;
 
 extern	T_OBJET	ValideHero ;
-extern	U32	SizeOfBufferValidePos	;
-extern	U8	*BufferValidePos	;
+extern	uint32_t	SizeOfBufferValidePos	;
+extern	uint8_t	*BufferValidePos	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 extern	void	SaveValidePos( void ) ;

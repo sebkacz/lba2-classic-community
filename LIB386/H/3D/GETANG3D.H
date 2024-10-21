@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 GetAngleVector3D(S32 x, S32 y, S32 z);
+extern int32_t GetAngleVector3D(int32_t x, int32_t y, int32_t z);
 
 // -----------------------------------------------------------------------------
 #define GetAngle3D(x0, y0, z0, x1, y1, z1)                                     \

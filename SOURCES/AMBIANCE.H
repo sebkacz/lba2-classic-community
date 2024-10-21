@@ -1,12 +1,12 @@
 #ifndef	AMBIANCE_H
 #define	AMBIANCE_H
 
-extern	S32	RestartRainSample ;
+extern	int32_t	RestartRainSample ;
 
 #define	MAX_PLAYING_SAMPLES	32
 
 #if defined(DEBUG_TOOLS)||defined(TEST_TOOLS)
-extern	S32	NbPlayingSamples ;
+extern	int32_t	NbPlayingSamples ;
 extern	SAMPLE_PLAYING	ListPlayingSamples[MAX_PLAYING_SAMPLES] ;
 #endif
 
@@ -15,29 +15,29 @@ extern void StartRainSample( void ) ;
 /*--------------------------------------------------------------------------*/
 extern HQR_GET_CALLBACK	DelBlocHQRSample ;
 /*--------------------------------------------------------------------------*/
-extern U32  HQ_MixSample(S32 numsample,S32 frequence,S32 decalage,S32 repeat,S32 pan,S32 volume);
+extern uint32_t  HQ_MixSample(int32_t numsample,int32_t frequence,int32_t decalage,int32_t repeat,int32_t pan,int32_t volume);
 /*--------------------------------------------------------------------------*/
-extern U32  HQ_RestartSample( S32 numsample, S32 frequence, S32 repeat, S32 pan, S32 volume ) ;
+extern uint32_t  HQ_RestartSample( int32_t numsample, int32_t frequence, int32_t repeat, int32_t pan, int32_t volume ) ;
 /*--------------------------------------------------------------------------*/
 extern void HQ_StopSample();
 /*--------------------------------------------------------------------------*/
 #define	HQ_StopOneSample(num)	StopOneSample(num)
 /*--------------------------------------------------------------------------*/
-extern void HQ_FadeOutSamples( S32 dureehr ) ;
+extern void HQ_FadeOutSamples( int32_t dureehr ) ;
 /*--------------------------------------------------------------------------*/
-extern void HQ_FadeInSamples( S32 dureehr ) ;
+extern void HQ_FadeInSamples( int32_t dureehr ) ;
 /*--------------------------------------------------------------------------*/
 extern void HQ_PauseSamples(void) ;
 /*--------------------------------------------------------------------------*/
 extern void HQ_ResumeSamples(void) ;
 /*--------------------------------------------------------------------------*/
-extern S32  GiveBalance(S32 xp,S32 yp,S32 distance,U32 *pan,S32 *vol);
+extern int32_t  GiveBalance(int32_t xp,int32_t yp,int32_t distance,uint32_t *pan,int32_t *vol);
 /*--------------------------------------------------------------------------*/
-extern U32  HQ_3D_MixSample(S32 numsample,S32 frequence,S32 decalage,S32 repeat,S32 x,S32 y,S32 z);
+extern uint32_t  HQ_3D_MixSample(int32_t numsample,int32_t frequence,int32_t decalage,int32_t repeat,int32_t x,int32_t y,int32_t z);
 /*--------------------------------------------------------------------------*/
-extern void HQ_ChangePanSample( S32 numsample, S32 volume, U32 pan ) ;
+extern void HQ_ChangePanSample( int32_t numsample, int32_t volume, uint32_t pan ) ;
 /*--------------------------------------------------------------------------*/
-extern void HQ_3D_ChangePanSample( S32 numsample, S32 x, S32 y, S32 z ) ;
+extern void HQ_3D_ChangePanSample( int32_t numsample, int32_t x, int32_t y, int32_t z ) ;
 /*--------------------------------------------------------------------------*/
 extern void LaunchAmbiance( void ) ;
 /*--------------------------------------------------------------------------*/
@@ -49,27 +49,27 @@ extern void InitPalette( void ) ;
 /*--------------------------------------------------------------------------*/
 extern void ChoicePalette( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void FadePal(U8 r,U8 v,U8 b,U8 *ptrpal,S32 percent);
+extern void FadePal(uint8_t r,uint8_t v,uint8_t b,uint8_t *ptrpal,int32_t percent);
 /*--------------------------------------------------------------------------*/
-extern void FadeToBlack(U8 *ptrpal);
+extern void FadeToBlack(uint8_t *ptrpal);
 /*--------------------------------------------------------------------------*/
 extern void WhiteFade(void);
 /*--------------------------------------------------------------------------*/
-extern void FadeWhiteToPal(U8 *ptrpal);
+extern void FadeWhiteToPal(uint8_t *ptrpal);
 /*--------------------------------------------------------------------------*/
-extern void FadeToPal(U8 *ptrpal);
+extern void FadeToPal(uint8_t *ptrpal);
 /*--------------------------------------------------------------------------*/
-extern void FadeToBlackAndSamples( U8 *ptrpal ) ;
+extern void FadeToBlackAndSamples( uint8_t *ptrpal ) ;
 /*--------------------------------------------------------------------------*/
-extern void FadeToPalAndSamples( U8 *ptrpal ) ;
+extern void FadeToPalAndSamples( uint8_t *ptrpal ) ;
 /*--------------------------------------------------------------------------*/
 extern void SetBlackPal(void);
 /*--------------------------------------------------------------------------*/
-extern void FadePalToPal( U8 *ptrpal, U8 *ptrpal1 ) ;
+extern void FadePalToPal( uint8_t *ptrpal, uint8_t *ptrpal1 ) ;
 /*--------------------------------------------------------------------------*/
-extern void FadeToPalIndex( U8 num ) ;
+extern void FadeToPalIndex( uint8_t num ) ;
 /*--------------------------------------------------------------------------*/
-extern void PaletteIndex(U8 num);
+extern void PaletteIndex(uint8_t num);
 /*--------------------------------------------------------------------------*/
 extern void ReadVolumeSettings(void);
 /*--------------------------------------------------------------------------*/

@@ -6,8 +6,8 @@
 #define	TAILLE_MAX_CHEAT_CODE	10
 
 typedef	struct	{
-			U8	size;
-			U8	code[TAILLE_MAX_CHEAT_CODE];
+			uint8_t	size;
+			uint8_t	code[TAILLE_MAX_CHEAT_CODE];
 		} T_CODE;
 
 enum	{
@@ -47,8 +47,8 @@ T_CODE	DefCheatCode[]= {
 
 #define	NB_DEF_CHEAT_CODE	(sizeof(DefCheatCode)/sizeof(DefCheatCode[0]))
 
-S32	NbKeyInBuffer ;
-U8	BufferCheatCode[TAILLE_MAX_CHEAT_CODE] ;
+int32_t	NbKeyInBuffer ;
+uint8_t	BufferCheatCode[TAILLE_MAX_CHEAT_CODE] ;
 
 //***************************************************************************
 static inline void	InitCheatCode()
@@ -74,10 +74,10 @@ const char *CheatText[] = {
 void	GereCheatCode( void )
 {
 	T_OBJET	*ptrobj ;
-	S32	cheat, start ;
-	S32	text = -1 ;
-	S32	sprite = -1 ;
-	S32	key	;
+	int32_t	cheat, start ;
+	int32_t	text = -1 ;
+	int32_t	sprite = -1 ;
+	int32_t	key	;
 
 	while((key = GetAscii()) != 0)
 	{
@@ -90,7 +90,7 @@ void	GereCheatCode( void )
 		}
 
 		memmove( BufferCheatCode, BufferCheatCode+1, TAILLE_MAX_CHEAT_CODE-1 );
-		BufferCheatCode[TAILLE_MAX_CHEAT_CODE-1] = (U8)MyKey ;
+		BufferCheatCode[TAILLE_MAX_CHEAT_CODE-1] = (uint8_t)MyKey ;
 
 		if( NbKeyInBuffer<TAILLE_MAX_CHEAT_CODE ) NbKeyInBuffer++;
 
@@ -131,7 +131,7 @@ exit_loop:
 				break;
 
 			case CHEAT_MAGIC: // points de magie au maximum
-				MagicPoint = (U8)(MagicLevel * 20) ;
+				MagicPoint = (uint8_t)(MagicLevel * 20) ;
 				sprite = SPRITE_MAGIE ;
 				text = 1 ;
 				break;
@@ -148,7 +148,7 @@ exit_loop:
 				}
 
 				ListVarGame[FLAG_CLOVER] = NbCloverBox ;
-				MagicPoint = (U8)(MagicLevel * 20) ;
+				MagicPoint = (uint8_t)(MagicLevel * 20) ;
 				text = 2 ;
 				break;
 

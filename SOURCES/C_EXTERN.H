@@ -1,351 +1,350 @@
-#include        "DEFINES.H"
+#include "DEFINES.H"
 
 /*--------- divers ---------------------------------------------*/
-extern	S32	BodyComportement;
+extern int32_t BodyComportement;
 
-extern	S32	DebugFps	;
+extern int32_t DebugFps;
 
-extern	S32	DistribVersion	;
+extern int32_t DistribVersion;
 
-extern	char	MessageNoCD[50] ;
+extern char MessageNoCD[50];
 
-extern	U16	GameOptionMenu[] ;
-extern	S32	FlecheForcee ;
-extern  U16   	*BufOrder       ;
-extern  U8   	*BufText        ;
+extern uint16_t GameOptionMenu[];
+extern int32_t FlecheForcee;
+extern uint16_t *BufOrder;
+extern uint8_t *BufText;
 
-extern	S32	DemoSlide 	;	// Mode démo non jouable
-extern	S32	RestartMusic	;
+extern int32_t DemoSlide; // Mode démo non jouable
+extern int32_t RestartMusic;
 
-extern	U8	FlagRain 	;
-extern	U8	FlagDrawHorizon	;
-extern	U8	SavingEnable 	;
-extern	U8	FlagPlayAcf	;
-extern	U8	RainEnable  	;
+extern uint8_t FlagRain;
+extern uint8_t FlagDrawHorizon;
+extern uint8_t SavingEnable;
+extern uint8_t FlagPlayAcf;
+extern uint8_t RainEnable;
 
-extern	char	NewGameTxt[20] 	;// ATTENTION: max 19 chars
+extern char NewGameTxt[20]; // ATTENTION: max 19 chars
 
-#ifdef	DEMO
-extern	U8	FlagSlideShow ;
+#ifdef DEMO
+extern uint8_t FlagSlideShow;
 #endif
 
-extern "C" U8   *BufSpeak       ;
+extern "C" uint8_t *BufSpeak;
 
-extern  char   	GamePathname[] ;
-extern  char   	OldGamePathname[] ;
-extern	char	PlayerName[MAX_SIZE_PLAYER_NAME+1] ;
+extern char GamePathname[];
+extern char OldGamePathname[];
+extern char PlayerName[MAX_SIZE_PLAYER_NAME + 1];
 
-extern	U8	*PtrScene	;
+extern uint8_t *PtrScene;
 
-extern  U8   	*LbaFont ;
-extern  U8   	PalettePcx[] 	;
-extern  U8   	*PtrPal 	;
-extern	U8	*PtrPalNormal 	;
-extern	U8	*PtrPalCurrent 	;
-extern	U8	*PtrPalEclair  	;
-extern	U8	*PtrPalBlack  	;
-extern	U8	*PtrTransPal  	;
-extern	U8	*PtrXplPalette 	;
-extern	XPL_HEADER	*PtrXplHeader ;
+extern uint8_t *LbaFont;
+extern uint8_t PalettePcx[];
+extern uint8_t *PtrPal;
+extern uint8_t *PtrPalNormal;
+extern uint8_t *PtrPalCurrent;
+extern uint8_t *PtrPalEclair;
+extern uint8_t *PtrPalBlack;
+extern uint8_t *PtrTransPal;
+extern uint8_t *PtrXplPalette;
+extern XPL_HEADER *PtrXplHeader;
 
-extern	S32	IdxPalette 	;	// numéro de palette dans le HQR
-extern	S32	LastIdxPalette 	;	// numéro de la palette précédente dans le HQR
+extern int32_t IdxPalette;     // numéro de palette dans le HQR
+extern int32_t LastIdxPalette; // numéro de la palette précédente dans le HQR
 
-extern  S32    	MyKey ;
+extern int32_t MyKey;
 
-extern  S32	LastJoyFlag  ;
-extern  S32	Jumping ;
-extern  S32	Pushing ;
-extern  S32	LastMyJoy  ;
-extern  S32	LastMyFire ;
+extern int32_t LastJoyFlag;
+extern int32_t Jumping;
+extern int32_t Pushing;
+extern int32_t LastMyJoy;
+extern int32_t LastMyFire;
 
-extern  char   	String[] ;
-extern  S32    	Value ;
+extern char String[];
+extern int32_t Value;
 
-extern	S32	Nxw, Nyw, Nzw ;
-extern	S32	SaveNxw, SaveNyw, SaveNzw ;
-extern	S32	OldX, OldY, OldZ ;
+extern int32_t Nxw, Nyw, Nzw;
+extern int32_t SaveNxw, SaveNyw, SaveNzw;
+extern int32_t OldX, OldY, OldZ;
 
-extern	U8	AnimNumObj ;
-extern	T_OBJET	*APtObj ;
+extern uint8_t AnimNumObj;
+extern T_OBJET *APtObj;
 
 //------------ Mode Cinema = 2 bandes noires de 40 pixels en haut et en bas de
 //			     l'ecran
 
-extern	U8	CinemaMode ;
-extern	S32	TimerCinema ;
-extern	S32	LastYCinema ;
-extern	S32	DebCycleCinema ;	// en pixels Y
-extern	S32	DureeCycleCinema ;	// en TimerRefHR
+extern uint8_t CinemaMode;
+extern int32_t TimerCinema;
+extern int32_t LastYCinema;
+extern int32_t DebCycleCinema;   // en pixels Y
+extern int32_t DureeCycleCinema; // en TimerRefHR
 
 //---------------------------------------------------------------------------
 
-extern	S32	TimerProto ;
+extern int32_t TimerProto;
 
-extern  S32    	SampleVolume ;
-extern  S32	VoiceVolume  ;
-extern  S32	MasterVolume ;
+extern int32_t SampleVolume;
+extern int32_t VoiceVolume;
+extern int32_t MasterVolume;
 
-extern  S32    	SamplesEnable ;
+extern int32_t SamplesEnable;
 
-extern	U32	ParmSampleVolume    ; // a sauver dans les sauvegardes
-extern	U32	ParmSampleDecalage  ;
-extern	U32	ParmSampleFrequence ;
+extern uint32_t ParmSampleVolume; // a sauver dans les sauvegardes
+extern uint32_t ParmSampleDecalage;
+extern uint32_t ParmSampleFrequence;
 
-extern	S32	DetailLevel	;
-extern	S32	VideoFullScreen ;
+extern int32_t DetailLevel;
+extern int32_t VideoFullScreen;
 
-extern  S32    	FlecheForcee ;
+extern int32_t FlecheForcee;
 
-extern  S32    	FlagPalettePcx ;
-extern  S32    	FlagFade ;
-extern	S32	FlagPal  ;
-extern  S32    	FadeMenu ;
-extern  S32    	FlagMessageShade ;
-extern  S32    	FlagBlackPal ;
+extern int32_t FlagPalettePcx;
+extern int32_t FlagFade;
+extern int32_t FlagPal;
+extern int32_t FadeMenu;
+extern int32_t FlagMessageShade;
+extern int32_t FlagBlackPal;
 
-extern	S32	FlagShadeMenu ;
+extern int32_t FlagShadeMenu;
 
-#ifdef	DEBUG_TOOLS
-extern	S32	DrawZVObjets ;
+#ifdef DEBUG_TOOLS
+extern int32_t DrawZVObjets;
 #endif
 
-extern  S32    	FlaFromCD ;
-extern  char   	PathFla[] ;
+extern int32_t FlaFromCD;
+extern char PathFla[];
 
-extern  S32    	Version_US ;
+extern int32_t Version_US;
 
 /*-------------------------- memoire ---------------------------*/
 
-extern	U32	SpriteMem ;
-extern	U32	SpriteRawMem ;
-extern	U32	Anim3DSMem ;
-extern	U32	SampleMem ;
-extern	U32	AnimMem	;
-extern	U32	BodyMem	;
-extern	U32	ObjFixMem ;
-extern	U32	IsleObjMem ;
-extern	U32	CubeInfosMem ;
-extern	U32	ListDecorsMem ;
-extern	U32	MapPGroundMem ;
-extern	U32	ListTexDefMem ;
-extern	U32	MapSommetYMem ;
-extern	U32	MapIntensityMem ;
-extern	U32	SCCMem ;	// Calculé dynamiquement
+extern uint32_t SpriteMem;
+extern uint32_t SpriteRawMem;
+extern uint32_t Anim3DSMem;
+extern uint32_t SampleMem;
+extern uint32_t AnimMem;
+extern uint32_t BodyMem;
+extern uint32_t ObjFixMem;
+extern uint32_t IsleObjMem;
+extern uint32_t CubeInfosMem;
+extern uint32_t ListDecorsMem;
+extern uint32_t MapPGroundMem;
+extern uint32_t ListTexDefMem;
+extern uint32_t MapSommetYMem;
+extern uint32_t MapIntensityMem;
+extern uint32_t SCCMem; // Calculé dynamiquement
 
 /*-------- RESSOURCES ---------------------------------------------*/
 
-extern  T_HQR_HEADER    *HQR_Samples ;
+extern T_HQR_HEADER *HQR_Samples;
 
 /*-------- DISKFUNC.C ---------------------------------------------*/
 
-extern  S32   	CubeMode ;
-extern  S32   	LastCubeMode ;
-extern	S32	ModeLabyrinthe ;
+extern int32_t CubeMode;
+extern int32_t LastCubeMode;
+extern int32_t ModeLabyrinthe;
 
-extern  char 	PleaseWait[] ;
+extern char PleaseWait[];
 
-//extern  char   	ProgDrive[] ;
-//extern  char   	ProgDir[] ;
+// extern  char   	ProgDrive[] ;
+// extern  char   	ProgDir[] ;
 
-//extern  unsigned OrgDrive 	;
-//extern  char   	 OrgDir[] ;
+// extern  unsigned OrgDrive 	;
+// extern  char   	 OrgDir[] ;
 
-//extern  char   	Name[] ;
-//extern  char   	Ext[] ;
+// extern  char   	Name[] ;
+// extern  char   	Ext[] ;
 
 /*-------- LIB_SVGA ---------------------------------------------*/
-extern  S16    	NbPolyPoints ;
+extern int16_t NbPolyPoints;
 
 /*-------- life tool ---------------------------------------------*/
-extern  T_TRACK *ListBrickTrack ;
-extern  S32    	NbBrickTrack ;
+extern T_TRACK *ListBrickTrack;
+extern int32_t NbBrickTrack;
 
 /*--------- menus -----------------------------*/
-extern  U16    GameChoice ;
-extern  U16    GameNbChoices ;
-extern  S16    GameListChoice[] ;
+extern uint16_t GameChoice;
+extern uint16_t GameNbChoices;
+extern int16_t GameListChoice[];
 
 /*--------- perso ----------------------------*/
-extern  S32    FlagTheEnd ;
+extern int32_t FlagTheEnd;
 
-extern	T_COMPORTEMENT	ListComportement[MAX_COMPORTEMENTS] ;
-extern	T_COMPORTEMENT	*PtrComportement ; // Comportement courant
+extern T_COMPORTEMENT ListComportement[MAX_COMPORTEMENTS];
+extern T_COMPORTEMENT *PtrComportement; // Comportement courant
 
-extern  S32    Shadow ;
-extern  S32    ShadowX, ShadowY, ShadowZ ;
-extern  U8     ShadowCol ;
-extern	U32    ShadowLevel ;
+extern int32_t Shadow;
+extern int32_t ShadowX, ShadowY, ShadowZ;
+extern uint8_t ShadowCol;
+extern uint32_t ShadowLevel;
 
-extern  S32    FlagChgCube, NumCube ;
-extern	S32    FlagReajustPosTwinsen ;	// Reajustement de twinsen lors d'un
-					// changement de cube
-extern	S32    PhantomX ;	// offset du cube ext pour aller mourir
-extern	S32    PhantomY ;	// offset du cube ext pour aller mourir
-extern	S32    PhantomIsland ;
-extern	S32    FlagLoadGame ;
-extern  S32    NewPosX, NewPosY, NewPosZ ;
-extern  S32    CubeStartX, CubeStartY, CubeStartZ ;
-extern  S32    Island  ;
-extern  S32    Planet  ;
+extern int32_t FlagChgCube, NumCube;
+extern bool
+    FlagReajustPosTwinsen; // Reajustment of Twinsen during a cube change
+extern int32_t PhantomX;   // offset du cube ext pour aller mourir
+extern int32_t PhantomY;   // offset du cube ext pour aller mourir
+extern int32_t PhantomIsland;
+extern int32_t FlagLoadGame;
+extern int32_t NewPosX, NewPosY, NewPosZ;
+extern int32_t CubeStartX, CubeStartY, CubeStartZ;
+extern int32_t Island;
+extern int32_t Planet;
 
-extern	S32    AllCameras ;
-extern	S32    ReverseStereo ;
+extern int32_t AllCameras;
+extern int32_t ReverseStereo;
 
-extern	S32    ScaleFactorSprite ;
+extern int32_t ScaleFactorSprite;
 
-extern	S32    SpriteX ;	// Coordonnees d'affichage des sprites
-extern	S32    SpriteY ;
+extern int32_t SpriteX; // Coordonnees d'affichage des sprites
+extern int32_t SpriteY;
 
-extern  S32    FlagWater ;
+extern int32_t FlagWater;
 
 // perso sauvegarde entrée cube
-extern  U8     SaveComportement ;
+extern uint8_t SaveComportement;
 
 /*--------- Extra objs ----------------------------*/
-extern  T_HQR_HEADER    *HQRPtrSprite ;
-extern	T_HQR_HEADER	*HQRPtrSpriteRaw ;
-extern	T_HQR_HEADER	*HQRPtrAnim3DS ;
-extern	S16	*PtrZvExtra	;
-extern	S16	*PtrZvExtraRaw	;
-extern	S16	*PtrZvAnim3DS	;
+extern T_HQR_HEADER *HQRPtrSprite;
+extern T_HQR_HEADER *HQRPtrSpriteRaw;
+extern T_HQR_HEADER *HQRPtrAnim3DS;
+extern int16_t *PtrZvExtra;
+extern int16_t *PtrZvExtraRaw;
+extern int16_t *PtrZvAnim3DS;
 
 /*-------- Moteur 3D ---------------------------------------------*/
-extern	U8   *BufferTexture ;
-extern	U8   AnimateTexture ;
-extern  U8   *BufferAnim ;
+extern uint8_t *BufferTexture;
+extern uint8_t AnimateTexture;
+extern uint8_t *BufferAnim;
 
 /*--------- Ardoise ---------------------------*/
-extern	S8	ListArdoise[MAX_ARDOISE]  ;
+extern int8 _tListArdoise[MAX_ARDOISE];
 
-extern	U8	CurrentArdoise ;
-extern	U8	NbArdoise ;
+extern uint8_t CurrentArdoise;
+extern uint8_t NbArdoise;
 
 /*-------------------- Animations 3DS  ---------------------------*/
 
-extern	T_ANIM_3DS	*ListAnim3DS	;
+extern T_ANIM_3DS *ListAnim3DS;
 
+extern T_HQR_HEADER *HQR_Anims;
+extern T_HQR_HEADER *HQR_Bodys;
+extern T_HQR_HEADER *HQR_ObjFix;
 
-extern  T_HQR_HEADER    *HQR_Anims ;
-extern  T_HQR_HEADER    *HQR_Bodys ;
-extern  T_HQR_HEADER    *HQR_ObjFix ;
+extern uint8_t *BufferPof;
+extern uint8_t *BufferFile3D;
 
-extern	U8	*BufferPof ;
-extern	U8	*BufferFile3D ;
-
-extern  T_SORT  ListTri[] ;
+extern T_SORT ListTri[];
 
 /*--------- ambiance ----------------------------*/
-extern  S16    SampleAmbiance[] ;
-extern  S16    SampleRepeat[] ;
-extern  S16    SampleRnd[] ;
-extern  S16    SampleFreq[] ;
-extern  S16    SampleVol[] ;
-extern  S32    SamplePlayed ;
-extern  U32    TimerNextAmbiance ;
-extern  S32    SecondEcart ;
-extern  S32    SecondMin ;
-extern  S32    CubeJingle ;
+extern int16_t SampleAmbiance[];
+extern int16_t SampleRepeat[];
+extern int16_t SampleRnd[];
+extern int16_t SampleFreq[];
+extern int16_t SampleVol[];
+extern int32_t SamplePlayed;
+extern uint32_t TimerNextAmbiance;
+extern int32_t SecondEcart;
+extern int32_t SecondMin;
+extern int32_t CubeJingle;
 
 /*-------- Brick ISO ---------------------------------------------*/
 
-#ifdef  BRICK_HQR
-extern  U8   *BufferBrick    ;
+#ifdef BRICK_HQR
+extern uint8_t *BufferBrick;
 #endif
 
-extern  S32    FirstTime ;
-extern	S32    FirstLoop ;
-extern	S32    FirstSave ;
+extern int32_t FirstTime;
+extern int32_t FirstLoop;
+extern int32_t FirstSave;
 
-extern  S32    WorldXCube ;
-extern  S32    WorldYCube ;
-extern  S32    WorldZCube ;
+extern int32_t WorldXCube;
+extern int32_t WorldYCube;
+extern int32_t WorldZCube;
 
-extern  S32    XpOrgw ;
-extern  S32    YpOrgw ;
+extern int32_t XpOrgw;
+extern int32_t YpOrgw;
 
 /*--------- Message ---------------------------------------------*/
-#ifdef	CDROM
-extern  S32    NumObjSpeak ;
+#ifdef CDROM
+extern int32_t NumObjSpeak;
 #endif
-extern  S32    FlagSpeak ;
+extern int32_t FlagSpeak;
 
 //-------------------- Message Chapter
-//extern S16 MessChapitreTwinsen[MAX_CHAPTER][5] ;
+// extern int16_t MessChapitreTwinsen[MAX_CHAPTER][5] ;
 
 //-------------------- ExtFunc.c
-extern	U8	*PtrNuances ;	// Nuances gouraud
+extern uint8_t *PtrNuances; // Nuances gouraud
 
-extern	U8	MagicHitForce[] ;
-extern	U8	MagicBallHitForce[] ;
-extern	U8	MagicBallSprite[] ;
+extern uint8_t MagicHitForce[];
+extern uint8_t MagicBallHitForce[];
+extern uint8_t MagicBallSprite[];
 
 /*══════════════════════════════════════════════════════════════════════════*
-	Liste des Globales sauvées dans les fichiers de sauvegarde .LBA
+        Liste des Globales sauvées dans les fichiers de sauvegarde .LBA
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
-extern	S32		NewCube ;	// change cube demandé
-extern  U8   		ListVarCube[] ;
-extern  S16    		ListVarGame[] ;
-extern  U8    		Comportement ;
-extern  U8    		SaveComportementHero ;
-extern  S32    		NbGoldPieces ;
-extern  S32    		NbZlitosPieces ;
-extern	U8		NumVersion ;
-extern  U8    		MagicLevel ;
-extern  U8    		MagicPoint ;
-extern  U8    		NbLittleKeys ;
-extern  S16    		NbCloverBox ;
-extern  S32    		SceneStartX, SceneStartY, SceneStartZ ;
-extern  U8    		Weapon ;
-			// TimerRef en extern sauvé ici
-//extern  S32    		LastFire ;
-extern  U8    		Bulle ;
-extern  U8    		ActionNormal ;
-extern  S32    		InventoryAction ;
-extern  S32    		MagicBall ;
-extern  U8    		MagicBallType ;
-extern  U8    		MagicBallCount ;
-extern	S32    		MagicBallFlags ;
-extern	T_ZONE		*PtrZoneClimb ;	// Zone echelle dans laquelle se trouve Twinsen
-extern  U8            	FlagClimbing ;
-extern  S32            	StartYFalling ;
-extern  MOVE		RealFalling ;
-extern  S32            	StepFalling ;
-extern	MOVE		RealShifting ;
-extern	S32		StepShifting ;
-extern  U8    		NumObjFollow ;
-extern  U8    		CameraZone ;
-extern  S32    		StartXCube ;
-extern  S32    		StartYCube ;
-extern  S32    		StartZCube ;
-extern	T_INV_OBJ	TabInv[]     ;
-extern	T_DART		ListDart[] ;
-extern  S32    		NbObjets ;
-extern  T_OBJET 	ListObjet[] ;
-extern  T_EXTRA 	ListExtra[] ;
-extern  S32    		NbZones ;
-extern  T_ZONE  	*ListZone ;
-extern  T_INCRUST_DISP  ListIncrustDisp[] ;
-			// ListPartFlow en extern sauvé ici
+extern int32_t NewCube; // change cube demandé
+extern uint8_t ListVarCube[];
+extern int16_t ListVarGame[];
+extern uint8_t Comportement;
+extern uint8_t SaveComportementHero;
+extern int32_t NbGoldPieces;
+extern int32_t NbZlitosPieces;
+extern uint8_t NumVersion;
+extern uint8_t MagicLevel;
+extern uint8_t MagicPoint;
+extern uint8_t NbLittleKeys;
+extern int16_t NbCloverBox;
+extern int32_t SceneStartX, SceneStartY, SceneStartZ;
+extern uint8_t Weapon;
+// TimerRef en extern sauvé ici
+// extern  int32_t    		LastFire ;
+extern uint8_t Bulle;
+extern uint8_t ActionNormal;
+extern int32_t InventoryAction;
+extern int32_t MagicBall;
+extern uint8_t MagicBallType;
+extern uint8_t MagicBallCount;
+extern int32_t MagicBallFlags;
+extern T_ZONE *PtrZoneClimb; // Zone echelle dans laquelle se trouve Twinsen
+extern uint8_t FlagClimbing;
+extern int32_t StartYFalling;
+extern MOVE RealFalling;
+extern int32_t StepFalling;
+extern MOVE RealShifting;
+extern int32_t StepShifting;
+extern uint8_t NumObjFollow;
+extern uint8_t CameraZone;
+extern int32_t StartXCube;
+extern int32_t StartYCube;
+extern int32_t StartZCube;
+extern T_INV_OBJ TabInv[];
+extern T_DART ListDart[];
+extern int32_t NbObjets;
+extern T_OBJET ListObjet[];
+extern T_EXTRA ListExtra[];
+extern int32_t NbZones;
+extern T_ZONE *ListZone;
+extern T_INCRUST_DISP ListIncrustDisp[];
+// ListPartFlow en extern sauvé ici
 
-extern	MOVE	SampleAlwaysMove ;	// pour repaner les samples always de tps en tps
+extern MOVE SampleAlwaysMove; // pour repaner les samples always de tps en tps
 
-extern	S32	FlagCameraForcee ;
-extern	S32	AddBetaCam ;
+extern int32_t FlagCameraForcee;
+extern int32_t AddBetaCam;
 
-extern	S32	VueCamera ;
+extern int32_t VueCamera;
 
-extern	S32	DefVueDistance[NB_VUE_CAMERA] ;
-extern	S32	DefAlphaCam[NB_VUE_CAMERA] ;
+extern int32_t DefVueDistance[NB_VUE_CAMERA];
+extern int32_t DefAlphaCam[NB_VUE_CAMERA];
 
-extern	S32	ExtraConque ;	// Numero extra visant Twinsen (avec Conque)
-extern	U8	PingouinActif ;	// Pingouin en cours d'utilisation
+extern int32_t ExtraConque;   // Numero extra visant Twinsen (avec Conque)
+extern uint8_t PingouinActif; // Pingouin en cours d'utilisation
 
-extern	T_TABALLCUBE	TabAllCube[]	;
+extern T_TABALLCUBE TabAllCube[];
 /*──────────────────────────────────────────────────────────────────────────*/
 
-extern	U8	NumObjDial	;
-extern	S32	DialNbLine 	;	// pour la version demo le 02/08/96
-extern	U8	SaveBodyHero	;
-extern	U32	Checksum ;
+extern uint8_t NumObjDial;
+extern int32_t DialNbLine; // pour la version demo le 02/08/96
+extern uint8_t SaveBodyHero;
+extern uint32_t Checksum;

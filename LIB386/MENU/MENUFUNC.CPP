@@ -10,9 +10,9 @@
 /*══════════════════════════════════════════════════════════════════════════*/
 
 
-T_CLICK_BOX	*GetPtrLcb( T_MENU *ptrmenu, S32 handle )
+T_CLICK_BOX	*GetPtrLcb( T_MENU *ptrmenu, int32_t handle )
 {
-	S32		n, nblcb ;
+	int32_t		n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -31,9 +31,9 @@ T_CLICK_BOX	*GetPtrLcb( T_MENU *ptrmenu, S32 handle )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	SwitchButton( T_MENU *ptrmenu, S32 handle )
+void	SwitchButton( T_MENU *ptrmenu, int32_t handle )
 {
-	S32	n, nblcb ;
+	int32_t	n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -54,9 +54,9 @@ void	SwitchButton( T_MENU *ptrmenu, S32 handle )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	ChangeButtonFlags( T_MENU *ptrmenu, S32 handle, S32 flags, S32 flagaff )
+void	ChangeButtonFlags( T_MENU *ptrmenu, int32_t handle, int32_t flags, int32_t flagaff )
 {
-	S32	n, nblcb ;
+	int32_t	n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -79,9 +79,9 @@ void	ChangeButtonFlags( T_MENU *ptrmenu, S32 handle, S32 flags, S32 flagaff )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 //	Remise en fonction le 09/10/95
-S32	GetButtonFlags( T_MENU *ptrmenu, S32 handle )
+int32_t	GetButtonFlags( T_MENU *ptrmenu, int32_t handle )
 {
-	S32	n, nblcb ;
+	int32_t	n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -101,9 +101,9 @@ S32	GetButtonFlags( T_MENU *ptrmenu, S32 handle )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	ChangeButtonString( T_MENU *ptrmenu, S32 handle, char *string, S32 flagaff )
+void	ChangeButtonString( T_MENU *ptrmenu, int32_t handle, char *string, int32_t flagaff )
 {
-	S32	n, nblcb ;
+	int32_t	n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -126,9 +126,9 @@ void	ChangeButtonString( T_MENU *ptrmenu, S32 handle, char *string, S32 flagaff 
 
 /*──────────────────────────────────────────────────────────────────────────*/
 //	Remise en fonction le 09/10/95
-const char	*GetButtonString( T_MENU *ptrmenu, S32 handle )
+const char	*GetButtonString( T_MENU *ptrmenu, int32_t handle )
 {
-	S32	n, nblcb ;
+	int32_t	n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	nblcb = ptrmenu->NbBox ;
@@ -147,25 +147,25 @@ const char	*GetButtonString( T_MENU *ptrmenu, S32 handle )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	InputString( T_MENU *ptrmenu, S32 handle, S32 maxcar )
+void	InputString( T_MENU *ptrmenu, int32_t handle, int32_t maxcar )
 {
-	S32		n, nblcb, numlcb ;
-	S32		coul,x,y ;
-	S32		x1,y1,x2,y2 ;
-	S32		start,pc ;
-	S32		exit ;
-	S32		len ;
-	S32		nbaffcar ;
-	S32		carsizex ;
-	S32		myclick, mykey ;
-	S32		memoasciimode ;
+	int32_t		n, nblcb, numlcb ;
+	int32_t		coul,x,y ;
+	int32_t		x1,y1,x2,y2 ;
+	int32_t		start,pc ;
+	int32_t		exit ;
+	int32_t		len ;
+	int32_t		nbaffcar ;
+	int32_t		carsizex ;
+	int32_t		myclick, mykey ;
+	int32_t		memoasciimode ;
 
-	S32		car ;
+	int32_t		car ;
 	char		string[256] ;
-	S32	memoclipxmin ;
-	S32	memoclipxmax ;
-	S32	memoclipymin ;
-	S32	memoclipymax ;
+	int32_t	memoclipxmin ;
+	int32_t	memoclipxmax ;
+	int32_t	memoclipymin ;
+	int32_t	memoclipymax ;
 
 	T_CLICK_BOX	*ptrlcb ;
 
@@ -414,10 +414,10 @@ void	InputString( T_MENU *ptrmenu, S32 handle, S32 maxcar )
 /*══════════════════════════════════════════════════════════════════════════*/
 /* fontions evoluées */
 
-void	Message( const char *message, S32 flag )
+void	Message( const char *message, int32_t flag )
 {
 	T_MENU	menu ;
-	S32	len ;
+	int32_t	len ;
 
 	len = strlen(message)*SizeChar / (SizeChar+7) + 2 ;
 
@@ -454,10 +454,10 @@ void	Message( const char *message, S32 flag )
 /*══════════════════════════════════════════════════════════════════════════*/
 /* Confirm( "Voulez-vous vraiment ?", "OUI" (RETURN), "NON"(ESC) ) ; */
 
-S32	Confirm( const char *message, const char *oui, const char *non )
+int32_t	Confirm( const char *message, const char *oui, const char *non )
 {
 	T_MENU	menu ;
-	S32	len, select ;
+	int32_t	len, select ;
 
 	len = strlen(message)*SizeChar / (SizeChar+7) + 2 ;
 
@@ -507,7 +507,7 @@ S32	Confirm( const char *message, const char *oui, const char *non )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void ChangeButtonValueLimit( T_MENU *ptrmenu, S32 handle, S32 valmin, S32 valmax )
+void ChangeButtonValueLimit( T_MENU *ptrmenu, int32_t handle, int32_t valmin, int32_t valmax )
 {
 	T_CLICK_BOX	*ptrlcb ;
 

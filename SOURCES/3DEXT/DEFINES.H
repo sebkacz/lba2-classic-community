@@ -29,12 +29,12 @@ typedef struct {
 
 	T_REAL_VALUE	RealAngle;		// synchro de la rotation
 
-	S32		XMin ;			// ZV
-	S32		YMin ;
-	S32		ZMin ;
-	S32		XMax ;
-	S32		YMax ;
-	S32		ZMax ;
+	int32_t		XMin ;			// ZV
+	int32_t		YMin ;
+	int32_t		ZMin ;
+	int32_t		XMax ;
+	int32_t		YMax ;
+	int32_t		ZMax ;
 
 
 		} 	T_OBJET;

@@ -46,19 +46,19 @@ extern "C" {
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	S32		HTabY[25] ;	// Adresses Y de la carte hercule
+extern	int32_t		HTabY[25] ;	// Adresses Y de la carte hercule
 
 //#pragma	aux	HTabY	"*"
 
 extern	HBoxStyle       HBStyles[] ;
 
-extern	S32	HCurX ;
-extern	S32	HCurY ;
+extern	int32_t	HCurX ;
+extern	int32_t	HCurY ;
 
-extern	S32	ModeHercule ;
+extern	int32_t	ModeHercule ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	S32	TestHercule( void ) ;
+extern	int32_t	TestHercule( void ) ;
 
 /*#pragma	aux	TestHercule	"*"	\
 		parm caller []		\
@@ -96,19 +96,19 @@ void	HCls( void ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	HPrintCar( S32 x, S32 y, char car ) ;
+void	HPrintCar( int32_t x, int32_t y, char car ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	HPrintCarC( S32 x, S32 y, U8 attr, char car ) ;
+void	HPrintCarC( int32_t x, int32_t y, uint8_t attr, char car ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HString( S32 x, S32 y, char *string ) ;
+extern	void	HString( int32_t x, int32_t y, char *string ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HStringC( S32 x, S32 y, U8 attr, char *string ) ;
+extern	void	HStringC( int32_t x, int32_t y, uint8_t attr, char *string ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
@@ -125,19 +125,19 @@ extern	void	HScrollDown( void ) ;
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void 	HCentre( S32 y, char *texte ) ;
+extern	void 	HCentre( int32_t y, char *texte ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void 	HCentreC( S32 y, U8 attr, char *texte ) ;
+extern	void 	HCentreC( int32_t y, uint8_t attr, char *texte ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HStringf( S32 x, S32 y, char *format, ... ) ;
+extern	void	HStringf( int32_t x, int32_t y, char *format, ... ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HStringfC( S32 x, S32 y, U8 attr, char *format, ... ) ;
+extern	void	HStringfC( int32_t x, int32_t y, uint8_t attr, char *format, ... ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 extern	void	HPrintf( char *format, ... ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HPrintfC( U8 attr, char *format, ... ) ;
+extern	void	HPrintfC( uint8_t attr, char *format, ... ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HGotoXY( S32 x, S32 y ) ;
+extern	void	HGotoXY( int32_t x, int32_t y ) ;
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 /*══════════════════════════════════════════════════════════════════════════*
@@ -159,10 +159,10 @@ extern "C" {
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HLineH( S32 y, S32 x0, S32 x1, char car ) ;
+extern	void	HLineH( int32_t y, int32_t x0, int32_t x1, char car ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HLineV( S32 x, S32 y0, S32 y1, char car ) ;
+extern	void	HLineV( int32_t x, int32_t y0, int32_t y1, char car ) ;
 
 
 #ifdef __cplusplus
@@ -170,28 +170,28 @@ extern	void	HLineV( S32 x, S32 y0, S32 y1, char car ) ;
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HRect( S32 x0, S32 y0, S32 x1, S32 y1, U8 style ) ;
+extern	void	HRect( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t style ) ;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HColor( S32 y, S32 x0, S32 x1, U8 attr ) ;
+extern	void	HColor( int32_t y, int32_t x0, int32_t x1, uint8_t attr ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HColorBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr ) ;
+extern	void	HColorBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr ) ;
 
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	HClsBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr ) ;
+extern	void	HClsBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr ) ;
 
 #ifdef __cplusplus
 }
 #endif
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern 	void	HBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr, U8 style ) ;
+extern 	void	HBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr, uint8_t style ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
@@ -205,7 +205,7 @@ extern 	void	HBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr, U8 style ) ;
  *══════════════════════════════════════════════════════════════════════════*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	void	CaptureHerculeScreen( char *filename, U32 flags ) ;
+extern	void	CaptureHerculeScreen( char *filename, uint32_t flags ) ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 

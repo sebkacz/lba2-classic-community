@@ -5,6 +5,7 @@
 
 // Input
 
+#include <cstdint>
 #define	I_UP			(1<<0)	// 'UP'		Avancer
 #define	I_DOWN			(1<<1)	// 'DOWN'	Reculer
 #define	I_LEFT			(1<<2)	// 'LEFT'	Tourner à Gauche
@@ -58,30 +59,30 @@
 #define	ALL_INPUTS	(0xFFFFFFFFL)
 
 // Input
-extern	U32     LastInput ;
-extern	U32     NbInput   ;
-extern	U32	WaitNoKey ;
+extern	uint32_t     LastInput ;
+extern	uint32_t     NbInput   ;
+extern	uint32_t	WaitNoKey ;
 
 #define	ClearWaitNoInput()	ClearNoRepeatInput()
 #define	InitWaitNoInput(inputs)	GetInput(inputs)
-#define	InitWaitNoKey()		{WaitNoKey = TRUE; MyKey=0;}
+#define	InitWaitNoKey()		{WaitNoKey = true; MyKey=0;}
 
 #ifdef	LBA_EDITOR
-extern	U32	WaitNoClick ;
+extern	uint32_t	WaitNoClick ;
 
 #define	InitWaitNoClick(click)	{WaitNoClick |= click;MyClick&=~(click);}
 #endif
 
 typedef struct {
-	U32	Key1 ;
-	U32	Key2 ;
+	uint32_t	Key1 ;
+	uint32_t	Key2 ;
 	} T_DEF_KEY ;
 
 extern	T_DEF_KEY      	DefKeys[MAX_INPUT+1] ;
 extern	T_DEF_KEY      	MemoDefKeys[MAX_INPUT+1] ;
 
 // tableau de configuration des touches utilisé au cours du jeu
-extern	U32		TabInputBit[MAX_INPUT*2+1]  ;
+extern	uint32_t		TabInputBit[MAX_INPUT*2+1]  ;
 
 
 

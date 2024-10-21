@@ -47,10 +47,10 @@ ColMask         db      0       ; Noir par Defaut
 			PUBLIC  C      AffMask
 
 ;----------------------------------------------------------------------------
-;#define	ColorMask(color)	ColMask = (U8)(color)
+;#define	ColorMask(color)	ColMask = (uint8_t)(color)
 
 ;----------------------------------------------------------------------------
-;S32	AffMask(S32 nummask, S32 x, S32 y, void *bankmask)	;
+;int32_t	AffMask(int32_t nummask, int32_t x, int32_t y, void *bankmask)	;
 
 ;#pragma aux AffMask	"*"		\
 ;	parm	[eax] [ebx] [ecx] [esi]	\

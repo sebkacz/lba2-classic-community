@@ -2,7 +2,7 @@
 #define	GAMEMENU_H
 
 #ifdef	DEMO
-extern	S32	FlagShowEndDemo ;
+extern	int32_t	FlagShowEndDemo ;
 #endif
 
 /*--------------------------------------------------------------------------*/
@@ -12,11 +12,11 @@ extern void Init3DGame(void);
 /*--------------------------------------------------------------------------*/
 extern void SetDetailLevel( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void MessageTransp( char *mess, S32 coul, S32 moving ) ;
+extern void MessageTransp( char *mess, int32_t coul, int32_t moving ) ;
 /*--------------------------------------------------------------------------*/
-extern void InitMenuIncrustText( const char *text, S32 sprite, S32 time ) ;
+extern void InitMenuIncrustText( const char *text, int32_t sprite, int32_t time ) ;
 /*--------------------------------------------------------------------------*/
-extern void DrawFireBar( S32 xmin, S32 ymin, S32 xmax, S32 ymax, S32 coul ) ;
+extern void DrawFireBar( int32_t xmin, int32_t ymin, int32_t xmax, int32_t ymax, int32_t coul ) ;
 /*--------------------------------------------------------------------------*/
 #define	DrawFire( y, coul )	DrawFireBar(	320-LargeurMenu/2,	\
 							y,			\
@@ -26,61 +26,61 @@ extern void DrawFireBar( S32 xmin, S32 ymin, S32 xmax, S32 ymax, S32 coul ) ;
 /*--------------------------------------------------------------------------*/
 extern int  my_sort_function( const void *a, const void *b) ;
 /*--------------------------------------------------------------------------*/
-extern S32  PlayerGameList(char **ptrlistname,char *listname,S32 flagnew);
+extern int32_t  PlayerGameList(char **ptrlistname,char *listname,int32_t flagnew);
 /*--------------------------------------------------------------------------*/
-extern S32  FindPlayerFile(void);
+extern int32_t  FindPlayerFile(void);
 /*--------------------------------------------------------------------------*/
-extern void DrawOneString(S32 x,S32 y,char *playername,S32 draw);
+extern void DrawOneString(int32_t x,int32_t y,char *playername,int32_t draw);
 /*--------------------------------------------------------------------------*/
-extern void ClearOneString(S32 x,S32 y);
+extern void ClearOneString(int32_t x,int32_t y);
 /*--------------------------------------------------------------------------*/
-extern void DrawSingleString(S32 x,S32 y,char *string);
+extern void DrawSingleString(int32_t x,int32_t y,char *string);
 /*--------------------------------------------------------------------------*/
-extern S32  InputPlayerName(S32 choice,char *name);
+extern int32_t  InputPlayerName(int32_t choice,char *name);
 /*--------------------------------------------------------------------------*/
-extern S32  ChoosePlayerName(S32 mess,S32 flagflip,S32 flagnew);
+extern int32_t  ChoosePlayerName(int32_t mess,int32_t flagflip,int32_t flagnew);
 /*--------------------------------------------------------------------------*/
-extern void DrawOneChoice(S32 x,S32 y,S32 type,S32 num,S32 select);
+extern void DrawOneChoice(int32_t x,int32_t y,int32_t type,int32_t num,int32_t select);
 /*--------------------------------------------------------------------------*/
-extern void DrawGameMenu(U16 *ptrmenu,S32 justone);
+extern void DrawGameMenu(uint16_t *ptrmenu,int32_t justone);
 /*--------------------------------------------------------------------------*/
-extern S32  DoGameMenu(U16 *ptrmenu);
+extern int32_t  DoGameMenu(uint16_t *ptrmenu);
 /*--------------------------------------------------------------------------*/
-extern S32  OptionsMenu(S32 flagflip);
+extern int32_t  OptionsMenu(int32_t flagflip);
 /*--------------------------------------------------------------------------*/
 extern void VolumeOptions(void);
 /*--------------------------------------------------------------------------*/
 extern void SavedGameManagement(void);
 /*--------------------------------------------------------------------------*/
-extern S32  DeleteSavedGame( void ) ;
+extern int32_t  DeleteSavedGame( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void ZoomSavedGame(S32 x,S32 y);
+extern void ZoomSavedGame(int32_t x,int32_t y);
 /*--------------------------------------------------------------------------*/
-extern void DrawScreenSave(U8 *ptr,S32 x,S32 y);
+extern void DrawScreenSave(uint8_t *ptr,int32_t x,int32_t y);
 /*--------------------------------------------------------------------------*/
-extern void DrawCadreSave(S32 x,S32 y);
+extern void DrawCadreSave(int32_t x,int32_t y);
 /*--------------------------------------------------------------------------*/
-extern S32  IsFirstGameLaunched( void ) ;
+extern int32_t  IsFirstGameLaunched( void ) ;
 /*--------------------------------------------------------------------------*/
-extern S32  MainGameMenu( S32 load );
+extern int32_t  MainGameMenu( int32_t load );
 /*--------------------------------------------------------------------------*/
-extern void GameAskChoice(S32 nummess);
+extern void GameAskChoice(int32_t nummess);
 /*--------------------------------------------------------------------------*/
 extern void GameOver(void);
 /*--------------------------------------------------------------------------*/
-extern void Help( U8 flaggame ) ;
+extern void Help( uint8_t flaggame ) ;
 /*--------------------------------------------------------------------------*/
-extern void Credits(S32 mode);
+extern void Credits(int32_t mode);
 /*--------------------------------------------------------------------------*/
-extern S32  SlideShow( void ) ;
+extern int32_t  SlideShow( void ) ;
 /*--------------------------------------------------------------------------*/
 extern void SlideDemo( int argc, char *argv[] ) ;
 /*--------------------------------------------------------------------------*/
-extern S32  AdelineLogo(void) ;
+extern int32_t  AdelineLogo(void) ;
 /*--------------------------------------------------------------------------*/
 extern void DistribLogo(void) ;
 /*--------------------------------------------------------------------------*/
-extern S32  BumperLogo(void) ;
+extern int32_t  BumperLogo(void) ;
 /*--------------------------------------------------------------------------*/
 #ifdef	DEMO
 extern void DemoLogo( void ) ;
@@ -88,9 +88,9 @@ extern void DemoLogo( void ) ;
 extern void DemoBumper( void ) ;
 #endif
 /*--------------------------------------------------------------------------*/
-extern void EffectPcx(U8 num,U8 *screen,U8 effect,U8 flagbcl);
+extern void EffectPcx(uint8_t num,uint8_t *screen,uint8_t effect,uint8_t flagbcl);
 /*--------------------------------------------------------------------------*/
-extern void EffectPcxMess( U8 numpcx, U8 *screen, U8 effect, S32 mess ) ;
+extern void EffectPcxMess( uint8_t numpcx, uint8_t *screen, uint8_t effect, int32_t mess ) ;
 /*--------------------------------------------------------------------------*/
 extern void Introduction( void ) ;
 /*--------------------------------------------------------------------------*/

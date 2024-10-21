@@ -21,7 +21,7 @@
 		public	C	MulMatrixF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	MulMAtrixF(S32 *MatDst, S32 *MatSrc1, S32* MatSrc2) ;
+;void	MulMAtrixF(int32_t *MatDst, int32_t *MatSrc1, int32_t* MatSrc2) ;
 
 ;#pragma aux MulMAtrixF		       		\
 ;	parm		[edi] [esi] [ebx]	\

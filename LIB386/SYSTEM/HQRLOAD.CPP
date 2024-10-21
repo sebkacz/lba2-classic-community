@@ -11,7 +11,7 @@
 //──────────────────────────────────────────────────────────────────────────
 // alloue la memoire necessaire
 // et charge une fiche(index) d'une ressource .HQR
-void	*LoadMalloc_HQR(const char *name, S32 index)
+void	*LoadMalloc_HQR(const char *name, int32_t index)
 {
 	void	*ptr	;
 
@@ -43,7 +43,7 @@ void	*LoadMalloc_HQR(const char *name, S32 index)
 
 //──────────────────────────────────────────────────────────────────────────
 // charge une fiche(index) à l'adresse voulue (ptrdest) depuis une ressource
-U32	Load_HQR(const char *name, void *ptr, S32 index)
+uint32_t	Load_HQR(const char *name, void *ptr, int32_t index)
 {
 	HQF_Init(name, index)		;
 	return HQF_LoadClose(ptr)	;

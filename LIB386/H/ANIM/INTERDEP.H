@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-S32	ObjectSetInterDep(T_OBJ_3D *obj)	;
+int32_t	ObjectSetInterDep(T_OBJ_3D *obj)	;
 
 #pragma aux ObjectSetInterDep	"*"		\
 	parm caller		[ebx]			\

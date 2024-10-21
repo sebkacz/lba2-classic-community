@@ -3,10 +3,10 @@
 
 typedef	struct
 {
-	S32	XRain	;
-	S32	YRain	;
-	S32	ZRain	;
-	S32	Timer	;
+	int32_t	XRain	;
+	int32_t	YRain	;
+	int32_t	ZRain	;
+	int32_t	Timer	;
 }	T_RAIN	;
 
 /*--------------------------------------------------------------------------*/
@@ -21,9 +21,9 @@ extern void ClearImpactRain(void) ;
 extern void AffRain(void);
 /*--------------------------------------------------------------------------*/
 
-extern	S32	OldRealTime		;
-extern	S32	DeltaRain		;
-extern	U32	RealTime		;
-extern	S32	LastTimer		;
+extern	int32_t	OldRealTime		;
+extern	int32_t	DeltaRain		;
+extern	uint32_t	RealTime		;
+extern	int32_t	LastTimer		;
 
 #endif	// RAIN_H

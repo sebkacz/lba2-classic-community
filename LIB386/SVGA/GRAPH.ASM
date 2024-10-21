@@ -52,7 +52,7 @@ BufferClip	db	512 dup (?)
 			PUBLIC	C	GetBoxGraph
 
 ;----------------------------------------------------------------------------
-;S32	AffGraph(S32 numgraph, S32 x, S32 y, void *bankgraph)	;
+;int32_t	AffGraph(int32_t numgraph, int32_t x, int32_t y, void *bankgraph)	;
 
 ;#pragma aux AffGraph	"*"		\
 ;	parm	[eax] [ebx] [ecx] [esi]	\
@@ -332,7 +332,7 @@ EndGraph:		ret
 AffGraph		endp
 
 ;----------------------------------------------------------------------------
-;S32	GetBoxGraph(S32 numgraph, S32 *x0, S32 *y0, S32 *x1, S32 *y1, void *bankgraph);
+;int32_t	GetBoxGraph(int32_t numgraph, int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1, void *bankgraph);
 
 ;#pragma aux GetBoxGraph	"*"				\
 ;	parm		[eax] [ebx] [ecx] [edx] [edi] [esi]	\

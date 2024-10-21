@@ -12,9 +12,9 @@ extern	"C"	{
 
 typedef	struct
 	{
-		S32	DeviceID;
-		S32	ControlID;
-		S32	Channels;
+		int32_t	DeviceID;
+		int32_t	ControlID;
+		int32_t	Channels;
 	}	VOLUMECONTROL	;
 
 //████████████████████████████████████████████████████████████████████████████
@@ -47,15 +47,15 @@ typedef	struct
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetMixerVolDevice(VOLUMECONTROL *volcontrol, S32 type)	;
+int32_t	GetMixerVolDevice(VOLUMECONTROL *volcontrol, int32_t type)	;
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetMixerVolume(VOLUMECONTROL *volcontrol)		;
+int32_t	GetMixerVolume(VOLUMECONTROL *volcontrol)		;
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	SetMixerVolume(VOLUMECONTROL *volcontrol, S32 volume)	;
+void	SetMixerVolume(VOLUMECONTROL *volcontrol, int32_t volume)	;
 
 //████████████████████████████████████████████████████████████████████████████
 

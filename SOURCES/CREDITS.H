@@ -3,9 +3,9 @@
 
 typedef struct  {
 
-	S32             NbObjects ;
-	S32             OffTxt ;
-	S32		OffXpl ;
+	int32_t             NbObjects ;
+	int32_t             OffTxt ;
+	int32_t		OffXpl ;
 
 		}       S_CRED_INFOS_2 ;
 
@@ -16,15 +16,15 @@ typedef struct {
 	T_OBJ_3D	Obj ;			// lib struct
 	BOUND_MOVE	RealAngle;		// synchro de la rotation
 
-	S32		Flag ;
-	S32		DestX ;
-	S32		DestZ ;
+	int32_t		Flag ;
+	int32_t		DestX ;
+	int32_t		DestZ ;
 
-	S32		OffBody ;		// offset
-	S32		OffAnim[2] ;
+	int32_t		OffBody ;		// offset
+	int32_t		OffAnim[2] ;
 
 	} S_CRED_OBJ_2 ;
 
-extern	S32     GamePlayCredits( const char *file_name, S32 mode ) ;
+extern	int32_t     GamePlayCredits( const char *file_name, int32_t mode ) ;
 
 #endif	// CREDITS_H

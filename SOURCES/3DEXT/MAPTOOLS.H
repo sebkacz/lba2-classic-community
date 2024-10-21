@@ -2,19 +2,19 @@
 #define	MAPTOOLS_H
 
 /*--------------------------------------------------------------------------*/
-extern S32 CalculAltitudeObjet(S32 x,S32 z,S32 cj);
+extern int32_t CalculAltitudeObjet(int32_t x,int32_t z,int32_t cj);
 
 /*--------------------------------------------------------------------------*/
-extern S32 GiveTriangle(S32 x,S32 z);
+extern int32_t GiveTriangle(int32_t x,int32_t z);
 
 /*--------------------------------------------------------------------------*/
-extern S32 GiveTerrainCol(S32 x,S32 z);
+extern int32_t GiveTerrainCol(int32_t x,int32_t z);
 
 /*--------------------------------------------------------------------------*/
-extern	U8	GiveTerrainCodeJeu( S32 x, S32 y, S32 z ) ;
+extern	uint8_t	GiveTerrainCodeJeu( int32_t x, int32_t y, int32_t z ) ;
 
 /*--------------------------------------------------------------------------*/
-extern S32	SearchCameraPos( S32 x, S32 y, S32 z, S32 objbeta, S32 mode ) ;
+extern int32_t	SearchCameraPos( int32_t x, int32_t y, int32_t z, int32_t objbeta, int32_t mode ) ;
 
 /*--------------------------------------------------------------------------*/
 

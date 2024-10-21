@@ -3,15 +3,15 @@
 #define	CONE_GANT	2048
 #define	RND_BETA_BONUS	300	// Angle aléatoire rajouter
 
-extern	S32	MagicBallFlags ;
-extern	S32	InitMagicBall = FALSE ;	// Pour ne pas traiter la balle
+extern	int32_t	MagicBallFlags ;
+extern	int32_t	InitMagicBall = FALSE ;	// Pour ne pas traiter la balle
 					// magique (ou plutot son ombre de
 					// retour) dans la boucle ou elle a
 					// été initialisée
 
 // Tableaux de Kashes Maximum necessaire par chapitre scénarique
 
-S32	NecessaryChapterMoney[MAX_CHAPTER] = {
+int32_t	NecessaryChapterMoney[MAX_CHAPTER] = {
 	50,	// 0
 	50,	// 1
 	50,	// 2
@@ -40,7 +40,7 @@ S32	NecessaryChapterMoney[MAX_CHAPTER] = {
 			 ▀▀▀▀▀ ▀   ▀   ▀▀  ▀▀  ▀ ▀▀  ▀
  *══════════════════════════════════════════════════════════════════════════*/
 
-void	InitFly( T_EXTRA *ptrextra, S32 alpha, S32 beta, S32 vitesse, U8 poids )
+void	InitFly( T_EXTRA *ptrextra, int32_t alpha, int32_t beta, int32_t vitesse, uint8_t poids )
 {
 	ptrextra->Flags |= EXTRA_FLY ;
 
@@ -49,11 +49,11 @@ void	InitFly( T_EXTRA *ptrextra, S32 alpha, S32 beta, S32 vitesse, U8 poids )
 	ptrextra->U.Org.Z = ptrextra->PosZ ;
 
 	Rotate( vitesse,0, alpha ) ;
-	ptrextra->Vy = (S16)(-Z0) ;
+	ptrextra->Vy = (int16_t)(-Z0) ;
 
 	Rotate( 0, X0, beta ) ;
-	ptrextra->Vx = (S16)X0 ;
-	ptrextra->Vz = (S16)Z0 ;
+	ptrextra->Vx = (int16_t)X0 ;
+	ptrextra->Vz = (int16_t)Z0 ;
 
 	ptrextra->Poids = poids ;
 
@@ -62,9 +62,9 @@ void	InitFly( T_EXTRA *ptrextra, S32 alpha, S32 beta, S32 vitesse, U8 poids )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	BounceExtra( T_EXTRA *ptrextra, S32 oldx, S32 oldy, S32 oldz )
+void	BounceExtra( T_EXTRA *ptrextra, int32_t oldx, int32_t oldy, int32_t oldz )
 {
-	S32	vx, vy, vz ;
+	int32_t	vx, vy, vz ;
 
 	vx = ptrextra->Vx ;
 	vy = ptrextra->Vy ;
@@ -73,19 +73,19 @@ void	BounceExtra( T_EXTRA *ptrextra, S32 oldx, S32 oldy, S32 oldz )
 	// test under last pos
 	if( PtrWorldColBrick( oldx, ptrextra->PosY, oldz ) )
 	{
-		ptrextra->Vy = (S16)(-ptrextra->Vy) ;
+		ptrextra->Vy = (int16_t)(-ptrextra->Vy) ;
 	}
 
 	// test left & right
 	if( PtrWorldColBrick( ptrextra->PosX, oldy, oldz ) )
 	{
-		ptrextra->Vx = (S16)(-ptrextra->Vx) ;
+		ptrextra->Vx = (int16_t)(-ptrextra->Vx) ;
 	}
 
 	// test up & down
 	if( PtrWorldColBrick( oldx, oldy, ptrextra->PosZ ) )
 	{
-		ptrextra->Vz = (S16)(-ptrextra->Vz) ;
+		ptrextra->Vz = (int16_t)(-ptrextra->Vz) ;
 	}
 
 	ptrextra->U.Org.X = ptrextra->PosX = oldx ;
@@ -97,13 +97,13 @@ void	BounceExtra( T_EXTRA *ptrextra, S32 oldx, S32 oldy, S32 oldz )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S32	ExtraBonus(	S32 x, S32 y, S32 z,
-			S32 alpha, S32 beta,
-			S16 num, S16 nb )
+int32_t	ExtraBonus(	int32_t x, int32_t y, int32_t z,
+			int32_t alpha, int32_t beta,
+			int16_t num, int16_t nb )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
-	S32	flagkill = FALSE ;
+	int32_t	n ;
+	int32_t	flagkill = FALSE ;
 
 searchextra:
 
@@ -167,11 +167,11 @@ searchextra:
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	ExtraLabyrinthe( S32 x, S32 y, S32 z )
+int32_t	ExtraLabyrinthe( int32_t x, int32_t y, int32_t z )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
-	S16	num = 4 ;
+	int32_t	n ;
+	int16_t	num = 4 ;
 
 	if( !ModeLabyrinthe )	return -1 ;
 
@@ -182,7 +182,7 @@ S32	ExtraLabyrinthe( S32 x, S32 y, S32 z )
 		if( ptrextra->Sprite != -1 )	continue ;
 		/* slot libre */
 
-		ptrextra->Sprite = (S16)(32768+num) ;	// explo
+		ptrextra->Sprite = (int16_t)(32768+num) ;	// explo
 		ptrextra->Scale  = -1 ;
 
 		ptrextra->Flags = EXTRA_TIME_OUT ;
@@ -202,7 +202,7 @@ S32	ExtraLabyrinthe( S32 x, S32 y, S32 z )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	MagicBallExplo(	S32 x, S32 y, S32 z, S32 beta )
+void	MagicBallExplo(	int32_t x, int32_t y, int32_t z, int32_t beta )
 {
 	y = ((y/SIZE_BRICK_Y)+1)*SIZE_BRICK_Y ;
 
@@ -210,10 +210,10 @@ void	MagicBallExplo(	S32 x, S32 y, S32 z, S32 beta )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	SearchBonusKey()
+int32_t	SearchBonusKey()
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 	for( n=0; n<MAX_EXTRAS; n++, ptrextra++ )
@@ -228,11 +228,11 @@ S32	SearchBonusKey()
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S32	ExtraSearch(	U8 owner, S32 x, S32 y, S32 z, S16 num,
-			U8 numobj, S32 speed, U8 hitforce )
+int32_t	ExtraSearch(	uint8_t owner, int32_t x, int32_t y, int32_t z, int16_t num,
+			uint8_t numobj, int32_t speed, uint8_t hitforce )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 
@@ -241,7 +241,7 @@ S32	ExtraSearch(	U8 owner, S32 x, S32 y, S32 z, S16 num,
 		if( ptrextra->Sprite != -1 )	continue ;
 		/* slot libre */
 
-		/* S16 Timer: num obj search */
+		/* int16_t Timer: num obj search */
 		/* Vz = speed */
 
 		ptrextra->Sprite = num ;
@@ -255,9 +255,9 @@ S32	ExtraSearch(	U8 owner, S32 x, S32 y, S32 z, S16 num,
 		ptrextra->PosZ = z ;
 
 		ptrextra->Owner = owner ;
-		ptrextra->Timer = (U32)numobj ;
+		ptrextra->Timer = (uint32_t)numobj ;
 
-		ptrextra->Vz = (S16)speed ;
+		ptrextra->Vz = (int16_t)speed ;
 		ptrextra->HitForce = hitforce ;
 
 		InitMove( &ptrextra->U.Move, speed ) ;
@@ -271,11 +271,11 @@ S32	ExtraSearch(	U8 owner, S32 x, S32 y, S32 z, S16 num,
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S32	ExtraSearchKey(	U8 owner, S32 x, S32 y, S32 z,
-			S16 num, U8 numobj )
+int32_t	ExtraSearchKey(	uint8_t owner, int32_t x, int32_t y, int32_t z,
+			int16_t num, uint8_t numobj )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 
@@ -284,7 +284,7 @@ S32	ExtraSearchKey(	U8 owner, S32 x, S32 y, S32 z,
 		if( ptrextra->Sprite != -1 )	continue ;
 		// slot libre
 
-		// S16 Timer: num obj search
+		// int16_t Timer: num obj search
 		// Vz = speed
 
 		ptrextra->Sprite = num ;
@@ -298,7 +298,7 @@ S32	ExtraSearchKey(	U8 owner, S32 x, S32 y, S32 z,
 		ptrextra->PosZ = z ;
 
 		ptrextra->Owner = owner ;
-		ptrextra->Timer = (U32)numobj ;
+		ptrextra->Timer = (uint32_t)numobj ;
 
 		ptrextra->Vz = 4000 ;
 		ptrextra->HitForce = 0 ;
@@ -314,12 +314,12 @@ S32	ExtraSearchKey(	U8 owner, S32 x, S32 y, S32 z,
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	GetExtraZV( T_EXTRA *ptrextra, S32 *xmin, S32 *ymin, S32 *zmin,
-				       S32 *xmax, S32 *ymax, S32 *zmax )
+void	GetExtraZV( T_EXTRA *ptrextra, int32_t *xmin, int32_t *ymin, int32_t *zmin,
+				       int32_t *xmax, int32_t *ymax, int32_t *zmax )
 {
 	if( !(ptrextra->Sprite&32768) )	// c'est un sprite
 	{
-		S16	*ptr = &PtrZvExtraRaw[ ptrextra->Sprite*8 + 2 ] ;
+		int16_t	*ptr = &PtrZvExtraRaw[ ptrextra->Sprite*8 + 2 ] ;
 
 		*xmin = *ptr++ ;
 		*xmax = *ptr++ ;
@@ -334,13 +334,13 @@ void	GetExtraZV( T_EXTRA *ptrextra, S32 *xmin, S32 *ymin, S32 *zmin,
 		{
 			case 3:	// c'est un objet 3D
 			{
-				S32	x0,z0, x1,z1 ;
-				S32	size ;
+				int32_t	x0,z0, x1,z1 ;
+				int32_t	size ;
 				T_BODY_HEADER	*ptr ;
 
 				// recharger body ici pour etre sûr qu'il n'a pas bougé
 				// dans le buffer HQR_Get()
-				ptrextra->PtrBody = (U8*)GivePtrObjFix( ptrextra->Body ) ;
+				ptrextra->PtrBody = (uint8_t*)GivePtrObjFix( ptrextra->Body ) ;
 
 				ptr = (T_BODY_HEADER *)ptrextra->PtrBody ;
 
@@ -373,12 +373,12 @@ void	GetExtraZV( T_EXTRA *ptrextra, S32 *xmin, S32 *ymin, S32 *zmin,
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-U8	ExtraCheckObjCol( T_EXTRA *ptrextra, U8 owner )
+uint8_t	ExtraCheckObjCol( T_EXTRA *ptrextra, uint8_t owner )
 {
 	T_OBJET	*ptrobjt = ListObjet;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	U8	n ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	uint8_t	n ;
 
 	GetExtraZV( ptrextra, &x0, &y0, &z0, &x1, &y1, &z1 ) ;
 
@@ -422,15 +422,15 @@ U8	ExtraCheckObjCol( T_EXTRA *ptrextra, U8 owner )
 						if( ptrextra->Flags&EXTRA_RENVOYABLE
 						AND ptrobjt->WorkFlags&OK_RENVOIE )
 						{
-							S32 angle = GetAngle2D( ptrobjt->Obj.X, ptrobjt->Obj.Z,
+							int32_t angle = GetAngle2D( ptrobjt->Obj.X, ptrobjt->Obj.Z,
 									ptrextra->PosX, ptrextra->PosZ ) ;
 
 							angle = (ptrobjt->Obj.Beta-angle+CONE_GANT/2) & (MAX_ANGLE-1) ;
 
 							if( angle <= CONE_GANT )	// 2048: CONE_GANT
 							{
-								ptrextra->Vx = (S16)-ptrextra->Vx ;
-								ptrextra->Vz = (S16)-ptrextra->Vz ;
+								ptrextra->Vx = (int16_t)-ptrextra->Vx ;
+								ptrextra->Vz = (int16_t)-ptrextra->Vz ;
 								ptrextra->Vy = 10 ;
 								ptrextra->Poids = 2 ;
 								ptrextra->U.Org.X = ptrextra->PosX ;
@@ -471,16 +471,16 @@ U8	ExtraCheckObjCol( T_EXTRA *ptrextra, U8 owner )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-U8	ExtraSearchCheckObjCol( T_EXTRA *ptrextra,
-				S32 oldx, S32 oldy, S32 oldz,
-				U8 owner )
+uint8_t	ExtraSearchCheckObjCol( T_EXTRA *ptrextra,
+				int32_t oldx, int32_t oldy, int32_t oldz,
+				uint8_t owner )
 {
 	T_OBJET	*ptrobjt = ListObjet;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	S32	dx, dy, dz ;
-	S32	zvinzv ;
-	U8	n ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	int32_t	dx, dy, dz ;
+	int32_t	zvinzv ;
+	uint8_t	n ;
 
 	GetExtraZV( ptrextra, &x0, &y0, &z0, &x1, &y1, &z1 ) ;
 
@@ -550,15 +550,15 @@ U8	ExtraSearchCheckObjCol( T_EXTRA *ptrextra,
 						if( ptrextra->Flags&EXTRA_RENVOYABLE
 						AND ptrobjt->WorkFlags&OK_RENVOIE )
 						{
-							S32 angle = GetAngle2D( ptrobjt->Obj.X, ptrobjt->Obj.Z,
+							int32_t angle = GetAngle2D( ptrobjt->Obj.X, ptrobjt->Obj.Z,
 									ptrextra->PosX, ptrextra->PosZ ) ;
 
 							angle = (ptrobjt->Obj.Beta-angle+CONE_GANT/2) & (MAX_ANGLE-1) ;
 
 							if( angle <= CONE_GANT )	// 2048: CONE_GANT
 							{
-								ptrextra->Vx = (S16)-ptrextra->Vx ;
-								ptrextra->Vz = (S16)-ptrextra->Vz ;
+								ptrextra->Vx = (int16_t)-ptrextra->Vx ;
+								ptrextra->Vz = (int16_t)-ptrextra->Vz ;
 								ptrextra->Vy = 0 ;
 								ptrextra->Poids = 1 ;
 								ptrextra->U.Org.X = ptrextra->PosX ;
@@ -599,16 +599,16 @@ U8	ExtraSearchCheckObjCol( T_EXTRA *ptrextra,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U8	ExtraCheckExtraCol( 	T_EXTRA *ptrextra,
-				S32 oldx, S32 oldy, S32 oldz,
-				U8 owner )
+uint8_t	ExtraCheckExtraCol( 	T_EXTRA *ptrextra,
+				int32_t oldx, int32_t oldy, int32_t oldz,
+				uint8_t owner )
 {
 	T_EXTRA	*ptrobjt ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	S32	dx, dy ,dz ;
-	S32	dxt, dyt, dzt ;
-	U8	n ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	int32_t	dx, dy ,dz ;
+	int32_t	dxt, dyt, dzt ;
+	uint8_t	n ;
 
 	GetExtraZV( ptrextra, &x0, &y0, &z0, &x1, &y1, &z1 ) ;
 
@@ -672,12 +672,12 @@ U8	ExtraCheckExtraCol( 	T_EXTRA *ptrextra,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U8	FullWorldColBrick(	S32 oldx, S32 oldy, S32 oldz,
-				S32 newx, S32 newy, S32 newz )
+uint8_t	FullWorldColBrick(	int32_t oldx, int32_t oldy, int32_t oldz,
+				int32_t newx, int32_t newy, int32_t newz )
 {
-	S32	x0, y0, z0 ;
-	S32	x1, y1, z1 ;
-	S32	x2, y2, z2 ;
+	int32_t	x0, y0, z0 ;
+	int32_t	x1, y1, z1 ;
+	int32_t	x2, y2, z2 ;
 
 	if( WorldColBrick( newx,newy,newz ) )	return 1 ;
 
@@ -731,12 +731,12 @@ void	AdjustScreenMinMax()
 /*──────────────────────────────────────────────────────────────────────────*/
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	Aff2DShape(	S16 *ptr,
-			S32 xs, S32 ys,
-			S32 coul, S32 angle, S32 zoom )
+void	Aff2DShape(	int16_t *ptr,
+			int32_t xs, int32_t ys,
+			int32_t coul, int32_t angle, int32_t zoom )
 {
-	S32	x0, y0, x1, y1 ;
-	S32	x, y, n, nb ;
+	int32_t	x0, y0, x1, y1 ;
+	int32_t	x, y, n, nb ;
 
 	ClearScreenMinMax() ;
 
@@ -768,11 +768,11 @@ void	Aff2DShape(	S16 *ptr,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	AffSpecial( S32 numextra )
+void	AffSpecial( int32_t numextra )
 {
 	T_EXTRA	*ptrextra ;
-	S32	angle ;
-	S32	scale ;
+	int32_t	angle ;
+	int32_t	scale ;
 
 	ptrextra = &ListExtra[numextra] ;
 
@@ -797,7 +797,7 @@ void	AffSpecial( S32 numextra )
 			{
 				if( !FlagAnimWhoSpeak )	// pas de gestion pendant les messages
 				{
-					scale = BoundRegleTrois( scale, ptrextra->Beta, (S32)(ptrextra->PtrBody), TimerRefHR-ptrextra->Timer ) ;
+					scale = BoundRegleTrois( scale, ptrextra->Beta, (int32_t)(ptrextra->PtrBody), TimerRefHR-ptrextra->Timer ) ;
 
 					if( scale==ptrextra->Beta )
 					{
@@ -815,7 +815,7 @@ void	AffSpecial( S32 numextra )
 			break ;
 
 		case 3: // Objet 3D
-			ptrextra->PtrBody = (U8*)GivePtrObjFix( ptrextra->Body ) ;
+			ptrextra->PtrBody = (uint8_t*)GivePtrObjFix( ptrextra->Body ) ;
 
 			BodyDisplay_AlphaBeta( ptrextra->PosX, ptrextra->PosY, ptrextra->PosZ,
 					       ptrextra->Scale, ptrextra->Beta, 0,
@@ -830,10 +830,10 @@ void	AffSpecial( S32 numextra )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S32	InitExtraPof( S32 x, S32 y, S32 z, S16 num, S32 alpha, S32 beta, S32 speed, S32 poids, S32 scaledeb, S32 scalefin, S32 duree, S32 rotation, S32 timeout )
+int32_t	InitExtraPof( int32_t x, int32_t y, int32_t z, int16_t num, int32_t alpha, int32_t beta, int32_t speed, int32_t poids, int32_t scaledeb, int32_t scalefin, int32_t duree, int32_t rotation, int32_t timeout )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 
@@ -842,16 +842,16 @@ S32	InitExtraPof( S32 x, S32 y, S32 z, S16 num, S32 alpha, S32 beta, S32 speed, 
 		if( ptrextra->Sprite != -1 )	continue ;
 		/* slot libre */
 
-		ptrextra->Sprite = (S16)(0+32768) ;
+		ptrextra->Sprite = (int16_t)(0+32768) ;
 
-		ptrextra->Divers = (S16)rotation ;
+		ptrextra->Divers = (int16_t)rotation ;
 
 		ptrextra->Body = num ;
 		ptrextra->Scale = scaledeb ;
 		ptrextra->Info  = scaledeb ;
-		ptrextra->Beta  = (S16)scalefin ;
+		ptrextra->Beta  = (int16_t)scalefin ;
 
-		ptrextra->PtrBody = (U8*)duree ;
+		ptrextra->PtrBody = (uint8_t*)duree ;
 
 		ptrextra->Flags = EXTRA_END_COL|EXTRA_NO_SHADOW ;
 
@@ -859,12 +859,12 @@ S32	InitExtraPof( S32 x, S32 y, S32 z, S16 num, S32 alpha, S32 beta, S32 speed, 
 		ptrextra->PosY = y ;
 		ptrextra->PosZ = z ;
 
-		InitFly( ptrextra, alpha, beta, speed, (U8)poids ) ;
+		InitFly( ptrextra, alpha, beta, speed, (uint8_t)poids ) ;
 
 		ptrextra->HitForce = 0 ;
 
 		ptrextra->Timer = TimerRefHR ;
-		ptrextra->TimeOut = (S16)timeout ;
+		ptrextra->TimeOut = (int16_t)timeout ;
 
 		if( timeout>0 )	ptrextra->Flags|=EXTRA_TIME_OUT ;
 
@@ -876,12 +876,12 @@ S32	InitExtraPof( S32 x, S32 y, S32 z, S16 num, S32 alpha, S32 beta, S32 speed, 
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S32	InitExtraAnimSprite( 	U8 owner, S32 x, S32 y, S32 z,
-				S16 deb, S16 fin, S32 tempo, S32 scale, S32 transparent,
-				U8 hitforce )
+int32_t	InitExtraAnimSprite( 	uint8_t owner, int32_t x, int32_t y, int32_t z,
+				int16_t deb, int16_t fin, int32_t tempo, int32_t scale, int32_t transparent,
+				uint8_t hitforce )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 
@@ -891,7 +891,7 @@ S32	InitExtraAnimSprite( 	U8 owner, S32 x, S32 y, S32 z,
 		/* slot libre */
 
 		ptrextra->Sprite = ptrextra->Body = deb ;
-		ptrextra->Divers = (S16)(fin+1) ;	// +1 pour detecter la fin par BoundRegleTrois()
+		ptrextra->Divers = (int16_t)(fin+1) ;	// +1 pour detecter la fin par BoundRegleTrois()
 
 		ptrextra->Flags = EXTRA_ANIM_SPRITE ;
 		if( transparent )	ptrextra->Flags |= EXTRA_TRANSPARENT ;
@@ -913,7 +913,7 @@ S32	InitExtraAnimSprite( 	U8 owner, S32 x, S32 y, S32 z,
 		ptrextra->Owner = owner ;
 
 		ptrextra->Timer = TimerRefHR ;
-		ptrextra->TimeOut = (S16)tempo ;	// tempo
+		ptrextra->TimeOut = (int16_t)tempo ;	// tempo
 
 		ptrextra->Scale = scale ;
 
@@ -925,9 +925,9 @@ S32	InitExtraAnimSprite( 	U8 owner, S32 x, S32 y, S32 z,
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-S16	CoulRetourBalle( T_EXTRA *ptrextra )
+int16_t	CoulRetourBalle( T_EXTRA *ptrextra )
 {
-	S16	sprite = SPRITE_BALLE_SHADOW ;	// jaune ou feu
+	int16_t	sprite = SPRITE_BALLE_SHADOW ;	// jaune ou feu
 
 	if( ptrextra->Sprite == SPRITE_BALLE_LVL_2 )	sprite = SPRITE_BALLE_SHADOW_2 ;	// vert
 	if( ptrextra->Sprite == SPRITE_BALLE_LVL_3 )	sprite = SPRITE_BALLE_SHADOW_3 ;	// rouge
@@ -945,7 +945,7 @@ S16	CoulRetourBalle( T_EXTRA *ptrextra )
 void	ClearExtra()
 {
 	T_EXTRA	*ptrextra = ListExtra ;
-	S32	n ;
+	int32_t	n ;
 
 	for( n=0; n<MAX_EXTRAS; n++, ptrextra++ )
 	{
@@ -957,14 +957,14 @@ void	ClearExtra()
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	ThrowExtra(	U8 owner,
-			S32 x, S32 y, S32 z,
-			S16 num,
-			S32 alpha, S32 beta, S32 vitesse, U8 poids,
-			U8 hitforce )
+int32_t	ThrowExtra(	uint8_t owner,
+			int32_t x, int32_t y, int32_t z,
+			int16_t num,
+			int32_t alpha, int32_t beta, int32_t vitesse, uint8_t poids,
+			uint8_t hitforce )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
+	int32_t	n ;
 
 	ptrextra = ListExtra ;
 
@@ -1004,15 +1004,15 @@ S32	ThrowExtra(	U8 owner,
 
 // le 29/05/95 pour les projectiles 3D
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	ThrowExtraObj(	U8 owner,
-			S32 x, S32 y, S32 z,
-			S32 indexfile3d,
-			S32 alpha, S32 beta, S32 vitesse, S16 alpharot,
-			U8 poids, U8 hitforce )
+int32_t	ThrowExtraObj(	uint8_t owner,
+			int32_t x, int32_t y, int32_t z,
+			int32_t indexfile3d,
+			int32_t alpha, int32_t beta, int32_t vitesse, int16_t alpharot,
+			uint8_t poids, uint8_t hitforce )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
-	S32	num = 3 ;
+	int32_t	n ;
+	int32_t	num = 3 ;
 
 	ptrextra = ListExtra ;
 
@@ -1020,10 +1020,10 @@ S32	ThrowExtraObj(	U8 owner,
 	{
 		if( ptrextra->Sprite != -1 ) 	continue ;	// slot libre
 
-		ptrextra->Body    = (S16)indexfile3d ;
-		ptrextra->PtrBody = (U8*)GivePtrObjFix( indexfile3d ) ;
+		ptrextra->Body    = (int16_t)indexfile3d ;
+		ptrextra->PtrBody = (uint8_t*)GivePtrObjFix( indexfile3d ) ;
 
-		ptrextra->Sprite = (S16)(num+32768) ;
+		ptrextra->Sprite = (int16_t)(num+32768) ;
 		ptrextra->Scale  = 0 ;
 
 		ptrextra->Flags = EXTRA_END_OBJ
@@ -1055,9 +1055,9 @@ S32	ThrowExtraObj(	U8 owner,
 
 		ptrextra->Divers = 0 ;
 
-		ptrextra->Beta = (S16)beta ;
+		ptrextra->Beta = (int16_t)beta ;
 
-		if( alpharot>0 )	ptrextra->TimeOut = (S16)(alpharot/20) ;
+		if( alpharot>0 )	ptrextra->TimeOut = (int16_t)(alpharot/20) ;
 		else			ptrextra->TimeOut = alpharot ;
 
 		return n ;
@@ -1067,13 +1067,13 @@ S32	ThrowExtraObj(	U8 owner,
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	ThrowExtraFoudre( U8 owner )
+void	ThrowExtraFoudre( uint8_t owner )
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
-	S32	m ;
-	S32	t ;
-	S32	a ;
+	int32_t	n ;
+	int32_t	m ;
+	int32_t	t ;
+	int32_t	a ;
 
 	t = TimerRefHR ;
 
@@ -1149,13 +1149,13 @@ void	ThrowExtraFoudre( U8 owner )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	InvoqueFoudre( U8 owner, S32 x, S32 y, S32 z )
+void	InvoqueFoudre( uint8_t owner, int32_t x, int32_t y, int32_t z )
 {
 	T_EXTRA	*ptrextra = ListExtra ;
 	T_OBJET	*ptrobj = ListObjet ;
-	S32	extra ;
-	S32	n ;
-	U8	force ;
+	int32_t	extra ;
+	int32_t	n ;
+	uint8_t	force ;
 
 	// vire tous les extras de foudre de la liste
 	for( n=0; n<MAX_EXTRAS; n++, ptrextra++ )
@@ -1198,7 +1198,7 @@ void	InvoqueFoudre( U8 owner, S32 x, S32 y, S32 z )
 			else	force = MagicBallHitForce[MagicLevel] ;
 
 			extra = ExtraSearch( owner, ptrobj->Obj.X, y, ptrobj->Obj.Z, SPRITE_FOUDRE,
-					     (U8)n, 15000, force ) ;
+					     (uint8_t)n, 15000, force ) ;
 
 			if( extra!=-1 )
 			{
@@ -1209,11 +1209,11 @@ void	InvoqueFoudre( U8 owner, S32 x, S32 y, S32 z )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	ThrowExtraProtection( U8 owner )
+void	ThrowExtraProtection( uint8_t owner )
 {
 	T_EXTRA	*ptrextra ;
-	S32	m, n ;
-	S32	t ;
+	int32_t	m, n ;
+	int32_t	t ;
 
 	t = TimerRefHR ;
 
@@ -1272,7 +1272,7 @@ void	ThrowExtraProtection( U8 owner )
 void	AnnuleExtraProtection( void )
 {
 	T_EXTRA	*ptrextra = ListExtra ;
-	S32	m ;
+	int32_t	m ;
 
 	// peut-etre faut-il obliger le sort de foudre a se lancer
 	// (si ListExtra est plein)(cf scene finale !)
@@ -1303,13 +1303,13 @@ void	AnnuleExtraProtection( void )
 -----------------------------------------------------------
 */
 
-U8	WhichBonus( S32 flags )	// types de bonus demandés
+uint8_t	WhichBonus( int32_t flags )	// types de bonus demandés
 {
-	U8	n, m = 0 ;
-	U8	tabbonus[5] ;
-	S32	curr, max ;
-	S32	num ;
-	U8	besoin = 0 ;
+	uint8_t	n, m = 0 ;
+	uint8_t	tabbonus[5] ;
+	int32_t	curr, max ;
+	int32_t	num ;
+	uint8_t	besoin = 0 ;
 
 	// cherche les bonus disponibles
 	for( n=0; n<5; n++ )
@@ -1411,7 +1411,7 @@ U8	WhichBonus( S32 flags )	// types de bonus demandés
 
 	if( n==0 )	// Money demandé
 	{
-		n = (U8)SPRITE_PIECE ;	// determine sprite (Kashes ou Zlitos)
+		n = (uint8_t)SPRITE_PIECE ;	// determine sprite (Kashes ou Zlitos)
 	}
 	else	n += 3 ;	// offset sprite bonus
 
@@ -1422,8 +1422,8 @@ U8	WhichBonus( S32 flags )	// types de bonus demandés
 
 void	GiveExtraBonus( T_OBJET *ptrobj )
 {
-	S32	beta ;
-	U8	n ;
+	int32_t	beta ;
+	uint8_t	n ;
 
 	n = WhichBonus( ptrobj->OptionFlags ) ;
 	if( n==255 )	return ;
@@ -1435,7 +1435,7 @@ void	GiveExtraBonus( T_OBJET *ptrobj )
 				ptrobj->Obj.Y,
 				ptrobj->Obj.Z,
 				(256*MUL_ANGLE), 0,
-				(S16)(n/*+3*/),	/* 3 offset spr bonus */
+				(int16_t)(n/*+3*/),	/* 3 offset spr bonus */
 				ptrobj->NbBonus ) ;
 
 		HQ_3D_MixSample( SAMPLE_BONUS, 0x1000, 0, 1,
@@ -1454,7 +1454,7 @@ void	GiveExtraBonus( T_OBJET *ptrobj )
 				ptrobj->Obj.Z,
 				200*MUL_ANGLE,
 				beta,
-				(S16)(n/*+3*/),	/* 3 offset spr bonus */
+				(int16_t)(n/*+3*/),	/* 3 offset spr bonus */
 				ptrobj->NbBonus ) ;
 
 		HQ_3D_MixSample( SAMPLE_BONUS, 0x1000, 0, 1,
@@ -1467,10 +1467,10 @@ void	GiveExtraBonus( T_OBJET *ptrobj )
 
 void	ZoneGiveExtraBonus( T_ZONE *ptrz )
 {
-	S32	p ;
-	S32	x, z ;
-	S32	beta ;
-	U8	n ;
+	int32_t	p ;
+	int32_t	x, z ;
+	int32_t	beta ;
+	uint8_t	n ;
 
 	if( ptrz->Info2 )	return ;	/* déjà pris */
 
@@ -1488,8 +1488,8 @@ void	ZoneGiveExtraBonus( T_ZONE *ptrz )
 	p = ExtraBonus(	x, ptrz->Y1, z,
 			(180*MUL_ANGLE),
 			beta,
-			(S16)n,
-			(S16)ptrz->Info1 ) ; /* nb */
+			(int16_t)n,
+			(int16_t)ptrz->Info1 ) ; /* nb */
 
 	if( p != -1 )
 	{
@@ -1500,13 +1500,13 @@ void	ZoneGiveExtraBonus( T_ZONE *ptrz )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 // Retourne le numéro d'extra le plus près du point (x,z) (-1 si aucun extra)
-S32	PlusProcheExtra( S32 x, S32 z, S32 flags )
+int32_t	PlusProcheExtra( int32_t x, int32_t z, int32_t flags )
 {
 	T_EXTRA	*ptrextra = ListExtra ;
-	S32	n ;
-	S32	dist = 32768 ;
-	S32	num = -1 ;
-	S32	newdist ;
+	int32_t	n ;
+	int32_t	dist = 32768 ;
+	int32_t	num = -1 ;
+	int32_t	newdist ;
 
 	for( n=0; n<MAX_EXTRAS; n++, ptrextra++ )
 	{
@@ -1526,11 +1526,11 @@ S32	PlusProcheExtra( S32 x, S32 z, S32 flags )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	ReajustPosExtra( T_EXTRA *ptrextra, U8 col, S16 *ptrymin )
+void	ReajustPosExtra( T_EXTRA *ptrextra, uint8_t col, int16_t *ptrymin )
 {
-	S32	xw, yw, zw ;
-	S32	x, y, z ;
-	S32	coly = 0 ;
+	int32_t	xw, yw, zw ;
+	int32_t	x, y, z ;
+	int32_t	coly = 0 ;
 
 	x = ptrextra->PosX ;
 	y = ptrextra->PosY ;
@@ -1619,12 +1619,12 @@ void	ReajustPosExtra( T_EXTRA *ptrextra, U8 col, S16 *ptrymin )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	NewMagicBallRebond = 0 ;
+int32_t	NewMagicBallRebond = 0 ;
 
 #define	BACK_EXPLO	1
 #define	BACK_SOUND	2
 
-void	InitBackMagicBall( T_EXTRA *ptrextra, S16 num, S32 flags )
+void	InitBackMagicBall( T_EXTRA *ptrextra, int16_t num, int32_t flags )
 {
 	if( flags&BACK_SOUND )
 	{
@@ -1658,17 +1658,17 @@ void	InitBackMagicBall( T_EXTRA *ptrextra, S16 num, S32 flags )
 void	GereExtras()
 {
 	T_EXTRA	*ptrextra ;
-	S32	n ;
-	S32	oldx, oldy, oldz ;
-	S32	time ;
-	S32	timer ;
-	S16	*ptr ;
-	S32	alpha, beta, s ;
-	S32	flagcol ;
-	S32	type ;	// type d'extra (arme,..)
+	int32_t	n ;
+	int32_t	oldx, oldy, oldz ;
+	int32_t	time ;
+	int32_t	timer ;
+	int16_t	*ptr ;
+	int32_t	alpha, beta, s ;
+	int32_t	flagcol ;
+	int32_t	type ;	// type d'extra (arme,..)
 	T_DART	*ptrd ;
-	U8	col, owner, numobj, search ;
-	S32     taken ;
+	uint8_t	col, owner, numobj, search ;
+	int32_t     taken ;
 
 	ptrextra = ListExtra ;
 
@@ -1863,7 +1863,7 @@ void	GereExtras()
 
 		if( ptrextra->Flags & EXTRA_FOUDRE_STEP1 )
 		{
-			S32	a ;
+			int32_t	a ;
 
 			if( timer > ptrextra->Timer+1000 )
 			{
@@ -1907,7 +1907,7 @@ void	GereExtras()
 
 		if( ptrextra->Flags & EXTRA_FOUDRE_STEP3 )
 		{
-			S32	y ;
+			int32_t	y ;
 
 			if( timer > ptrextra->Timer+500 )
 			{
@@ -1939,7 +1939,7 @@ void	GereExtras()
 
 		if( ptrextra->Flags & EXTRA_PROTECT )
 		{
-			S32	a, y ;
+			int32_t	a, y ;
 
 			if( ptrextra->Info==0 )
 			{
@@ -1998,15 +1998,15 @@ void	GereExtras()
 		if( ptrextra->Flags & EXTRA_SEARCH_OBJ )
 		{
 			T_OBJET	*ptrobj ;
-			S32	ox, oy, oz ;
+			int32_t	ox, oy, oz ;
 
-			/* (S16)Timer: numobj search */
+			/* (int16_t)Timer: numobj search */
 			/* Vz = speed */
 			/* PtrBody = last angle beta */
 
 			taken = FALSE ;	// Objet touché
 
-			search = (U8)ptrextra->Timer ;
+			search = (uint8_t)ptrextra->Timer ;
 			owner  = ptrextra->Owner ;
 
 			oldx = ptrextra->PosX ;
@@ -2067,17 +2067,17 @@ void	GereExtras()
 		if( ptrextra->Flags & EXTRA_SEARCH_KEY )// QUE magic ball ONLY
 		{
 			T_EXTRA	*sextra ;
-			S32	ox, oy, oz ;
-			S32	xmin, ymin, zmin, xmax, ymax, zmax ;
+			int32_t	ox, oy, oz ;
+			int32_t	xmin, ymin, zmin, xmax, ymax, zmax ;
 
-			/* (S16)Timer: numobj search */
+			/* (int16_t)Timer: numobj search */
 			/* Vz = speed */
 
 			oldx = ptrextra->PosX ;
 			oldy = ptrextra->PosY ;
 			oldz = ptrextra->PosZ ;
 
-			search = (U8)ptrextra->Timer ;
+			search = (uint8_t)ptrextra->Timer ;
 
 			sextra = &ListExtra[search] ;
 
@@ -2104,7 +2104,7 @@ void	GereExtras()
 			ptrextra->PosX += X0 ;
 			ptrextra->PosZ += Z0 ;
 
-			if( ExtraCheckExtraCol( ptrextra, oldx, oldy, oldz, (U8)MagicBall ) == search )
+			if( ExtraCheckExtraCol( ptrextra, oldx, oldy, oldz, (uint8_t)MagicBall ) == search )
 			{
 				// trouve clef
 				HQ_3D_MixSample( SAMPLE_BONUS_TROUVE, 0x1000, 0, 1,
@@ -2125,7 +2125,7 @@ void	GereExtras()
 						 12, 30,
 						 0, 0, 2 ) ;
 
-				NbLittleKeys += (U8)sextra->Divers  ;
+				NbLittleKeys += (uint8_t)sextra->Divers  ;
 				sextra->Sprite = -1 ;
 
 				// init retour balle
@@ -2299,7 +2299,7 @@ void	GereExtras()
 							{
 								ptrd = &ListDart[s] ;
 
-								ptr = (S16*)(ptrextra->PtrBody+2) ;
+								ptr = (int16_t*)(ptrextra->PtrBody+2) ;
 								ptr+=2 ;
 
 								// On ne reajuste la flechette que si
@@ -2384,7 +2384,7 @@ void	GereExtras()
 					}
 					else
 					{
-						ptr = (S16*)(ptrextra->PtrBody+2) ;
+						ptr = (int16_t*)(ptrextra->PtrBody+2) ;
 					}
 					ptr+=2 ;
 
@@ -2399,7 +2399,7 @@ void	GereExtras()
 		{
 			if( !(ptrextra->Flags & EXTRA_FLY) )	/* no take while flying */
 			{
-				S32	numobj ;
+				int32_t	numobj ;
 				T_OBJET *ptrobj ;
 
 				taken = FALSE ;
@@ -2412,7 +2412,7 @@ void	GereExtras()
 				AND (Distance2D( ptrextra->PosX,ptrextra->PosZ,
 					      ListObjet[NUM_PERSO].Obj.X, ListObjet[NUM_PERSO].Obj.Z ) <= (3*SIZE_BRICK_XZ)) )
 				{
-					S32	angle ;
+					int32_t	angle ;
 
 					angle = GetAngle2D( ListObjet[NUM_PERSO].Obj.X, ListObjet[NUM_PERSO].Obj.Z,
 						 ptrextra->PosX, ptrextra->PosZ ) ;
@@ -2505,7 +2505,7 @@ void	GereExtras()
 									{
 										MagicPoint += ptrextra->Divers*2  ;
 										if( MagicPoint > (MagicLevel*20) )
-											MagicPoint = (U8)(MagicLevel*20) ;
+											MagicPoint = (uint8_t)(MagicLevel*20) ;
 
 										taken = TRUE ;
 									}
@@ -2531,7 +2531,7 @@ void	GereExtras()
 								case SPRITE_CLE: /* Little Key */
 									if( numobj==NUM_PERSO )
 									{
-										NbLittleKeys += (U8)ptrextra->Divers  ;
+										NbLittleKeys += (uint8_t)ptrextra->Divers  ;
 										taken = TRUE ;
 									}
 									break ;
@@ -2539,7 +2539,7 @@ void	GereExtras()
 								case SPRITE_CLOVER: /* four leaf clover */
 									if( numobj==NUM_PERSO )
 									{
-										S32 sup ;	// supplement
+										int32_t sup ;	// supplement
 
 										sup = (ListVarGame[FLAG_CLOVER]+ptrextra->Divers)-NbCloverBox ;
 
@@ -2559,7 +2559,7 @@ void	GereExtras()
 											OR  MagicPoint < (MagicLevel*20) )
 											{
 												ListObjet[NUM_PERSO].LifePoint = MAX_LIFE_POINTS ;
-												MagicPoint = (U8)(MagicLevel*20) ;
+												MagicPoint = (uint8_t)(MagicLevel*20) ;
 												sup-- ;
 											}
 										}

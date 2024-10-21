@@ -12,9 +12,9 @@ extern "C" {
 #define MALLOC_ALIGN 32
 
 // -----------------------------------------------------------------------------
-void *NormMalloc(U32 size);
+void *NormMalloc(uint32_t size);
 void NormFree(void *ptr);
-void *NormMshrink(void *ptr, U32 size);
+void *NormMshrink(void *ptr, uint32_t size);
 
 // -----------------------------------------------------------------------------
 #define Malloc NormMalloc

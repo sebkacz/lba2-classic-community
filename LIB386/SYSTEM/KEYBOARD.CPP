@@ -16,9 +16,9 @@ extern "C" {
 #define KeyIndex(x) ((x) < 256 ? (x) : 256 - 32 + ((x) >> 3))
 
 // --- Public state ------------------------------------------------------------
-S32 AsciiMode = FALSE;
-S32 Key;
-U8 TabKeys[TABKEYS_NUM_KEYS];
+int32_t AsciiMode = FALSE;
+int32_t Key;
+uint8_t TabKeys[TABKEYS_NUM_KEYS];
 
 // --- Private functions -------------------------------------------------------
 void UpdateKeyboardState() {
@@ -28,7 +28,7 @@ void UpdateKeyboardState() {
   memset(TabKeys, 0, 256);
 
   SDL_PumpEvents();
-  const U8 *keystate = SDL_GetKeyboardState(NULL);
+  const uint8_t *keystate = SDL_GetKeyboardState(NULL);
   for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
     if (keystate[keyIndex]) {
       TabKeys[KeyIndex(keyIndex)] |= KeyBit(keyIndex);
@@ -50,15 +50,15 @@ void EndKeyboard() {
 }
 
 // --- Interface ---------------------------------------------------------------
-S32 GetAscii() {
-  static S32 lastReturnedAscii = 0;
+int32_t GetAscii() {
+  static int32_t lastReturnedAscii = 0;
 
   ManageEvents();
 
-  const U8 *keystate = SDL_GetKeyboardState(NULL);
+  const uint8_t *keystate = SDL_GetKeyboardState(NULL);
   for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
     if (keystate[keyIndex]) {
-      S32 asciiValue = SDL_GetKeyFromScancode((SDL_Scancode)keyIndex);
+      int32_t asciiValue = SDL_GetKeyFromScancode((SDL_Scancode)keyIndex);
 
       if (lastReturnedAscii == asciiValue) {
         return 0;
@@ -74,12 +74,12 @@ S32 GetAscii() {
   return 0;
 }
 
-S32 CheckKey(U32 key) {
+int32_t CheckKey(uint32_t key) {
   return ((key) < 256 ? TabKeys[(key)] & 0x80
                       : TabKeys[256 - 32 + ((key) >> 3)] & (1 << ((key)&7)));
 }
 
-void GetKeyScancodeName(char *string, U8 strMaxLen, U32 scanCode) {
+void GetKeyScancodeName(char *string, uint8_t strMaxLen, uint32_t scanCode) {
   const char *name = SDL_GetScancodeName((SDL_Scancode)scanCode);
   snprintf(string, strMaxLen, "%s", name);
 }

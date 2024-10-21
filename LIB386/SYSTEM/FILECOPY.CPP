@@ -10,8 +10,8 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 bool Copy(const char *sname, const char *dname) {
-  S32 shandle, dhandle;
-  U32 size, n, buf;
+  int32_t shandle, dhandle;
+  uint32_t size, n, buf;
 
   size = FileSize(sname);
   if (!size) {
@@ -30,7 +30,7 @@ bool Copy(const char *sname, const char *dname) {
   }
 
   for (n = size; n > 0; n--) { // faster and smaller to count down 8-)
-    U32 s;
+    uint32_t s;
 
     s = Read(shandle, &buf, 4);
     if (s != Write(dhandle, &buf, s)) {

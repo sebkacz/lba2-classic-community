@@ -366,7 +366,7 @@ Loop_PerspFPU		PROC
 			fistp	[Fill_Next_ZBuf]
 
 			cmp	ecx,32
-			jbe	@@Less32
+			jbe	@@Lesint32_t
 
 			fild	dword ptr [esp]	; W
 
@@ -375,7 +375,7 @@ Loop_PerspFPU		PROC
 			mov	[Fill_Next_W],ebx	; Next W
 
 			fdivr	[F_256]		; 1/W
-@@Less32:
+@@Lesint32_t:
 			jmp	ebp		; RET
 Loop_PerspFPU		ENDP
 
@@ -576,10 +576,10 @@ Filler_TextureZFogSmooth PROC
 			push	ecx
 
 			cmp	ecx,32
-			jb	@@Less32
+			jb	@@Lesint32_t
 
 			mov	ecx,32
-@@Less32:
+@@Lesint32_t:
 			mov	esi,[RepMask]
 			mov	al,bh
 
@@ -898,10 +898,10 @@ Filler_TextureZFogSmoothZBuf PROC
 			push	ecx
 
 			cmp	ecx,32
-			jbe	@@Less32
+			jbe	@@Lesint32_t
 
 			mov	ecx,32
-@@Less32:
+@@Lesint32_t:
 			mov	esi,[Fill_ScaledFogNear]
 
 			sub	edx,esi
@@ -1264,10 +1264,10 @@ Filler_TextureZFogSmoothNZW PROC
 			push	ecx
 
 			cmp	ecx,32
-			jbe	@@Less32
+			jbe	@@Lesint32_t
 
 			mov	ecx,32
-@@Less32:
+@@Lesint32_t:
 			mov	esi,[Fill_ScaledFogNear]
 
 			sub	edx,esi

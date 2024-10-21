@@ -1,7 +1,7 @@
 
-S32	Draw_Poly( STRUC_CLIPVERTEX src[], S32 type )
+int32_t	Draw_Poly( STRUC_CLIPVERTEX src[], int32_t type )
 {
-	S32	k, l ;
+	int32_t	k, l ;
 	STRUC_CLIPVERTEX	dst[10];
 	STRUC_CLIPVERTEX	dst1[10];
 
@@ -15,9 +15,9 @@ S32	Draw_Poly( STRUC_CLIPVERTEX src[], S32 type )
 			for ( l=0; l!=k; l++ )
 			{
 				if (!LongProjectPoint(dst[l].V_X0+CameraXr, dst[l].V_Y0+CameraYr, CameraZr-dst[l].V_Z0 )) return FALSE ;
-				if( (Xp!=(S32)(S16)Xp) OR (Yp!=(S32)(S16)Yp) ) return FALSE ;
-				Tab_Points[l].Pt_XE = (S16)Xp;
-				Tab_Points[l].Pt_YE = (S16)Yp;
+				if( (Xp!=(int32_t)(int16_t)Xp) OR (Yp!=(int32_t)(int16_t)Yp) ) return FALSE ;
+				Tab_Points[l].Pt_XE = (int16_t)Xp;
+				Tab_Points[l].Pt_YE = (int16_t)Yp;
 				Tab_Points[l].Pt_Light = dst[l].V_Light;
 				Tab_Points[l].Pt_MapU = dst[l].V_MapU;
 				Tab_Points[l].Pt_MapV = dst[l].V_MapV;
@@ -33,9 +33,9 @@ S32	Draw_Poly( STRUC_CLIPVERTEX src[], S32 type )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	DrawSky(S32 y)
+void	DrawSky(int32_t y)
 {
-	U32	xx, zz, i, j;
+	uint32_t	xx, zz, i, j;
 	STRUC_CLIPVERTEX	src[10];
 
 	PtrMap = SkySeaTexture + 128 ;
@@ -85,11 +85,11 @@ void	DrawSky(S32 y)
 }
 
 
-void	DrawOneSea(S32 y)			// Si on souhaite que l'eau ne soit pas au niveau 0 :)
+void	DrawOneSea(int32_t y)			// Si on souhaite que l'eau ne soit pas au niveau 0 :)
 {
 	STRUC_CLIPVERTEX	src[10];
-	U32	i,j,xx, zz;
-	S32	b ;
+	uint32_t	i,j,xx, zz;
+	int32_t	b ;
 
 	PtrMap = SkySeaTexture ;
 	RepMask = 0x7F7F ;

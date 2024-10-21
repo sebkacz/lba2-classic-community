@@ -11,10 +11,10 @@ extern "C" {
 char PathConfigFile[ADELINE_MAX_PATH];
 
 // --- Private state -----------------------------------------------------------
-static U32 NbFuncs = 0;
+static uint32_t NbFuncs = 0;
 
 // -----------------------------------------------------------------------------
-U32 RegisterInitClear(PTR_VOID_FUNC init, PTR_VOID_FUNC clear) {
+uint32_t RegisterInitClear(PTR_VOID_FUNC init, PTR_VOID_FUNC clear) {
   if (NbFuncs == 32) {
     return 1;
   }

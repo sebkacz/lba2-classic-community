@@ -8,18 +8,18 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern U32 SizeChar;
-extern U8 TextInk;
-extern U8 TextPaper;
+extern uint32_t SizeChar;
+extern uint8_t TextInk;
+extern uint8_t TextPaper;
 
 // -----------------------------------------------------------------------------
-extern void AffString(S32 x, S32 y, char *str);
+extern void AffString(int32_t x, int32_t y, char *str);
 
 // -----------------------------------------------------------------------------
 #define CoulText(ink, paper)                                                   \
   {                                                                            \
-    TextInk = (U8)(ink);                                                       \
-    TextPaper = (U8)(paper);                                                   \
+    TextInk = (uint8_t)(ink);                                                       \
+    TextPaper = (uint8_t)(paper);                                                   \
   }
 
 // =============================================================================

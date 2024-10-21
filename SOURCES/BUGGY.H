@@ -6,53 +6,53 @@
 /*──────────────────────────────────────────────────────────────────────────*/
 typedef struct {
 
-	S32	Angle ;
-	S32	X ;
-	S32	Y ;
-	S32	Z ;
+	int32_t	Angle ;
+	int32_t	X ;
+	int32_t	Y ;
+	int32_t	Z ;
 
 		}	S_ONE_WHEEL ;
 
 typedef struct {
 
-	S32	X ;
-	S32	Y ;
-	S32	Z ;
-	S32	Cube ;
-	S32	Beta	;
-	S32	Alpha	;
-	S32     Gamma	;
+	int32_t	X ;
+	int32_t	Y ;
+	int32_t	Z ;
+	int32_t	Cube ;
+	int32_t	Beta	;
+	int32_t	Alpha	;
+	int32_t     Gamma	;
 
 	S_ONE_WHEEL	Wheel[4] ;
 
-	S32		BetaWheel ;
+	int32_t		BetaWheel ;
 
-	S32		SpeedInc ;
-	S32		SpeedRot ;
+	int32_t		SpeedInc ;
+	int32_t		SpeedRot ;
 
-	S32		Speed ;
+	int32_t		Speed ;
 
-//	S32		YSpeed ;
-//	S32		LastYs ;
-//	S32		LastSpeedLevel ;
+//	int32_t		YSpeed ;
+//	int32_t		LastYs ;
+//	int32_t		LastSpeedLevel ;
 
-	S32		LastTimer ;
+	int32_t		LastTimer ;
 
 		} S_BUGGY ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 #define	BUGGY_PRESENT		0x80
-#define	NUM_BUGGY		((U8)(NumBuggy&~(BUGGY_PRESENT)))
+#define	NUM_BUGGY		((uint8_t)(NumBuggy&~(BUGGY_PRESENT)))
 #define	IsBuggyPresent()        (NumBuggy&BUGGY_PRESENT)
 
 extern	S_BUGGY	ListBuggy[MAX_BUGGYS] ;
-extern	U8	NumBuggy	;
+extern	uint8_t	NumBuggy	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-extern	void	InitBuggy( U8 numobj, U32 flaginit ) ;
+extern	void	InitBuggy( uint8_t numobj, uint32_t flaginit ) ;
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 extern	void	ResetBuggy( void ) ;
@@ -61,7 +61,7 @@ extern	void	ResetBuggy( void ) ;
 extern	void	TakeBuggy( void )	;
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-extern	void	LeaveBuggy( U8 newcomportement ) ;
+extern	void	LeaveBuggy( uint8_t newcomportement ) ;
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 extern	void	DoAnimBuggy( T_OBJET *ptrobj ) ;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -8,13 +9,13 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 TextXMin;
-extern S32 TextXMax;
-extern S32 TextYMin;
-extern S32 TextYMax;
+extern int32_t TextXMin;
+extern int32_t TextXMax;
+extern int32_t TextYMin;
+extern int32_t TextYMax;
 
 // -----------------------------------------------------------------------------
-void GraphPrintf(U32 flagflip, U32 x, U32 y, const char *format, ...);
+void GraphPrintf(uint32_t flagflip, uint32_t x, uint32_t y, const char *format, ...);
 
 // =============================================================================
 #ifdef __cplusplus

@@ -19,8 +19,8 @@
 //	INF infos sur le cube (nb obj decors)
 //	DOB list et pos des objets decors (si exist)
 //	GRD carre 64*64*2 T_HALF_POLY des polys de sol
-//      Y   carre 65*65 S16 sommet altitudes
-//	LUM carre 65*65 U8 intensite des sommets
+//      Y   carre 65*65 int16_t sommet altitudes
+//	LUM carre 65*65 uint8_t intensite des sommets
 //	TXD liste des pseudos des testures des polys
 
 #define	HQR_MAP_IDM		0
@@ -39,16 +39,16 @@
 #define	HQR_STEP_CUBE		6
 
 extern	void	TheEndCheckFile( const char *filename ) ;
-extern	void	TheEnd( S32 num, const char *error ) ;
+extern	void	TheEnd( int32_t num, const char *error ) ;
 
-//extern	U32	IsleMem ;
-extern	U32	IsleObjMem ;
-extern	U32	CubeInfosMem ;
-extern	U32	ListDecorsMem ;
-extern	U32	MapPGroundMem ;
-extern	U32	ListTexDefMem ;
-extern	U32	MapSommetYMem ;
-extern	U32	MapIntensityMem ;
+//extern	uint32_t	IsleMem ;
+extern	uint32_t	IsleObjMem ;
+extern	uint32_t	CubeInfosMem ;
+extern	uint32_t	ListDecorsMem ;
+extern	uint32_t	MapPGroundMem ;
+extern	uint32_t	ListTexDefMem ;
+extern	uint32_t	MapSommetYMem ;
+extern	uint32_t	MapIntensityMem ;
 
 /*══════════════════════════════════════════════════════════════════════════*
 	     █     █▀▀▀█ █▀▀▀█ █▀▀▀▄        █    ██▀▀▀ █     █▀▀▀▀
@@ -62,20 +62,20 @@ extern	U32	MapIntensityMem ;
 // celui de l'editeur:
 // #define		MAX_OBJ_DECORS		200
 
-S32	InitExternalView()
+int32_t	InitExternalView()
 {
 #ifdef	LBA_EDITOR
-	IsleMapIndex	= (U8*)		Malloc( 256 ) ; // stored file no recover
+	IsleMapIndex	= (uint8_t*)		Malloc( 256 ) ; // stored file no recover
 	if( !IsleMapIndex )	TheEnd( NOT_ENOUGH_MEM, "IsleMapIndex (3DExt)" ) ;
 
-	ObjTexture	= (U8*)		Malloc( 256 * 256 + RECOVER_AREA ) ;
+	ObjTexture	= (uint8_t*)		Malloc( 256 * 256 + RECOVER_AREA ) ;
 	if( !ObjTexture )	TheEnd( NOT_ENOUGH_MEM, "ObjTexture (3DExt)" ) ;
 
-	GroundTexture	= (U8*)		Malloc( 256 * 256 + RECOVER_AREA ) ;
+	GroundTexture	= (uint8_t*)		Malloc( 256 * 256 + RECOVER_AREA ) ;
 	if( !GroundTexture )	TheEnd( NOT_ENOUGH_MEM, "GroundTexture (3DExt)" ) ;
 
 	// Gros Malloc ZBuffer
-	PtrZBuffer = (U16*)Malloc( SIZE_Z_BUFFER ) ;
+	PtrZBuffer = (uint16_t*)Malloc( SIZE_Z_BUFFER ) ;
 	if( !PtrZBuffer )	TheEnd( NOT_ENOUGH_MEM, "PtrZvBuffer (3DExt)" ) ;
 #endif
 
@@ -170,9 +170,9 @@ void	LoadIsland()
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	LoadCube( S32 x, S32 y )
+int32_t	LoadCube( int32_t x, int32_t y )
 {
-	S32	index ;
+	int32_t	index ;
 
 	index = y*16 + x ;
 	index = IsleMapIndex[index]&127 ; // bug compilo ou debug ?
@@ -186,11 +186,11 @@ S32	LoadCube( S32 x, S32 y )
 	// index-1 pour vrai index fichier (0 == pas de cube, 1 == 1er cube (num 0) )
 	index = HQR_START_CUBE + HQR_STEP_CUBE * (index-1) ;
 
-	ListCubeInfos = (S32 *)HQR_Get( HQR_CubeInfos, index+HQR_CUBE_INF ) ;
+	ListCubeInfos = (int32_t *)HQR_Get( HQR_CubeInfos, index+HQR_CUBE_INF ) ;
 
 	NbObjDecors 	= ListCubeInfos[INFO_NB_DECORS] ;
 	AlphaLight  	= ListCubeInfos[INFO_ALPHA_LIGHT]&0xFFFF ;
-	CubeBitField 	= (U16)(ListCubeInfos[INFO_ALPHA_LIGHT]>>16) ;
+	CubeBitField 	= (uint16_t)(ListCubeInfos[INFO_ALPHA_LIGHT]>>16) ;
 	BetaLight   	= ListCubeInfos[INFO_BETA_LIGHT] ;
 	Sky_Y		= ListCubeInfos[INFO_SKY_Y] ;
 
@@ -224,9 +224,9 @@ S32	LoadCube( S32 x, S32 y )
 
 	ListTexDef = (T_HALF_TEX *)HQR_Get( HQR_ListTexDef, index+HQR_CUBE_TXD ) ;
 
-	MapSommetY = (S16 *)HQR_Get( HQR_MapSommetY, index+HQR_CUBE_Y ) ;
+	MapSommetY = (int16_t *)HQR_Get( HQR_MapSommetY, index+HQR_CUBE_Y ) ;
 
-	MapIntensity = (U8 *)HQR_Get( HQR_MapIntensity, index+HQR_CUBE_LUM ) ;
+	MapIntensity = (uint8_t *)HQR_Get( HQR_MapIntensity, index+HQR_CUBE_LUM ) ;
 
 	return TRUE ;
 }
@@ -235,25 +235,25 @@ S32	LoadCube( S32 x, S32 y )
 
 #define	CJ_WATER        1	// code jeu noyade
 
-extern "C" PTR_U8  	BufSpeak      ;
+extern "C" PTR_uint8_t  	BufSpeak      ;
 
 // initialise un cube vide rempli d'eau (codes jeux compris)
 
 void	InitSeaCube( void )
 {
-	S32	n ;
+	int32_t	n ;
 	T_HALF_POLY *mappoly ;
 
 	NbObjDecors = 0 ;
 
 	// ATTENTION: explose BufSpeak
-	MapSommetY    = (S16*)BufSpeak	;
-	MapPolyGround = (T_HALF_POLY*)(BufSpeak+(NB_COTE+1)*(NB_COTE+1)*2) ;// *2 car S16
+	MapSommetY    = (int16_t*)BufSpeak	;
+	MapPolyGround = (T_HALF_POLY*)(BufSpeak+(NB_COTE+1)*(NB_COTE+1)*2) ;// *2 car int16_t
 
 	mappoly = MapPolyGround ;
 
 	// initialise tous les sommet à 0 (niveau de l'eau)
-	memset( MapSommetY, 0, (NB_COTE+1)*(NB_COTE+1)*2 ) ;	// *2 car S16
+	memset( MapSommetY, 0, (NB_COTE+1)*(NB_COTE+1)*2 ) ;	// *2 car int16_t
 
 	// vire tous les polygones de la carte
 	memset( MapPolyGround, 0, NB_COTE*NB_COTE*2*sizeof(T_HALF_POLY) ) ;

@@ -9,21 +9,21 @@
 
 #ifdef	LBA_EDITOR	// Special PERSO.EXE
 #define	INFO_DECORS	1024
-extern	S32	FlagInfos ;
+extern	int32_t	FlagInfos ;
 
 #define SIZE_NAME               19
 
 typedef	struct
 {
 	char   Name[SIZE_NAME+1] ;
-	S16	Value ;			}	T_VAR ;
+	int16_t	Value ;			}	T_VAR ;
 
 extern	T_VAR	ListVarGame[] ;
 #else
-extern	S16	ListVarGame[] ;
+extern	int16_t	ListVarGame[] ;
 #endif
 
-extern	S32	FlagMasque ;
+extern	int32_t	FlagMasque ;
 
 #define	MAX_SOUS_OBJET	20
 #define	SIZE_BRICK_Y	256
@@ -36,16 +36,16 @@ extern	S32	FlagMasque ;
 extern	void	ClearScreenMinMax() ;
 extern	void	AdjustScreenMinMax() ;
 
-S32	NumDecorsDraw ;
+int32_t	NumDecorsDraw ;
 
 //****************************************************************************
-void	DrawCubeNoBox( 	S32 ox, S32 oy, S32 oz,
-			S32 xw0, S32 yw0, S32 zw0,
-			S32 xw1, S32 yw1, S32 zw1	)
+void	DrawCubeNoBox( 	int32_t ox, int32_t oy, int32_t oz,
+			int32_t xw0, int32_t yw0, int32_t zw0,
+			int32_t xw1, int32_t yw1, int32_t zw1	)
 {
-	S32	x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7 ;
-	S16	coul = 11 ;
-	S16	coul1 = 13 ;
+	int32_t	x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7 ;
+	int16_t	coul = 11 ;
+	int16_t	coul1 = 13 ;
 
 	ClearScreenMinMax() ;
 	LongWorldRotatePoint( ox,oy,oz ) ;
@@ -126,9 +126,9 @@ void	AffZVObjet( T_DECORS *ptrobj )
 /*══════════════════════════════════════════════════════════════════════════*/
 void	FixeObjetsDecorsInvisibles( void )
 {
-	S32 i ;
+	int32_t i ;
 	T_DECORS	*ptrobj ;
-	S32	numvar ;
+	int32_t	numvar ;
 
 	ptrobj = ListDecors ;
 
@@ -177,8 +177,8 @@ int	sub_qsort_zv_decors( const void *a, const void *b )
 	T_DECORS	*ptrobja ;
 	T_DECORS	*ptrobjb ;
 
-	S32	x0a, y0a, z0a, x1a, y1a, z1a ;
-	S32	x0b, y0b, z0b, x1b, y1b, z1b ;
+	int32_t	x0a, y0a, z0a, x1a, y1a, z1a ;
+	int32_t	x0b, y0b, z0b, x1b, y1b, z1b ;
 
 	ptrobja = ((T_LIST_TRI *)a)->PtrDec ;
 	ptrobjb = ((T_LIST_TRI *)b)->PtrDec ;
@@ -242,7 +242,7 @@ pas_rec_sur_x:
 #ifdef	LBA_EDITOR
 void	AffichageObjetDecorsZV( void )
 {
-	S32 i ;
+	int32_t i ;
 	T_LIST_TRI	*ptrtri ;
 	T_DECORS	*ptrobj ;
 
@@ -271,12 +271,12 @@ void	AffichageObjetDecorsZV( void )
 
 void	AffichageObjetDecorsZBuf( void )
 {
-	S32 i ;
+	int32_t i ;
 	T_LIST_TRI	*ptrtri ;
 	T_DECORS	*ptrobj ;
-	S32	clipzstart ;
-	S32	numvar ;
-	S32	zr ;
+	int32_t	clipzstart ;
+	int32_t	numvar ;
+	int32_t	zr ;
 
 	ObjPtrMap = ObjTexture;		// texture obj
 
@@ -407,7 +407,7 @@ void	AffichageObjetDecorsZBuf( void )
 
 // Version ZVs absolues précalculées
 // on teste par rapport a un seul point
-S32	TestZVDecors( S32 xw, S32 yw, S32 zw, T_DECORS *objet )
+int32_t	TestZVDecors( int32_t xw, int32_t yw, int32_t zw, T_DECORS *objet )
 {
 	if( objet->Body & DEC_INVISIBLE )	return FALSE ;
 

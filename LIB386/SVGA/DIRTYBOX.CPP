@@ -23,16 +23,16 @@ extern "C" {
 #endif
 
 // --- Public state ------------------------------------------------------------
-S32 BoxClipXMin, BoxClipXMax, BoxClipYMin, BoxClipYMax;
-S32 BoxCleanClip;
+int32_t BoxClipXMin, BoxClipXMax, BoxClipYMin, BoxClipYMax;
+int32_t BoxCleanClip;
 BOX_FUNC *BoxOneBlit, *BoxOneClean;
 VOID_FUNC *BoxScreenGet, *BoxScreenRelease, *BoxScreenFlip;
 
 // --- Private state -----------------------------------------------------------
-static U8 BufferSprite[48 * 48];
+static uint8_t BufferSprite[48 * 48];
 
-static S32 BoxMask = ~7;
-static S32 BoxAlign = 7;
+static int32_t BoxMask = ~7;
+static int32_t BoxAlign = 7;
 
 static T_BOX *pBoxMalloc = NULL;
 static T_BOX *pBoxFree = NULL;
@@ -42,7 +42,7 @@ static T_BOX *pBoxOptList = NULL;
 static T_BOX *pBoxMovingList = NULL;
 
 // --- Private functions -------------------------------------------------------
-void NewBox(T_BOX **boxlist, S32 x0, S32 y0, S32 x1, S32 y1);
+void NewBox(T_BOX **boxlist, int32_t x0, int32_t y0, int32_t x1, int32_t y1);
 
 void CollapseList(T_BOX **boxlist) {
   T_BOX *pbox;
@@ -51,7 +51,7 @@ void CollapseList(T_BOX **boxlist) {
 
   if (pbox) {
     T_BOX *pbox2;
-    S32 x0, y0, x1, y1;
+    int32_t x0, y0, x1, y1;
 
     x0 = y0 = INT_MAX;
     x1 = y1 = INT_MIN;
@@ -72,10 +72,10 @@ void CollapseList(T_BOX **boxlist) {
     pbox2->pBoxNext = pBoxFree; // link list with free list
     pBoxFree = pbox->pBoxNext;
 
-    pbox->x0 = (S16)x0;
-    pbox->y0 = (S16)y0;
-    pbox->x1 = (S16)x1;
-    pbox->y1 = (S16)y1;
+    pbox->x0 = (int16_t)x0;
+    pbox->y0 = (int16_t)y0;
+    pbox->x1 = (int16_t)x1;
+    pbox->y1 = (int16_t)y1;
 
     pbox->pBoxNext = NULL;
   }
@@ -98,7 +98,7 @@ void DelBox(T_BOX **ppbox) {
   pBoxFree = pbox;
 }
 
-void AddSortBox(T_BOX **boxlist, T_BOX *pbox, S32 y0) {
+void AddSortBox(T_BOX **boxlist, T_BOX *pbox, int32_t y0) {
   while (*boxlist) {
     if ((*boxlist)->y0 >= y0) {
       break;
@@ -186,17 +186,17 @@ void MergeListsAndEmpty(T_BOX **boxlistdst, T_BOX **boxlistsrc) {
   *boxlistsrc = NULL; // list is empty
 }
 
-void BoxPhysClear(S32 x0, S32 y0, S32 x1, S32 y1) {
+void BoxPhysClear(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   T_BOX box;
 
   x0 &= BoxMask;
   x1 = (x1 + BoxAlign + 1) & BoxMask;
   y1++;
 
-  box.x0 = (S16)x0;
-  box.y0 = (S16)y0;
-  box.x1 = (S16)x1;
-  box.y1 = (S16)y1;
+  box.x0 = (int16_t)x0;
+  box.y0 = (int16_t)y0;
+  box.x1 = (int16_t)x1;
+  box.y1 = (int16_t)y1;
   box.pBoxNext = NULL;
 
   ClearBox(Phys, TabOffPhysLine, &box);
@@ -229,10 +229,10 @@ static void BoxClear() {
   return
 
 // --- Public interface --------------------------------------------------------
-void NewBox(T_BOX **boxlist, S32 x0, S32 y0, S32 x1, S32 y1) {
-  S32 bx0, by0, bx1, by1;
-  S32 restart;
-  S32 testsurf, bestsurf;
+void NewBox(T_BOX **boxlist, int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
+  int32_t bx0, by0, bx1, by1;
+  int32_t restart;
+  int32_t testsurf, bestsurf;
   T_BOX **ppboxbest, *pbox, **ppbox;
 
   x0 &= BoxMask;
@@ -245,8 +245,8 @@ again:
     restart = FALSE;
     ppbox = boxlist;
     for (pbox = *ppbox; pbox; pbox = pbox->pBoxNext) {
-      S32 comsurf, totalsurf;
-      S32 cx0, cy0, cx1, cy1;
+      int32_t comsurf, totalsurf;
+      int32_t cx0, cy0, cx1, cy1;
 
       cx0 = pbox->x0;
       cx1 = pbox->x1;
@@ -316,27 +316,27 @@ again:
 
   pBoxFree = pbox->pBoxNext;
 
-  pbox->x0 = (S16)x0;
-  pbox->y0 = (S16)y0;
-  pbox->x1 = (S16)x1;
-  pbox->y1 = (S16)y1;
+  pbox->x0 = (int16_t)x0;
+  pbox->y0 = (int16_t)y0;
+  pbox->x1 = (int16_t)x1;
+  pbox->y1 = (int16_t)y1;
 
   AddSortBox(boxlist, pbox, y0);
 }
 
-void BoxMovingAdd(S32 x0, S32 y0, S32 x1, S32 y1) {
+void BoxMovingAdd(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   CheckClip();
 
   NewBox(&pBoxMovingList, x0, y0, x1, y1);
 }
 
-void BoxStaticAdd(S32 x0, S32 y0, S32 x1, S32 y1) {
+void BoxStaticAdd(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   CheckClip();
 
   NewBox(&pBoxStaticList, x0, y0, x1, y1);
 }
 
-void BoxUnstaticAdd(S32 x0, S32 y0, S32 x1, S32 y1) {
+void BoxUnstaticAdd(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   T_BOX box;
 
   CheckClip();
@@ -344,10 +344,10 @@ void BoxUnstaticAdd(S32 x0, S32 y0, S32 x1, S32 y1) {
   x0 &= BoxMask;
   x1 = (x1 + BoxAlign) & BoxMask;
 
-  box.x0 = (S16)x0;
-  box.y0 = (S16)y0;
-  box.x1 = (S16)x1;
-  box.y1 = (S16)y1;
+  box.x0 = (int16_t)x0;
+  box.y0 = (int16_t)y0;
+  box.x1 = (int16_t)x1;
+  box.y1 = (int16_t)y1;
   box.pBoxNext = NULL;
 
   BoxOneClean(&box); // offscreen buffer cleanup
@@ -355,7 +355,7 @@ void BoxUnstaticAdd(S32 x0, S32 y0, S32 x1, S32 y1) {
   NewBox(&pBoxStaticList, x0, y0, x1, y1);
 }
 
-void BoxCls(S32 x0, S32 y0, S32 x1, S32 y1) {
+void BoxCls(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
   T_BOX box;
 
   CheckClip();
@@ -363,10 +363,10 @@ void BoxCls(S32 x0, S32 y0, S32 x1, S32 y1) {
   x0 &= BoxMask;
   x1 = (x1 + BoxAlign) & BoxMask;
 
-  box.x0 = (S16)x0;
-  box.y0 = (S16)y0;
-  box.x1 = (S16)x1;
-  box.y1 = (S16)y1;
+  box.x0 = (int16_t)x0;
+  box.y0 = (int16_t)y0;
+  box.x1 = (int16_t)x1;
+  box.y1 = (int16_t)y1;
   box.pBoxNext = NULL;
 
   DefaultBoxOneClear(&box); // offscreen buffer clear
@@ -393,8 +393,8 @@ void BoxBlitStaticListToScreen() {
 }
 
 void BoxBlit() {
-  S32 SaveClipXMin, SaveClipYMin, SaveClipXMax, SaveClipYMax;
-  S32 x0, y0, x1, y1;
+  int32_t SaveClipXMin, SaveClipYMin, SaveClipXMax, SaveClipYMax;
+  int32_t x0, y0, x1, y1;
 
   ManageEvents();
 
@@ -407,7 +407,7 @@ void BoxBlit() {
 
   if (FlagMouse) // Display mouse
   {
-    S32 sx, sy;
+    int32_t sx, sy;
 
     GetBoxGraph(MouseSpriteGraphicNum, &x0, &y0, &x1, &y1, MouseSpriteGraphic);
 
@@ -512,7 +512,7 @@ void BoxStaticFullflip() {
   BoxUpdate();
 }
 
-void BoxChangeClip(S32 x0, S32 y0, S32 x1, S32 y1, S32 clean) {
+void BoxChangeClip(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t clean) {
   x1++;
   y1++;
 
@@ -539,7 +539,7 @@ void BoxChangeClip(S32 x0, S32 y0, S32 x1, S32 y1, S32 clean) {
   BoxCleanClip |= clean;
 }
 
-S32 BoxInit(S32 nbBox) {
+int32_t BoxInit(int32_t nbBox) {
   if ((ProcessorSignature.FPU == 1) &&
       (ProcessorSignature.Family >= 5) // At least Pentium
       && ((ProcessorSignature.Manufacturer == 1) ||
@@ -594,13 +594,13 @@ S32 BoxInit(S32 nbBox) {
 
 void DefaultBoxOneBlit(T_BOX *pbox) {
   if (pbox->x0 < BoxClipXMin)
-    pbox->x0 = (S16)BoxClipXMin;
+    pbox->x0 = (int16_t)BoxClipXMin;
   if (pbox->x1 > BoxClipXMax)
-    pbox->x1 = (S16)BoxClipXMax;
+    pbox->x1 = (int16_t)BoxClipXMax;
   if (pbox->y0 < BoxClipYMin)
-    pbox->y0 = (S16)BoxClipYMin;
+    pbox->y0 = (int16_t)BoxClipYMin;
   if (pbox->y1 > BoxClipYMax)
-    pbox->y1 = (S16)BoxClipYMax;
+    pbox->y1 = (int16_t)BoxClipYMax;
 
   if ((pbox->x1 <= pbox->x0) || (pbox->y1 <= pbox->y0))
     return;

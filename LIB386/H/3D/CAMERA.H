@@ -8,50 +8,50 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 LFactorX;
-extern S32 LFactorY;
+extern int32_t LFactorX;
+extern int32_t LFactorY;
 
-extern S32 CameraAlpha;
-extern S32 CameraBeta;
-extern S32 CameraGamma;
+extern int32_t CameraAlpha;
+extern int32_t CameraBeta;
+extern int32_t CameraGamma;
 
-extern S32 CameraX;
-extern S32 CameraY;
-extern S32 CameraZ;
+extern int32_t CameraX;
+extern int32_t CameraY;
+extern int32_t CameraZ;
 
-extern S32 CameraXr;
-extern S32 CameraYr;
-extern S32 CameraZr;
+extern int32_t CameraXr;
+extern int32_t CameraYr;
+extern int32_t CameraZr;
 
-extern S32 CameraZrClip;
+extern int32_t CameraZrClip;
 
-extern S32 NearClip;
+extern int32_t NearClip;
 
-extern S32 XCentre;
-extern S32 YCentre;
+extern int32_t XCentre;
+extern int32_t YCentre;
 
-extern S32 Xp;
-extern S32 Yp;
+extern int32_t Xp;
+extern int32_t Yp;
 
-extern S32 X0;
-extern S32 Y0;
-extern S32 Z0;
+extern int32_t X0;
+extern int32_t Y0;
+extern int32_t Z0;
 
-extern S32 TypeProj;
+extern int32_t TypeProj;
 
 extern float FRatioX;
 extern float FRatioY;
 
-extern U64 MMX_DEMI;
-extern U64 MMX_DEMI2;
+extern uint64_t MMX_DEMI;
+extern uint64_t MMX_DEMI2;
 
 // -----------------------------------------------------------------------------
-void SetCamera(S32 x, S32 y, S32 z);
-void SetTargetCamera(S32 x, S32 y, S32 z, S32 gamma);
-void SetAngleCamera(S32 alpha, S32 beta, S32 gamma);
-void SetPosCamera(S32 x, S32 y, S32 z);
-void SetFollowCamera(S32 targetx, S32 targety, S32 targetz, S32 alpha, S32 beta,
-                     S32 gamma, S32 camzoom);
+void SetCamera(int32_t x, int32_t y, int32_t z);
+void SetTargetCamera(int32_t x, int32_t y, int32_t z, int32_t gamma);
+void SetAngleCamera(int32_t alpha, int32_t beta, int32_t gamma);
+void SetPosCamera(int32_t x, int32_t y, int32_t z);
+void SetFollowCamera(int32_t targetx, int32_t targety, int32_t targetz, int32_t alpha, int32_t beta,
+                     int32_t gamma, int32_t camzoom);
 
 // =============================================================================
 #ifdef __cplusplus

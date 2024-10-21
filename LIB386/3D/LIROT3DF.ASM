@@ -31,7 +31,7 @@
 		public C	LongInverseRotatePointF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LongInverseRotatePointF(S32 *Mat, S32 x, S32 y, S32 z)	;
+;void	LongInverseRotatePointF(int32_t *Mat, int32_t x, int32_t y, int32_t z)	;
 
 ;#pragma aux LongInverseRotatePointF			\
 ;	parm caller	[esi] [eax] [ebx] [ecx]	\

@@ -3,7 +3,7 @@
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	DoAnimWagon( void )
 {
-	S32	n, angle, va   ;
+	int32_t	n, angle, va   ;
 	T_OBJ_3D *obj = &APtObj->Obj ;
 
 	// Magouille pour ne pas ecraser les groupes dans AffOneObjet()
@@ -19,8 +19,8 @@ void	DoAnimWagon( void )
 	{
 		va = APtObj->SRot/(15*20) ;
 
-		obj->CurrentFrame[2].Alpha = (S16)(TimerRefHR*va) ;
-		obj->CurrentFrame[3].Alpha = (S16)(TimerRefHR*va) ;
+		obj->CurrentFrame[2].Alpha = (int16_t)(TimerRefHR*va) ;
+		obj->CurrentFrame[3].Alpha = (int16_t)(TimerRefHR*va) ;
 
 		switch( APtObj->Info )
 		{
@@ -75,7 +75,7 @@ void	DoAnimWagon( void )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	DoDirWagon( T_OBJET *ptrobj )
 {
-	S32	brick	;
+	int32_t	brick	;
 
 	// ATTENTION : Grosse Magouille :
 	// Le champ Sprite des objets de type Wagon (forcement des
@@ -712,11 +712,11 @@ void	DoDirWagon( T_OBJET *ptrobj )
 			break ;
 	} // fin switch
 
-	ptrobj->SizeSHit = (S16)brick ;
+	ptrobj->SizeSHit = (int16_t)brick ;
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	GetNumBrickWagon( S32 brick )
+int32_t	GetNumBrickWagon( int32_t brick )
 {
 #ifdef	LBA_EDITOR
 	if( ListVarGame[FLAG_PLANETE_ESMER].Value )
@@ -752,13 +752,13 @@ S32	GetNumBrickWagon( S32 brick )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	AdjustEssieuWagonAvant( S32 brickw )
+void	AdjustEssieuWagonAvant( int32_t brickw )
 {
-	S32	brick ;
-	S32	diff = FALSE ;
-	S32	xess, yess, zess ;	// x,y et z de l'essieu avant
-	S32	ey ;		// ecart y relatif à un pseudo
-	S32	y ;		// ordonnee de la pente
+	int32_t	brick ;
+	int32_t	diff = FALSE ;
+	int32_t	xess, yess, zess ;	// x,y et z de l'essieu avant
+	int32_t	ey ;		// ecart y relatif à un pseudo
+	int32_t	y ;		// ordonnee de la pente
 
 	Rotate( 0,400,APtObj->Obj.Beta ) ;
 
@@ -792,7 +792,7 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 
 				ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-				APtObj->Obj.CurrentFrame[0].Beta = (S16)(-abs(y-ey)) ;
+				APtObj->Obj.CurrentFrame[0].Beta = (int16_t)(-abs(y-ey)) ;
 			}
 			break ;
 
@@ -814,7 +814,7 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 
 				ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-				APtObj->Obj.CurrentFrame[0].Beta = (S16)(-abs(y-ey)) ;
+				APtObj->Obj.CurrentFrame[0].Beta = (int16_t)(-abs(y-ey)) ;
 			}
 			break ;
 
@@ -836,7 +836,7 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 
 				ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-				APtObj->Obj.CurrentFrame[0].Beta = (S16)(-abs(y-ey)) ;
+				APtObj->Obj.CurrentFrame[0].Beta = (int16_t)(-abs(y-ey)) ;
 			}
 			break ;
 
@@ -858,7 +858,7 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 
 				ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-				APtObj->Obj.CurrentFrame[0].Beta = (S16)(-abs(y-ey)) ;
+				APtObj->Obj.CurrentFrame[0].Beta = (int16_t)(-abs(y-ey)) ;
 			}
 			break ;
 
@@ -868,7 +868,7 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 			if( APtObj->Coord.SHit.SHitX<0 )
 			{
 				ey = APtObj->Obj.Y-(APtObj->Obj.Y&(~255)) ;
-				APtObj->Obj.CurrentFrame[0].Beta = (S16)(-ey) ;
+				APtObj->Obj.CurrentFrame[0].Beta = (int16_t)(-ey) ;
 			}
 			else	APtObj->Obj.CurrentFrame[0].Beta = 0 ;
 			break ;
@@ -878,13 +878,13 @@ void	AdjustEssieuWagonAvant( S32 brickw )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	AdjustEssieuWagonArriere( S32 brickw )
+void	AdjustEssieuWagonArriere( int32_t brickw )
 {
-	S32	brick ;
-	S32	diff = FALSE ;
-	S32	xess, yess, zess ;	// x,y et z de l'essieu avant
-	S32	ey	;		// ecart y relatif à un pseudo
-	S32	y	;		// ordonnee de la pente
+	int32_t	brick ;
+	int32_t	diff = FALSE ;
+	int32_t	xess, yess, zess ;	// x,y et z de l'essieu avant
+	int32_t	ey	;		// ecart y relatif à un pseudo
+	int32_t	y	;		// ordonnee de la pente
 
 	Rotate( 0,-400,APtObj->Obj.Beta ) ;
 
@@ -921,7 +921,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -929,7 +929,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 					APtObj->Obj.CurrentFrame[1].Type = TYPE_TRANSLATE ;
 					if( APtObj->Obj.Beta==0 )
 					{
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
 					}
 					else	APtObj->Obj.CurrentFrame[1].Beta = PAS_ESSIEU ;
 					break ;
@@ -957,7 +957,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -965,7 +965,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 					APtObj->Obj.CurrentFrame[1].Type = TYPE_TRANSLATE ;
 					if( APtObj->Obj.Beta==2048 )
 					{
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
 					}
 					else	APtObj->Obj.CurrentFrame[1].Beta = PAS_ESSIEU ;
 					break ;
@@ -993,7 +993,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -1001,7 +1001,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 					APtObj->Obj.CurrentFrame[1].Type = TYPE_TRANSLATE ;
 					if( APtObj->Obj.Beta==1024 )
 					{
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
 					}
 					else	APtObj->Obj.CurrentFrame[1].Beta = PAS_ESSIEU ;
 					break ;
@@ -1029,7 +1029,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -1037,7 +1037,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 					APtObj->Obj.CurrentFrame[1].Type = TYPE_TRANSLATE ;
 					if( APtObj->Obj.Beta==3072 )
 					{
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-(APtObj->Obj.Y-(APtObj->Obj.Y&(~255)))) ;
 					}
 					else	APtObj->Obj.CurrentFrame[1].Beta = PAS_ESSIEU ;
 					break ;
@@ -1061,7 +1061,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -1078,7 +1078,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -1095,7 +1095,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 
@@ -1112,7 +1112,7 @@ void	AdjustEssieuWagonArriere( S32 brickw )
 
 						ey = APtObj->Obj.Y-(yess&(~255))-50 ;
 
-						APtObj->Obj.CurrentFrame[1].Beta = (S16)(-abs(y-ey)) ;
+						APtObj->Obj.CurrentFrame[1].Beta = (int16_t)(-abs(y-ey)) ;
 					}
 					break ;
 

@@ -23,7 +23,7 @@
 			PUBLIC	C	CopyBlock
 
 ;----------------------------------------------------------------------------
-;void	CopyBlock(S32 x0, S32 y0, S32 x1, S32 y1, void *src, S32 xd, S32 yd, void *dst)
+;void	CopyBlock(int32_t x0, int32_t y0, int32_t x1, int32_t y1, void *src, int32_t xd, int32_t yd, void *dst)
 
 ;#pragma aux CopyBlock	"*"				\
 ;	parm caller	[eax] [ebx] [ecx] [edx] [esi]	\

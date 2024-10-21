@@ -14,13 +14,13 @@
 
 T_RAIN	TabRain[MAX_RAIN]	;
 
-S32	LastTimer=0		;
-S32	DeltaRain=0		;
+int32_t	LastTimer=0		;
+int32_t	DeltaRain=0		;
 
 //----------------------------------------------------------------------------
 void	InitOneRain( T_RAIN *pt )
 {
-	S32	rndy	;
+	int32_t	rndy	;
 
 	rndy = MyRnd(VueOffsetY + 10000) ;
 
@@ -50,7 +50,7 @@ void	RestartOneRain( T_RAIN *pt )
 // impact et qui init les goutes a n'importe quel Y
 void	InitRain()
 {
-	S32	i	;
+	int32_t	i	;
 
 	for ( i = 0; i < MAX_RAIN; i++)
 	{
@@ -63,7 +63,7 @@ void	InitRain()
 //----------------------------------------------------------------------------
 void	ClearImpactRain()
 {
-	S32	i ;
+	int32_t	i ;
 
 	for ( i = 0 ; i < MAX_RAIN ; i++)
 	{
@@ -77,8 +77,8 @@ void	ClearImpactRain()
 //----------------------------------------------------------------------------
 void	GereRain()
 {
-	S32	temp	;
-	S32	i 	;
+	int32_t	temp	;
+	int32_t	i 	;
 
 	temp	  = TimerRefHR					;
 	DeltaRain = LastTimer ? (temp-LastTimer) * 10 : 0	;
@@ -98,9 +98,9 @@ void	GereRain()
 //----------------------------------------------------------------------------
 void	AffRain()
 {
-	S32	i, c	;
-	S32	xp, yp	;
-	S32	f 	;
+	int32_t	i, c	;
+	int32_t	xp, yp	;
+	int32_t	f 	;
 
 	UnsetClip() ;
 
@@ -108,14 +108,14 @@ void	AffRain()
 	{
 		if( TabRain[i].Timer )
 		{
-			S32	x0, y0, x1, y1	;
-			S32	x, y, z		;
-			S32	dt		;
+			int32_t	x0, y0, x1, y1	;
+			int32_t	x, y, z		;
+			int32_t	dt		;
 
 			dt = LastTimer - TabRain[i].Timer ;
 
 			c  = TabRain[i].XRain>>16	;
- 			x  = (S16)(TabRain[i].XRain&0xFFFF) ;
+ 			x  = (int16_t)(TabRain[i].XRain&0xFFFF) ;
  			y  = TabRain[i].YRain	     	;
 			z  = TabRain[i].ZRain		;
 
@@ -157,7 +157,7 @@ void	AffRain()
 		}
 		else
 		{
-			S32	z0, z1 	;
+			int32_t	z0, z1 	;
 
 			if ( TabRain[i].YRain <= RAIN_STOP )
 			{

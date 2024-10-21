@@ -1,20 +1,10 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 // Comes from GLOBEXT.CPP and is non C
-extern U8 *ScreenAux;
+extern uint8_t *ScreenAux;
 
-// -----------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-// -----------------------------------------------------------------------------
-void InitAdeline(S32 argc, char *argv[]);
-
-// =============================================================================
-#ifdef __cplusplus
-}
-#endif
+void InitAdeline(int32_t argc, char *argv[]);

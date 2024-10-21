@@ -8,11 +8,11 @@
 
 #ifdef	COMPILATOR
 #define	PATH_FLOW	"f:\\projet\\lba2\\datas\\flow\\"
-extern	U8	*BufferDef ;
+extern	uint8_t	*BufferDef ;
 #endif
 
 #ifdef	LBA_EDITOR
-U32		NbImpacts = 0 ;
+uint32_t		NbImpacts = 0 ;
 T_IMPACT	ListImpact[MAX_IMPACT] ;
 
 // ATTENTION: Laisser imperativement les instructions FLOW et THROW avant les
@@ -34,16 +34,16 @@ char	*ImpCommandList[NB_IMP_COMMAND] = {
 		} ;
 #else
 //T_HQR_HEADER	*HQR_Impact ;
-U8	*BufferImpact ;
+uint8_t	*BufferImpact ;
 #endif
 
 #ifdef	LBA_EDITOR
 /*──────────────────────────────────────────────────────────────────────────*/
-S8	GetImpCommand( void )
+int8_t	GetImpCommand( void )
 {
 	char	*ptr ;
 	char	c ;
-	S8	i ;
+	int8_t	i ;
 
 	ptr = String ;
 
@@ -85,14 +85,14 @@ S8	GetImpCommand( void )
 	Beep() ;
 	MessageF( TRUE, "ImpCommande inconnue: %s", String ) ;
 
-	return (S8)IMP_NOP ;
+	return (int8_t)IMP_NOP ;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	GetNumDef( char *pathdef, char *name )
+int32_t	GetNumDef( char *pathdef, char *name )
 {
-	S32	n = 0 ;
-	S32	len ;
+	int32_t	n = 0 ;
+	int32_t	len ;
 	char	*ptr ;
 	char	*com ;	// Pointeur sur commentaire éventuel
 
@@ -126,13 +126,13 @@ S32	GetNumDef( char *pathdef, char *name )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	GetNumDefAddIfNot( char *pathdef, char *name, char *rem )
+int32_t	GetNumDefAddIfNot( char *pathdef, char *name, char *rem )
 {
 	char	ch[256] ;
-	S32	n = 0 ;
-	S32	len ;
+	int32_t	n = 0 ;
+	int32_t	len ;
 	char	*ptr ;
-	S32	found = FALSE ;
+	int32_t	found = FALSE ;
 
 	strupr( name ) ;
 	len = strlen( name ) ;
@@ -194,11 +194,11 @@ S32	GetNumDefAddIfNot( char *pathdef, char *name, char *rem )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Entrée: impact en mode texte
 // Sortie: impact en mode compilé dans le même buffer
-S32	CompileImpact( U8 *buffer )
+int32_t	CompileImpact( uint8_t *buffer )
 {
-	U8	*ptr = buffer ;
-	S8	command ;
-	S32	nbentities = 0 ;
+	uint8_t	*ptr = buffer ;
+	int8_t	command ;
+	int32_t	nbentities = 0 ;
 
 	// Traduction et compilation de l'impact
 	PtrFiche = buffer ;
@@ -218,35 +218,35 @@ S32	CompileImpact( U8 *buffer )
 		{
 			// SAMPLE nom[.wav] frequence decalage volume
 			case IMP_SAMPLE:
-				*(S16*)ptr = (S16)GetValue() ;	// Num Sample
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Num Sample
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Frequence
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Frequence
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Decalage
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Decalage
 				ptr+=2 ;
-				*ptr++ = (U8)GetValue() ;       // Volume
+				*ptr++ = (uint8_t)GetValue() ;       // Volume
 				nbentities++ ;
 				break ;
 
 			// FLOW nom[.flw]
 			case IMP_FLOW:
-				*ptr++ = (U8)GetValue() ;	// Num Flow
+				*ptr++ = (uint8_t)GetValue() ;	// Num Flow
 				nbentities++ ;
 				break ;
 
 			// THROW sprite alpha beta speed poids force
 			case IMP_THROW:
-				*(S16*)ptr = (S16)GetValue() ;	// Sprite
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Sprite
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// alpha
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// alpha
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// beta
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// beta
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Speed
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Speed
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Poids
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Poids
 				ptr+=2 ;
-				*ptr++ = (U8)GetValue() ;	// Force
+				*ptr++ = (uint8_t)GetValue() ;	// Force
 				nbentities++ ;
 				break ;
 
@@ -254,74 +254,74 @@ S32	CompileImpact( U8 *buffer )
 			case IMP_THROW_OBJ:
 				GetFicName() ;			// Body
 #ifdef	COMPILATOR
-				*(S16*)ptr = SearchIndexBodyFix( FicName, "THROW" ) ;
+				*(int16_t*)ptr = SearchIndexBodyFix( FicName, "THROW" ) ;
 				ptr += 2 ;
 #else
 				strcpy( (char*)ptr, FicName ) ;
 				ptr+=strlen(FicName) ;
 				*ptr++ = '\0' ;
 #endif
-				*(S16*)ptr = (S16)GetValue() ;	// alpha
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// alpha
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// beta
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// beta
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Speed
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Speed
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Poids
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Poids
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Rotation
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Rotation
 				ptr+=2 ;
 
-				*ptr++ = (U8)GetValue() ;	// Force
+				*ptr++ = (uint8_t)GetValue() ;	// Force
 				nbentities++ ;
 				break ;
 
 			// THROW_POF nom[.pof] alpha beta speed poids force
 			case IMP_THROW_POF:
-				*(S16*)ptr = (S16)GetValue() ;	// Num Pof
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Num Pof
 				ptr+=2 ;
 
-				*(S16*)ptr = (S16)GetValue() ;	// alpha
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// alpha
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// beta
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// beta
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Speed
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Speed
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Poids
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Poids
 				ptr+=2 ;
-				*(S32*)ptr = GetValue() ;	// Scale
+				*(int32_t*)ptr = GetValue() ;	// Scale
 				ptr+=4 ;
 				nbentities++ ;
 				break ;
 
 			// SPRITE deb fin tempo scale transparent
 			case IMP_SPRITE:
-				*(S16*)ptr = (S16)GetValue() ;	// Deb
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Deb
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Fin
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Fin
 				ptr+=2 ;
-				*(S32*)ptr = GetValue() ;	// tempo
+				*(int32_t*)ptr = GetValue() ;	// tempo
 				ptr+=4 ;
-				*(S32*)ptr = GetValue() ;	// scale
+				*(int32_t*)ptr = GetValue() ;	// scale
 				ptr+=4 ;
-				*ptr++ = (U8)GetValue() ;	// transparent on/off
-				*ptr++ = (U8)GetValue() ;	// Force
+				*ptr++ = (uint8_t)GetValue() ;	// transparent on/off
+				*ptr++ = (uint8_t)GetValue() ;	// Force
 				nbentities++ ;
 				break ;
 
 			// FLOW_SPRITE nom[.flow] deb fin tempo scale transparent force
 			case IMP_FLOW_SPRITE:
-				*ptr++ = (U8)GetValue() ;	// Num Flow
-				*(S16*)ptr = (S16)GetValue() ;	// Deb
+				*ptr++ = (uint8_t)GetValue() ;	// Num Flow
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Deb
 				ptr+=2 ;
-				*(S16*)ptr = (S16)GetValue() ;	// Fin
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Fin
 				ptr+=2 ;
-				*(S32*)ptr = GetValue() ;	// tempo
+				*(int32_t*)ptr = GetValue() ;	// tempo
 				ptr+=4 ;
-				*(S32*)ptr = GetValue() ;	// scale
+				*(int32_t*)ptr = GetValue() ;	// scale
 				ptr+=4 ;
-				*ptr++ = (U8)GetValue() ;	// transparent on/off
-				*ptr++ = (U8)GetValue() ;	// Force
+				*ptr++ = (uint8_t)GetValue() ;	// transparent on/off
+				*ptr++ = (uint8_t)GetValue() ;	// Force
 				nbentities++ ;
 				break ;
 
@@ -329,33 +329,33 @@ S32	CompileImpact( U8 *buffer )
 
 			// FLOW_OBJ nom[.flw] nom[.O4D] Force
 			case IMP_FLOW_OBJ:
-				*ptr++ = (U8)GetValue() ;	// Num Flow
+				*ptr++ = (uint8_t)GetValue() ;	// Num Flow
 				GetFicName() ;			// Body
 #ifdef	COMPILATOR
-				*(S16*)ptr = SearchIndexBodyFix( FicName, "THROW" ) ;
+				*(int16_t*)ptr = SearchIndexBodyFix( FicName, "THROW" ) ;
 				ptr += 2 ;
 #else
 				strcpy( (char*)ptr, FicName ) ;
 				ptr+=strlen(FicName) ;
 				*ptr++ = '\0' ;
 #endif
-				*ptr++ = (U8)GetValue() ;	// Force
+				*ptr++ = (uint8_t)GetValue() ;	// Force
 				nbentities++ ;
 				break ;
 
 			// FLOW_POF nom[.flw] nom[.pof] scale_deb scale_fin tempo speedrot
 			case IMP_FLOW_POF:
-				*ptr++ = (U8)GetValue() ;	// Num Flow
-				*(S16*)ptr = (S16)GetValue() ;	// Num Pof
+				*ptr++ = (uint8_t)GetValue() ;	// Num Flow
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// Num Pof
 				ptr+=2 ;
 
-				*(S32*)ptr = GetValue() ;	// scale_deb
+				*(int32_t*)ptr = GetValue() ;	// scale_deb
 				ptr+=4 ;
-				*(S32*)ptr = GetValue() ;	// scale_fin
+				*(int32_t*)ptr = GetValue() ;	// scale_fin
 				ptr+=4 ;
-				*(S32*)ptr = GetValue() ;	// tempo scale
+				*(int32_t*)ptr = GetValue() ;	// tempo scale
 				ptr+=4 ;
-				*(S16*)ptr = (S16)GetValue() ;	// SpeedRot
+				*(int16_t*)ptr = (int16_t)GetValue() ;	// SpeedRot
 				ptr+=2 ;
 				nbentities++ ;
 				break ;
@@ -374,10 +374,10 @@ S32	CompileImpact( U8 *buffer )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U8	*SearchImpact( char *name )
+uint8_t	*SearchImpact( char *name )
 {
 	char path[ADELINE_MAX_PATH] ;
-	S32		n, size ;
+	int32_t		n, size ;
 	T_IMPACT	*ptri = ListImpact ;
 
 	for( n=0; n<NbImpacts; n++, ptri++ )
@@ -400,7 +400,7 @@ U8	*SearchImpact( char *name )
 	AddExt( path, ".IMP" ) ;
 
 	size = FileSize( path ) 		;
-	ptri->buf = (U8 *)Malloc(size+1)	;/* Pas De Mshrink */
+	ptri->buf = (uint8_t *)Malloc(size+1)	;/* Pas De Mshrink */
 
 	if( !ptri->buf )	return NULL ;
 
@@ -421,18 +421,18 @@ U8	*SearchImpact( char *name )
 /*──────────────────────────────────────────────────────────────────────────*/
 #ifndef	COMPILATOR
 #ifdef	LBA_EDITOR
-void	DoImpact( char *name, S32 x, S32 y, S32 z, U8 owner )
+void	DoImpact( char *name, int32_t x, int32_t y, int32_t z, uint8_t owner )
 #else
-void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
+void   	DoImpact( int32_t num, int32_t x, int32_t y, int32_t z, uint8_t owner )
 #endif
 {
-	S32	wlong, wlong2, wlong3 ;
-	S32	beta = 0;
-	S32	extra ;
-	U8	*ptr	;
-	S16	wword, wword2, wword3 ;
-	S8	command ;
-	U8	wbyte, wbyte2	;
+	int32_t	wlong, wlong2, wlong3 ;
+	int32_t	beta = 0;
+	int32_t	extra ;
+	uint8_t	*ptr	;
+	int16_t	wword, wword2, wword3 ;
+	int8_t	command ;
+	uint8_t	wbyte, wbyte2	;
 
 #ifdef	LBA_EDITOR
 	SaveTimer() ;
@@ -441,7 +441,7 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 
 	RestoreTimer() ;
 #else
-	ptr = BufferImpact + *(((U32*)BufferImpact)+num) ;
+	ptr = BufferImpact + *(((uint32_t*)BufferImpact)+num) ;
 #endif
 
 	if( ptr )
@@ -459,18 +459,18 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 			{
 				// SAMPLE nom[.wav] volume
 				case IMP_SAMPLE:
-					wword  = *(S16*)ptr ;	// NumSample
+					wword  = *(int16_t*)ptr ;	// NumSample
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// Frequence
+					wword2 = *(int16_t*)ptr ;	// Frequence
 					ptr+=2 ;
-					wlong  = *(S16*)ptr ;	// Decalage
+					wlong  = *(int16_t*)ptr ;	// Decalage
 					ptr+=2 ;
 					ParmSampleVolume = *ptr++ ;	// Volume
 
 #ifdef	LBA_EDITOR
-					HQ_3D_MixSample( COMMON_NUM_DEF, wword, wword2, (S16)wlong, 1, x, y, z ) ;
+					HQ_3D_MixSample( COMMON_NUM_DEF, wword, wword2, (int16_t)wlong, 1, x, y, z ) ;
 #else
-					HQ_3D_MixSample( wword, wword2, (S16)wlong, 1, x, y, z ) ;
+					HQ_3D_MixSample( wword, wword2, (int16_t)wlong, 1, x, y, z ) ;
 #endif
 					break ;
 
@@ -482,15 +482,15 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 
 				// THROW sprite alpha beta speed poids force
 				case IMP_THROW:
-					wword = *(S16*)ptr ;	// Sprite
+					wword = *(int16_t*)ptr ;	// Sprite
 					ptr+=2 ;
-					wlong = *(S16*)ptr ;	// alpha
+					wlong = *(int16_t*)ptr ;	// alpha
 					ptr+=2 ;
-					wlong2 = *(S16*)ptr ;	// beta
+					wlong2 = *(int16_t*)ptr ;	// beta
 					ptr+=2 ;
-					wlong3 = *(S16*)ptr ;	// Speed
+					wlong3 = *(int16_t*)ptr ;	// Speed
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// Poids
+					wword2 = *(int16_t*)ptr ;	// Poids
 					ptr+=2 ;
 					wbyte = *ptr++ ;	// Force
 
@@ -499,7 +499,7 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 					extra = ThrowExtra( owner,
 						x, y, z,
 						wword,
-						wlong, wlong2, wlong3, (U8)wword2,
+						wlong, wlong2, wlong3, (uint8_t)wword2,
 						wbyte ) ;
 
 #ifdef	LBA_EDITOR
@@ -520,18 +520,18 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 					ptr++ ;			// Skip '\0'
 					wword = 0 ;
 #else
-					wword = *(S16*)ptr ;	// num body
+					wword = *(int16_t*)ptr ;	// num body
 					ptr+=2 ;
 #endif
-					wlong = *(S16*)ptr ;	// alpha
+					wlong = *(int16_t*)ptr ;	// alpha
 					ptr+=2 ;
-					wlong2 = *(S16*)ptr ;	// beta
+					wlong2 = *(int16_t*)ptr ;	// beta
 					ptr+=2 ;
-					wlong3 = *(S16*)ptr ;	// Speed
+					wlong3 = *(int16_t*)ptr ;	// Speed
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// Poids
+					wword2 = *(int16_t*)ptr ;	// Poids
 					ptr+=2 ;
-					wword3 = *(S16*)ptr ;	// Rotation
+					wword3 = *(int16_t*)ptr ;	// Rotation
 					ptr+=2 ;
 
 					wlong2 = (wlong2+beta)&4095 ;
@@ -547,7 +547,7 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 #endif
 						wlong, wlong2, wlong3,
 						wword3, // alpharot
-						(U8)wword2, wbyte ) ;
+						(uint8_t)wword2, wbyte ) ;
 
 #ifdef	LBA_EDITOR
 					if( extra!=-1 AND !Shadow )
@@ -561,16 +561,16 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 
 				// THROW_POF nom[.pof] alpha beta speed poids scale
 				case IMP_THROW_POF:
-					wword = *(S16*)ptr ;	// Num Pof
+					wword = *(int16_t*)ptr ;	// Num Pof
 					ptr+=2 ;
 
-					wlong  = *(S16*)ptr ;	// alpha
+					wlong  = *(int16_t*)ptr ;	// alpha
 					ptr+=2 ;
-					wlong2 = *(S16*)ptr ;	// beta
+					wlong2 = *(int16_t*)ptr ;	// beta
 					ptr+=2 ;
-					wlong3 = *(S16*)ptr ;	// Speed
+					wlong3 = *(int16_t*)ptr ;	// Speed
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// Poids
+					wword2 = *(int16_t*)ptr ;	// Poids
 					ptr+=2 ;
 
 					wlong2 = (wlong2+beta)&4095 ;
@@ -578,7 +578,7 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 					InitExtraPof( x, y, z, wword,
 						      wlong, wlong2,
 						      wlong3, wword2,
-						      *(S32*)ptr, *(S32*)ptr, 0, // Scale
+						      *(int32_t*)ptr, *(int32_t*)ptr, 0, // Scale
 						      0, 0 ) ;
 
 					ptr+=4 ;
@@ -586,13 +586,13 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 
 				// SPRITE deb fin tempo scale transparent
 				case IMP_SPRITE:
-					wword  = *(S16*)ptr ;	// Deb
+					wword  = *(int16_t*)ptr ;	// Deb
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// Fin
+					wword2 = *(int16_t*)ptr ;	// Fin
 					ptr+=2 ;
-					wlong  = *(S32*)ptr ;	// tempo
+					wlong  = *(int32_t*)ptr ;	// tempo
 					ptr+=4 ;
-					wlong2 = *(S32*)ptr ;	// scale
+					wlong2 = *(int32_t*)ptr ;	// scale
 					ptr+=4 ;
 					wbyte  = *ptr++ ;	// transparent
 					wbyte2  = *ptr++ ;	// force
@@ -606,13 +606,13 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 				// FLOW_SPRITE nom[.flow] deb fin tempo scale transparent force
 				case IMP_FLOW_SPRITE:
 					wbyte = *ptr++ ; 	// num flow
-					wword = *(S16*)ptr ;	// deb
+					wword = *(int16_t*)ptr ;	// deb
 					ptr+=2 ;
-					wword2 = *(S16*)ptr ;	// fin
+					wword2 = *(int16_t*)ptr ;	// fin
 					ptr+=2 ;
-					wlong3 = *(S32*)ptr ;	// tempo
+					wlong3 = *(int32_t*)ptr ;	// tempo
 					ptr+=4 ;
-					wlong2 = *(S32*)ptr ;	// scale
+					wlong2 = *(int32_t*)ptr ;	// scale
 					ptr+=4 ;
 					wbyte2  = *ptr++ ;	// transparent
 					wlong = *ptr++ ;	// force
@@ -634,7 +634,7 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 					ptr++ ;			// Skip '\0'
 					wword = 0 ;
 #else
-					wword = *(S16*)ptr ;	// num body
+					wword = *(int16_t*)ptr ;	// num body
 					ptr+=2 ;
 #endif
 					wlong = *ptr++ ;	// force
@@ -650,16 +650,16 @@ void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner )
 				case IMP_FLOW_POF:
 					wbyte = *ptr++ ;	// Num Flow
 
-					wword = *(S16*)ptr ;	// Num Pof
+					wword = *(int16_t*)ptr ;	// Num Pof
 					ptr+=2 ;
 
-					wlong  = *(S32*)ptr ;	// scale_deb
+					wlong  = *(int32_t*)ptr ;	// scale_deb
 					ptr+=4 ;
-					wlong2 = *(S32*)ptr ;	// scale_fin
+					wlong2 = *(int32_t*)ptr ;	// scale_fin
 					ptr+=4 ;
-					wlong3 = *(S32*)ptr ;	// tempo
+					wlong3 = *(int32_t*)ptr ;	// tempo
 					ptr+=4 ;
-					wword2 = *(S16*)ptr ;	// SpeedRot
+					wword2 = *(int16_t*)ptr ;	// SpeedRot
 					ptr+=2 ;
 
 					CreateExtraParticleFlow( FLOW_EXTRA_POF,

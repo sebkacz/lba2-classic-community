@@ -27,21 +27,21 @@
 
 typedef	struct
 	{
-		U32	Size	;
-		U32	Flags	;
-		U32	Dummy[2];
+		uint32_t	Size	;
+		uint32_t	Flags	;
+		uint32_t	Dummy[2];
 	}	MALLOC_BLOCK	;
 
 typedef	struct
 	{
 		MALLOC_BLOCK	*Ptr	;
-		U32		Size	;
+		uint32_t		Size	;
 	}	MEMORY_BLOCK	;
 
 //████████████████████████████████████████████████████████████████████████████
 
 static	MEMORY_BLOCK	Block[MAX_BLOCKS];
-static	S32		NbBlock = 0	;
+static	int32_t		NbBlock = 0	;
 
 //████████████████████████████████████████████████████████████████████████████
 
@@ -49,12 +49,12 @@ extern HDIGDRIVER	DigDriver;	// Handle to digital audio driver
 
 //████████████████████████████████████████████████████████████████████████████
 
-RCFUNC void * RADLINK radmalloc(U32 size)
+RCFUNC void * RADLINK radmalloc(uint32_t size)
 {
 	MALLOC_BLOCK	*ptr		;
 	MALLOC_BLOCK	*next		;
-	S32		i, found	;
-	U32		left		;
+	int32_t		i, found	;
+	uint32_t		left		;
 
 	if (!size || (size==0xffffffff))	return NULL;
 
@@ -76,7 +76,7 @@ RCFUNC void * RADLINK radmalloc(U32 size)
 			{
 				break	;
 			}
-			ptr = (MALLOC_BLOCK*)((U8*)ptr+sizeof(MALLOC_BLOCK)+ptr->Size) ;
+			ptr = (MALLOC_BLOCK*)((uint8_t*)ptr+sizeof(MALLOC_BLOCK)+ptr->Size) ;
 		}
 	}
 end:
@@ -97,7 +97,7 @@ end:
 
 	ptr->Size = size		;
 
-	next = (MALLOC_BLOCK*)((U8*)ptr+sizeof(MALLOC_BLOCK)+size)	;
+	next = (MALLOC_BLOCK*)((uint8_t*)ptr+sizeof(MALLOC_BLOCK)+size)	;
 
 	next->Size = left		;
 	next->Flags= ptr->Flags|FLAG_FREE;
@@ -110,7 +110,7 @@ end:
 
 RCFUNC void RADLINK radfree(void *ptr)
 {
-	S32		i, found		;
+	int32_t		i, found		;
 	MALLOC_BLOCK	*prev, *block, *next	;
 
 	if (!ptr)	return	;
@@ -130,7 +130,7 @@ RCFUNC void RADLINK radfree(void *ptr)
 			}
 			else
 			{
-				next  = (MALLOC_BLOCK*)((U8*)block+sizeof(MALLOC_BLOCK)+block->Size) ;
+				next  = (MALLOC_BLOCK*)((uint8_t*)block+sizeof(MALLOC_BLOCK)+block->Size) ;
 			}
 
 			if(block+1==(MALLOC_BLOCK*)ptr)
@@ -172,7 +172,7 @@ end:
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	SmackRegisterMemory(void *ptr, U32 size)
+void	SmackRegisterMemory(void *ptr, uint32_t size)
 {
 	if(NbBlock>=MAX_BLOCKS)	return	;
 
@@ -186,7 +186,7 @@ void	SmackRegisterMemory(void *ptr, U32 size)
 
 void	SmackResetMemory()
 {
-	S32	i ;
+	int32_t	i ;
 
 	for(i=0; i<NbBlock; i++)
 	{

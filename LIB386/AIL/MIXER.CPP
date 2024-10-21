@@ -10,10 +10,10 @@ static MIXERCONTROLDETAILS_UNSIGNED VolumeValue[2];
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetMixerVolDevice(VOLUMECONTROL *volcontrol, S32 type)
+int32_t	GetMixerVolDevice(VOLUMECONTROL *volcontrol, int32_t type)
 {
-	S32 			voldeviceid;
-	S32			i ;
+	int32_t 			voldeviceid;
+	int32_t			i ;
 	MIXERLINE 		lineinfo;
 	MIXERLINECONTROLS 	linecontrols;
 	MIXERCONTROL 		volumecontrol;
@@ -74,7 +74,7 @@ error:			mixerClose((HMIXER)voldeviceid);
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetMixerVolume(VOLUMECONTROL *volcontrol)
+int32_t	GetMixerVolume(VOLUMECONTROL *volcontrol)
 {
 	if(volcontrol->DeviceID == -1)
 	{
@@ -91,7 +91,7 @@ S32	GetMixerVolume(VOLUMECONTROL *volcontrol)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	SetMixerVolume(VOLUMECONTROL *volcontrol, S32 volume)
+void	SetMixerVolume(VOLUMECONTROL *volcontrol, int32_t volume)
 {
 	if(volcontrol->DeviceID == -1)
 	{

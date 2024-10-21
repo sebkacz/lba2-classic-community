@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-void ScaleBox(S32 xs0, S32 ys0, S32 xs1, S32 ys1, void *ptrs, S32 xd0, S32 yd0,
-              S32 xd1, S32 yd1, void *ptrd);
+void ScaleBox(int32_t xs0, int32_t ys0, int32_t xs1, int32_t ys1, void *ptrs, int32_t xd0, int32_t yd0,
+              int32_t xd1, int32_t yd1, void *ptrd);
 
 // =============================================================================
 #ifdef __cplusplus

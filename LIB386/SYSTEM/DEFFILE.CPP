@@ -12,22 +12,22 @@
 
 //══════════════════════════════════════════════════════════════════════════
 static	char	DefString[256]			;
-static	S32	LenDefString			;
+static	int32_t	LenDefString			;
 static	char	*PtrEndIdent			;
 	char	*OrgPtrDef			;
 	char	*EndPtrDef			;
 
-	S32	DefFileReadSkipComments	= TRUE	;
+	int32_t	DefFileReadSkipComments	= TRUE	;
 
-static	S32	BufferSize			;
+static	int32_t	BufferSize			;
 static	char	FileName[ADELINE_MAX_PATH]		;
 
 //══════════════════════════════════════════════════════════════════════════
-static inline S32 ReadBufferString(const char *identificateur)
+static inline int32_t ReadBufferString(const char *identificateur)
 {
 	char	*ptrdef	;
-	U8	*ptr	;
-	S32	len	;
+	uint8_t	*ptr	;
+	int32_t	len	;
 
 	DefString[0]	= 0	;
 	LenDefString	= 0	;
@@ -59,7 +59,7 @@ static inline S32 ReadBufferString(const char *identificateur)
 
 				while(*ptrdef==32) 	ptrdef++;//skip leading spaces
 
-				ptr = (U8*)ptrdef;
+				ptr = (uint8_t*)ptrdef;
 
 				while(*ptr>=32)
 				{
@@ -92,9 +92,9 @@ static inline S32 ReadBufferString(const char *identificateur)
 }
 
 //══════════════════════════════════════════════════════════════════════════
-S32	DefFileBufferInit(char *file, void *buffer, S32 maxsize)
+int32_t	DefFileBufferInit(char *file, void *buffer, int32_t maxsize)
 {
-	S32	buffersize	;
+	int32_t	buffersize	;
 
 	buffersize	= FileSize(file);
 
@@ -166,12 +166,12 @@ const char *DefFileBufferReadStringDefault(const char *ident, const char *def)
 }
 
 //══════════════════════════════════════════════════════════════════════════
-S32	DefFileBufferReadValue2(const char *ident, S32 *result)
+int32_t	DefFileBufferReadValue2(const char *ident, int32_t *result)
 {
 	char	*ptrdef	;
-	S32	i 	;
+	int32_t	i 	;
 	char	c	;
-	S32	value	;
+	int32_t	value	;
 
 	DefFileBufferReadString( ident ) ;
 	if(!LenDefString)
@@ -208,7 +208,7 @@ S32	DefFileBufferReadValue2(const char *ident, S32 *result)
 }
 
 //══════════════════════════════════════════════════════════════════════════
-S32	DefFileBufferReadValueDefault(const char *ident, S32 def)
+int32_t	DefFileBufferReadValueDefault(const char *ident, int32_t def)
 {
 	DefFileBufferReadValue2( ident, &def)	;
 
@@ -216,16 +216,16 @@ S32	DefFileBufferReadValueDefault(const char *ident, S32 def)
 }
 
 //══════════════════════════════════════════════════════════════════════════
-S32	DefFileBufferReadValue(const char *ident)
+int32_t	DefFileBufferReadValue(const char *ident)
 {
 	return DefFileBufferReadValueDefault( ident, -1)	;
 }
 
 //══════════════════════════════════════════════════════════════════════════
-S32	DefFileBufferWriteString(const char *ident, const char *string)
+int32_t	DefFileBufferWriteString(const char *ident, const char *string)
 {
 	char	crlf[2]={13, 10}	;
-	S32	handle			;
+	int32_t	handle			;
 	char	*result			;
 
 	if(!OrgPtrDef)

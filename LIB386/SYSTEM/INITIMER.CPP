@@ -53,14 +53,14 @@ extern	void __interrupt NewIntPM08(void)		;
 #pragma	aux NewIntPM08	"*"
 
 //-------------------------------------------------------------------------
-//extern	U32	Old_PM08_Off	;
-//extern	U16	Old_PM08_Sel	;
+//extern	uint32_t	Old_PM08_Off	;
+//extern	uint16_t	Old_PM08_Sel	;
 
-extern  U32	TimerDataStart	;
-extern  U32	TimerDataEnd	;
+extern  uint32_t	TimerDataStart	;
+extern  uint32_t	TimerDataEnd	;
 
-extern  U32	TimerStart	;
-extern  U32	TimerEnd	;
+extern  uint32_t	TimerStart	;
+extern  uint32_t	TimerEnd	;
 
 //-------------------------------------------------------------------------
 #ifdef	__cplusplus
@@ -97,7 +97,7 @@ void	InitTimer()
 	r.x.eax = 0x3508		;//	Function 35h, for Int 08
 	sr.ds = sr.es = 0		;//	Security (kill the cat)
 	int386x( 0x21, &r, &r, &sr )	;//	Call Int 21
-	Old_PM08_Sel = (U16)sr.es	;//	ES:EBX=Old Interrupt 08
+	Old_PM08_Sel = (uint16_t)sr.es	;//	ES:EBX=Old Interrupt 08
 	Old_PM08_Off = r.x.ebx		;
 
 //----- Install New Protected Vector 08 --------

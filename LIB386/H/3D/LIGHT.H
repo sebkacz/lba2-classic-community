@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -8,16 +9,16 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 AlphaLight, BetaLight, GammaLight;
-extern S32 NormalXLight, NormalYLight, NormalZLight;
-extern S32 CameraXLight, CameraYLight, CameraZLight;
-extern S32 PosXLight, PosYLight, PosZLight;
-extern S32 TargetXLight, TargetYLight, TargetZLight;
-extern S32 LightNormalUnit;
+extern int32_t AlphaLight, BetaLight, GammaLight;
+extern int32_t NormalXLight, NormalYLight, NormalZLight;
+extern int32_t CameraXLight, CameraYLight, CameraZLight;
+extern int32_t PosXLight, PosYLight, PosZLight;
+extern int32_t TargetXLight, TargetYLight, TargetZLight;
+extern int32_t LightNormalUnit;
 extern float FactorLight;
 
 // -----------------------------------------------------------------------------
-void SetLightVector(S32 alpha, S32 beta, S32 gamma);
+void SetLightVector(int32_t alpha, int32_t beta, int32_t gamma);
 void RecomputeLight();
 
 // -----------------------------------------------------------------------------

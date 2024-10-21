@@ -1,38 +1,35 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-// -----------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct {
-  S16 Type;
-  S16 Alpha;
-  S16 Beta;
-  S16 Gamma;
+  int16_t Type;
+  int16_t Alpha;
+  int16_t Beta;
+  int16_t Gamma;
 } T_GROUP_INFO;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef union {
   void *Ptr;
-  S32 Num;
+  int32_t Num;
 } T_PTR_NUM;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct {
-  S32 X; // world coor
-  S32 Y;
-  S32 Z;
+  int32_t X; // world coor
+  int32_t Y;
+  int32_t Z;
 
-  S32 Alpha; // local angles
-  S32 Beta;
-  S32 Gamma;
+  int32_t Alpha; // local angles
+  int32_t Beta;
+  int32_t Gamma;
 
   T_PTR_NUM Body;
   ; // ->.O3D
@@ -43,40 +40,40 @@ typedef struct {
   void *Texture;     //
   void *NextTexture; //
 
-  U32 LastOfsIsPtr;
+  uint32_t LastOfsIsPtr;
 
-  S32 LastFrame;
-  U32 LastOfsFrame;
-  U32 LastTimer; // last TimerRef
-  U32 LastNbGroups;
+  int32_t LastFrame;
+  uint32_t LastOfsFrame;
+  uint32_t LastTimer; // last TimerRef
+  uint32_t LastNbGroups;
 
-  S32 NextFrame;
-  U32 NextOfsFrame;
-  U32 NextTimer; // TimerRef when frame reached
-  U32 NextNbGroups;
+  int32_t NextFrame;
+  uint32_t NextOfsFrame;
+  uint32_t NextTimer; // TimerRef when frame reached
+  uint32_t NextNbGroups;
 
-  S32 LoopFrame;
-  U32 LoopOfsFrame;
+  int32_t LoopFrame;
+  uint32_t LoopOfsFrame;
 
-  U32 NbFrames;
+  uint32_t NbFrames;
 
-  S32 LastAnimStepX;
-  S32 LastAnimStepY;
-  S32 LastAnimStepZ;
+  int32_t LastAnimStepX;
+  int32_t LastAnimStepY;
+  int32_t LastAnimStepZ;
 
-  S32 LastAnimStepAlpha;
-  S32 LastAnimStepBeta;
-  S32 LastAnimStepGamma;
+  int32_t LastAnimStepAlpha;
+  int32_t LastAnimStepBeta;
+  int32_t LastAnimStepGamma;
 
-  U32 Interpolator; // lib internal
+  uint32_t Interpolator; // lib internal
 
-  U32 Time; // TimerRef last modif
+  uint32_t Time; // TimerRef last modif
 
-  U32 Status; // BitField FLAG_*
+  uint32_t Status; // BitField FLAG_*
 
-  U32 Master; // BitField ANIM_MASTER_ROT
+  uint32_t Master; // BitField ANIM_MASTER_ROT
 
-  U32 NbGroups;
+  uint32_t NbGroups;
 
   T_GROUP_INFO CurrentFrame[30];
 } T_OBJ_3D;
@@ -84,40 +81,40 @@ typedef struct {
 
 #pragma pack(push, 1)
 typedef struct {
-  S16 X;
-  S16 Y;
-  S16 Z;
-  S16 Group;
+  int16_t X;
+  int16_t Y;
+  int16_t Z;
+  int16_t Group;
 } T_OBJ_POINT;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct {
-  S32 Info;
-  S16 SizeHeader;
-  S16 Dummy;
-  S32 XMin;
-  S32 XMax;
-  S32 YMin;
-  S32 YMax;
-  S32 ZMin;
-  S32 ZMax;
-  S32 NbGroupes;
-  S32 OffGroupes;
-  S32 NbPoints;
-  S32 OffPoints;
-  S32 NbNormales;
-  S32 OffNormales;
-  S32 NbNormFaces;
-  S32 OffNormFaces;
-  S32 NbPolys;
-  S32 OffPolys;
-  S32 NbLines;
-  S32 OffLines;
-  S32 NbSpheres;
-  S32 OffSpheres;
-  S32 NbTextures;
-  S32 OffTextures;
+  int32_t Info;
+  int16_t SizeHeader;
+  int16_t Dummy;
+  int32_t XMin;
+  int32_t XMax;
+  int32_t YMin;
+  int32_t YMax;
+  int32_t ZMin;
+  int32_t ZMax;
+  int32_t NbGroupes;
+  int32_t OffGroupes;
+  int32_t NbPoints;
+  int32_t OffPoints;
+  int32_t NbNormales;
+  int32_t OffNormales;
+  int32_t NbNormFaces;
+  int32_t OffNormFaces;
+  int32_t NbPolys;
+  int32_t OffPolys;
+  int32_t NbLines;
+  int32_t OffLines;
+  int32_t NbSpheres;
+  int32_t OffSpheres;
+  int32_t NbTextures;
+  int32_t OffTextures;
 } T_BODY_HEADER;
 #pragma pack(pop)
 
@@ -130,17 +127,12 @@ typedef struct {
 #define MASK_OBJECT_TRANSPARENT (1 << 10)
 
 // -----------------------------------------------------------------------------
-extern U8 *ObjPtrMap; // Ptr on the current texture page
+extern uint8_t *ObjPtrMap; // Ptr on the current texture page
 extern T_OBJ_POINT Obj_ListRotatedPoints[];
 
 // -----------------------------------------------------------------------------
-extern S32 ObjectDisplay(T_OBJ_3D *obj);
-extern S32 BodyDisplay(S32 x, S32 y, S32 z, S32 alpha, S32 beta, S32 gamma,
+extern int32_t ObjectDisplay(T_OBJ_3D *obj);
+extern int32_t BodyDisplay(int32_t x, int32_t y, int32_t z, int32_t alpha, int32_t beta, int32_t gamma,
                        void *obj);
-extern S32 BodyDisplay_AlphaBeta(S32 x, S32 y, S32 z, S32 alpha, S32 beta,
-                                 S32 gamma, void *obj);
-
-// =============================================================================
-#ifdef __cplusplus
-}
-#endif
+extern int32_t BodyDisplay_AlphaBeta(int32_t x, int32_t y, int32_t z, int32_t alpha, int32_t beta,
+                                 int32_t gamma, void *obj);

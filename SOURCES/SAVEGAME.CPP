@@ -12,33 +12,33 @@
 
 extern	char	PlayerName[MAX_SIZE_PLAYER_NAME+1] ;
 
-extern	S32	LastMyJoy ;
-extern	S32	LastMyFire ;
-extern	S32	LastJoyFlag ;
+extern	int32_t	LastMyJoy ;
+extern	int32_t	LastMyFire ;
+extern	int32_t	LastJoyFlag ;
 
 #ifndef	EDITLBA2
 #ifdef __cplusplus
-extern "C" U8	*PtrLib3DBufferAnim ;	// P_ANIM.ASM (lib_3D)
+extern "C" uint8_t	*PtrLib3DBufferAnim ;	// P_ANIM.ASM (lib_3D)
 #else
-extern	U8	*PtrLib3DBufferAnim ;	// P_ANIM.ASM (lib_3D)
+extern	uint8_t	*PtrLib3DBufferAnim ;	// P_ANIM.ASM (lib_3D)
 #endif
 
 #pragma	aux	PtrLib3DBufferAnim	"*"
 #endif
 
-extern	S32	InvSelect 	    ;	// GAMEMENU.C
+extern	int32_t	InvSelect 	    ;	// GAMEMENU.C
 
-U8	*PtrSave ;
+uint8_t	*PtrSave ;
 
 #if defined(DEBUG_TOOLS)||defined(TEST_TOOLS)||defined(EDITLBA2)
 T_REAL_VALUE_HR	TempoRealAngle ;
-S32		LastStepFalling ;
-S32		LastStepShifting ;
+int32_t		LastStepFalling ;
+int32_t		LastStepShifting ;
 #endif
 
 #ifdef	DEMO
-S32	CurrentDemoSave = 0 ;
-S32	NewDemoSave = 0 ;
+int32_t	CurrentDemoSave = 0 ;
+int32_t	NewDemoSave = 0 ;
 
 char	*ListDemoSave[NB_DEMOSAVE] = {
 	"demo0.lba",
@@ -60,10 +60,10 @@ char	*ListDemoSave[NB_DEMOSAVE] = {
 
 #define	LbaReadByte(ptr)	ptr = *PtrSave++ ;
 
-#define	LbaReadWord(ptr)	ptr = *(S16*)PtrSave ;\
+#define	LbaReadWord(ptr)	ptr = *(int16_t*)PtrSave ;\
 				PtrSave += 2 ;
 
-#define	LbaReadLong(ptr)	ptr = *(S32*)PtrSave ;\
+#define	LbaReadLong(ptr)	ptr = *(int32_t*)PtrSave ;\
 				PtrSave += 4 ;
 
 //-------- Ecriture
@@ -72,21 +72,21 @@ char	*ListDemoSave[NB_DEMOSAVE] = {
 
 #define	LbaWriteByte(val)	*PtrSave++ = val ;
 
-#define	LbaWriteWord(val)	*(S16*)PtrSave = val ;\
+#define	LbaWriteWord(val)	*(int16_t*)PtrSave = val ;\
 				PtrSave += 2 ;
 
-#define	LbaWriteLong(val)	*(S32*)PtrSave = val ;\
+#define	LbaWriteLong(val)	*(int32_t*)PtrSave = val ;\
 				PtrSave += 4 ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Resultat pas terrible
 #ifndef	EDITLBA2
-void	RemapPicture( U8 *buf, U32 size )
+void	RemapPicture( uint8_t *buf, uint32_t size )
 {
-	S32	n ;
-	U8	newpal[256] ;
-	U8	*ptr ;
-	U8	r,v,b ;
+	int32_t	n ;
+	uint8_t	newpal[256] ;
+	uint8_t	*ptr ;
+	uint8_t	r,v,b ;
 
 //	if( PtrPal==PtrPalNormal )	return ;
 	// Mettre un moyen plus clean !!!!!!
@@ -128,7 +128,7 @@ void	RemapPicture( U8 *buf, U32 size )
 }
 
 #ifdef	DEMO
-S32	SetDemoSaveGame( S32 num )
+int32_t	SetDemoSaveGame( int32_t num )
 {
 	NewDemoSave = CurrentDemoSave = num ;
 
@@ -152,7 +152,7 @@ S32	SetDemoSaveGame( S32 num )
 void	AutoSaveGame()
 {
 #ifndef	DEMO
-	U8	memonumversion = NumVersion ;
+	uint8_t	memonumversion = NumVersion ;
 	char	memoplayername[MAX_SIZE_PLAYER_NAME+1] ;
 	char	memogamepathname[ADELINE_MAX_PATH] ;
 
@@ -198,7 +198,7 @@ void	AutoSaveGame()
 /*──────────────────────────────────────────────────────────────────────────*/
 void	CurrentSaveGame()
 {
-	U8	memonumversion = NumVersion ;
+	uint8_t	memonumversion = NumVersion ;
 	char	memoplayername[MAX_SIZE_PLAYER_NAME+1] ;
 	char	memogamepathname[ADELINE_MAX_PATH] ;
 
@@ -242,15 +242,15 @@ void	CurrentSaveGame()
 #endif	// EDITLBA2
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	SaveGame( S32 flagmess )
+void	SaveGame( int32_t flagmess )
 {
-	U8	*sizeptr ;
-	U8	*memoptr ;
-	S32	sizefile = 0 ;
+	uint8_t	*sizeptr ;
+	uint8_t	*memoptr ;
+	int32_t	sizefile = 0 ;
 #ifndef	EDITLBA2
-	S32	savetimerrefhr ;
+	int32_t	savetimerrefhr ;
 //	char string[30] ;
-//	S32	x0, y0, x1, y1 ;
+//	int32_t	x0, y0, x1, y1 ;
 
 	// Image 160x120
 	ScaleBox( 0, 0, 639, 479, Log, 0, 0, 159, 119, BufSpeak+50000L ) ;	// old Screen
@@ -281,7 +281,7 @@ void	SaveGame( S32 flagmess )
 
 	PtrSave = BufSpeak+50000L ;	// old Screen
 #else
-	PtrSave = (U8*)Screen ;
+	PtrSave = (uint8_t*)Screen ;
 #endif
 
 	if( flagmess )	// non AUTOSAVE ni CURRENTSAVE
@@ -332,7 +332,7 @@ void	SaveGame( S32 flagmess )
 
 	if( NumVersion&SAVE_COMPRESS )	// Version compactee
 	{
-		S32	size ;
+		int32_t	size ;
 
 		sizefile = PtrSave-memoptr ;
 
@@ -347,28 +347,28 @@ void	SaveGame( S32 flagmess )
 #ifndef	EDITLBA2
 	Save( GamePathname, BufSpeak+50000L, PtrSave-(BufSpeak+50000L) ) ;
 #else
-	Save( GamePathname, (U8*)Screen, PtrSave-(U8*)Screen ) ;
+	Save( GamePathname, (uint8_t*)Screen, PtrSave-(uint8_t*)Screen ) ;
 #endif
 }
 
 // Version 4 : LBA II only !!
-#define	LoadGameV4(name)	Load( name, (U8*)Screen ) ;\
-				PtrSave = (U8*)Screen ;
+#define	LoadGameV4(name)	Load( name, (uint8_t*)Screen ) ;\
+				PtrSave = (uint8_t*)Screen ;
 
 #ifndef	EDITLBA2
 /*──────────────────────────────────────────────────────────────────────────*/
 void	LoadGameNumCube( )
 {
-	U8	numversion ;
-	U8	wbyte ;
-	U8	*ptr  ;
+	uint8_t	numversion ;
+	uint8_t	wbyte ;
+	uint8_t	*ptr  ;
 
 	LoadGameV4( GamePathname ) ;
 
 	LbaReadByte( numversion ) ;	// num version
 	LbaReadLong( NewCube ) ;
 
-	ptr = (U8 *)PlayerName ;
+	ptr = (uint8_t *)PlayerName ;
 	do
 	{
 		LbaReadByte( wbyte ) ;
@@ -378,14 +378,14 @@ void	LoadGameNumCube( )
 
 	if( numversion&SAVE_COMPRESS )	// Version compactee
 	{
-		U8	*ptrdecomp ;
-		S32	sizefile ;
-		S32	size ;
+		uint8_t	*ptrdecomp ;
+		int32_t	sizefile ;
+		int32_t	size ;
 
 		LbaReadLong( sizefile ) ;
-		size = FileSize( GamePathname )-(PtrSave-(U8*)Screen) ;
+		size = FileSize( GamePathname )-(PtrSave-(uint8_t*)Screen) ;
 
-		ptrdecomp = (U8*)PtrSave + sizefile + RECOVER_AREA ;
+		ptrdecomp = (uint8_t*)PtrSave + sizefile + RECOVER_AREA ;
 		memcpy( ptrdecomp, PtrSave, size ) ;
 		ExpandLZ( PtrSave, ptrdecomp, sizefile, 2 ) ;
 	}
@@ -399,9 +399,9 @@ void	LoadGameNumCube( )
 /*──────────────────────────────────────────────────────────────────────────*/
 void	LoadGamePlayerName( )
 {
-	U8	wbyte ;
-	S32	newcube ;
-	U8	*ptr ;
+	uint8_t	wbyte ;
+	int32_t	newcube ;
+	uint8_t	*ptr ;
 
 #ifdef	EDITLBA2
 	PtrSave = BufTempo ;
@@ -414,7 +414,7 @@ void	LoadGamePlayerName( )
 	LbaReadByte( wbyte ) ;	// num version
 	LbaReadLong( newcube ) ;
 
-	ptr = (U8 *)PlayerName ;
+	ptr = (uint8_t *)PlayerName ;
 	do
 	{
 		LbaReadByte( wbyte ) ;
@@ -427,10 +427,10 @@ void	LoadGamePlayerName( )
 #define	NB_GAME_CHOICE	5
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U8	*LoadGameScreen( )
+uint8_t	*LoadGameScreen( )
 {
-	U8	wbyte ;
-	U8	*ptr ;
+	uint8_t	wbyte ;
+	uint8_t	*ptr ;
 
 #ifdef	EDITLBA2
 	PtrSave = BufTempo ;
@@ -443,7 +443,7 @@ U8	*LoadGameScreen( )
 	LbaReadByte( NumVersion ) ;	// num version
 	LbaReadLong( NewCube ) ;
 
-	ptr = (U8 *)PlayerName ;
+	ptr = (uint8_t *)PlayerName ;
 	do
 	{
 		LbaReadByte( wbyte ) ;
@@ -453,9 +453,9 @@ U8	*LoadGameScreen( )
 
 	if( NumVersion&SAVE_COMPRESS )	// Version compactee
 	{
-		U8	*ptrdecomp ;
-		S32	sizefile ;
-		S32	size ;
+		uint8_t	*ptrdecomp ;
+		int32_t	sizefile ;
+		int32_t	size ;
 
 		LbaReadLong( sizefile ) ;
 #ifdef	EDITLBA2
@@ -464,7 +464,7 @@ U8	*LoadGameScreen( )
 		size = FileSize( GamePathname )-(PtrSave-(BufSpeak+50000L)) ;
 #endif
 
-		ptrdecomp = (U8*)PtrSave + sizefile + RECOVER_AREA ;
+		ptrdecomp = (uint8_t*)PtrSave + sizefile + RECOVER_AREA ;
 		memcpy( ptrdecomp, PtrSave, size ) ;
 		ExpandLZ( PtrSave, ptrdecomp, sizefile, 2 ) ;
 	}
@@ -473,13 +473,13 @@ U8	*LoadGameScreen( )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	LoadGame( void )
+int32_t	LoadGame( void )
 {
-	U8	*ptr ;
-	U8	wbyte ;
+	uint8_t	*ptr ;
+	uint8_t	wbyte ;
 #ifndef	EDITLBA2
-	S32	flaginit = FALSE ;
-	S32	savetimerrefhr ;
+	int32_t	flaginit = FALSE ;
+	int32_t	savetimerrefhr ;
 
 	HQ_StopSample() ;
 #endif
@@ -489,7 +489,7 @@ S32	LoadGame( void )
 	LbaReadByte( NumVersion ) ;	// num version
 	LbaReadLong( NewCube ) ;
 
-	ptr = (U8 *)PlayerName ;
+	ptr = (uint8_t *)PlayerName ;
 	do
 	{
 		LbaReadByte( wbyte ) ;
@@ -499,20 +499,20 @@ S32	LoadGame( void )
 
 	if( NumVersion&SAVE_COMPRESS )	// Version compactee
 	{
-		U8	*ptrdecomp ;
-		S32	sizefile ;
-		S32	size ;
+		uint8_t	*ptrdecomp ;
+		int32_t	sizefile ;
+		int32_t	size ;
 
 		LbaReadLong( sizefile ) ;
-		size = FileSize( GamePathname )-(PtrSave-(U8*)Screen) ;
+		size = FileSize( GamePathname )-(PtrSave-(uint8_t*)Screen) ;
 
-		ptrdecomp = (U8*)PtrSave + sizefile + RECOVER_AREA ;
+		ptrdecomp = (uint8_t*)PtrSave + sizefile + RECOVER_AREA ;
 		memcpy( ptrdecomp, PtrSave, size ) ;
 		ExpandLZ( PtrSave, ptrdecomp, sizefile, 2 ) ;
 
 #ifdef	EDITLBA2
-		SizeFile = sizefile + (PtrSave-(U8*)Screen-sizeof(sizefile)) ;
-		CompressedSizeFile = size + (PtrSave-(U8*)Screen) ;
+		SizeFile = sizefile + (PtrSave-(uint8_t*)Screen-sizeof(sizefile)) ;
+		CompressedSizeFile = size + (PtrSave-(uint8_t*)Screen) ;
 #endif
 	}
 #ifdef	EDITLBA2
@@ -557,22 +557,22 @@ S32	LoadGame( void )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	LoadGameOldVersion( void )
+int32_t	LoadGameOldVersion( void )
 {
 	T_INV_OBJ	*ptri ;
 	T_ARROW		*ptra ;
-	S32		n ;
-	U8		*ptr ;
-	S32		savetimerrefhr ;
-	S32		wlong ;
-	U8		wbyte ;
+	int32_t		n ;
+	uint8_t		*ptr ;
+	int32_t		savetimerrefhr ;
+	int32_t		wlong ;
+	uint8_t		wbyte ;
 
 	LoadGameV4( GamePathname ) ;
 
 	LbaReadByte( NumVersion ) ;	// num version
 	LbaReadLong( NewCube ) ;
 
-	ptr = (U8 *)PlayerName ;
+	ptr = (uint8_t *)PlayerName ;
 	do
 	{
 		LbaReadByte( wbyte ) ;
@@ -582,20 +582,20 @@ S32	LoadGameOldVersion( void )
 
 	if( NumVersion&SAVE_COMPRESS )	// Version compactee
 	{
-		U8	*ptrdecomp ;
-		S32	sizefile ;
-		S32	size ;
+		uint8_t	*ptrdecomp ;
+		int32_t	sizefile ;
+		int32_t	size ;
 
 		LbaReadLong( sizefile ) ;
-		size = FileSize( GamePathname )-(PtrSave-(U8*)Screen) ;
+		size = FileSize( GamePathname )-(PtrSave-(uint8_t*)Screen) ;
 
-		ptrdecomp = (U8*)PtrSave + sizefile /*- size*/ + RECOVER_AREA ;
+		ptrdecomp = (uint8_t*)PtrSave + sizefile /*- size*/ + RECOVER_AREA ;
 		memcpy( ptrdecomp, PtrSave, size ) ;
 		ExpandLZ( PtrSave, ptrdecomp, sizefile, 2 ) ;
 
 #ifdef	EDITLBA2
-		SizeFile = sizefile + (PtrSave-(U8*)Screen-sizeof(sizefile)) ;
-		CompressedSizeFile = size + (PtrSave-(U8*)Screen) ;
+		SizeFile = sizefile + (PtrSave-(uint8_t*)Screen-sizeof(sizefile)) ;
+		CompressedSizeFile = size + (PtrSave-(uint8_t*)Screen) ;
 #endif
 	}
 #ifdef	EDITLBA2
@@ -701,7 +701,7 @@ S32	LoadGameOldVersion( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Sauvegarde de l'etat du jeu dans PtrSave
-void	SaveContexte( S32 savetimerrefhr )
+void	SaveContexte( int32_t savetimerrefhr )
 {
 	T_OBJET		*ptrobj ;
 	S_PART_FLOW	*ptrf ;
@@ -709,17 +709,17 @@ void	SaveContexte( S32 savetimerrefhr )
 	T_DART		*ptrd ;
 	T_ZONE		*ptrz ;
 	T_ARROW		*ptra ;
-	S32	n ;
+	int32_t	n ;
 #ifndef	EDITLBA2
-	U8	wbyte ;
-	U8	wbyte2 ;
-	U8	*saveptr ;
-	U8	*saveptr2 ;
+	uint8_t	wbyte ;
+	uint8_t	wbyte2 ;
+	uint8_t	*saveptr ;
+	uint8_t	*saveptr2 ;
 	T_PATCH		*ptrpatch ;
 	T_EXTRA		*ptre ;
 	T_INCRUST_DISP	*ptrdisp ;
 	S_ONE_DOT	*ptrpt ;
-	S32	i ;
+	int32_t	i ;
 #endif
 
 	// list vars game et cube
@@ -795,7 +795,7 @@ void	SaveContexte( S32 savetimerrefhr )
 	LbaWriteLong( ExtraConque ) ;
 	LbaWriteByte( PingouinActif ) ;
 
-	LbaWriteLong( (S32)PtrZoneClimb ) ;
+	LbaWriteLong( (int32_t)PtrZoneClimb ) ;
 
 	// Flechettes
 	ptrd = ListDart ;
@@ -839,19 +839,19 @@ void	SaveContexte( S32 savetimerrefhr )
 		LbaWriteWord( ptrobj->LifePoint ) ;
 		LbaWriteWord( ptrobj->OptionFlags ) ;
 
-//	U8	*PtrAnimAction ;
+//	uint8_t	*PtrAnimAction ;
 
 		LbaWriteWord( ptrobj->Sprite ) ;
 		LbaWriteWord( ptrobj->OffsetLabelTrack ) ;
 
 //	T_OBJ_3D Obj	;
-//	U8	*PtrFile3D ;
+//	uint8_t	*PtrFile3D ;
 
 		LbaWriteLong( ptrobj->IndexFile3D ) ;
 
-//	S16	NbBonus ;
+//	int16_t	NbBonus ;
 		LbaWriteByte( ptrobj->Armure ) ;
-//	U8	CoulObj ;
+//	uint8_t	CoulObj ;
 
 		LbaWriteWord( ptrobj->XMin ) ;
 		LbaWriteWord( ptrobj->XMax ) ;
@@ -862,7 +862,7 @@ void	SaveContexte( S32 savetimerrefhr )
 
 		LbaWriteLong( ptrobj->OldBeta ) ;
 		LbaWrite( &(ptrobj->BoundAngle),sizeof(ptrobj->BoundAngle) ) ;
-//	U8	*PtrTrack ;
+//	uint8_t	*PtrTrack ;
 		LbaWriteWord( ptrobj->OffsetTrack ) ;
 		LbaWriteWord( ptrobj->SRot ) ;
 		LbaWriteWord( ptrobj->OffsetLife ) ;
@@ -881,7 +881,7 @@ void	SaveContexte( S32 savetimerrefhr )
 		LbaWriteByte( ptrobj->CodeJeu ) ;
 		LbaWrite( &(ptrobj->ExeSwitch),sizeof(ptrobj->ExeSwitch) ) ;
 
-//	S16	MessageChapter[MAX_CHAPTER] ;
+//	int16_t	MessageChapter[MAX_CHAPTER] ;
 
 		LbaWriteLong( ptrobj->SampleAlways ) ;
 		LbaWriteByte( ptrobj->SampleVolume ) ;
@@ -913,11 +913,11 @@ void	SaveContexte( S32 savetimerrefhr )
 				break ;
 
 			case 2:
-				LbaWriteWord( *(S16*)(PtrScene+ptrpatch->Offset) ) ;
+				LbaWriteWord( *(int16_t*)(PtrScene+ptrpatch->Offset) ) ;
 				break ;
 
 			case 4:
-				LbaWriteLong( *(S32*)(PtrScene+ptrpatch->Offset) ) ;
+				LbaWriteLong( *(int32_t*)(PtrScene+ptrpatch->Offset) ) ;
 				break ;
 
 			default:
@@ -925,7 +925,7 @@ void	SaveContexte( S32 savetimerrefhr )
 		}
 	}
 
-	*(U32*)saveptr = (U32)(PtrSave-saveptr-4) ;
+	*(uint32_t*)saveptr = (uint32_t)(PtrSave-saveptr-4) ;
 #endif
 	//-----------------------------------
 
@@ -1065,7 +1065,7 @@ void	SaveContexte( S32 savetimerrefhr )
 	LbaWrite( ListBuggy, sizeof(S_BUGGY)*MAX_BUGGYS ) ;
 
 	// a integrer dans la prochaine version de sauvegarde
-	LbaWrite( ListArdoise, MAX_ARDOISE*sizeof(S8) ) ;
+	LbaWrite( ListArdoise, MAX_ARDOISE*sizeof(int8_t) ) ;
 
 	LbaWriteByte( CurrentArdoise ) ;
 	LbaWriteByte( NbArdoise ) ;
@@ -1075,7 +1075,7 @@ void	SaveContexte( S32 savetimerrefhr )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 // Chargement d'une partie se trouvant dans PtrSave
-S32	LoadContexte( S32 *savetimerrefhr )
+int32_t	LoadContexte( int32_t *savetimerrefhr )
 {
 	T_OBJET		*ptrobj ;
 	S_PART_FLOW	*ptrf ;
@@ -1083,17 +1083,17 @@ S32	LoadContexte( S32 *savetimerrefhr )
 	T_DART		*ptrd ;
 	T_ZONE		*ptrz ;
 	T_ARROW		*ptra ;
-	S32		n ;
-	S32		wlong ;
+	int32_t		n ;
+	int32_t		wlong ;
 #ifndef	EDITLBA2
-	S32		wlong2 ;
+	int32_t		wlong2 ;
 	T_EXTRA		*ptrextra ;
 	T_PATCH		*ptrpatch ;
 	S_ONE_DOT	*ptrdot ;
-	S32	flaginit = FALSE ;
-	U8	wbyte2 ;
+	int32_t	flaginit = FALSE ;
+	uint8_t	wbyte2 ;
 #endif
-	U8		wbyte ;
+	uint8_t		wbyte ;
 
 	// list Var game and cube
 #ifdef	EDITLBA2
@@ -1247,7 +1247,7 @@ S32	LoadContexte( S32 *savetimerrefhr )
 	LbaReadLong( ExtraConque ) ;
 	LbaReadByte( PingouinActif ) ;
 
-	PtrZoneClimb = (T_ZONE*)*(U32*)PtrSave ;
+	PtrZoneClimb = (T_ZONE*)*(uint32_t*)PtrSave ;
 	PtrSave+=4 ;
 
 	// Flechettes
@@ -1290,19 +1290,19 @@ S32	LoadContexte( S32 *savetimerrefhr )
 		LbaReadWord( ptrobj->LifePoint ) ;
 		LbaReadWord( ptrobj->OptionFlags ) ;
 
-//	U8	*PtrAnimAction ;
+//	uint8_t	*PtrAnimAction ;
 
 		LbaReadWord( ptrobj->Sprite ) ;
 		LbaReadWord( ptrobj->OffsetLabelTrack ) ;
 
 //	T_OBJ_3D Obj	;
-//	U8	*PtrFile3D ;
+//	uint8_t	*PtrFile3D ;
 
 		LbaReadLong( ptrobj->IndexFile3D ) ;
 
-//	S16	NbBonus ;
+//	int16_t	NbBonus ;
 		LbaReadByte( ptrobj->Armure ) ;
-//	U8	CoulObj ;
+//	uint8_t	CoulObj ;
 
 		LbaReadWord( ptrobj->XMin ) ;
 		LbaReadWord( ptrobj->XMax ) ;
@@ -1322,7 +1322,7 @@ S32	LoadContexte( S32 *savetimerrefhr )
 #endif
 		LbaRead( &(ptrobj->BoundAngle), sizeof(ptrobj->BoundAngle) ) ;
 
-//	U8	*PtrTrack ;
+//	uint8_t	*PtrTrack ;
 		LbaReadWord( ptrobj->OffsetTrack ) ;
 		LbaReadWord( ptrobj->SRot ) ;
 		LbaReadWord( ptrobj->OffsetLife ) ;
@@ -1341,7 +1341,7 @@ S32	LoadContexte( S32 *savetimerrefhr )
 		LbaReadByte( ptrobj->CodeJeu ) ;
 		LbaRead( &(ptrobj->ExeSwitch),sizeof(ptrobj->ExeSwitch) ) ;
 
-//	S16	MessageChapter[MAX_CHAPTER] ;
+//	int16_t	MessageChapter[MAX_CHAPTER] ;
 
 #if defined(DEBUG_TOOLS)||defined(TEST_TOOLS)||defined(EDITLBA2)
 		if( NumVersion>=35 )// Compatibilité sauvegardes
@@ -1379,11 +1379,11 @@ S32	LoadContexte( S32 *savetimerrefhr )
 				break ;
 
 			case 2:
-				LbaReadWord( *(S16*)(PtrScene+ptrpatch->Offset) ) ;
+				LbaReadWord( *(int16_t*)(PtrScene+ptrpatch->Offset) ) ;
 				break ;
 
 			case 4:
-				LbaReadLong( *(S32*)(PtrScene+ptrpatch->Offset) ) ;
+				LbaReadLong( *(int32_t*)(PtrScene+ptrpatch->Offset) ) ;
 				break ;
 
 			default:
@@ -1525,7 +1525,7 @@ S32	LoadContexte( S32 *savetimerrefhr )
 	LbaReadByte( NumBuggy ) ;
 	LbaRead( ListBuggy, sizeof(S_BUGGY)*MAX_BUGGYS ) ;
 
-	LbaRead( ListArdoise, MAX_ARDOISE*sizeof(S8) ) ;
+	LbaRead( ListArdoise, MAX_ARDOISE*sizeof(int8_t) ) ;
 
 	LbaReadByte( CurrentArdoise ) ;
 	LbaReadByte( NbArdoise ) ;

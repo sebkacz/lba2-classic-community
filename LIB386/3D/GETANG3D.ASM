@@ -21,7 +21,7 @@
 		public	C	GetAngleVector3D
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	GetAngleVector3D(S32 x, S32 y, S32 z)	;
+;void	GetAngleVector3D(int32_t x, int32_t y, int32_t z)	;
 
 ;#pragma aux GetAngleVector3D	"*"		\
 ;	parm		[eax] [ebx] [ecx]	\

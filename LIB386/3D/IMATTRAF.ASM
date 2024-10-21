@@ -20,7 +20,7 @@
 		public	C	InitMatrixTransF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	InitMatrixTransF(S32 *MatDst, S32 tx, S32 ty, S32 tz) ;
+;void	InitMatrixTransF(int32_t *MatDst, int32_t tx, int32_t ty, int32_t tz) ;
 
 ;#pragma aux InitMatrixTransF	"*"		\
 ;	parm		[edi] [eax] [ebx] [ecx]	\

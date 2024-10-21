@@ -7,62 +7,62 @@ extern "C" {
 
 // GRILLE_A.ASM
 
-extern	U8	CodeJeu			;
-extern	S32	XMap, YMap, ZMap 	;
-extern	S32	XScreen, YScreen	;
-extern	PTR_U8	BufCube       		;
-extern	PTR_U8	BufferMaskBrick 	;
-extern	PTR_U8	BufMap			;
-extern	PTR_U8	TabBlock		;
-extern	PTR_U8	BufferBrick	       	;
+extern	uint8_t	CodeJeu			;
+extern	int32_t	XMap, YMap, ZMap 	;
+extern	int32_t	XScreen, YScreen	;
+extern	PTR_uint8_t	BufCube       		;
+extern	PTR_uint8_t	BufferMaskBrick 	;
+extern	PTR_uint8_t	BufMap			;
+extern	PTR_uint8_t	TabBlock		;
+extern	PTR_uint8_t	BufferBrick	       	;
 
 //-------------------------------------------------------------------
 extern Func_WorldColBrick	WorldColBrick ;
 
 //-------------------------------------------------------------------
-extern U8	WorldColBrickFull( S32 xw, S32 yw, S32 zw, S32 ymax ) ;
+extern uint8_t	WorldColBrickFull( int32_t xw, int32_t yw, int32_t zw, int32_t ymax ) ;
 
 #pragma	aux     WorldColBrickFull	"*"	\
 		parm caller []			\
 		modify [eax ebx ecx edx]
 
 //-------------------------------------------------------------------
-extern U8	WorldCodeBrick(    S32 xw, S32 yw, S32 zw ) ;
+extern uint8_t	WorldCodeBrick(    int32_t xw, int32_t yw, int32_t zw ) ;
 
 #pragma aux	WorldCodeBrick	"*"			\
 		parm caller	[eax] [ebx] [ecx]	\
 		modify [edx]
 
 //-------------------------------------------------------------------
-extern U8	GetBlockBrick(     S32 xw, S32 yw, S32 zw ) ;
+extern uint8_t	GetBlockBrick(     int32_t xw, int32_t yw, int32_t zw ) ;
 
 #pragma	aux	GetBlockBrick	"*"	\
 		parm caller [] 		\
 		modify [eax ecx edx]
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-extern	U8	GetWorldColBrickVisible( S32 x, S32 y, S32 z ) ;
+extern	uint8_t	GetWorldColBrickVisible( int32_t x, int32_t y, int32_t z ) ;
 
 #pragma	aux     GetWorldColBrickVisible	"*"	\
 		parm caller []			\
 		modify [eax ecx edx]
 
 //-------------------------------------------------------------------
-extern	void	DecompColonne( U8 *pts, U8 *ptd  ) ;
+extern	void	DecompColonne( uint8_t *pts, uint8_t *ptd  ) ;
 
 #pragma	aux 	DecompColonne	"*"		\
 		parm caller	[esi] [edi]	\
 		modify [eax ecx edx]
 
 //-------------------------------------------------------------------
-extern	void	Map2Screen( S32 x, S32 y, S32 z ) ;
+extern	void	Map2Screen( int32_t x, int32_t y, int32_t z ) ;
 
 #pragma	aux	Map2Screen	"*"			\
 		parm caller	[eax] [ecx] [edx]	\
 		modify exact [eax ebx edx]
 
 //-------------------------------------------------------------------
-extern	U8	*GetAdrBlock( S32 numblock ) ;
+extern	uint8_t	*GetAdrBlock( int32_t numblock ) ;
 
 #pragma	aux 	GetAdrBlock	"*"	\
 		parm caller	[ecx]	\
@@ -75,7 +75,7 @@ extern	U8	*GetAdrBlock( S32 numblock ) ;
 #endif
 
 //-------------------------------------------------------------------
-extern S32  LoadUsedBrick(void);
+extern int32_t  LoadUsedBrick(void);
 
 //-------------------------------------------------------------------
 extern Func_InitGrille InitGrille ;
@@ -84,9 +84,9 @@ extern Func_InitGrille InitGrille ;
 extern void FreeGrille(void);
 
 //-------------------------------------------------------------------
-extern U8   *GetAdrColonneMap(S32 x,S32 z);
+extern uint8_t   *GetAdrColonneMap(int32_t x,int32_t z);
 //-------------------------------------------------------------------
-extern U8   *GetAdrColonneCube(S32 x,S32 z);
+extern uint8_t   *GetAdrColonneCube(int32_t x,int32_t z);
 //-------------------------------------------------------------------
 extern Func_WorldColBrickVisible WorldColBrickVisible ;
 //-------------------------------------------------------------------
@@ -96,7 +96,7 @@ extern Func_GetShadow GetShadow ;
 extern Func_ProjectShadow ProjectShadow ;
 
 //-------------------------------------------------------------------
-extern U32  CreateMaskGph(U8 *ptsrc,U8 *ptdst);
+extern uint32_t  CreateMaskGph(uint8_t *ptsrc,uint8_t *ptdst);
 
 //-------------------------------------------------------------------
 extern void CopyMapToCube(void);
@@ -105,34 +105,34 @@ extern void CopyMapToCube(void);
 extern void InitBufferCube(void);
 
 //-------------------------------------------------------------------
-extern void DrawOverBrick(S32 xm,S32 ym,S32 zm);
+extern void DrawOverBrick(int32_t xm,int32_t ym,int32_t zm);
 
 //-------------------------------------------------------------------
-extern void DrawOverBrick3(S32 xm,S32 ym,S32 zm,S32 ymax);
+extern void DrawOverBrick3(int32_t xm,int32_t ym,int32_t zm,int32_t ymax);
 
 //-------------------------------------------------------------------
-extern void DrawOverBrickCage(S32 xm,S32 ym,S32 zm);
+extern void DrawOverBrickCage(int32_t xm,int32_t ym,int32_t zm);
 
 //-------------------------------------------------------------------
-extern void AffBrickBlock(S32 block,S32 brick,S16 x,S16 y,S16 z);
+extern void AffBrickBlock(int32_t block,int32_t brick,int16_t x,int16_t y,int16_t z);
 
 //-------------------------------------------------------------------
 extern void AffGrille(void);
 
 //-------------------------------------------------------------------
-extern void AffBrickBlockColon(S32 block,S32 brick,S16 x,S16 y,S16 z);
+extern void AffBrickBlockColon(int32_t block,int32_t brick,int16_t x,int16_t y,int16_t z);
 
 //-------------------------------------------------------------------
 extern void AffGrilleOnly(void);
 
 //-------------------------------------------------------------------
-extern void AffBrickBlockOnly(S32 block,S32 brick,S16 x,S16 y,S16 z);
+extern void AffBrickBlockOnly(int32_t block,int32_t brick,int16_t x,int16_t y,int16_t z);
 
 //-------------------------------------------------------------------
 extern void AffGrilleLabyrinthe(void);
 
 //-------------------------------------------------------------------
-extern void AffOneBrick(S32 x,S32 y,S32 z);
+extern void AffOneBrick(int32_t x,int32_t y,int32_t z);
 
 //-------------------------------------------------------------------
 extern void IncrustGrm(T_ZONE *ptrz);

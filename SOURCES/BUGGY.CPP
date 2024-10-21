@@ -16,16 +16,16 @@
 
 S_BUGGY	ListBuggy[MAX_BUGGYS] ;
 
-S32	Gear = 0 ;
-S32	TimerGear ;
+int32_t	Gear = 0 ;
+int32_t	TimerGear ;
 
-U8	NumBuggy = 0	;
+uint8_t	NumBuggy = 0	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 // Initialise Pos et Cube Buggy Scenarique pris par Twinsen
-void	InitBuggy( U8 numobj, U32 flaginit )
+void	InitBuggy( uint8_t numobj, uint32_t flaginit )
 {
 	S_BUGGY	*ptb = &ListBuggy[0] ;
 	T_OBJET	*ptrobj = &ListObjet[numobj] ;
@@ -49,7 +49,7 @@ void	InitBuggy( U8 numobj, U32 flaginit )
 
 		InitBody( GEN_BODY_NORMAL, numobj ) ;
 
-		NumBuggy = (U8)(numobj|BUGGY_PRESENT) ;
+		NumBuggy = (uint8_t)(numobj|BUGGY_PRESENT) ;
 	}
 	else if( NumBuggy )
 	{
@@ -57,7 +57,7 @@ void	InitBuggy( U8 numobj, U32 flaginit )
 		AND ListObjet[NUM_PERSO].Move!=MOVE_BUGGY )
 		{
 #ifndef	LBA_EDITOR
-			S32	x, y ;
+			int32_t	x, y ;
 #endif
 
 			if( NumCube==ptb->Cube )
@@ -93,7 +93,7 @@ void	InitBuggy( U8 numobj, U32 flaginit )
 		}
 		else	InitBody( NO_BODY, numobj ) ;
 
-		NumBuggy = (U8)(numobj|BUGGY_PRESENT) ;
+		NumBuggy = (uint8_t)(numobj|BUGGY_PRESENT) ;
 	}
 	else	InitBody( NO_BODY, numobj ) ;
 }
@@ -114,7 +114,7 @@ void	ResetBuggy( void )
 
 void	TakeBuggy( void )
 {
-	S32	sample ;
+	int32_t	sample ;
 	T_OBJET	*ptrobj = &ListObjet[NUM_PERSO] ;
 	S_BUGGY	*ptb    = &ListBuggy[0] ;
 
@@ -179,9 +179,9 @@ void	TakeBuggy( void )
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-void	LeaveBuggy( U8 newcomportement )
+void	LeaveBuggy( uint8_t newcomportement )
 {
-	S32	sample ;
+	int32_t	sample ;
 	T_OBJET	*ptrobj = &ListObjet[NUM_PERSO] ;
 	S_BUGGY	*ptb    = &ListBuggy[0] ;
 
@@ -237,13 +237,13 @@ void	MoveBuggy( T_OBJET *ptrobj )
 {
 	S_BUGGY		*ptb   = &ListBuggy[0] ;
 	T_OBJ_3D	*ptb3d = &ptrobj->Obj ;
-	S32		pitch  = 0 ;
-	S32	flagattack = FALSE ;
+	int32_t		pitch  = 0 ;
+	int32_t	flagattack = FALSE ;
 
-//	S32	speedlevel ;
-	S32	speedinc ;
-	S32	rotlevel ;
-	S32	timerhr, deltatimer ;
+//	int32_t	speedlevel ;
+	int32_t	speedinc ;
+	int32_t	rotlevel ;
+	int32_t	timerhr, deltatimer ;
 
 	timerhr = TimerRefHR ;
 	deltatimer = timerhr - ptb->LastTimer ;
@@ -461,7 +461,7 @@ void	MoveBuggy( T_OBJET *ptrobj )
 	if( ptrobj->SampleAlways
 	AND IsSamplePlaying( ptrobj->SampleAlways ) )
 	{
-		S32	pitch ;
+		int32_t	pitch ;
 
 		switch( Gear )
 		{
@@ -490,16 +490,16 @@ void	MoveBuggy( T_OBJET *ptrobj )
 
 void	DoAnimBuggy( T_OBJET *ptrobj )
 {
-	S32	x1, y1, z1, yw ;
+	int32_t	x1, y1, z1, yw ;
 	S_BUGGY	*ptb = &ListBuggy[0] ;
 	T_OBJ_3D	*ptb3d = &ptrobj->Obj ;
 
-//	S32	oldx, oldy, oldz ;
+//	int32_t	oldx, oldy, oldz ;
 
 	// wheels rot
-	S32	c, d ;
+	int32_t	c, d ;
 
-	S32	x, y, z ;
+	int32_t	x, y, z ;
 
 	// Magouille pour ne pas ecraser les groupes dans AffOneObjet()
 	ObjectSetInterFrame( ptb3d )	;
@@ -525,9 +525,9 @@ void	DoAnimBuggy( T_OBJET *ptrobj )
 	// test altitude #2: triangles interdits
 
 	// roue avant gauche direction
-	ptb3d->CurrentFrame[3].Beta = (S16)ptb->BetaWheel ;
+	ptb3d->CurrentFrame[3].Beta = (int16_t)ptb->BetaWheel ;
 	// roue avant droite direction
-	ptb3d->CurrentFrame[6].Beta = (S16)ptb->BetaWheel ;
+	ptb3d->CurrentFrame[6].Beta = (int16_t)ptb->BetaWheel ;
 
 
 	// gestion 4 roues séparées.
@@ -649,13 +649,13 @@ void	DoAnimBuggy( T_OBJET *ptrobj )
 	ptb->Wheel[3].Z = z ;
 
 	// +++++++++++ front right wheel
-	ptb3d->CurrentFrame[4].Alpha = (S16)ptb->Wheel[1].Angle ;
+	ptb3d->CurrentFrame[4].Alpha = (int16_t)ptb->Wheel[1].Angle ;
 	// +++++++++++ front left wheel
-	ptb3d->CurrentFrame[7].Alpha = (S16)ptb->Wheel[0].Angle ;
+	ptb3d->CurrentFrame[7].Alpha = (int16_t)ptb->Wheel[0].Angle ;
 	// +++++++++++ back left wheel
-	ptb3d->CurrentFrame[11].Alpha = (S16)ptb->Wheel[2].Angle ;
+	ptb3d->CurrentFrame[11].Alpha = (int16_t)ptb->Wheel[2].Angle ;
 	// +++++++++++ back right wheel
-	ptb3d->CurrentFrame[9].Alpha = (S16)ptb->Wheel[3].Angle ;
+	ptb3d->CurrentFrame[9].Alpha = (int16_t)ptb->Wheel[3].Angle ;
 
 	// inclinaison voiture (pitch)
 	ptb3d->CurrentFrame[1].Type = 0 ;
@@ -679,7 +679,7 @@ void	DoAnimBuggy( T_OBJET *ptrobj )
 	}
 	else	y1 = yw ;
 
-	ptb3d->CurrentFrame[1].Alpha = (S16)(1024-GetAngle2D( 0, y, 800, y1 ) ) ;
+	ptb3d->CurrentFrame[1].Alpha = (int16_t)(1024-GetAngle2D( 0, y, 800, y1 ) ) ;
 	ptb->Alpha = ptb3d->CurrentFrame[1].Alpha ;
 
 	// inclinaison voiture (roll)
@@ -702,13 +702,13 @@ void	DoAnimBuggy( T_OBJET *ptrobj )
 	}
 	else	y1 = yw ;
 
-	ptb3d->CurrentFrame[1].Gamma = (S16)GetAngle2D( y, 0, y1, 800 ) ;
+	ptb3d->CurrentFrame[1].Gamma = (int16_t)GetAngle2D( y, 0, y1, 800 ) ;
 
 	// volant
-	ptb3d->CurrentFrame[12].Gamma = (S16)-ptb->BetaWheel ;
+	ptb3d->CurrentFrame[12].Gamma = (int16_t)-ptb->BetaWheel ;
 
 	// tete twinsen
-	ptb3d->CurrentFrame[14].Beta = (S16)ptb->BetaWheel ;
+	ptb3d->CurrentFrame[14].Beta = (int16_t)ptb->BetaWheel ;
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀

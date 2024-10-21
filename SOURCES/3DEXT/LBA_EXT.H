@@ -6,7 +6,7 @@
 
 #include <POLYGON/POLY.H>
 
-S32	Min3( S32 a, S32 b, S32 c ) ;
+int32_t	Min3( int32_t a, int32_t b, int32_t c ) ;
 /*
 #pragma aux	Min3=					\
 		"cmp	eax, edx"			\
@@ -24,7 +24,7 @@ S32	Min3( S32 a, S32 b, S32 c ) ;
 		parm caller [eax] [edx] [ecx]		\
 		modify exact [eax]
 */
-S32	Max3( S32 a, S32 b, S32 c ) ;
+int32_t	Max3( int32_t a, int32_t b, int32_t c ) ;
 /*
 #pragma aux	Max3=					\
 		"cmp	eax, edx"			\
@@ -88,19 +88,19 @@ S32	Max3( S32 a, S32 b, S32 c ) ;
 // structure d'un element du decors
 typedef struct {
 
-		S32	Body	;		//
-		S32	Xworld	;		//
-		S32	Yworld	;        	// position dans le monde
-		S32	Zworld	;	      	//
-		S32	CodeJeu	;	      	// CodeJeu U8
-		S32	Beta	;		// direction de l'objet
+		int32_t	Body	;		//
+		int32_t	Xworld	;		//
+		int32_t	Yworld	;        	// position dans le monde
+		int32_t	Zworld	;	      	//
+		int32_t	CodeJeu	;	      	// CodeJeu uint8_t
+		int32_t	Beta	;		// direction de l'objet
 
-		S32	XMin ;			// ZV
-		S32	YMin ;
-		S32	ZMin ;
-		S32	XMax ;
-		S32	YMax ;
-		S32	ZMax ;
+		int32_t	XMin ;			// ZV
+		int32_t	YMin ;
+		int32_t	ZMin ;
+		int32_t	XMax ;
+		int32_t	YMax ;
+		int32_t	ZMax ;
 
 		}	T_DECORS ;
 
@@ -111,9 +111,9 @@ typedef struct {
 // structure tempo de rotation/tri
 typedef struct {
 
-		S32	Zrot;
-		S16	X2D;	// old S32
-		S16	Y2D;	// old S32
+		int32_t	Zrot;
+		int16_t	X2D;	// old int32_t
+		int16_t	Y2D;	// old int32_t
 
 		} 	T_SOMMET_ROT;
 
@@ -123,14 +123,14 @@ typedef struct {
 #define	DEC_DRAWN	(1<<17)	// objet affiché à l'ecran
 
 typedef struct {
-		S32	Zrot ;
+		int32_t	Zrot ;
 
 		T_DECORS *PtrDec ;	// ca prend la meme place que Num
 					// et c'est plus rapide dans les
 					// boucles !
-		S32	Num ;
+		int32_t	Num ;
 
-		S32	NumMasque ;		// numero eventuel d'un masque écran
+		int32_t	NumMasque ;		// numero eventuel d'un masque écran
 
 		}	T_LIST_TRI ;
 
@@ -138,26 +138,26 @@ typedef struct {
 // structure map poly mode jeu ( 32 Bits)
 typedef	struct	{
 
-		U32	Bank		:4 ;	// coul bank poly
-		U32	TexFlag		:2 ;	// flag texture 00 rien 01 triste 10 flat 11 gouraud
-		U32	PolyFlag	:2 ;	// flag poly 00 rien 01 flat 10 gouraud 11 dither
-		U32	SampleStep	:4 ;	// sample pas twinsen
-		U32	CodeJeu		:4 ;	// code jeu
-		U32	Sens		:1 ;	// sens diagonale
-		U32	Col		:1 ;
-		U32	Dummy		:1 ;
-		U32	IndexTex	:13 ;	// index texture 8192
+		uint32_t	Bank		:4 ;	// coul bank poly
+		uint32_t	TexFlag		:2 ;	// flag texture 00 rien 01 triste 10 flat 11 gouraud
+		uint32_t	PolyFlag	:2 ;	// flag poly 00 rien 01 flat 10 gouraud 11 dither
+		uint32_t	SampleStep	:4 ;	// sample pas twinsen
+		uint32_t	CodeJeu		:4 ;	// code jeu
+		uint32_t	Sens		:1 ;	// sens diagonale
+		uint32_t	Col		:1 ;
+		uint32_t	Dummy		:1 ;
+		uint32_t	IndexTex	:13 ;	// index texture 8192
 
 		}	T_HALF_POLY ;		// 1 long
 
 typedef struct	{
 
-		U16	Tx0 ;
-		U16	Ty0 ;
-		U16	Tx1 ;
-		U16	Ty1 ;
-		U16	Tx2 ;
-		U16	Ty2 ;
+		uint16_t	Tx0 ;
+		uint16_t	Ty0 ;
+		uint16_t	Tx1 ;
+		uint16_t	Ty1 ;
+		uint16_t	Tx2 ;
+		uint16_t	Ty2 ;
 
 		}	T_HALF_TEX ;		// 2 Longs
 
@@ -169,16 +169,16 @@ typedef	struct	{
 
 		Struc_Point	Tab_Points[3] ;
 
-		U8	Type ;
-		U8	Color ;
+		uint8_t	Type ;
+		uint8_t	Color ;
 
-		S16	Fog ;
+		int16_t	Fog ;
 
-		S16	X0 ;
-		S16	Y0 ;
+		int16_t	X0 ;
+		int16_t	Y0 ;
 
-		S16	X1 ;
-		S16	Y1 ;
+		int16_t	X1 ;
+		int16_t	Y1 ;
 
 
 		}	S_ANI_POLY ;

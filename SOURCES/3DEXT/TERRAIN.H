@@ -3,15 +3,15 @@
 
 #define	Y_SEA	-50
 
-extern	S32	Sky_Y ;
-extern	S32	Reglage ;
+extern	int32_t	Sky_Y ;
+extern	int32_t	Reglage ;
 
 /*--------------------------------------------------------------------------*/
 extern void DrawSkySeaZBuf(void) ;
 /*--------------------------------------------------------------------------*/
 extern void ClsTerrainZBuf(void);
 /*--------------------------------------------------------------------------*/
-extern void DrawSeenSea( S32 y ) ;
+extern void DrawSeenSea( int32_t y ) ;
 /*--------------------------------------------------------------------------*/
 extern void DrawHorizon2ZBuf(void);
 /*--------------------------------------------------------------------------*/
@@ -19,7 +19,7 @@ extern void AffichageTerrainZBuf( void );
 /*--------------------------------------------------------------------------*/
 extern void AffichageTerrainRapide( void ) ;
 /*--------------------------------------------------------------------------*/
-extern void CopyBlock256( U8 *sour, U8 *dest ) ;
+extern void CopyBlock256( uint8_t *sour, uint8_t *dest ) ;
 /*--------------------------------------------------------------------------*/
 extern void ClearAniPoly( void ) ;
 /*--------------------------------------------------------------------------*/

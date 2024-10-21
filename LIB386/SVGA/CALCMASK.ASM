@@ -27,7 +27,7 @@ comment @
 			PUBLIC	C	CalcGraphMsk
 
 ;----------------------------------------------------------------------------
-;S32	CalcGraphMsk(S32 numbrick, void *bankbrick, void *ptmask)
+;int32_t	CalcGraphMsk(int32_t numbrick, void *bankbrick, void *ptmask)
 
 ;#pragma aux CalcGraphMsk	"*"	\
 ;	parm	[eax] [esi] [edi]	\

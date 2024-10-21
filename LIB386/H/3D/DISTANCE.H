@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-U32 Distance2D(S32 x0, S32 y0, S32 x1, S32 y1);
-U32 Distance3D(S32 x0, S32 y0, S32 z0, S32 x1, S32 y1, S32 z1);
+uint32_t Distance2D(int32_t x0, int32_t y0, int32_t x1, int32_t y1);
+uint32_t Distance3D(int32_t x0, int32_t y0, int32_t z0, int32_t x1, int32_t y1, int32_t z1);
 
 // =============================================================================
 #ifdef __cplusplus

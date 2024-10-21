@@ -48,7 +48,7 @@
 		public	C	LongProjectPoint3DF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LongProjectPoint3DF(S32 x, S32 y, S32 z)		;
+;void	LongProjectPoint3DF(int32_t x, int32_t y, int32_t z)		;
 
 ;#pragma aux LongProjectPoint3DF		\
 ;	parm		[eax] [ebx] [ecx]	\

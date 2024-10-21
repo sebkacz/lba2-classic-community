@@ -14,14 +14,14 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 TextXMin = 0;
-S32 TextXMax = 0;
-S32 TextYMin = 0;
-S32 TextYMax = 0;
+int32_t TextXMin = 0;
+int32_t TextXMax = 0;
+int32_t TextYMin = 0;
+int32_t TextYMax = 0;
 
 // -----------------------------------------------------------------------------
-void GraphPrintf(U32 flagflip, U32 x, U32 y, const char *format, ...) {
-  S32 len;
+void GraphPrintf(uint32_t flagflip, uint32_t x, uint32_t y, const char *format, ...) {
+  int32_t len;
   char *ptr;
   char msgbuf[256];
   va_list arglist;

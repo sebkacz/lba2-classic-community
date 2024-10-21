@@ -11,7 +11,7 @@ extern "C" {
 extern	void	InitSmacker()	;
 
 //--------------------------------------------------------------------------
-extern	void	SmackRegisterMemory(void *ptr, U32 size)	;
+extern	void	SmackRegisterMemory(void *ptr, uint32_t size)	;
 
 //--------------------------------------------------------------------------
 extern	void	SmackResetMemory()	;

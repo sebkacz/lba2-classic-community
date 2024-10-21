@@ -8,7 +8,7 @@
 	  ▀▀▀▀▀ ▀▀▀▀▀ ▀▀  ▀ ▀▀▀▀▀ ▀▀▀▀▀   ▀▀  ▀▀  ▀ ▀▀  ▀ ▀▀▀▀▀ ▀▀  ▀
  *══════════════════════════════════════════════════════════════════════════*/
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	BigSampleRepeat = 1 ;
+int32_t	BigSampleRepeat = 1 ;
 
 
 /*══════════════════════════════════════════════════════════════════════════*/
@@ -16,11 +16,11 @@ S32	BigSampleRepeat = 1 ;
 // Permet de forcer une track à un label et non à un offset (en gros, comme
 // dans l'outil !)
 
-S16	SearchOffsetTrack( T_OBJET *ptrobj, U8 label )
+int16_t	SearchOffsetTrack( T_OBJET *ptrobj, uint8_t label )
 {
-	U8	*ptrtrack;
-	S16	offsettrack = 0 ;
-	U8	macro ;
+	uint8_t	*ptrtrack;
+	int16_t	offsettrack = 0 ;
+	uint8_t	macro ;
 
 	while( TRUE )
 	{
@@ -36,8 +36,8 @@ S16	SearchOffsetTrack( T_OBJET *ptrobj, U8 label )
 			if( *ptrtrack==label )
 			{
 				ptrobj->LabelTrack = label ;	/* label */
-				ptrobj->OffsetLabelTrack = (S16)(offsettrack-1) ;
-				return( (S16)(offsettrack-1) ) ;
+				ptrobj->OffsetLabelTrack = (int16_t)(offsettrack-1) ;
+				return( (int16_t)(offsettrack-1) ) ;
 			}
 			else	offsettrack++ ;
 			break ;
@@ -102,7 +102,7 @@ S16	SearchOffsetTrack( T_OBJET *ptrobj, U8 label )
 			{
 				char	*ptr, c ;
 				char	string[256] ;
-				S32	n ;
+				int32_t	n ;
 
 				ptr = string ;
 				n = 0 ;
@@ -128,7 +128,7 @@ S16	SearchOffsetTrack( T_OBJET *ptrobj, U8 label )
 
 void	Track_SetLabel( T_OBJET *ptrobj )
 {
-	U8	*ptrtrack ;
+	uint8_t	*ptrtrack ;
 
 	ptrtrack = ptrobj->PtrTrack ;
 	ptrtrack += ptrobj->OffsetTrack ;		/* offset macro en cours */
@@ -144,16 +144,16 @@ void	Track_SetLabel( T_OBJET *ptrobj )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	DoTrack( U8 numobj )
+void	DoTrack( uint8_t numobj )
 {
 	T_OBJET	*ptrobj ;
-	S32	distance ;
-	S32	flag ;
-	S32	angle ;
-	U8	*ptrtrack;
-	S16	memooffsettrack;
-	U8	macro ;
-	U8	n ;
+	int32_t	distance ;
+	int32_t	flag ;
+	int32_t	angle ;
+	uint8_t	*ptrtrack;
+	int16_t	memooffsettrack;
+	uint8_t	macro ;
+	uint8_t	n ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -172,20 +172,20 @@ void	DoTrack( U8 numobj )
 		{
 /*-------------------------------------------------------------------------*/
 		case TM_SAMPLE:
-			HQ_3D_MixSample( *(S16*)ptrtrack, 0x1000, 0, 1,
+			HQ_3D_MixSample( *(int16_t*)ptrtrack, 0x1000, 0, 1,
 			ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
 			ptrobj->OffsetTrack += 2 ;
 			break ;
 
 		case TM_SAMPLE_RND:
-			HQ_3D_MixSample( *(S16*)ptrtrack, 0x800, 0x1000, 1,
+			HQ_3D_MixSample( *(int16_t*)ptrtrack, 0x800, 0x1000, 1,
 			ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
 			ptrobj->OffsetTrack += 2 ;
 			break ;
 
 		case TM_SAMPLE_ALWAYS:
 			{
-			S32	num = *(S16*)ptrtrack ;
+			int32_t	num = *(int16_t*)ptrtrack ;
 
 			if( ptrobj->SampleAlways
 			AND ((ptrobj->SampleAlways>>8)&0xFFFF)!=num )
@@ -197,7 +197,7 @@ void	DoTrack( U8 numobj )
 			if( !ptrobj->SampleAlways
 			OR  !IsSamplePlaying( ptrobj->SampleAlways ) )
 			{
-				ptrobj->SampleVolume = (U8)ParmSampleVolume ;
+				ptrobj->SampleVolume = (uint8_t)ParmSampleVolume ;
 
 				ptrobj->SampleAlways = HQ_3D_MixSample( num, 0x1000, 0, 0,
 						 ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
@@ -215,7 +215,7 @@ void	DoTrack( U8 numobj )
 
 		case TM_SAMPLE_STOP:
 			{
-			S32 num = *(S16*)ptrtrack ;
+			int32_t num = *(int16_t*)ptrtrack ;
 
 			if( ptrobj->SampleAlways
 			AND ((ptrobj->SampleAlways>>8)&0xFFFF)==num )
@@ -230,12 +230,12 @@ void	DoTrack( U8 numobj )
 			break ;
 
 		case TM_REPEAT_SAMPLE:
-			BigSampleRepeat = *(S16*)ptrtrack ;
+			BigSampleRepeat = *(int16_t*)ptrtrack ;
 			ptrobj->OffsetTrack += 2 ;
 			break ;
 
 		case TM_SIMPLE_SAMPLE:
-			HQ_MixSample( *(S16*)ptrtrack, 0x1000, 0, BigSampleRepeat, 64, 127 ) ;
+			HQ_MixSample( *(int16_t*)ptrtrack, 0x1000, 0, BigSampleRepeat, 64, 127 ) ;
 			BigSampleRepeat = 1 ;
 			ptrobj->OffsetTrack += 2 ;
 			break ;
@@ -280,7 +280,7 @@ void	DoTrack( U8 numobj )
 
 /*-------------------------------------------------------------------------*/
 		case TM_ANIM:
-			if( !InitAnim( *(U16*)ptrtrack, ANIM_REPEAT, numobj ) )
+			if( !InitAnim( *(uint16_t*)ptrtrack, ANIM_REPEAT, numobj ) )
 			{
 				ptrobj->OffsetTrack = memooffsettrack ;
 				flag = FALSE ;
@@ -338,19 +338,19 @@ void	DoTrack( U8 numobj )
 		case TM_WAIT_NB_SECOND:
 			ptrobj->OffsetTrack += 5 ;
 
-			if( *(U32*)(ptrtrack+1) == 0 )
+			if( *(uint32_t*)(ptrtrack+1) == 0 )
 			{
-				*(U32*)(ptrtrack+1) = TimerRefHR + ( *ptrtrack * 1000 ) ;
+				*(uint32_t*)(ptrtrack+1) = TimerRefHR + ( *ptrtrack * 1000 ) ;
 			}
 
-			if ( TimerRefHR < *(U32*)(ptrtrack+1) )
+			if ( TimerRefHR < *(uint32_t*)(ptrtrack+1) )
 			{
 				ptrobj->OffsetTrack -= 6 ;
 				flag = FALSE ;
 			}
 			else
 			{
-				*(U32*)(ptrtrack+1) = 0	;
+				*(uint32_t*)(ptrtrack+1) = 0	;
 			}
 			break ;
 
@@ -358,19 +358,19 @@ void	DoTrack( U8 numobj )
 		case TM_WAIT_NB_SECOND_RND:
 			ptrobj->OffsetTrack += 5 ;
 
-			if( *(U32*)(ptrtrack+1) == 0 )
+			if( *(uint32_t*)(ptrtrack+1) == 0 )
 			{
-				*(U32*)(ptrtrack+1) = TimerRefHR + ( MyRnd(*ptrtrack) * 1000 ) ;
+				*(uint32_t*)(ptrtrack+1) = TimerRefHR + ( MyRnd(*ptrtrack) * 1000 ) ;
 			}
 
-			if ( TimerRefHR < *(U32*)(ptrtrack+1) )
+			if ( TimerRefHR < *(uint32_t*)(ptrtrack+1) )
 			{
 				ptrobj->OffsetTrack -= 6 ;
 				flag = FALSE ;
 			}
 			else
 			{
-				*(U32*)(ptrtrack+1) = 0	;
+				*(uint32_t*)(ptrtrack+1) = 0	;
 			}
 			break ;
 
@@ -379,19 +379,19 @@ void	DoTrack( U8 numobj )
 		case TM_WAIT_NB_DIZIEME:
 			ptrobj->OffsetTrack += 5 ;
 
-			if( *(U32*)(ptrtrack+1) == 0 )
+			if( *(uint32_t*)(ptrtrack+1) == 0 )
 			{
-				*(U32*)(ptrtrack+1) = TimerRefHR + ( *ptrtrack * 100 ) ;
+				*(uint32_t*)(ptrtrack+1) = TimerRefHR + ( *ptrtrack * 100 ) ;
 			}
 
-			if ( TimerRefHR < *(U32*)(ptrtrack+1) )
+			if ( TimerRefHR < *(uint32_t*)(ptrtrack+1) )
 			{
 				ptrobj->OffsetTrack -= 6 ;
 				flag = FALSE ;
 			}
 			else
 			{
-				*(U32*)(ptrtrack+1) = 0	;
+				*(uint32_t*)(ptrtrack+1) = 0	;
 			}
 			break ;
 
@@ -399,19 +399,19 @@ void	DoTrack( U8 numobj )
 		case TM_WAIT_NB_DIZIEME_RND:
 			ptrobj->OffsetTrack += 5 ;
 
-			if( *(U32*)(ptrtrack+1) == 0 )
+			if( *(uint32_t*)(ptrtrack+1) == 0 )
 			{
-				*(U32*)(ptrtrack+1) = TimerRefHR + ( MyRnd(*ptrtrack) * 100 ) ;
+				*(uint32_t*)(ptrtrack+1) = TimerRefHR + ( MyRnd(*ptrtrack) * 100 ) ;
 			}
 
-			if ( TimerRefHR < *(U32*)(ptrtrack+1) )
+			if ( TimerRefHR < *(uint32_t*)(ptrtrack+1) )
 			{
 				ptrobj->OffsetTrack -= 6 ;
 				flag = FALSE ;
 			}
 			else
 			{
-				*(U32*)(ptrtrack+1) = 0	;
+				*(uint32_t*)(ptrtrack+1) = 0	;
 			}
 			break ;
 
@@ -539,7 +539,7 @@ void	DoTrack( U8 numobj )
 
 			if( !(ptrobj->Flags & SPRITE_3D) )
 			{
-				Value = *(S16*)ptrtrack ;
+				Value = *(int16_t*)ptrtrack ;
 
 				if( !(Value&0x8000) )
 				{
@@ -548,7 +548,7 @@ void	DoTrack( U8 numobj )
 								ptrobj->Obj.Beta,
 								Value ) ;
 
-					*(S16*)ptrtrack |= 0x8000 ;
+					*(int16_t*)ptrtrack |= 0x8000 ;
 				}
 
 				Value &= 0x7FFF ;
@@ -565,7 +565,7 @@ void	DoTrack( U8 numobj )
 				else
 				{
 					ptrobj->WorkFlags &= ~(TRACK_MASTER_ROT) ;
-					*(S16*)ptrtrack = (S16)Value ;
+					*(int16_t*)ptrtrack = (int16_t)Value ;
 				}
 			}
 			break ;
@@ -575,7 +575,7 @@ void	DoTrack( U8 numobj )
 			ptrobj->OffsetTrack+=2 ;
 			if( !(ptrobj->Flags & SPRITE_3D) )
 			{
-				Value = *(S16*)ptrtrack ;
+				Value = *(int16_t*)ptrtrack ;
 
 				if( Value == -1 )
 				{
@@ -589,7 +589,7 @@ void	DoTrack( U8 numobj )
 								ptrobj->Obj.Beta,
 								Value ) ;
 
-					*(S16*)ptrtrack = (S16)Value ;
+					*(int16_t*)ptrtrack = (int16_t)Value ;
 				}
 
 				if( ptrobj->Obj.Beta != Value )
@@ -604,7 +604,7 @@ void	DoTrack( U8 numobj )
 				else
 				{
 					ptrobj->WorkFlags &= ~(TRACK_MASTER_ROT) ;
-					*(S16*)ptrtrack = -1 ;
+					*(int16_t*)ptrtrack = -1 ;
 				}
 			}
 			break ;
@@ -615,11 +615,11 @@ void	DoTrack( U8 numobj )
 
 			if( !(ptrobj->Flags & SPRITE_3D) )
 			{
-				Value = *(S16*)(ptrtrack+2) ;
+				Value = *(int16_t*)(ptrtrack+2) ;
 
 				if( Value == -1 )
 				{
-					Value = *(S16*)ptrtrack ;
+					Value = *(int16_t*)ptrtrack ;
 					if( rand()&1 )
 					{
 						Value = (ptrobj->Obj.Beta + MyRnd( Value ))&(MAX_ANGLE-1) ;
@@ -634,7 +634,7 @@ void	DoTrack( U8 numobj )
 								ptrobj->Obj.Beta,
 								Value ) ;
 
-					*(S16*)(ptrtrack+2) = (S16)Value ;
+					*(int16_t*)(ptrtrack+2) = (int16_t)Value ;
 				}
 
 				if( ptrobj->Obj.Beta != Value )
@@ -649,7 +649,7 @@ void	DoTrack( U8 numobj )
 				else
 				{
 					ptrobj->WorkFlags &= ~(TRACK_MASTER_ROT) ;
-					*(S16*)(ptrtrack+2) = -1 ;
+					*(int16_t*)(ptrtrack+2) = -1 ;
 				}
 			}
 			break ;
@@ -679,7 +679,7 @@ void	DoTrack( U8 numobj )
 					ptrobj->Obj.Beta = 0*MUL_ANGLE ;
 					break ;
 				}
-				ptrobj->DoorWidth = *(S16*)ptrtrack ;
+				ptrobj->DoorWidth = *(int16_t*)ptrtrack ;
 				ptrobj->WorkFlags |= AUTO_STOP_DOOR ;
 
 				//speed porte
@@ -718,7 +718,7 @@ void	DoTrack( U8 numobj )
 /*-------------------------------------------------------------------------*/
 		case TM_BETA:
 			ptrobj->OffsetTrack += 2 ;
-			ptrobj->Obj.Beta = *(S16*)ptrtrack ;
+			ptrobj->Obj.Beta = *(int16_t*)ptrtrack ;
 			if( !(ptrobj->Flags & SPRITE_3D) )
 			{
 				ClearRealAngle( ptrobj ) ;
@@ -728,7 +728,7 @@ void	DoTrack( U8 numobj )
 /*-------------------------------------------------------------------------*/
 		case TM_POS_POINT:
 			{
-			S16	nu ;
+			int16_t	nu ;
 
 			ptrobj->OffsetTrack ++ ;
 			Value = *ptrtrack ;	// index point
@@ -768,18 +768,18 @@ void	DoTrack( U8 numobj )
 		case TM_LABEL:
 			ptrobj->LabelTrack = *ptrtrack ;	/* label */
 			ptrobj->OffsetTrack++ ;
-			ptrobj->OffsetLabelTrack = (S16)(ptrobj->OffsetTrack-2) ;
+			ptrobj->OffsetLabelTrack = (int16_t)(ptrobj->OffsetTrack-2) ;
 			break ;
 
 /*-------------------------------------------------------------------------*/
 		case TM_GOTO:
-			ptrobj->OffsetTrack = *(S16*)ptrtrack ;
+			ptrobj->OffsetTrack = *(int16_t*)ptrtrack ;
 			break ;
 
 /*-------------------------------------------------------------------------*/
 		case TM_SPEED:
 			ptrobj->OffsetTrack += 2 ;
-			ptrobj->SRot = *(S16*)ptrtrack ;
+			ptrobj->SRot = *(int16_t*)ptrtrack ;
 			if( ptrobj->Flags & SPRITE_3D )
 			{	/* voir pour les 2 types ? */
 				ChangeSpeedMove( &ptrobj->BoundAngle.Move, ptrobj->SRot ) ;
@@ -798,7 +798,7 @@ void	DoTrack( U8 numobj )
 				case 1:
 					ptrobj->SRot++ ;
 				default:
-					ptrobj->SRot = (S16)(51200 / (S32)ptrobj->SRot) ;
+					ptrobj->SRot = (int16_t)(51200 / (int32_t)ptrobj->SRot) ;
 					break;
 				}
 			}
@@ -851,7 +851,7 @@ void	DoTrack( U8 numobj )
 			if( *ptrtrack>0 )
 			{
 				ptrtrack++ ;
-				ptrobj->OffsetTrack = *(S16*)ptrtrack ;
+				ptrobj->OffsetTrack = *(int16_t*)ptrtrack ;
 			}
 			else
 			{
@@ -863,7 +863,7 @@ void	DoTrack( U8 numobj )
 
 /*-------------------------------------------------------------------------*/
 		case TM_SPRITE:
-			angle = *(S16*)ptrtrack ;	// angle = sprite
+			angle = *(int16_t*)ptrtrack ;	// angle = sprite
 			ptrobj->OffsetTrack+=2 ;
 			if( ptrobj->Flags & SPRITE_3D )
 			{
@@ -891,7 +891,7 @@ void	DoTrack( U8 numobj )
 			{
 				if( n>(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) )
 				{
-					n = (U8)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
+					n = (uint8_t)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
 				}
 
 				n += ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb ;
@@ -909,7 +909,7 @@ void	DoTrack( U8 numobj )
 			{
 				if( n>(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) )
 				{
-					n = (U8)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
+					n = (uint8_t)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
 				}
 
 				n += ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb ;
@@ -927,7 +927,7 @@ void	DoTrack( U8 numobj )
 			{
 				if( n>(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) )
 				{
-					n = (U8)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
+					n = (uint8_t)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
 				}
 
 				n += ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb ;
@@ -945,7 +945,7 @@ void	DoTrack( U8 numobj )
 			{
 				InitSprite( ptrobj->Coord.A3DS.Deb, ptrobj ) ;
 				ptrobj->SizeSHit = n ;
-				ptrobj->PtrFile3D = (U8*)TimerRefHR ;
+				ptrobj->PtrFile3D = (uint8_t*)TimerRefHR ;
 			}
 			break ;
 
@@ -979,7 +979,7 @@ void	DoTrack( U8 numobj )
 			{
 				if( n>(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) )
 				{
-					n = (U8)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
+					n = (uint8_t)(ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin-ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb) ;
 				}
 
 				n += ListAnim3DS[ptrobj->Coord.A3DS.Num].Deb ;
@@ -995,13 +995,13 @@ void	DoTrack( U8 numobj )
 /*-------------------------------------------------------------------------*/
 		case TM_DECALAGE:
 			ptrobj->OffsetTrack += 2 ;
-			ParmSampleDecalage = *(S16*)ptrtrack ;
+			ParmSampleDecalage = *(int16_t*)ptrtrack ;
 			break ;
 
 /*-------------------------------------------------------------------------*/
 		case TM_FREQUENCE:
 			ptrobj->OffsetTrack += 2 ;
-			ParmSampleFrequence = *(S16*)ptrtrack ;
+			ParmSampleFrequence = *(int16_t*)ptrtrack ;
 			break ;
 
 /*-------------------------------------------------------------------------*/

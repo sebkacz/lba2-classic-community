@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-typedef void(Func_LongRotate)(S32 x, S32 z, S32 angle);
+typedef void(Func_LongRotate)(int32_t x, int32_t z, int32_t angle);
 
 // -----------------------------------------------------------------------------
 extern Func_LongRotate *LongRotate;

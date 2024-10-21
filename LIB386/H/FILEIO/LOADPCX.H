@@ -9,7 +9,7 @@ extern "C" {
 
 //──────────────────────────────────────────────────────────────────────────
 extern void LoadPCX(	char *file_name, void *screen,
-			S32 *resx, S32 *resy, void *tabcol	)	;
+			int32_t *resx, int32_t *resy, void *tabcol	)	;
 
 //──────────────────────────────────────────────────────────────────────────
 #ifdef __cplusplus

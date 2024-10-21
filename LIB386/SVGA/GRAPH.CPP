@@ -6,12 +6,12 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-S32 GetDxDyGraph(S32 numgraph, S32 *x, S32 *y, const void *bankgraph) {
-  const S32 *graphMem = (const S32 *)bankgraph;
-  const U8 *graphBytes = (const U8 *)bankgraph;
+int32_t GetDxDyGraph(int32_t numgraph, int32_t *x, int32_t *y, const void *bankgraph) {
+  const int32_t *graphMem = (const int32_t *)bankgraph;
+  const uint8_t *graphBytes = (const uint8_t *)bankgraph;
 
   // Don't know if the value is really a signed int, but works for now
-  S32 offset = graphMem[numgraph];
+  int32_t offset = graphMem[numgraph];
 
   *x = (graphBytes[offset] & 0xFF);
   *y = (graphBytes[offset + 1] & 0xFF);

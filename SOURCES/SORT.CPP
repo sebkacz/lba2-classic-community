@@ -1,6 +1,6 @@
 #include	"C_EXTERN.H"
 
-S32	NbTriObj = 0	;
+int32_t	NbTriObj = 0	;
 
 /*══════════════════════════════════════════════════════════════════════════*
 
@@ -22,31 +22,31 @@ S32	NbTriObj = 0	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 typedef struct {
-	U32	after[MAX_INDEX] ;
-	S32	x0  ;
-	S32	y0  ;
-	S32	x1  ;
-	S32	y1  ;
-	S32	present ;
+	uint32_t	after[MAX_INDEX] ;
+	int32_t	x0  ;
+	int32_t	y0  ;
+	int32_t	x1  ;
+	int32_t	y1  ;
+	int32_t	present ;
 } Elem ;
 
 typedef struct {
 	Elem		aElem[MAX_TRI] ;
-	S32		cElem ;
+	int32_t		cElem ;
 } tDatabase ;
 
 tDatabase Base ;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-U32	Checked[MAX_INDEX]	;
+uint32_t	Checked[MAX_INDEX]	;
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-static inline S32 BaseDistance(S32 after, S32 before)
+static inline int32_t BaseDistance(int32_t after, int32_t before)
 {
 	T_SORT	*pt1, *pt2;
-	S32 dxa, dya, dza ;
-	S32 dxb, dyb, dzb ;
-	S32 va ;
+	int32_t dxa, dya, dza ;
+	int32_t dxb, dyb, dzb ;
+	int32_t va ;
 
 	pt1 = &ListTri[after]	;
 	pt2 = &ListTri[before]	;
@@ -66,18 +66,18 @@ static inline S32 BaseDistance(S32 after, S32 before)
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-static inline S32 BaseFindFirst(S32 after)
+static inline int32_t BaseFindFirst(int32_t after)
 {
-	S32	i	;
-	S32	best	;
-	S32	index	;
-	S32	bafter	;
-	S32	bi	;
-	U32	bit	;
+	int32_t	i	;
+	int32_t	best	;
+	int32_t	index	;
+	int32_t	bafter	;
+	int32_t	bi	;
+	uint32_t	bit	;
 
 restartall:
 
-	memset(Checked, 0, MAX_INDEX*sizeof(U32))	;
+	memset(Checked, 0, MAX_INDEX*sizeof(uint32_t))	;
 
 	best = -1	;
 
@@ -99,7 +99,7 @@ restart:
 	{
 		if(Base.aElem[i].after[index]&bit)
 		{
-			S32 temp ;
+			int32_t temp ;
 
 			temp = BaseDistance(after, i) ;
 
@@ -120,9 +120,9 @@ restart:
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-static inline S32 BaseDisplayFirst( void )
+static inline int32_t BaseDisplayFirst( void )
 {
-	S32 i ;
+	int32_t i ;
 
 	for(i=0; i<Base.cElem; i++)
 	{
@@ -137,9 +137,9 @@ static inline S32 BaseDisplayFirst( void )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32 BaseSort( void )
+int32_t BaseSort( void )
 {
-	S32 i ;
+	int32_t i ;
 
 	for(i=0; i<Base.cElem; i++)
 	{
@@ -160,15 +160,15 @@ void BaseReset( void )
 	Base.aElem[b].after[IndexAfter(a)] |= BitAfter(a)
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	TreeInsert( S16 numtype, S32 posx, S32 posy, S32 posz,
-		    S32 txmin, S32 tymin, S32 tzmin,
-		    S32 txmax, S32 tymax, S32 tzmax )
+int32_t	TreeInsert( int16_t numtype, int32_t posx, int32_t posy, int32_t posz,
+		    int32_t txmin, int32_t tymin, int32_t tzmin,
+		    int32_t txmax, int32_t tymax, int32_t tzmax )
 {
-	S32	x0, y0, x1, y1	;
-	S32	i		;
+	int32_t	x0, y0, x1, y1	;
+	int32_t	i		;
 	T_SORT	*pt		;
 	Elem	*elem		;
-	S32	zrot = 0	;
+	int32_t	zrot = 0	;
 
 	if(CubeMode==CUBE_INTERIEUR)
 	{
@@ -184,8 +184,8 @@ S32	TreeInsert( S16 numtype, S32 posx, S32 posy, S32 posz,
 	}
 	else
 	{
-		S32	d ;
-		S32	mx, my, mz ;
+		int32_t	d ;
+		int32_t	mx, my, mz ;
 
 		mx = (txmin + txmax)>>1 ;
 		my = (tymin + tymax)>>1 ;
@@ -246,7 +246,7 @@ S32	TreeInsert( S16 numtype, S32 posx, S32 posy, S32 posz,
 
 	Base.aElem[Base.cElem].present= TRUE;
 
-	memset(Base.aElem[Base.cElem].after, 0, sizeof(U32)*MAX_INDEX) ;
+	memset(Base.aElem[Base.cElem].after, 0, sizeof(uint32_t)*MAX_INDEX) ;
 	Base.aElem[Base.cElem].x0 = x0 ;
 	Base.aElem[Base.cElem].y0 = y0 ;
 	Base.aElem[Base.cElem].x1 = x1 ;
@@ -260,9 +260,9 @@ S32	TreeInsert( S16 numtype, S32 posx, S32 posy, S32 posz,
 // test d'overlap
 //		if((x0<=elem->x1)&&(x1>=elem->x0)&&(y0<=elem->y1)&&(y1>=elem->y0))
 		{
-			S32	dxa, dya, dza	;
-			S32	dxb, dyb, dzb	;
-			S32	vb		;
+			int32_t	dxa, dya, dza	;
+			int32_t	dxb, dyb, dzb	;
+			int32_t	vb		;
 
 			dxa = txmin-pt->XMax	;
 			dya = tymin-pt->YMax	;

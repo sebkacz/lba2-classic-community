@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-void	ObjectSetFrame(T_OBJ_3D *obj, U32 frame)	;
+void	ObjectSetFrame(T_OBJ_3D *obj, uint32_t frame)	;
 
 #pragma aux ObjectSetFrame	"*"		\
 	parm caller	[ebx] [edx]		\

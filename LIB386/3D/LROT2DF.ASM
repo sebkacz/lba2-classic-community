@@ -29,7 +29,7 @@
 		public	C	LongRotateF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LongRotateF(S32 x, S32 z, S32 angle)	;
+;void	LongRotateF(int32_t x, int32_t z, int32_t angle)	;
 
 ;#pragma aux	LongRotateF			\
 ;	parm		[eax] [ecx] [edx]	\

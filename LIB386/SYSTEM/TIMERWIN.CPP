@@ -4,31 +4,31 @@
 #include	<SYSTEM/TIMERWIN.H>
 
 //-------------------------------------------------------------------------
-volatile U32	TimerSystemHR	;
-volatile U32	TimerRefHR	;
+volatile uint32_t	TimerSystemHR	;
+volatile uint32_t	TimerRefHR	;
 
 //-------------------------------------------------------------------------
-volatile S32	TimerLock	;
+volatile int32_t	TimerLock	;
 
 //-------------------------------------------------------------------------
-volatile S32	CmptFrame	;
-volatile S32	NbFramePerSecond;
+volatile int32_t	CmptFrame	;
+volatile int32_t	NbFramePerSecond;
 
 //-------------------------------------------------------------------------
-volatile S32	CmptMemoTimerRef;
+volatile int32_t	CmptMemoTimerRef;
 
 //-------------------------------------------------------------------------
-	U32	LastTime	;
-	U32	LastEvaluate	;
+	uint32_t	LastTime	;
+	uint32_t	LastEvaluate	;
 
 //-------------------------------------------------------------------------
-static	U32	MemoTimerRefHR	;
+static	uint32_t	MemoTimerRefHR	;
 
 //----------------------------------------------------------------------------
 WINDOW_PROC_PTR	OldTimerWindowProc;
 
 //----------------------------------------------------------------------------
-S32	TimerWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+int32_t	TimerWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
@@ -58,7 +58,7 @@ S32	TimerWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 //-------------------------------------------------------------------------
 void	ManageTime()
 {
-	S32		time	;
+	int32_t		time	;
 
 	TimerSystemHR = timeGetTime() ;
 
@@ -103,7 +103,7 @@ void	RestoreTimer()
 }
 
 //-------------------------------------------------------------------------
-void	SetTimerHR(U32 timer)
+void	SetTimerHR(uint32_t timer)
 {
 	LockTimer()		;
 	TimerRefHR = timer	;

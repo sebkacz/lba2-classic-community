@@ -2,10 +2,10 @@
 
 //***************************************************************************
 
-static  U32             JoyThere        = 0     ;
-static  U32             JoyUsed         = -1    ;
-static  U32             JoyHasPov       = 0     ;
-static  S32             JoyRange[16][6][2]      ;
+static  uint32_t             JoyThere        = 0     ;
+static  uint32_t             JoyUsed         = -1    ;
+static  uint32_t             JoyHasPov       = 0     ;
+static  int32_t             JoyRange[16][6][2]      ;
 //static  JOYINFOEX       JoyInfoEx               ;
 // FIXME: Implement using SDL
 
@@ -13,7 +13,7 @@ static  S32             JoyRange[16][6][2]      ;
 void    DetectJoys()
 {
   // FIXME: Implement using SDL
-//        U32             i, j, n, k      ;
+//        uint32_t             i, j, n, k      ;
 //        JOYCAPS         caps            ;
 //
 //        n = ade_min(joyGetNumDevs(), 16) 	;
@@ -78,10 +78,10 @@ void    DetectJoys()
 }
 
 //***************************************************************************
-static inline U32 JoyMakeBitfield(U32 n, U32 *val, S32 pov)
+static inline uint32_t JoyMakeBitfield(uint32_t n, uint32_t *val, int32_t pov)
 {
-        S32     res, i, j       ;
-        S32     temp            ;
+        int32_t     res, i, j       ;
+        int32_t     temp            ;
 
         res     = 0 ;
 
@@ -120,10 +120,10 @@ static inline U32 JoyMakeBitfield(U32 n, U32 *val, S32 pov)
 }
 
 //***************************************************************************
-void    GetJoys(U32 *bitfield)
+void    GetJoys(uint32_t *bitfield)
 {
         // FIXME: Implement using SDL
-//        S32     i, j;
+//        int32_t     i, j;
 //
 //        if(!JoyUsed)    return  ;
 //

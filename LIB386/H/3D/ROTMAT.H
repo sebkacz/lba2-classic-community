@@ -9,8 +9,8 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-typedef void(Func_RotateMatrix)(TYPE_MAT *MatDst, TYPE_MAT *MatSrc, S32 x,
-                                S32 y, S32 z);
+typedef void(Func_RotateMatrix)(TYPE_MAT *MatDst, TYPE_MAT *MatSrc, int32_t x,
+                                int32_t y, int32_t z);
 
 // -----------------------------------------------------------------------------
 extern Func_RotateMatrix *RotateMatrix; ///< Do Not call from C

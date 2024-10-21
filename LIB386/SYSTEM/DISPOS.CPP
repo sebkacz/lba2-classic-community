@@ -16,7 +16,7 @@ extern "C" {
 #define OS_NT 3
 
 // --- Public state ------------------------------------------------------------
-U32 OSType = OS_NT; // TODO: Remove, is required by CPU.ASM right now
+uint32_t OSType = OS_NT; // TODO: Remove, is required by CPU.ASM right now
 
 // --- Interface ---------------------------------------------------------------
 void DisplayOS() {

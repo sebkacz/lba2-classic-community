@@ -1,16 +1,16 @@
 #ifndef	SAVEGAME_H
 #define	SAVEGAME_H
 
-extern	U8	*PtrSave ;
+extern	uint8_t	*PtrSave ;
 
 #ifdef	DEMO
 #define	NB_DEMOSAVE	3
-extern	S32	CurrentDemoSave ;
-extern	S32	NewDemoSave ;
+extern	int32_t	CurrentDemoSave ;
+extern	int32_t	NewDemoSave ;
 extern	char	*ListDemoSave[NB_DEMOSAVE] ;
 
 /*--------------------------------------------------------------------------*/
-extern	S32	SetDemoSaveGame( S32 num ) ;
+extern	int32_t	SetDemoSaveGame( int32_t num ) ;
 /*--------------------------------------------------------------------------*/
 #endif
 
@@ -19,21 +19,21 @@ extern void AutoSaveGame(void);
 /*--------------------------------------------------------------------------*/
 extern void CurrentSaveGame(void);
 /*--------------------------------------------------------------------------*/
-extern void SaveGame(S32 flagmess);
+extern void SaveGame(int32_t flagmess);
 /*--------------------------------------------------------------------------*/
 extern void LoadGameNumCube(void);
 /*--------------------------------------------------------------------------*/
 extern void LoadGamePlayerName(void);
 /*--------------------------------------------------------------------------*/
-extern U8   *LoadGameScreen(void);
+extern uint8_t   *LoadGameScreen(void);
 /*--------------------------------------------------------------------------*/
-extern S32  LoadGame(void);
+extern int32_t  LoadGame(void);
 /*--------------------------------------------------------------------------*/
-extern S32  LoadGameOldVersion(void) ;
+extern int32_t  LoadGameOldVersion(void) ;
 /*--------------------------------------------------------------------------*/
-extern void SaveContexte( S32 savetimerrefhr ) ;
+extern void SaveContexte( int32_t savetimerrefhr ) ;
 /*--------------------------------------------------------------------------*/
-extern S32  LoadContexte( S32 *savetimerrefhr ) ;
+extern int32_t  LoadContexte( int32_t *savetimerrefhr ) ;
 /*--------------------------------------------------------------------------*/
 
 #endif	// SAVEGAME_H

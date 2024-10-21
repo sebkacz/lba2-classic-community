@@ -3,46 +3,46 @@
 #include <SVGA/SCREEN.H>
 #include <SVGA/VIDEO.H>
 
-extern	S32	FlagAnimWhoSpeak	;	// MESSAGE.CPP
+extern	int32_t	FlagAnimWhoSpeak	;	// MESSAGE.CPP
 
 //#########################################################################
 // Memorisation de l'anim et de la frame en cours au moment d'un changement
 // de cube pour reprendre exactement a la même anim/frame dans le cube de
 // destination pour un changement de cube plus smooth
 
-U16	MemoAnim  ;	/* anim en cours */
-U8	MemoFlagAnim ;
-S32	MemoFrame ;
-S32	FlagReinit = FALSE ;
-S32	MemoMove ;	// pour le buggy
+uint16_t	MemoAnim  ;	/* anim en cours */
+uint8_t	MemoFlagAnim ;
+int32_t	MemoFrame ;
+int32_t	FlagReinit = FALSE ;
+int32_t	MemoMove ;	// pour le buggy
 
-S32	TestNumObjFollow = TRUE ;
+int32_t	TestNumObjFollow = TRUE ;
 
-extern	S16 NumDecorsCol ;	// EXTFUNC.CPP
+extern	int16_t NumDecorsCol ;	// EXTFUNC.CPP
 
 //#########################################################################
 
-S32	Nxw, Nyw, Nzw ;
-S32	SaveNxw, SaveNyw, SaveNzw ;
-S32	OldX, OldY, OldZ ;
-U8	AnimNumObj ;
+int32_t	Nxw, Nyw, Nzw ;
+int32_t	SaveNxw, SaveNyw, SaveNzw ;
+int32_t	OldX, OldY, OldZ ;
+uint8_t	AnimNumObj ;
 T_OBJET	*APtObj ;
 
-S32	LastJoyFlag = FALSE ;
-S32	Jumping = FALSE ;
-S32	Pushing = FALSE ;
-S32	LastMyJoy = 0 ;
-S32	LastMyFire = 0 ;
+int32_t	LastJoyFlag = FALSE ;
+int32_t	Jumping = FALSE ;
+int32_t	Pushing = FALSE ;
+int32_t	LastMyJoy = 0 ;
+int32_t	LastMyFire = 0 ;
 
-S32	Col1 ;
+int32_t	Col1 ;
 
-extern	S32	MagicBallFlags ;
+extern	int32_t	MagicBallFlags ;
 
-S32	BetaUsedObj = 0 ;
+int32_t	BetaUsedObj = 0 ;
 
-S32	PersoFlashTimer = 0 ;
+int32_t	PersoFlashTimer = 0 ;
 
-S32	ShadowYHero ;
+int32_t	ShadowYHero ;
 
 T_COMPORTEMENT	ListComportement[MAX_COMPORTEMENTS] = {
 	{ 0, -1, NULL, CF_STANDARD },		// Normal
@@ -92,9 +92,9 @@ char	DefSysText[4][20] = {
 	"Discret"
 	} ;
 
-extern	S32	XMap, YMap, ZMap ;
-extern	S16	M_XMin, M_XMax, M_YMin, M_YMax, M_ZMin, M_ZMax ;
-extern	U8	*SearchPtrAnimAction ;
+extern	int32_t	XMap, YMap, ZMap ;
+extern	int16_t	M_XMin, M_XMax, M_YMin, M_YMax, M_ZMin, M_ZMax ;
+extern	uint8_t	*SearchPtrAnimAction ;
 
 /*══════════════════════════════════════════════════════════════════════════*/
 #ifdef	DEBUG_TOOLS
@@ -102,9 +102,9 @@ extern	U8	*SearchPtrAnimAction ;
 #define	HashLine( x0, y0, x1, y1, coul, ep )	Line( x0, y0, x1, y1, coul )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	DrawCube( 	S32 xw0, S32 yw0, S32 zw0,
-			S32 xw1, S32 yw1, S32 zw1,
-			S32 type	)
+int32_t	DrawCube( 	int32_t xw0, int32_t yw0, int32_t zw0,
+			int32_t xw1, int32_t yw1, int32_t zw1,
+			int32_t type	)
 
 /*
 	type zone :
@@ -120,9 +120,9 @@ S32	DrawCube( 	S32 xw0, S32 yw0, S32 zw0,
      8192 --> zone message OUEST
 */
 {
-	S32	x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7 ;
-	S32	coul = 11 ;
-	S32	coul1 = 13 ;
+	int32_t	x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7 ;
+	int32_t	coul = 11 ;
+	int32_t	coul1 = 13 ;
 
 	ClearScreenMinMax() ;
 
@@ -332,10 +332,10 @@ S32	DrawCube( 	S32 xw0, S32 yw0, S32 zw0,
 
 void	DrawZonesDec()
 {
-	S32	n ;
+	int32_t	n ;
 	T_ZONE	*ptrz ;
-	S32	xw, yw, zw ;
-	S32	type ;
+	int32_t	xw, yw, zw ;
+	int32_t	type ;
 
 	xw = StartXCube*SIZE_BRICK_XZ ;
 	yw = StartYCube*SIZE_BRICK_Y ;
@@ -381,7 +381,7 @@ void	DrawZonesDec()
 /*══════════════════════════════════════════════════════════════════════════*/
 void	InitSysText( void )
 {
-	S32	n ;
+	int32_t	n ;
 
 	InitDial( 0 ) ;
 
@@ -405,13 +405,13 @@ void	InitSysText( void )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*══════════════════════════════════════════════════════════════════════════*/
-void	*GivePtrAnim(S32 index)
+void	*GivePtrAnim(int32_t index)
 {
 	return(HQR_Get( HQR_Anims, index ))	;
 }
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*══════════════════════════════════════════════════════════════════════════*/
-void	*GivePtrBody(S32 index)
+void	*GivePtrBody(int32_t index)
 {
 	return(HQR_Get( HQR_Bodys, index ) ) ;
 }
@@ -419,7 +419,7 @@ void	*GivePtrBody(S32 index)
 
 /*══════════════════════════════════════════════════════════════════════════*/
 
-void	InitObject( U8 numobj )
+void	InitObject( uint8_t numobj )
 {
 	T_OBJET *ptrobj ;
 
@@ -462,7 +462,7 @@ void	InitObject( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	StartInitObj( U8 numobj )
+void	StartInitObj( uint8_t numobj )
 {
 	T_OBJET	*ptrobj ;
 
@@ -490,7 +490,7 @@ void	StartInitObj( U8 numobj )
 		{
 			ptrobj->Coord.A3DS.Deb = ptrobj->Sprite ; // Frame Start
 			ptrobj->Coord.A3DS.Fin = ListAnim3DS[ptrobj->Coord.A3DS.Num].Fin ;	// Frame End
-			ptrobj->SizeSHit = (S16)ptrobj->Info3 ;	// NbFps
+			ptrobj->SizeSHit = (int16_t)ptrobj->Info3 ;	// NbFps
 		}
 	}
 	else
@@ -513,13 +513,13 @@ void	StartInitObj( U8 numobj )
 	AND ptrobj->Move!=MOVE_WAGON	// cf TM_SPEED
 	AND ptrobj->SRot )
 	{
-		ptrobj->SRot = (S16)(51200 / (S32)ptrobj->SRot) ; // 1024*1000/20
+		ptrobj->SRot = (int16_t)(51200 / (int32_t)ptrobj->SRot) ; // 1024*1000/20
 	}
 */
 	if( ptrobj->Move==MOVE_CIRCLE
 	OR  ptrobj->Move==MOVE_CIRCLE2 )
 	{
-		S32	x, z ;
+		int32_t	x, z ;
 
 		x = ListBrickTrack[ptrobj->Info3].X ;
 		z = ListBrickTrack[ptrobj->Info3].Z ;
@@ -555,7 +555,7 @@ void	StartInitObj( U8 numobj )
 
 void	StartInitAllObjs()
 {
-	U8	n ;
+	uint8_t	n ;
 
 	// Faut-il le laisser ?
 	// Cela sert a virer le compteur du pingouin si on meurt
@@ -587,7 +587,7 @@ void	RestartMecaPingouin()
 	ptrobj->WorkFlags |= OBJ_DEAD	;
 	ptrobj->Obj.Body.Num = -1		;
 	ptrobj->ZoneSce = -1		;
-	*(U32*)(&ptrobj->Info) = TimerRefHR + 30 * 1000 ;
+	*(uint32_t*)(&ptrobj->Info) = TimerRefHR + 30 * 1000 ;
 
 	// init zv pingouin en dur (je sais, c un peu crade, mais c 1 rustine
 	// de fin de projet !!!!!!)
@@ -607,7 +607,7 @@ void	RestartMecaPingouin()
 
 void	LoadFicPerso()
 {
-	S32	n ;
+	int32_t	n ;
 	T_COMPORTEMENT *ptrcomp = &ListComportement[MAX_COMPORTEMENTS-1] ;
 	T_OBJET *ptrobj = &ListObjet[NUM_PERSO] ;
 
@@ -659,10 +659,10 @@ void	InitPerso()
 /*──────────────────────────────────────────────────────────────────────────*/
 void	UseOneClover( void )
 {
-	S32	x, y, z, beta ;
-	S32	nu ;
+	int32_t	x, y, z, beta ;
+	int32_t	nu ;
 	T_OBJET *ptrobj = &ListObjet[NUM_PERSO] ;
-	S16	memoclover ;
+	int16_t	memoclover ;
 
 	SaveTimer() ;
 	// Penser a restarter les samples d'ambiance et les samples Always
@@ -703,9 +703,9 @@ void	UseOneClover( void )
 		SetComportement( Comportement ) ;
 	}
 
-	ListVarGame[FLAG_CLOVER] = (S16)(memoclover-1) ;
+	ListVarGame[FLAG_CLOVER] = (int16_t)(memoclover-1) ;
 	ptrobj->LifePoint = MAX_LIFE_POINTS ;
-	MagicPoint = (U8)(MagicLevel * 20) ;
+	MagicPoint = (uint8_t)(MagicLevel * 20) ;
 
 	TimerProto = 0 ;
 
@@ -725,9 +725,9 @@ void	UseOneClover( void )
 		// regarde sur quel type de pseudo on se trouve
 		if( CubeMode==CUBE_EXTERIEUR )
 		{
-			S32	col1, col2 ;
-			S32	dx = x>>9; // div512
-			S32	dz = z>>9; // div512
+			int32_t	col1, col2 ;
+			int32_t	dx = x>>9; // div512
+			int32_t	dz = z>>9; // div512
 
 			IndexMapPolyTested = dz*64*2+dx*2 ;
 
@@ -862,10 +862,10 @@ void	UseOneClover( void )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-void	SetComportement( U8 comportement )
+void	SetComportement( uint8_t comportement )
 {
-	U8	memogenbody ;
-	U16	memogenanim ;
+	uint8_t	memogenbody ;
+	uint16_t	memogenanim ;
 	T_OBJET	*ptrobj = &ListObjet[ NUM_PERSO ] ;
 
 	if( comportement >= MAX_COMPORTEMENTS )	return ;
@@ -1042,7 +1042,7 @@ void	RestartPerso()
 	if( MemoMove==MOVE_BUGGY_MANUAL
 	OR  MemoMove==MOVE_BUGGY )
 	{
-		ptrobj->Move = (U8)MemoMove ;
+		ptrobj->Move = (uint8_t)MemoMove ;
 		SetComportement( C_BUGGY ) ;
 
 		if( MemoMove==MOVE_BUGGY_MANUAL )
@@ -1074,7 +1074,7 @@ void	RestartPerso()
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	ClearFoudre( void )
 {
-	S32		n ;
+	int32_t		n ;
 	T_INCRUST_DISP	*ptrdisp = ListIncrustDisp ;
 
 	for( n=0; n<MAX_INCRUST_DISP; n++, ptrdisp++ )
@@ -1092,7 +1092,7 @@ void	ClearFoudre( void )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	ClearScene( void )
 {
-	S32		n ;
+	int32_t		n ;
 	T_INCRUST_DISP	*ptrdisp = ListIncrustDisp ;
 
 	ClearExtra() 	;
@@ -1141,8 +1141,8 @@ void	ClearHQRs( void )
 /*══════════════════════════════════════════════════════════════════════════*/
 void	InitLoadedGame( )
 {
-	S32	x, y, z ;
-	U8	n, nu ;
+	int32_t	x, y, z ;
+	uint8_t	n, nu ;
 	T_OBJ_3D	*ptr3d ;
 	T_OBJET	*ptrobj = ListObjet ;
 
@@ -1152,7 +1152,7 @@ void	InitLoadedGame( )
 	}
 	else
 	{
-		S32	frame = ptrobj->Obj.LastFrame ;
+		int32_t	frame = ptrobj->Obj.LastFrame ;
 
 		SetComportement( Comportement ) ;
 
@@ -1167,7 +1167,7 @@ void	InitLoadedGame( )
 	if(  (ptrobj->CarryBy!=-1)
 	AND !(ptrobj->CarryBy&CARRY_BY_DECORS) )
 	{
-		nu = (U8)ptrobj->CarryBy ;
+		nu = (uint8_t)ptrobj->CarryBy ;
 		ptrobj->PtrZoneRail = (T_ZONE*)Distance2D( ListObjet[nu].Obj.X, ListObjet[nu].Obj.Z,
 							   ptrobj->Obj.X, ptrobj->Obj.Z ) ;
 	}
@@ -1180,7 +1180,7 @@ void	InitLoadedGame( )
 		if(  (ptrobj->CarryBy!=-1)
 		AND !(ptrobj->CarryBy&CARRY_BY_DECORS) )
 		{
-			nu = (U8)ptrobj->CarryBy ;
+			nu = (uint8_t)ptrobj->CarryBy ;
 			ptrobj->PtrZoneRail = (T_ZONE*)Distance2D( ListObjet[nu].Obj.X, ListObjet[nu].Obj.Z,
 								   ptrobj->Obj.X, ptrobj->Obj.Z ) ;
 		}
@@ -1249,7 +1249,7 @@ void	InitLoadedGame( )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	LoadFile3dObjects()
 {
-	U8	n ;
+	uint8_t	n ;
 	T_OBJET	*ptrobj = &ListObjet[NUM_PERSO] ;
 
 	// Init body Twinsen
@@ -1283,8 +1283,8 @@ void	LoadFile3dObjects()
 void	ChangeCube()
 {
 	T_OBJET	*ptrobj = &ListObjet[NUM_PERSO] ;
-	S32	oldcube ;
-	S32	flagload ;
+	int32_t	oldcube ;
+	int32_t	flagload ;
 
 	APtObj = ptrobj ;
 
@@ -1523,7 +1523,7 @@ void	ChangeCube()
 	if( MemoMove==MOVE_BUGGY_MANUAL
 	OR  MemoMove==MOVE_BUGGY )
 	{
-		ptrobj->Move = (U8)MemoMove ;
+		ptrobj->Move = (uint8_t)MemoMove ;
 		SetComportement( C_BUGGY ) ;
 
 		if( MemoMove==MOVE_BUGGY_MANUAL )
@@ -1549,9 +1549,9 @@ void	ChangeCube()
 /*──────────────────────────────────────────────────────────────────────────*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	InitHitExtraPof( S32 x, S32 y, S32 z, S32 hitforce )
+void	InitHitExtraPof( int32_t x, int32_t y, int32_t z, int32_t hitforce )
 {
-	S32	nb = 0 ;
+	int32_t	nb = 0 ;
 
 	while( hitforce>=1
 	AND nb<MAX_HIT_POFS )	// on limite à 5 étoiles
@@ -1569,9 +1569,9 @@ void	InitHitExtraPof( S32 x, S32 y, S32 z, S32 hitforce )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-void	HitObj( U8 numhitter, U8 num, S32 hitforce, S32 beta )
+void	HitObj( uint8_t numhitter, uint8_t num, int32_t hitforce, int32_t beta )
 {
-	S32	memo ;
+	int32_t	memo ;
 	T_OBJET *ptrobjt ;
 
 	ptrobjt = &ListObjet[ num ] ;
@@ -1639,7 +1639,7 @@ void	HitObj( U8 numhitter, U8 num, S32 hitforce, S32 beta )
 		ptrobjt->LifePoint -= hitforce ;
 
 		/* attention dans l'outil LifePoint est un word
-		si ca devient un U8 pas de signe */
+		si ca devient un uint8_t pas de signe */
 		if( ptrobjt->LifePoint < 0 )	ptrobjt->LifePoint = 0 ;
 	}
 	else
@@ -1664,9 +1664,9 @@ void	HitObj( U8 numhitter, U8 num, S32 hitforce, S32 beta )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-void	FoudroieObj( U8 numhitter, U8 num, S32 armure )
+void	FoudroieObj( uint8_t numhitter, uint8_t num, int32_t armure )
 {
-	S32	memo ;
+	int32_t	memo ;
 	T_OBJET *ptrobjt ;
 
 	ptrobjt = &ListObjet[ num ] ;
@@ -1710,12 +1710,12 @@ void	FoudroieObj( U8 numhitter, U8 num, S32 armure )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	CheckZvOnZv( U8 numobj, U8 numobjt )
+int32_t	CheckZvOnZv( uint8_t numobj, uint8_t numobjt )
 {
 	T_OBJET	*ptrobj ;
 	T_OBJET	*ptrobjt ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -1752,16 +1752,16 @@ S32	CheckZvOnZv( U8 numobj, U8 numobjt )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	CheckObjCol( U8 numobj )
+int32_t	CheckObjCol( uint8_t numobj )
 {
-	S32	flagy ;
-	S32	angle, angle2 ;
+	int32_t	flagy ;
+	int32_t	angle, angle2 ;
 	T_OBJET	*ptrobj ;
 	T_OBJET	*ptrobjt ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	S32	dx, dz ;
-	U8	n ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	int32_t	dx, dz ;
+	uint8_t	n ;
 
 	ptrobj = &ListObjet[numobj] ;
 /*
@@ -1948,9 +1948,9 @@ test_obj_zv:
 			}
 			else
 			{
-				S32	oldx, oldz ;
-				S32	nbrecal = 0 ;
-				S32	coin ;
+				int32_t	oldx, oldz ;
+				int32_t	nbrecal = 0 ;
+				int32_t	coin ;
 
 				oldx = Nxw ;
 				oldz = Nzw ;
@@ -2124,13 +2124,13 @@ test_next_coin:
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U8	IsObjCol( U8 numobj )
+uint8_t	IsObjCol( uint8_t numobj )
 {
 	T_OBJET	*ptrobj ;
 	T_OBJET	*ptrobjt ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	U8	n ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	uint8_t	n ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -2174,9 +2174,9 @@ U8	IsObjCol( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	CheckCarrier( U8 numobj )
+void	CheckCarrier( uint8_t numobj )
 {
-	U8	n ;
+	uint8_t	n ;
 
 	if( ListObjet[numobj].Flags & OBJ_CARRIER )
 	{
@@ -2195,14 +2195,14 @@ void	CheckCarrier( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	CheckValidObjPos( U8 numobj, U8 owner )
+int32_t	CheckValidObjPos( uint8_t numobj, uint8_t owner )
 {
 	T_ZONE	*ptrz ;
 	T_OBJET	*ptrobj ;
 	T_OBJET	*ptrobjt ;
-	S32	x0,y0,z0, x1,y1,z1 ;
-	S32	xt0,yt0,zt0, xt1,yt1,zt1 ;
-	U8	n, cj ;
+	int32_t	x0,y0,z0, x1,y1,z1 ;
+	int32_t	xt0,yt0,zt0, xt1,yt1,zt1 ;
+	uint8_t	n, cj ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -2232,9 +2232,9 @@ S32	CheckValidObjPos( U8 numobj, U8 owner )
 	}
 	else
 	{
-		S32	col ;
-		S32	dx = ptrobj->Obj.X>>9; // div512
-		S32	dz = ptrobj->Obj.Z>>9; // div512
+		int32_t	col ;
+		int32_t	dx = ptrobj->Obj.X>>9; // div512
+		int32_t	dz = ptrobj->Obj.Z>>9; // div512
 
 		// check point chaud
 		if( WorldColBrickExt( ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z )==1 )	return FALSE ;
@@ -2359,13 +2359,13 @@ S32	CheckValidObjPos( U8 numobj, U8 owner )
 
 // positionne l'objet objtopos autour de l'objet objsrc
 
-void	PosObjetAroundAnother( U8 numsrc, U8 numtopos )
+void	PosObjetAroundAnother( uint8_t numsrc, uint8_t numtopos )
 {
 	T_OBJET *objsrc	;
 	T_OBJET *objtopos ;
-	S32	xb, zb ;
-	S32	beta, dist, dist2 ;
-	S32	step ;
+	int32_t	xb, zb ;
+	int32_t	beta, dist, dist2 ;
+	int32_t	step ;
 
 	objsrc   = &ListObjet[numsrc] ;
 	objtopos = &ListObjet[numtopos] ;
@@ -2413,7 +2413,7 @@ void	PosObjetAroundAnother( U8 numsrc, U8 numtopos )
 /*──────────────────────────────────────────────────────────────────────────*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-U8	ChoiceHeroBody( U8 genbody )
+uint8_t	ChoiceHeroBody( uint8_t genbody )
 {
 /* peut-etre dangereux d'enlever ca
 	if( genbody>8 )	// c'est un body special
@@ -2469,10 +2469,10 @@ U8	ChoiceHeroBody( U8 genbody )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	InitBody(	U8 gennewbody,
-			U8 numobj )
+void	InitBody(	uint8_t gennewbody,
+			uint8_t numobj )
 {
-	S32	newbody ;
+	int32_t	newbody ;
 	T_OBJET *ptrobj ;
 
 	ptrobj = &ListObjet[numobj] ;
@@ -2544,12 +2544,12 @@ void	InitBody(	U8 gennewbody,
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	InitSprite(	S32 newsprite,
+void	InitSprite(	int32_t newsprite,
 			T_OBJET *ptrobj )
 {
-	S16	*ptr ;
+	int16_t	*ptr ;
 
-	ptrobj->Sprite = (S16)newsprite ;
+	ptrobj->Sprite = (int16_t)newsprite ;
 
 	if( !(ptrobj->Flags & SPRITE_3D) )	return ;
 
@@ -2582,11 +2582,11 @@ void	InitSprite(	S32 newsprite,
 /*──────────────────────────────────────────────────────────────────────────*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	SetAnim( U8 numobj, U16 anim )
+void	SetAnim( uint8_t numobj, uint16_t anim )
 {
 	T_OBJ_3D	*obj = &ListObjet[numobj].Obj ;
-	S32	x, y, z, beta ;
-	U8   	body ;
+	int32_t	x, y, z, beta ;
+	uint8_t   	body ;
 
 	body = ListObjet[numobj].GenBody ;
 	ListObjet[numobj].GenBody = 255 ;
@@ -2609,11 +2609,11 @@ void	SetAnim( U8 numobj, U16 anim )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	InitAnim(	U16 gennewanim,
-			U8 flag,
-			U8 numobj )
+int32_t	InitAnim(	uint16_t gennewanim,
+			uint8_t flag,
+			uint8_t numobj )
 {
-	S32	newanim ;
+	int32_t	newanim ;
 	T_OBJET *ptrobj = &ListObjet[numobj] ;
 
 	if( ptrobj->Flags & SPRITE_3D )	return FALSE ; // -1 ;
@@ -2682,7 +2682,7 @@ S32	InitAnim(	U16 gennewanim,
 	// gere actions premiere frame
 	if( ptrobj->PtrAnimAction != 0 )
 	{
-		S32	frame = ptrobj->Obj.LastFrame ;
+		int32_t	frame = ptrobj->Obj.LastFrame ;
 		ptrobj->Obj.LastFrame = -1 ;
 
 		GereAnimAction( ptrobj, numobj ) ;
@@ -2697,10 +2697,10 @@ S32	InitAnim(	U16 gennewanim,
 /*══════════════════════════════════════════════════════════════════════════*/
 /* gestion anim */
 
-void	ReajustPos( U8 col )
+void	ReajustPos( uint8_t col )
 {
-	S32	xw, yw, zw ;
-	S32	coly = 0 ;
+	int32_t	xw, yw, zw ;
+	int32_t	coly = 0 ;
 
 	if( col<=1 )	return ;	//  - optimisation puisque on ne
 					// se sert pas de la collision 1 ici
@@ -2848,11 +2848,11 @@ void	ReceptionObj()
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-void    DoCornerReajust( S32 nx, S32 ny, S32 nz )
+void    DoCornerReajust( int32_t nx, int32_t ny, int32_t nz )
 {
-	S32	recalx = FALSE ;
-	S32	recalz = FALSE ;
-	U8	orgcol  ;
+	int32_t	recalx = FALSE ;
+	int32_t	recalz = FALSE ;
+	uint8_t	orgcol  ;
 
 	orgcol = WorldColBrick( Nxw, Nyw, Nzw ) ;
 
@@ -2951,10 +2951,10 @@ void    DoCornerReajust( S32 nx, S32 ny, S32 nz )
 /*──────────────────────────────────────────────────────────────────────────*/
 // Pour Twinsen, on reajuste par rapport à OldX,OldY,OldZ car on est sûr que
 // sa demi-ZV ne dépasse jamais la taille d'un pseudo
-S32    DoCornerReajustTwinsen( S32 nx, S32 ny, S32 nz )
+int32_t    DoCornerReajustTwinsen( int32_t nx, int32_t ny, int32_t nz )
 {
-	S32	validepos = TRUE ;
-	U8	orgcol  ;
+	int32_t	validepos = TRUE ;
+	uint8_t	orgcol  ;
 
 	orgcol = WorldColBrick( Nxw, Nyw, Nzw ) ;
 
@@ -3035,11 +3035,11 @@ S32    DoCornerReajustTwinsen( S32 nx, S32 ny, S32 nz )
 }
 
 /*
-void    DoCornerReajustTwinsen( S32 nx, S32 ny, S32 nz )
+void    DoCornerReajustTwinsen( int32_t nx, int32_t ny, int32_t nz )
 {
-	S32	recalx = FALSE ;
-	S32	recalz = FALSE ;
-	U8	orgcol  ;
+	int32_t	recalx = FALSE ;
+	int32_t	recalz = FALSE ;
+	uint8_t	orgcol  ;
 
 	orgcol = WorldColBrick( Nxw, Nyw, Nzw ) ;
 
@@ -3133,16 +3133,16 @@ void    DoCornerReajustTwinsen( S32 nx, S32 ny, S32 nz )
 */
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	CheckCarryBy( U8 numobj )
+int32_t	CheckCarryBy( uint8_t numobj )
 {
-	S32	validepos = TRUE ;
-	S16	nu = APtObj->CarryBy ;
+	int32_t	validepos = TRUE ;
+	int16_t	nu = APtObj->CarryBy ;
 
 	if( nu != -1 )
 	{
 		if( !(nu&CARRY_BY_DECORS) )
 		{
-			S32	flagrot = FALSE ;
+			int32_t	flagrot = FALSE ;
 			T_OBJET	*ptrobjc = &ListObjet[nu] ;
 
 			if( (CubeMode==CUBE_EXTERIEUR)
@@ -3176,12 +3176,12 @@ S32	CheckCarryBy( U8 numobj )
 			    AND ptrobjc->Obj.Beta!=ptrobjc->OldBeta
 			    AND abs(ptrobjc->Obj.Beta-ptrobjc->OldBeta)<=(256*MUL_ANGLE)  )	// l'objet porteur tourne
 			{
-				S32	dangle ;
+				int32_t	dangle ;
 
 				dangle = (ptrobjc->Obj.Beta+APtObj->OldBeta) ;
 
 				// Est-ce plus rapide qu'un Rotate() ?
-				LongRotate( 0, (S32)APtObj->PtrZoneRail, dangle ) ;
+				LongRotate( 0, (int32_t)APtObj->PtrZoneRail, dangle ) ;
 
 				Nxw = X0 ;
 				Nzw = Z0 ;
@@ -3231,7 +3231,7 @@ S32	CheckCarryBy( U8 numobj )
 					validepos = FALSE ;
 				}
 			}
-			else if( !CheckZvOnZv( numobj, (U8)nu ) )
+			else if( !CheckZvOnZv( numobj, (uint8_t)nu ) )
 			{
 				APtObj->CarryBy = -1 ;
 			}
@@ -3259,9 +3259,9 @@ S32	CheckCarryBy( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-S32	GereCodesJeu( U8 numobj )
+int32_t	GereCodesJeu( uint8_t numobj )
 {
-	S32	validepos = TRUE ;
+	int32_t	validepos = TRUE ;
 
 	// ATTENTION : le flag OPT_CODES_JEU lorsqu'il est
 	// positionne ne gere plus les codes jeux
@@ -3284,7 +3284,7 @@ S32	GereCodesJeu( U8 numobj )
 			AND !(CodeJeu>>4)
 			AND (APtObj->CodeJeu>>4) )
 			{
-				S32	oldcodejeu = APtObj->CodeJeu>>4 ;
+				int32_t	oldcodejeu = APtObj->CodeJeu>>4 ;
 
 				if( (PtrWorldCodeBrick( Nxw+APtObj->XMin, Nyw-1, Nzw+APtObj->ZMin )>>4)!=oldcodejeu
 				AND (PtrWorldCodeBrick( Nxw+APtObj->XMin, Nyw-1, Nzw+APtObj->ZMax )>>4)!=oldcodejeu
@@ -3298,7 +3298,7 @@ S32	GereCodesJeu( U8 numobj )
 				{
 					// on met à jour seulement le sample
 					APtObj->CodeJeu &= 0xF0	;	// ecrase ancien sample
-					APtObj->CodeJeu |= (U8)(CodeJeu&0x0F) ;
+					APtObj->CodeJeu |= (uint8_t)(CodeJeu&0x0F) ;
 				}
 			}
 			else
@@ -3498,13 +3498,13 @@ S32	GereCodesJeu( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	GereObjAnim( U8 numobj )
+void	GereObjAnim( uint8_t numobj )
 {
-	S32	numanim ;
+	int32_t	numanim ;
 
 	if( APtObj->Obj.Anim.Num != -1 )
 	{
-		S32 flag = ObjectSetInterDep( &APtObj->Obj )	;
+		int32_t flag = ObjectSetInterDep( &APtObj->Obj )	;
 
 		if( APtObj->Obj.Master&1 )
 			APtObj->WorkFlags |= ANIM_MASTER_ROT ;
@@ -3581,7 +3581,7 @@ void	GereObjAnim( U8 numobj )
 				// gere actions premiere frame
 				if( APtObj->PtrAnimAction != 0 )
 				{
-					S32	frame = APtObj->Obj.LastFrame ;
+					int32_t	frame = APtObj->Obj.LastFrame ;
 					APtObj->Obj.LastFrame = -1 ;
 
 					GereAnimAction( APtObj, numobj ) ;
@@ -3608,7 +3608,7 @@ void	GereObjAnim( U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 static void	DoAnimSprite3D()
 {
-	S32	flag, n	;
+	int32_t	flag, n	;
 
 	if( APtObj->HitForce != 0 )	APtObj->WorkFlags |= OK_HIT	;
 
@@ -3715,12 +3715,12 @@ static void	DoAnimSprite3D()
 	// ptrobj->Coord.A3DS.Deb : Frame Start (dans le .HQR)
 	// ptrobj->Coord.A3DS.Fin : Frame End   (dans le .HQR)
 	// ptrobj->SizeSHit : NbFps
-	// ptrobj->PtrFile3D: (U32)TimerRefHR de début d'anim
+	// ptrobj->PtrFile3D: (uint32_t)TimerRefHR de début d'anim
 
 	if( (APtObj->Flags & ANIM_3DS)
 	AND (APtObj->SizeSHit>0) )
 	{
-		S32	newsprite ;
+		int32_t	newsprite ;
 
 		if( APtObj->Coord.A3DS.Fin>=APtObj->Coord.A3DS.Deb )
 		{
@@ -3729,12 +3729,12 @@ static void	DoAnimSprite3D()
 					APtObj->Coord.A3DS.Deb,	// start
 					APtObj->Coord.A3DS.Fin+1,// end
 					((APtObj->Coord.A3DS.Fin-APtObj->Coord.A3DS.Deb+1)*1000)/APtObj->SizeSHit,	// TotalTime
-					TimerRefHR-(U32)APtObj->PtrFile3D );
+					TimerRefHR-(uint32_t)APtObj->PtrFile3D );
 
 			if( newsprite>APtObj->Coord.A3DS.Fin )
 			{
 				newsprite = APtObj->Coord.A3DS.Deb ;
-				APtObj->PtrFile3D = (U8*)TimerRefHR ;
+				APtObj->PtrFile3D = (uint8_t*)TimerRefHR ;
 			}
 		}
 		else
@@ -3744,12 +3744,12 @@ static void	DoAnimSprite3D()
 					APtObj->Coord.A3DS.Deb,	// start
 					APtObj->Coord.A3DS.Fin-1,// end
 					((APtObj->Coord.A3DS.Deb-APtObj->Coord.A3DS.Fin+1)*1000)/APtObj->SizeSHit,	// TotalTime
-					TimerRefHR-(U32)APtObj->PtrFile3D );
+					TimerRefHR-(uint32_t)APtObj->PtrFile3D );
 
 			if( newsprite<APtObj->Coord.A3DS.Fin )
 			{
 				newsprite = APtObj->Coord.A3DS.Deb ;
-				APtObj->PtrFile3D = (U8*)TimerRefHR ;
+				APtObj->PtrFile3D = (uint8_t*)TimerRefHR ;
 			}
 		}
 
@@ -3763,11 +3763,11 @@ static void	DoAnimSprite3D()
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	DoAnim( U8 numobj  )
+void	DoAnim( uint8_t numobj  )
 {
 	T_OBJET	*ptrobj ;
-	U8	col ;
-	S32	validepos = TRUE ;
+	uint8_t	col ;
+	int32_t	validepos = TRUE ;
 
 	APtObj = ptrobj = &ListObjet[(AnimNumObj = numobj)] ;
 
@@ -3836,7 +3836,7 @@ void	DoAnim( U8 numobj  )
 
 	if( APtObj->Flags & CHECK_BRICK_COL )
 	{
-		S32	memox, memoy, memoz ;
+		int32_t	memox, memoy, memoz ;
 
 		YMap = 0 ;
 
@@ -4141,7 +4141,7 @@ findoanim:
 
 	if( numobj==NUM_PERSO )
 	{
-		S16	nu = APtObj->CarryBy ;
+		int16_t	nu = APtObj->CarryBy ;
 
 		if( !LastValidePos AND APtObj->LifePoint<=0 )
 		{
@@ -4270,7 +4270,7 @@ void	ThrowMecaPingouin( void )
 
 		PtrProjectPoint( ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z ) ;
 		RestoreTimer() ;
-		*(U32*)(&ptrobj->Info) = TimerRefHR + 5 * 1000 ;
+		*(uint32_t*)(&ptrobj->Info) = TimerRefHR + 5 * 1000 ;
 
 		ptrobj->Info1 = InitIncrustDisp( INCRUST_NUM,
 						5,
@@ -4297,11 +4297,11 @@ void	ThrowMecaPingouin( void )
 /*══════════════════════════════════════════════════════════════════════════*/
 void	ExplodeMecaPingouin( void )
 {
-	S32	x, y, z ;
-	S32	beta ;
+	int32_t	x, y, z ;
+	int32_t	beta ;
 	T_OBJET	*ptrobj = &ListObjet[NUM_PINGOUIN] ;
-	U8	n ;
-	U8	hitforce ;
+	uint8_t	n ;
+	uint8_t	hitforce ;
 
 	x = ptrobj->Obj.X ;
 	y = ptrobj->Obj.Y ;
@@ -4336,7 +4336,7 @@ void	ExplodeMecaPingouin( void )
 
 				if( hitforce>ptrobj->Armure )
 				{
-					hitforce = (U8)(ptrobj->Armure+(hitforce-ptrobj->Armure)*3) ;
+					hitforce = (uint8_t)(ptrobj->Armure+(hitforce-ptrobj->Armure)*3) ;
 				}
 
 				HitObj( NUM_PERSO, n, hitforce, beta ) ;
@@ -4365,11 +4365,11 @@ TRACK_ATTACK
 #define	HEIGHT_JETPACK	543
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	DoDir( U8 numobj  )
+void	DoDir( uint8_t numobj  )
 {
 	T_OBJET	*ptrobj ;
-	S32	info3 ;
-	S32	angle ;
+	int32_t	info3 ;
+	int32_t	angle ;
 
 	ptrobj = &ListObjet[numobj] ;
 
@@ -4514,7 +4514,7 @@ void	DoDir( U8 numobj  )
 		case C_JETPACK:
 //			if( Input&I_UP )
 			{
-				S32 ydec = ShadowYHero ;
+				int32_t ydec = ShadowYHero ;
 
 				if( CubeMode==CUBE_EXTERIEUR )
 				{
@@ -4609,7 +4609,7 @@ void	DoDir( U8 numobj  )
 			if( (Input & I_THROW)
 			AND (PtrComportement->Flags & CF_WEAPON) )
 			{
-				S32	flagattack = FALSE ;
+				int32_t	flagattack = FALSE ;
 
 				switch( Weapon )
 				{
@@ -4804,7 +4804,7 @@ void	DoDir( U8 numobj  )
 
 	if( !(Input&I_FIRE) OR ActionNormal )
 	{
-		S32	test_down ;
+		int32_t	test_down ;
 
 		if( Input&(I_UP|I_DOWN) )
 		{
@@ -5085,8 +5085,8 @@ void	DoDir( U8 numobj  )
 				// tangeante du cercle
 		if( ptrobj->SRot )
 		{
-			S32	angle ;
-			S32	x, z ;
+			int32_t	angle ;
+			int32_t	x, z ;
 
 			// init du timer
 			if( !ptrobj->Info2 )	ptrobj->Info2 = TimerRefHR ;
@@ -5108,8 +5108,8 @@ void	DoDir( U8 numobj  )
 				// au drapeau
 		if( ptrobj->SRot )
 		{
-			S32	angle ;
-			S32	x, z ;
+			int32_t	angle ;
+			int32_t	x, z ;
 
 			// init du timer
 			if( !ptrobj->Info2 )	ptrobj->Info2 = TimerRefHR ;
@@ -5176,7 +5176,7 @@ void	ResetCinemaMode( void )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	FixeCinemaMode( S32 flagflip )
+void	FixeCinemaMode( int32_t flagflip )
 {
 	if( CinemaMode )
 	{
@@ -5185,7 +5185,7 @@ void	FixeCinemaMode( S32 flagflip )
 			// Scrolle vers l'interieur
 			if( flagflip )
 			{
-				S32	ymin = BoundRegleTrois( DebCycleCinema, 40, DureeCycleCinema, TimerRefHR-TimerCinema ) ;
+				int32_t	ymin = BoundRegleTrois( DebCycleCinema, 40, DureeCycleCinema, TimerRefHR-TimerCinema ) ;
 
 				SetClipWindow( ClipWindowXMin,
 					       ymin,
@@ -5230,7 +5230,7 @@ void	FixeCinemaMode( S32 flagflip )
 
 			if( flagflip )
 			{
-				S32	ymin = BoundRegleTrois( DebCycleCinema, 0, DureeCycleCinema, TimerRefHR-TimerCinema ) ;
+				int32_t	ymin = BoundRegleTrois( DebCycleCinema, 0, DureeCycleCinema, TimerRefHR-TimerCinema ) ;
 
 				SetClipWindow( ClipWindowXMin,
 					       ymin,
@@ -5287,20 +5287,20 @@ void	RestoreCinemaMode( void )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-static  S32	FlagFlip = 0	;
+static  int32_t	FlagFlip = 0	;
 /*──────────────────────────────────────────────────────────────────────────*/
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-void	AfficheShadow( T_SORT *pt, S32 beta )
+void	AfficheShadow( T_SORT *pt, int32_t beta )
 {
 	if( PtrProjectShadow( pt, beta ) )
 	{
 		if( ClipXMin <= ClipXMax
 		AND ClipYMin <= ClipYMax )
 		{
-			S32	xmin, xmax, zmin, zmax ;
-			S32	yw /*= pt->Yw*/ ;
+			int32_t	xmin, xmax, zmin, zmax ;
+			int32_t	yw /*= pt->Yw*/ ;
 
 			DrawShadow( ) ;
 
@@ -5328,16 +5328,16 @@ void	AfficheShadow( T_SORT *pt, S32 beta )
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	AffOneObject(T_SORT *pt)
+int32_t	AffOneObject(T_SORT *pt)
 {
 	T_OBJET	*ptrobj 	;
 	T_EXTRA	*ptrextra 	;
 	T_DART	*ptrd		;
-	S32	aff		;
-	S32	numobj, typeobj ;
-	S32	num		;
-	S32	memoy		;
-	S32	memoymax	;
+	int32_t	aff		;
+	int32_t	numobj, typeobj ;
+	int32_t	num		;
+	int32_t	memoy		;
+	int32_t	memoymax	;
 
 	numobj  = pt->NumObj ;
 	typeobj = numobj & ~1023 ;
@@ -5365,7 +5365,7 @@ S32	AffOneObject(T_SORT *pt)
 
 		if( ptrobj->WorkFlags&DRAW_SHADOW )
 		{
-			S32	nu = ptrobj->CarryBy ;
+			int32_t	nu = ptrobj->CarryBy ;
 
 			memoymax = pt->YMax ;
 			memoy = pt->Yw ;
@@ -5406,7 +5406,7 @@ S32	AffOneObject(T_SORT *pt)
 			if( ClipXMin <= ClipXMax
 			AND ClipYMin <= ClipYMax )
 			{
-				S32	yw = ptrobj->Obj.Y ;
+				int32_t	yw = ptrobj->Obj.Y ;
 
 				// Magouille pour eviter de se faire recouvrir
 				// dans les penchés en Interieur
@@ -5511,7 +5511,7 @@ S32	AffOneObject(T_SORT *pt)
 
 		if( ptrobj->WorkFlags&DRAW_SHADOW )
 		{
-			S32	nu = ptrobj->CarryBy ;
+			int32_t	nu = ptrobj->CarryBy ;
 
 			memoymax = pt->YMax ;
 			memoy = pt->Yw ;
@@ -5624,7 +5624,7 @@ S32	AffOneObject(T_SORT *pt)
 
 		if( ptrobj->WorkFlags&DRAW_SHADOW )
 		{
-			S32	nu = ptrobj->CarryBy ;
+			int32_t	nu = ptrobj->CarryBy ;
 
 			memoymax = pt->YMax ;
 			memoy = pt->Yw ;
@@ -5772,8 +5772,8 @@ S32	AffOneObject(T_SORT *pt)
 		if( ClipXMin <= ClipXMax
 		AND ClipYMin <= ClipYMax )
 		{
-			S32	xmin, ymin, zmin, xmax, ymax, zmax ;
-			S32	yw = ptrextra->PosY ;
+			int32_t	xmin, ymin, zmin, xmax, ymax, zmax ;
+			int32_t	yw = ptrextra->PosY ;
 
 			// Magouille pour eviter de se faire recouvrir
 			// dans les penchés en Interieur
@@ -5805,9 +5805,9 @@ S32	AffOneObject(T_SORT *pt)
 			if( ClipXMin <= ClipXMax
 			AND ClipYMin <= ClipYMax )
 			{
-				S32	xw = ptrf->OrgX ;
-				S32	yw = ptrf->OrgY ;
-				S32	zw = ptrf->OrgZ ;
+				int32_t	xw = ptrf->OrgX ;
+				int32_t	yw = ptrf->OrgY ;
+				int32_t	zw = ptrf->OrgZ ;
 
 				// Magouille pour eviter de se faire recouvrir
 				// dans les penchés en Interieur
@@ -5835,7 +5835,7 @@ S32	AffOneObject(T_SORT *pt)
 
 		aff = BodyDisplay_AlphaBeta(	ptrd->PosX, ptrd->PosY, ptrd->PosZ,
 					ptrd->Alpha, ptrd->Beta, 0,
-					(U8*)GivePtrObjFix( ptrd->Body ) ) ;
+					(uint8_t*)GivePtrObjFix( ptrd->Body ) ) ;
 
 		if( aff )
 		{
@@ -5843,7 +5843,7 @@ S32	AffOneObject(T_SORT *pt)
 			if( ClipXMin <= ClipXMax
 			AND ClipYMin <= ClipYMax )
 			{
-				S32	yw = ptrd->PosY ;
+				int32_t	yw = ptrd->PosY ;
 
 				// Magouille pour eviter de se faire recouvrir
 				// dans les penchés en Interieur
@@ -5861,7 +5861,7 @@ S32	AffOneObject(T_SORT *pt)
 
 	/*------------------------------------------------------------------------*/
 	case TYPE_LABY:
-		AffOneBrick( (S16)pt->Xw, (S16)pt->Yw, (S16)pt->Zw ) ;
+		AffOneBrick( (int16_t)pt->Xw, (int16_t)pt->Yw, (int16_t)pt->Zw ) ;
 		break ;
 
 	/*------------------------------------------------------------------------*/
@@ -5891,24 +5891,24 @@ void	AffNbFps( void )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void	AffScene( S32 flagflip )
+void	AffScene( int32_t flagflip )
 {
-	S32	n, c, cmpt ;
-	S32	dx, dy ;
+	int32_t	n, c, cmpt ;
+	int32_t	dx, dy ;
 	T_OBJET		*ptrobj ;
 	T_EXTRA		*ptrextra ;
 	T_INCRUST_DISP	*ptrdisp ;
 	S_PART_FLOW	*ptrflow;
 	T_DART		*ptrd ;
-	U8		*changepal = NULL ;
+	uint8_t		*changepal = NULL ;
 
-	S32	x,y,z ;
-	S32	num ;
-	S32	oldxporg ;
-	S32	oldyporg ;
+	int32_t	x,y,z ;
+	int32_t	num ;
+	int32_t	oldxporg ;
+	int32_t	oldyporg ;
 
-	S32	txmin, tymin, tzmin, txmax, tymax, tzmax ;
-	S32	typeobj ;
+	int32_t	txmin, tymin, tzmin, txmax, tymax, tzmax ;
+	int32_t	typeobj ;
 
 	char	string[256] ;
 /*------------------------------------------------------------------------*/
@@ -6031,7 +6031,7 @@ startaffscene:
 				tzmin = (z/SIZE_BRICK_XZ)*SIZE_BRICK_XZ + DEMI_BRICK_XZ - 768 ;
 				tzmax = tzmin + 1536 ;
 
-				TreeInsert( (S16)(n|TYPE_LABY),
+				TreeInsert( (int16_t)(n|TYPE_LABY),
 					    x, y, z,
 					    txmin, tymin, tzmin,
 					    txmax, tymax, tzmax ) ;
@@ -6082,7 +6082,7 @@ startaffscene:
 			typeobj |= SORT_NO_PRECLIP	;
 		}
 
-		TreeInsert( (S16)(n|typeobj), x, y, z,
+		TreeInsert( (int16_t)(n|typeobj), x, y, z,
 			    txmin, tymin, tzmin, txmax, tymax, tzmax ) ;
 
 		if( Shadow )
@@ -6115,7 +6115,7 @@ startaffscene:
 					typeobj |= SORT_NO_PRECLIP	;
 				}
 
-				TreeInsert( (S16)typeobj,
+				TreeInsert( (int16_t)typeobj,
 					    ShadowX, ShadowY, ShadowZ,
 					    txmin, ShadowY, tzmin, txmax, ShadowY, tzmax ) ;
 			}
@@ -6132,7 +6132,7 @@ startaffscene:
 
 		if( ptrextra->Flags & EXTRA_TIME_IN )
 		{
-			S32	timein = 35*20 ;
+			int32_t	timein = 35*20 ;
 
 			// pas de gestion pendant un message
 			if( FlagAnimWhoSpeak )	continue ;
@@ -6193,7 +6193,7 @@ startaffscene:
 			// pas de gestion pendant un message
 			if( FlagAnimWhoSpeak )	continue ;
 
-			ptrextra->Sprite = (S16)BoundRegleTrois(
+			ptrextra->Sprite = (int16_t)BoundRegleTrois(
 						ptrextra->Body,		// start
 						ptrextra->Divers,	// end
 						ptrextra->TimeOut,	// TotalTime
@@ -6222,7 +6222,7 @@ startaffscene:
 
 		if( ptrextra->Sprite==0x8004 )	// Dalle labyrinthe
 		{
-			TreeInsert( (S16)(n|TYPE_LABY),
+			TreeInsert( (int16_t)(n|TYPE_LABY),
 				    x, y, z,
 				    x-1024, y-768, z-1024,
 				    x+1024, y, z+1024 ) ;
@@ -6239,7 +6239,7 @@ startaffscene:
 			tymax += ptrextra->PosY ;
 			tzmax += ptrextra->PosZ ;
 
-			TreeInsert( (S16)(n|TYPE_EXTRA),
+			TreeInsert( (int16_t)(n|TYPE_EXTRA),
 				    x, y, z,
 				    txmin, tymin, tzmin,
 				    txmax, tymax, tzmax ) ;
@@ -6256,7 +6256,7 @@ startaffscene:
 
 			if( (x!=ShadowX OR y!=ShadowY OR z!=ShadowZ) )
 			{
-				TreeInsert( (S16)(0|TYPE_SHADOW), ShadowX, ShadowY, ShadowZ,
+				TreeInsert( (int16_t)(0|TYPE_SHADOW), ShadowX, ShadowY, ShadowZ,
 					    txmin, ShadowY, tzmin, txmax, ShadowY+1, tzmax ) ;
 			}
 		}
@@ -6285,13 +6285,13 @@ startaffscene:
 		tymax = y + ptrd->YMax	;
 		tzmax = z + ptrd->ZMax	;
 
-		TreeInsert( (S16)(n|TYPE_DART),
+		TreeInsert( (int16_t)(n|TYPE_DART),
 			    x, y, z,
 			    txmin, tymin, tzmin, txmax, tymax, tzmax ) ;
 
 		if( ModeLabyrinthe )
 		{
-			TreeInsert( (S16)(n|TYPE_LABY), x, y, z,
+			TreeInsert( (int16_t)(n|TYPE_LABY), x, y, z,
 				    x-1024, y-768, z-1024, x+1024, y, z+1024 ) ;
 		}
 	}
@@ -6310,7 +6310,7 @@ startaffscene:
 		// preclip
 		if( !PtrProjectPoint( x, y, z ) )	continue ;
 
-		TreeInsert( (S16)(n|TYPE_FLOW),
+		TreeInsert( (int16_t)(n|TYPE_FLOW),
 			    x, y, z,
 			    x+ptrflow->XMin, y+ptrflow->YMin, z+ptrflow->ZMin,
 			    x+ptrflow->XMax, y+ptrflow->YMax/2, z+ptrflow->ZMax ) ;
@@ -6391,8 +6391,8 @@ startaffscene:
 					ListObjet[num].Obj.Y + ListObjet[num].YMax,
 					ListObjet[num].Obj.Z ) ;
 
-		ptrdisp->X = (S16)Xp ;
-		ptrdisp->Y = (S16)Yp ;
+		ptrdisp->X = (int16_t)Xp ;
+		ptrdisp->Y = (int16_t)Yp ;
 
 		// pas de gestion pendant un message
 		if( !FlagAnimWhoSpeak )
@@ -6412,8 +6412,8 @@ startaffscene:
 					ListObjet[num].Obj.Y + ListObjet[num].YMax,
 					ListObjet[num].Obj.Z ) ;
 
-		ptrdisp->X = (S16)Xp ;
-		ptrdisp->Y = (S16)Yp ;
+		ptrdisp->X = (int16_t)Xp ;
+		ptrdisp->Y = (int16_t)Yp ;
 
 		// pas de gestion pendant un message
 		if( !FlagAnimWhoSpeak )
@@ -6482,7 +6482,7 @@ startaffscene:
 			if( ClipXMin <= ClipXMax
 			AND ClipYMin <= ClipYMax )
 			{
-				S32	x, y ;
+				int32_t	x, y ;
 
 				x = ScreenXMin ;
 				y = ScreenYMin ;
@@ -6517,7 +6517,7 @@ startaffscene:
 		if( ClipXMin <= ClipXMax
 		AND ClipYMin <= ClipYMax )
 		{
-			S32	x, y ;
+			int32_t	x, y ;
 
 			x = ScreenXMin ;
 			y = ScreenYMin ;
@@ -6564,7 +6564,7 @@ startaffscene:
 		{
 			cmpt = ptrdisp->TimerEnd-TimerRefHR ;
 			c = BoundRegleTrois( ptrdisp->Info, ptrdisp->Num, 1000*2, cmpt-1000 ) ;
-			ptrdisp->Y = (S16)c ;
+			ptrdisp->Y = (int16_t)c ;
 		}
 		else	c = ptrdisp->Y ;
 
@@ -6601,7 +6601,7 @@ startaffscene:
 	case INCRUST_INVENTORY:
 	case INCRUST_OBJ:
 		{
-		U8	*ptr3do ;
+		uint8_t	*ptr3do ;
 
 		ScreenXMin = ptrdisp->X ;
 		ScreenYMin = ptrdisp->Y ;
@@ -6618,7 +6618,7 @@ startaffscene:
 		BackupAngles( ClipXMin, ClipYMin, ClipXMax, ClipYMax ) ;
 		Box( ClipXMin, ClipYMin, ClipXMax, ClipYMax, 0 ) ;
 
-		ptr3do = (U8 *)GivePtrObjFix( ptrdisp->Num ) ;
+		ptr3do = (uint8_t *)GivePtrObjFix( ptrdisp->Num ) ;
 
 		// Anim les textures si elles ne le sont pas dans la boucle
 		if( !AnimateTexture )	DoTextureAnimation() ;
@@ -6685,8 +6685,8 @@ startaffscene:
 	if( DemoSlide )
 #endif
 	{
-		S32	num = 11 ;
-		S32	x = 639-103 ;
+		int32_t	num = 11 ;
+		int32_t	x = 639-103 ;
 
 #ifndef	DEMO
 		switch( DistribVersion )
@@ -6804,7 +6804,7 @@ startaffscene:
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	SetZoneCamera( T_ZONE *ptrz )
 {
-	S32	info0, info1, info2 ;
+	int32_t	info0, info1, info2 ;
 
 	info0 = ptrz->Info0 ;
 	info1 = ptrz->Info1 ;
@@ -6860,10 +6860,10 @@ void	GereZoneMessage( T_OBJET *ptrobj, T_ZONE *ptrz )
 {
 	if( ActionNormal==1 )
 	{
-		S32	angle  ;
-		S32	angle1 ;
-		S32	flagmess = 0 ;
-		S32	x, z ;
+		int32_t	angle  ;
+		int32_t	angle1 ;
+		int32_t	flagmess = 0 ;
+		int32_t	x, z ;
 
 		x = ptrobj->Obj.X ;
 		z = ptrobj->Obj.Z ;
@@ -6911,7 +6911,7 @@ void	GereZoneMessage( T_OBJET *ptrobj, T_ZONE *ptrz )
 		{
 			if( ptrz->Info1 )	// camera associee
 			{
-				S32	i ;
+				int32_t	i ;
 				T_ZONE 	*ptrzc = ListZone ;	// zone camera
 
 				for( i=0; i<NbZones; i++, ptrzc++ )
@@ -6941,7 +6941,7 @@ void	GereZoneMessage( T_OBJET *ptrobj, T_ZONE *ptrz )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-S32	GereZoneChangeCube( T_OBJET *ptrobj, T_ZONE *ptrz )
+int32_t	GereZoneChangeCube( T_OBJET *ptrobj, T_ZONE *ptrz )
 {
 	if( ((ptrobj->Move!=MOVE_BUGGY_MANUAL AND ptrobj->Move!=MOVE_BUGGY)
 	     OR (TabArrow[MAX_OBJECTIF+ptrz->Num].FlagHolo&4))// Exterieur
@@ -6950,10 +6950,10 @@ S32	GereZoneChangeCube( T_OBJET *ptrobj, T_ZONE *ptrz )
 		// protection meurt dans un autre cube
 		if( ptrobj->LifePoint > 0 )
 		{
-			S32	newbeta ;
-			S32	flagx = TRUE ;
-			S32	flagz = TRUE ;
-			S32	x, y, z ;
+			int32_t	newbeta ;
+			int32_t	flagx = TRUE ;
+			int32_t	flagz = TRUE ;
+			int32_t	x, y, z ;
 
 			x = ptrobj->Obj.X ;
 			y = ptrobj->Obj.Y ;
@@ -7039,12 +7039,12 @@ S32	GereZoneChangeCube( T_OBJET *ptrobj, T_ZONE *ptrz )
 }
 
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-void	CheckZoneSce( T_OBJET *ptrobj, U8 numobj )
+void	CheckZoneSce( T_OBJET *ptrobj, uint8_t numobj )
 {
-	S32	n ;
+	int32_t	n ;
 	T_ZONE	*ptrz ;
-	S32	x,y,z ;
-	S32	foundcamera = FALSE ;
+	int32_t	x,y,z ;
+	int32_t	foundcamera = FALSE ;
 
 	x = ptrobj->Obj.X ;
 	y = ptrobj->Obj.Y ;
@@ -7223,7 +7223,7 @@ void	CheckZoneSce( T_OBJET *ptrobj, U8 numobj )
 					if( (X0 >= 0) AND (Z0 >= 0)
 					AND (X0 <= 64*SIZE_BRICK_XZ-1) AND (Z0 <= 64*SIZE_BRICK_XZ-1) )
 					{
-						S32 col ;
+						int32_t col ;
 
 						if( CubeMode==CUBE_INTERIEUR )
 							col = PtrWorldColBrick( x, y-128, z ) ;
@@ -7348,9 +7348,9 @@ void	CheckZoneSce( T_OBJET *ptrobj, U8 numobj )
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 void	CheckBuggyZoneGiver( T_OBJET *ptrobj )
 {
-	S32	n ;
+	int32_t	n ;
 	T_ZONE	*ptrz ;
-	S32	x,y,z ;
+	int32_t	x,y,z ;
 
 	// teste les zones giver pour le buggy au point devant le buggy
 	Rotate( 0, ptrobj->ZMax, ptrobj->Obj.Beta ) ;

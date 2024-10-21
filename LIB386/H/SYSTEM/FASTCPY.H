@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-typedef	void	Func_FastCopy(void *dst, void *src, U32 len) ;
+typedef	void	Func_FastCopy(void *dst, void *src, uint32_t len) ;
 
 #pragma aux	Arg_FastCopy	"*"	\
 	parm caller	[edi] [esi] [ecx]	\

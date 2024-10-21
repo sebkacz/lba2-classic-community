@@ -6,64 +6,64 @@
 /*──────────────────────────────────────────────────────────────────────────*/
 
 #ifndef	LBA_GAME
-S16	FillFeuille= 1 ;
+int16_t	FillFeuille= 1 ;
 #endif
 
-S32	ClipZFar ;
-S32	StartZFog ;
+int32_t	ClipZFar ;
+int32_t	StartZFog ;
 
 //camera
 
-S32	CamPosX	;
-S32	CamPosY	;
-S32	CamPosZ	;
+int32_t	CamPosX	;
+int32_t	CamPosY	;
+int32_t	CamPosZ	;
 
-S32	AlphaCam	= 60*4;
-S32	BetaCam		= -64*4;
-S32	GammaCam	= 0;
-S32	ChampX		= 600;
-S32	ChampZ		= 600;
+int32_t	AlphaCam	= 60*4;
+int32_t	BetaCam		= -64*4;
+int32_t	GammaCam	= 0;
+int32_t	ChampX		= 600;
+int32_t	ChampZ		= 600;
 
-S32	VueDistance	= 30000;
-S32	VueOffsetX = 512*32 , VueOffsetY = 0 , VueOffsetZ = 512*32 ;
+int32_t	VueDistance	= 30000;
+int32_t	VueOffsetX = 512*32 , VueOffsetY = 0 , VueOffsetZ = 512*32 ;
 
-S32	WorldLightAlpha ;
-S32	WorldLightBeta ;
+int32_t	WorldLightAlpha ;
+int32_t	WorldLightBeta ;
 
 #ifdef	LBA_EDITOR
-S32	ZBuffer = FALSE ;
+int32_t	ZBuffer = FALSE ;
 #else
-S32	ZBuffer = TRUE ;
+int32_t	ZBuffer = TRUE ;
 #endif
 
 // terrain
 
-S32		*ListCubeInfos ;	// size ok file stored in hqr
+int32_t		*ListCubeInfos ;	// size ok file stored in hqr
 
-U8		*IsleMapIndex ;
+uint8_t		*IsleMapIndex ;
 
 T_HALF_POLY	*MapPolyGround ;
 T_HALF_TEX	*ListTexDef ;
 
 
-S16		*MapSommetY ;
-U8		*MapIntensity ;
+int16_t		*MapSommetY ;
+uint8_t		*MapIntensity ;
 T_SOMMET_ROT	SommetRot[65][65] ;
-U8		SommetAffichable[65][65] ;
+uint8_t		SommetAffichable[65][65] ;
 
-S32		FogCoul ;
-S32		PalLevel ;
+int32_t		FogCoul ;
+int32_t		PalLevel ;
 
-U8		*SkySeaTexture ;
-U8		*ObjTexture ;
-U8		*GroundTexture ;
+uint8_t		*SkySeaTexture ;
+uint8_t		*ObjTexture ;
+uint8_t		*GroundTexture ;
 
 Struc_Point	Tab_Points[8] ;
 //Struc_Point	MemoTab_Points[8] ;
 
 // decors
 
-S32		NbObjDecors ;
+int32_t		NbObjDecors ;
 T_DECORS	*ListDecors ;
 
 T_HQR_HEADER	*HQR_Isle_Obj ;
@@ -74,30 +74,30 @@ T_HQR_HEADER	*HQR_ListTexDef ;
 T_HQR_HEADER	*HQR_MapSommetY ;
 T_HQR_HEADER	*HQR_MapIntensity ;
 
-S32		NbObjScreen = 0;
-U16		CubeBitField ;
+int32_t		NbObjScreen = 0;
+uint16_t		CubeBitField ;
 
 T_LIST_TRI	*ListTriExt ;
 
 // collision avec le terrain
-S32	IndexMapPolyTested = 0 ;	// liaison avec perso
+int32_t	IndexMapPolyTested = 0 ;	// liaison avec perso
 
 //--------------------------------------------------------------------
 // Animation de l'eau
 
-S32		TimerAniPoly = 0 ;
-S32		CntAniPoly8 = 0 ;		// anim 0-7
-S32		CntAniPoly6 = 0 ;		// anim 0-5
+int32_t		TimerAniPoly = 0 ;
+int32_t		CntAniPoly8 = 0 ;		// anim 0-7
+int32_t		CntAniPoly6 = 0 ;		// anim 0-5
 
 S_ANI_POLY	*PtrPolySea	;		// buffer stockage
-S32		MaxPolySea = MAX_POLY_SEA ;
+int32_t		MaxPolySea = MAX_POLY_SEA ;
 
 S_ANI_POLY	*PtrAniPoly ;			// pointeur poly en cours
-S32		NbAniPoly  = 0 	;
+int32_t		NbAniPoly  = 0 	;
 
-S32		OffsetAniPoly1 ;
-S32		OffsetAniPoly2 ;
-S32		OffsetAniPoly3 ;
-S32		OffsetAniPoly4 ;
+int32_t		OffsetAniPoly1 ;
+int32_t		OffsetAniPoly2 ;
+int32_t		OffsetAniPoly3 ;
+int32_t		OffsetAniPoly4 ;
 
 /*──────────────────────────────────────────────────────────────────────────*/

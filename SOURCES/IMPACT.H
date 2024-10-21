@@ -38,28 +38,28 @@
 
 typedef struct {
 	char name[10] ;
-	U8   *buf     ;
+	uint8_t   *buf     ;
 	} T_IMPACT ;
 
-extern	U32		NbImpacts ;
+extern	uint32_t		NbImpacts ;
 extern	T_IMPACT	ListImpact[MAX_IMPACT] ;
 #else
 //extern	T_HQR_HEADER	*HQR_Impact ;
-extern	U8	*BufferImpact ;
+extern	uint8_t	*BufferImpact ;
 #endif
 
 #ifdef	LBA_EDITOR
-extern	S8	GetImpCommand( void ) ;
-extern	S32	GetNumDef( char *pathdef, char *name ) ;
-extern	S32	GetNumDefAddIfNot( char *pathdef, char *name, char *rem ) ;
-extern	S32	CompileImpact( U8 *buffer ) ;
-extern	U8	*SearchImpact( char *name ) ;
+extern	int8_t	GetImpCommand( void ) ;
+extern	int32_t	GetNumDef( char *pathdef, char *name ) ;
+extern	int32_t	GetNumDefAddIfNot( char *pathdef, char *name, char *rem ) ;
+extern	int32_t	CompileImpact( uint8_t *buffer ) ;
+extern	uint8_t	*SearchImpact( char *name ) ;
 
 #ifndef	COMPILATOR
-extern	void	DoImpact( char *name, S32 x, S32 y, S32 z, U8 owner ) ;
+extern	void	DoImpact( char *name, int32_t x, int32_t y, int32_t z, uint8_t owner ) ;
 #endif
 #else
-extern	void   	DoImpact( S32 num, S32 x, S32 y, S32 z, U8 owner ) ;
+extern	void   	DoImpact( int32_t num, int32_t x, int32_t y, int32_t z, uint8_t owner ) ;
 #endif
 
 #endif	// IMPACT_H

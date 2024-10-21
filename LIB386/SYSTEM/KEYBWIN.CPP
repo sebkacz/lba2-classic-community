@@ -5,13 +5,13 @@
 #include <SDL2/SDL.h>
 
 //----------------------------------------------------------------------------
-S32	AsciiMode = FALSE	;
+int32_t	AsciiMode = FALSE	;
 
 //----------------------------------------------------------------------------
-S32	Key			;
+int32_t	Key			;
 
 //----------------------------------------------------------------------------
-U8	TabKeys[256+16*8]	;
+uint8_t	TabKeys[256+16*8]	;
 
 //----------------------------------------------------------------------------
 WINDOW_PROC_PTR	OldKeybWindowProc;
@@ -22,9 +22,9 @@ WINDOW_PROC_PTR	OldKeybWindowProc;
 //----------------------------------------------------------------------------
 	HANDLE	AsciiMutex		;
 
-static	S32	BufferKey[BUFFER_SIZE]	;
-static	S32	StartKey = 0		;
-static	S32	EndKey = 0		;
+static	int32_t	BufferKey[BUFFER_SIZE]	;
+static	int32_t	StartKey = 0		;
+static	int32_t	EndKey = 0		;
 
 //----------------------------------------------------------------------------
 // FIXME: Implement Correctly
@@ -35,14 +35,14 @@ void	ManageKeyboard()
 }
 
 //----------------------------------------------------------------------------
-S32	KeybWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+int32_t	KeybWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch(message)
 	{
 	case WM_CHAR:
 		if(AsciiMode)
 		{
-			U32	nextendkey	;
+			uint32_t	nextendkey	;
 
 			WaitForSingleObject(AsciiMutex, INFINITE);
 
@@ -84,8 +84,8 @@ S32	KeybWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_SYSCHAR:
 endkey:
 	        {
-			U32	lRet	;
-			U32	dw	;
+			uint32_t	lRet	;
+			uint32_t	dw	;
 			// Fool DefWindowProc into thinking we do NOT have
 			// a system menu.  Otherwise it will try to
 			// pop up its own.
@@ -103,9 +103,9 @@ endkey:
 
 //----------------------------------------------------------------------------
 // FIXME: Implement Correctly
-S32 lastReturnedAscii = 0;
-S32 GetAscii() {
-        S32 asciiValue = 0;
+int32_t lastReturnedAscii = 0;
+int32_t GetAscii() {
+        int32_t asciiValue = 0;
         ManageEvents();
 
         const Uint8 *keystate = SDL_GetKeyboardState(NULL);
@@ -127,9 +127,9 @@ S32 GetAscii() {
         return 0;
 }
 
-/*S32	GetAscii()
+/*int32_t	GetAscii()
 {
-	U32	ret = 0	;
+	uint32_t	ret = 0	;
 
 
 	ManageEvents()	;

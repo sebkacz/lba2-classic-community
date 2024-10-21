@@ -34,7 +34,7 @@
 			PUBLIC	C LightListF
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	LightListF(TYPE_MAT *Mat, S32 *dst, S32 *src, S32 n)	;
+;void	LightListF(TYPE_MAT *Mat, int32_t *dst, int32_t *src, int32_t n)	;
 
 ;#pragma aux LightListF	"*"		\
 ;	parm 	[ebx] [edi] [esi] [ecx]	\

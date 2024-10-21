@@ -47,7 +47,7 @@ SCRBASE		EQU	0B0000h
 ;*══════════════════════════════════════════════════════════════════════════*/
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	S32	TestHercule( void )
+;//	int32_t	TestHercule( void )
 
 TestHercule	proc
 		mov	eax, 01a00h
@@ -96,7 +96,7 @@ HCls		proc	uses edi
 HCls		endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HPrintCar( S32 x, S32 y, char car )
+;//	void	HPrintCar( int32_t x, int32_t y, char car )
 ;//			      eax    ebx      ecx
 
 HPrintCar	proc
@@ -111,7 +111,7 @@ HPrintCar	proc
 HPrintCar	endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HPrintCarC( S32 x, S32 y, U8 attr, char car )
+;//	void	HPrintCarC( int32_t x, int32_t y, uint8_t attr, char car )
 ;//			       eax    ebx    ecx        edx
 
 HPrintCarC	proc
@@ -128,7 +128,7 @@ HPrintCarC	endp
 
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HString( S32 x, S32 y, char *string )
+;//	void	HString( int32_t x, int32_t y, char *string )
 ;//		            eax    ebx      ecx
 
 HString		proc
@@ -150,7 +150,7 @@ fin:		ret
 HString		endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HStringC( S32 x, S32 y, U8 attr, char *string )
+;//	void	HStringC( int32_t x, int32_t y, uint8_t attr, char *string )
 ;//		            eax    ebx     ecx         edx
 
 HStringC	proc
@@ -227,7 +227,7 @@ HScrollDown	endp
 ;*══════════════════════════════════════════════════════════════════════════*/
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HLineH( S32 y, S32 x0, S32 x1, char car )
+;//	void	HLineH( int32_t y, int32_t x0, int32_t x1, char car )
 ;//			   eax    ebx     ecx       edx
 
 HLineH		proc
@@ -249,7 +249,7 @@ HLineH		endp
 
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HLineV( S32 x, S32 y0, S32 y1, char car )
+;//	void	HLineV( int32_t x, int32_t y0, int32_t y1, char car )
 ;//			   eax    ebx     ecx       edx
 
 HLineV		proc
@@ -270,7 +270,7 @@ bclv:		mov	byte ptr [ebx], dl
 HLineV		endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HColor( S32 y, S32 x0, S32 x1, U8 attr )
+;//	void	HColor( int32_t y, int32_t x0, int32_t x1, uint8_t attr )
 ;//			   eax    ebx     ecx     edx
 
 HColor		proc
@@ -292,7 +292,7 @@ bclc:		mov	byte ptr [eax], dl
 HColor		endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HColorBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr )
+;//	void	HColorBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr )
 ;//			      esi     eax     ebx     ecx     edx
 
 HColorBox	proc
@@ -325,7 +325,7 @@ bclcx:		mov	byte ptr [eax], dl
 HColorBox	endp
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;//	void	HClsBox( S32 x0, S32 y0, S32 x1, S32 y1, U8 attr )
+;//	void	HClsBox( int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint8_t attr )
 ;//		            esi     eax     ebx     ecx     edx
 
 HClsBox		proc

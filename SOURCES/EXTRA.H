@@ -2,27 +2,27 @@
 #define	EXTRA_H
 
 /*--------------------------------------------------------------------------*/
-extern void InitFly(T_EXTRA *ptrextra,S32 alpha,S32 beta,S32 vitesse,U8 poids);
+extern void InitFly(T_EXTRA *ptrextra,int32_t alpha,int32_t beta,int32_t vitesse,uint8_t poids);
 /*--------------------------------------------------------------------------*/
-extern void BounceExtra(T_EXTRA *ptrextra,S32 oldx,S32 oldy,S32 oldz);
+extern void BounceExtra(T_EXTRA *ptrextra,int32_t oldx,int32_t oldy,int32_t oldz);
 /*--------------------------------------------------------------------------*/
-extern S32  ExtraBonus(S32 x,S32 y,S32 z,S32 alpha,S32 beta,S16 num,S16 nb);
+extern int32_t  ExtraBonus(int32_t x,int32_t y,int32_t z,int32_t alpha,int32_t beta,int16_t num,int16_t nb);
 /*--------------------------------------------------------------------------*/
-extern S32  ExtraLabyrinthe(S32 x,S32 y,S32 z);
+extern int32_t  ExtraLabyrinthe(int32_t x,int32_t y,int32_t z);
 /*--------------------------------------------------------------------------*/
-extern void MagicBallExplo(S32 x,S32 y,S32 z,S32 beta);
+extern void MagicBallExplo(int32_t x,int32_t y,int32_t z,int32_t beta);
 /*--------------------------------------------------------------------------*/
-extern S32  SearchBonusKey(void);
+extern int32_t  SearchBonusKey(void);
 /*--------------------------------------------------------------------------*/
-extern S32  ExtraSearch(U8 owner,S32 x,S32 y,S32 z,S16 num,U8 numobj,S32 speed,U8 hitforce);
+extern int32_t  ExtraSearch(uint8_t owner,int32_t x,int32_t y,int32_t z,int16_t num,uint8_t numobj,int32_t speed,uint8_t hitforce);
 /*--------------------------------------------------------------------------*/
-extern S32  ExtraSearchKey(U8 owner,S32 x,S32 y,S32 z,S16 num,U8 numobj);
+extern int32_t  ExtraSearchKey(uint8_t owner,int32_t x,int32_t y,int32_t z,int16_t num,uint8_t numobj);
 /*--------------------------------------------------------------------------*/
-extern void GetExtraZV(T_EXTRA *ptrextra,S32 *xmin,S32 *ymin,S32 *zmin,S32 *xmax,S32 *ymax,S32 *zmax);
+extern void GetExtraZV(T_EXTRA *ptrextra,int32_t *xmin,int32_t *ymin,int32_t *zmin,int32_t *xmax,int32_t *ymax,int32_t *zmax);
 /*--------------------------------------------------------------------------*/
-extern U8   ExtraCheckObjCol(T_EXTRA *ptrextra,U8 owner);
+extern uint8_t   ExtraCheckObjCol(T_EXTRA *ptrextra,uint8_t owner);
 /*--------------------------------------------------------------------------*/
-extern U8   ExtraCheckExtraCol(T_EXTRA *ptrextra,S32 oldx, S32 oldy, S32 oldz,U8 owner);
+extern uint8_t   ExtraCheckExtraCol(T_EXTRA *ptrextra,int32_t oldx, int32_t oldy, int32_t oldz,uint8_t owner);
 /*--------------------------------------------------------------------------*/
 extern Func_FullWorldColBrick FullWorldColBrick ;
 /*--------------------------------------------------------------------------*/
@@ -30,43 +30,43 @@ extern void ClearScreenMinMax(void);
 /*--------------------------------------------------------------------------*/
 extern void AdjustScreenMinMax(void);
 /*--------------------------------------------------------------------------*/
-extern void Aff2DShape(S16 *ptr,S32 xs,S32 ys,S32 coul,S32 angle,S32 zoom);
+extern void Aff2DShape(int16_t *ptr,int32_t xs,int32_t ys,int32_t coul,int32_t angle,int32_t zoom);
 /*--------------------------------------------------------------------------*/
-extern void AffSpecial(S32 numextra);
+extern void AffSpecial(int32_t numextra);
 /*--------------------------------------------------------------------------*/
-extern S32 InitExtraPof( S32 x, S32 y, S32 z, S16 num, S32 alpha, S32 beta, S32 speed, S32 poids, S32 scaledeb, S32 scalefin, S32 duree, S32 rotation, S32 timeout ) ;
+extern int32_t InitExtraPof( int32_t x, int32_t y, int32_t z, int16_t num, int32_t alpha, int32_t beta, int32_t speed, int32_t poids, int32_t scaledeb, int32_t scalefin, int32_t duree, int32_t rotation, int32_t timeout ) ;
 /*--------------------------------------------------------------------------*/
-extern S32 InitExtraAnimSprite( U8 owner, S32 x, S32 y, S32 z, S16 deb, S16 fin, S32 tempo, S32 scale, S32 transparent, U8 hitforce ) ;
+extern int32_t InitExtraAnimSprite( uint8_t owner, int32_t x, int32_t y, int32_t z, int16_t deb, int16_t fin, int32_t tempo, int32_t scale, int32_t transparent, uint8_t hitforce ) ;
 /*--------------------------------------------------------------------------*/
-extern S16  CoulRetourBalle(T_EXTRA *ptrextra);
+extern int16_t  CoulRetourBalle(T_EXTRA *ptrextra);
 /*--------------------------------------------------------------------------*/
 extern void ClearExtra(void);
 /*--------------------------------------------------------------------------*/
-extern S32  ThrowExtra(U8 owner,S32 x,S32 y,S32 z,S16 num,S32 alpha,S32 beta,S32 vitesse,U8 poids,U8 hitforce);
+extern int32_t  ThrowExtra(uint8_t owner,int32_t x,int32_t y,int32_t z,int16_t num,int32_t alpha,int32_t beta,int32_t vitesse,uint8_t poids,uint8_t hitforce);
 /*--------------------------------------------------------------------------*/
-extern S32  ThrowExtraObj(U8 owner,S32 x,S32 y,S32 z,S32 indexfile3d,S32 alpha,S32 beta,S32 vitesse,S16 alpharot,U8 poids,U8 hitforce);
+extern int32_t  ThrowExtraObj(uint8_t owner,int32_t x,int32_t y,int32_t z,int32_t indexfile3d,int32_t alpha,int32_t beta,int32_t vitesse,int16_t alpharot,uint8_t poids,uint8_t hitforce);
 /*--------------------------------------------------------------------------*/
-extern void ThrowExtraFoudre( U8 owner ) ;
+extern void ThrowExtraFoudre( uint8_t owner ) ;
 /*--------------------------------------------------------------------------*/
-extern void InvoqueFoudre( U8 owner, S32 x, S32 y, S32 z ) ;
+extern void InvoqueFoudre( uint8_t owner, int32_t x, int32_t y, int32_t z ) ;
 /*--------------------------------------------------------------------------*/
-extern void ThrowExtraProtection( U8 owner ) ;
+extern void ThrowExtraProtection( uint8_t owner ) ;
 /*--------------------------------------------------------------------------*/
 extern void AnnuleExtraProtection( void ) ;
 /*--------------------------------------------------------------------------*/
-extern U8   WhichBonus( S32 flags ) ;
+extern uint8_t   WhichBonus( int32_t flags ) ;
 /*--------------------------------------------------------------------------*/
 extern void GiveExtraBonus(T_OBJET *ptrobj);
 /*--------------------------------------------------------------------------*/
 extern void ZoneGiveExtraBonus(T_ZONE *ptrz);
 /*--------------------------------------------------------------------------*/
-extern S32  PlusProcheExtra( S32 x, S32 z, S32 flags ) ;
+extern int32_t  PlusProcheExtra( int32_t x, int32_t z, int32_t flags ) ;
 /*--------------------------------------------------------------------------*/
 // Passe par un pointeur de fonction, donc ne peut pas etre en passage par
 // registres
 extern Func_ReajustPosExtra ReajustPosExtra ;
 /*--------------------------------------------------------------------------*/
-extern void InitBackMagicBall(T_EXTRA *ptrextra,S16 num,S32 flags);
+extern void InitBackMagicBall(T_EXTRA *ptrextra,int16_t num,int32_t flags);
 /*--------------------------------------------------------------------------*/
 extern void GereExtras(void);
 /*--------------------------------------------------------------------------*/

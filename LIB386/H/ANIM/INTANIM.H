@@ -8,7 +8,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-S32	ObjectSetInterAnim(T_OBJ_3D *obj)	;
+int32_t	ObjectSetInterAnim(T_OBJ_3D *obj)	;
 
 #pragma aux ObjectSetInterAnim	"*"	\
 	parm caller	[ebx]		\

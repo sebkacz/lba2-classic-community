@@ -9,7 +9,7 @@
 #include	<string.h>
 
 /*──────────────────────────────────────────────────────────────────────────*/
-static	U8	PalMenu[] =	{
+static	uint8_t	PalMenu[] =	{
 				0,0,0,		// BLACK	0
 
 				71,71,119,	// B_GREY	1
@@ -23,7 +23,7 @@ static	U8	PalMenu[] =	{
 				255,255,87     // YELLOW       7
 				} ;
 
-static	U8	PalMenu2[] =	{
+static	uint8_t	PalMenu2[] =	{
 				87,87,255,	// BLUE
 				87,255,87,	// GREEN
 				87,255,255,	// CYAN
@@ -31,14 +31,14 @@ static	U8	PalMenu2[] =	{
 				255,87,255     // MAGENTA
 				} ;
 
-	S32	Pointed = -1 ;
+	int32_t	Pointed = -1 ;
 
-	S32	FlagAutoPal = FALSE ;
+	int32_t	FlagAutoPal = FALSE ;
 
 /*══════════════════════════════════════════════════════════════════════════*/
 void	InitPalMenu()
 {
-	S32	n ;
+	int32_t	n ;
 
 	for( n=0; n<8; n++ )
 		PalOne( n, PalMenu[n*3+0], PalMenu[n*3+1], PalMenu[n*3+2] ) ;
@@ -50,9 +50,9 @@ void	InitPalMenu()
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	CopyPalMenu( U8 *ptrpal )
+void	CopyPalMenu( uint8_t *ptrpal )
 {
-	S32	n ;
+	int32_t	n ;
 
 	for( n=0; n<8; n++ )
 	{
@@ -70,13 +70,13 @@ void	CopyPalMenu( U8 *ptrpal )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	DrawWindow(	S32 x1, S32 y1, S32 x2, S32 y2, S32 flags )
+void	DrawWindow(	int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t flags )
 {
-	S32	coul, up, down ;
-	S32	memoclipxmin ;
-	S32	memoclipxmax ;
-	S32	memoclipymin ;
-	S32	memoclipymax ;
+	int32_t	coul, up, down ;
+	int32_t	memoclipxmin ;
+	int32_t	memoclipxmax ;
+	int32_t	memoclipymin ;
+	int32_t	memoclipymax ;
 
 	memoclipxmin = ClipXMin ;
 	memoclipxmax = ClipXMax ;
@@ -120,9 +120,9 @@ void	DrawWindow(	S32 x1, S32 y1, S32 x2, S32 y2, S32 flags )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	OpenWindow( T_WINLIST *wlist, S32 x1, S32 y1, S32 largeur, S32 hauteur )
+void	OpenWindow( T_WINLIST *wlist, int32_t x1, int32_t y1, int32_t largeur, int32_t hauteur )
 {
-	S32	recal, x2, y2 ;
+	int32_t	recal, x2, y2 ;
 
 	x1++ ;
 	y1++ ;
@@ -168,9 +168,9 @@ void	OpenWindow( T_WINLIST *wlist, S32 x1, S32 y1, S32 largeur, S32 hauteur )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	GetWindowButton( T_MENU *ptrmenu, S32 handle, T_WINLIST *wlist )
+void	GetWindowButton( T_MENU *ptrmenu, int32_t handle, T_WINLIST *wlist )
 {
-	S32		n, nblcb ;
+	int32_t		n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	wlist->WindowX1 = 1 ;
@@ -204,16 +204,16 @@ void	GetWindowButton( T_MENU *ptrmenu, S32 handle, T_WINLIST *wlist )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	WinText( T_WINLIST *wlist, char *string, S32 value )
+void	WinText( T_WINLIST *wlist, char *string, int32_t value )
 {
 	GraphPrintf( FALSE, wlist->WindowCol, wlist->WindowLig, "%s%d", string, value ) ;
 	wlist->WindowLig += SizeChar+1 ;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	WinList( T_WINLIST *wlist, char **index, S32 nb, S32 size )
+void	WinList( T_WINLIST *wlist, char **index, int32_t nb, int32_t size )
 {
-	S32	n ;
+	int32_t	n ;
 
 	wlist->WindowArray = index ;
 	wlist->WindowNbIndex = nb ;
@@ -239,9 +239,9 @@ void	WinList( T_WINLIST *wlist, char **index, S32 nb, S32 size )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	WinSelect( T_WINLIST *wlist, S32 selected, S32 coul )
+void	WinSelect( T_WINLIST *wlist, int32_t selected, int32_t coul )
 {
-	S32	n ;
+	int32_t	n ;
 	char	**index ;
 
 	index = wlist->WindowArray ;
@@ -284,10 +284,10 @@ void	FlipWindow( T_WINLIST *wlist )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	GetIndexWinList( T_WINLIST *wlist )
+int32_t	GetIndexWinList( T_WINLIST *wlist )
 {
-	S32	num ;
-	S32	x, y, sizecol ;
+	int32_t	num ;
+	int32_t	x, y, sizecol ;
 
 	x = MouseX ;
 	y = MouseY ;
@@ -314,11 +314,11 @@ S32	GetIndexWinList( T_WINLIST *wlist )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	DrawBox( T_MENU *ptrmenu, S32 numlcb, S32 pushed)
+void	DrawBox( T_MENU *ptrmenu, int32_t numlcb, int32_t pushed)
 {
-	S32		flags ;
-	S32		nbaffcar ;
-	S32		len, x, y ;
+	int32_t		flags ;
+	int32_t		nbaffcar ;
+	int32_t		len, x, y ;
 	char		string[256] ;
 	char		valuestring[64] ;
 	T_CLICK_BOX	*ptrlcb ;
@@ -415,13 +415,13 @@ void	DrawBox( T_MENU *ptrmenu, S32 numlcb, S32 pushed)
 
 /*══════════════════════════════════════════════════════════════════════════*/
 T_CLICK_BOX	*AddHeaderButton(	T_MENU *ptrmenu,
-					S32 x1, S32 y1,
-					S32 largeur, S32 hauteur )
+					int32_t x1, int32_t y1,
+					int32_t largeur, int32_t hauteur )
 {
-	S32		x2, y2 ;
+	int32_t		x2, y2 ;
 	T_CLICK_BOX	*ptrlcb ;
 	void		*ptr ;
-	U32		newsize ;
+	uint32_t		newsize ;
 
 	x1 = ptrmenu->X1 + 6 + x1*(SizeChar+7)-2 ;
 	y1 = ptrmenu->Y1 + 6 + y1*(SizeChar+7)-2 ;
@@ -450,9 +450,9 @@ T_CLICK_BOX	*AddHeaderButton(	T_MENU *ptrmenu,
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	GetCoorButton( T_MENU *ptrmenu, S32 handle, S32 *x0, S32 *y0, S32 *x1, S32 *y1 )
+void	GetCoorButton( T_MENU *ptrmenu, int32_t handle, int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1 )
 {
-	S32		n, nblcb ;
+	int32_t		n, nblcb ;
 	T_CLICK_BOX	*ptrlcb ;
 
 	*x0 = 0 ;
@@ -477,7 +477,7 @@ void	GetCoorButton( T_MENU *ptrmenu, S32 handle, S32 *x0, S32 *y0, S32 *x1, S32 
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-void	GetCoorMenu( T_MENU *ptrmenu, S32 *x0, S32 *y0, S32 *x1, S32 *y1 )
+void	GetCoorMenu( T_MENU *ptrmenu, int32_t *x0, int32_t *y0, int32_t *x1, int32_t *y1 )
 {
 	*x0 = ptrmenu->X1 ;
 	*y0 = ptrmenu->Y1 ;
@@ -487,10 +487,10 @@ void	GetCoorMenu( T_MENU *ptrmenu, S32 *x0, S32 *y0, S32 *x1, S32 *y1 )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AddButton(	T_MENU	*ptrmenu,
-			S32	handle,
-			S32	x1, S32 y1,
-			S32	largeur, S32 hauteur,
-			S32	flags,
+			int32_t	handle,
+			int32_t	x1, int32_t y1,
+			int32_t	largeur, int32_t hauteur,
+			int32_t	flags,
 			const char	*ptrstring	)
 {
 	T_CLICK_BOX	*ptrlcb ;
@@ -505,15 +505,15 @@ void	AddButton(	T_MENU	*ptrmenu,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AddChangeValue( T_MENU	*ptrmenu,
-			S32	handle,
-			S32	x1, S32 y1,
-			S32	largeur, S32 hauteur,
-			S32	flags,
+			int32_t	handle,
+			int32_t	x1, int32_t y1,
+			int32_t	largeur, int32_t hauteur,
+			int32_t	flags,
 			char	*ptrstring,
-			S32	*ptrvar,
-			S32	step,
-			S32	minvar,
-			S32	maxvar	)
+			int32_t	*ptrvar,
+			int32_t	step,
+			int32_t	minvar,
+			int32_t	maxvar	)
 {
 	T_CLICK_BOX	*ptrlcborg ;
 	T_CLICK_BOX	*ptrlcb ;
@@ -552,13 +552,13 @@ void	AddChangeValue( T_MENU	*ptrmenu,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AddSwitch(	T_MENU	*ptrmenu,
-			S32	handle,
-			S32	x1, S32 y1,
-			S32	largeur, S32 hauteur,
-			S32	flags,
+			int32_t	handle,
+			int32_t	x1, int32_t y1,
+			int32_t	largeur, int32_t hauteur,
+			int32_t	flags,
 			const char	*ptrstring,
-			S32	*ptrvar,
-			S32	mask	)
+			int32_t	*ptrvar,
+			int32_t	mask	)
 {
 	T_CLICK_BOX	*ptrlcb ;
 
@@ -574,9 +574,9 @@ void	AddSwitch(	T_MENU	*ptrmenu,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AddText(	T_MENU	*ptrmenu,
-			S32	x1, S32 y1,
-			S32	largeur, S32 hauteur,
-			S32	flags,
+			int32_t	x1, int32_t y1,
+			int32_t	largeur, int32_t hauteur,
+			int32_t	flags,
 			const char	*ptrstring)
 {
 	T_CLICK_BOX	*ptrlcb ;
@@ -591,10 +591,10 @@ void	AddText(	T_MENU	*ptrmenu,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 void	AddWindow(	T_MENU	*ptrmenu,
-			S32	handle,
-			S32	x1, S32 y1,
-			S32	largeur, S32 hauteur,
-			S32	flags	)
+			int32_t	handle,
+			int32_t	x1, int32_t y1,
+			int32_t	largeur, int32_t hauteur,
+			int32_t	flags	)
 {
 	T_CLICK_BOX	*ptrlcb ;
 
@@ -607,33 +607,33 @@ void	AddWindow(	T_MENU	*ptrmenu,
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	GetOptimalSize( S32 deltax )
+int32_t	GetOptimalSize( int32_t deltax )
 {
 	return (deltax-8)/(SizeChar+7) ;
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-void	GetSizeMenu( T_MENU *ptrmenu, U32 *pdx, U32 *pdy )
+void	GetSizeMenu( T_MENU *ptrmenu, uint32_t *pdx, uint32_t *pdy )
 {
 	*pdx = ptrmenu->X2 - ptrmenu->X1 + 1 ;
 	*pdy = ptrmenu->Y2 - ptrmenu->Y1 + 1 ;
 }
 
-S32	MenuBestFitX( S32 deltax )
+int32_t	MenuBestFitX( int32_t deltax )
 {
 	return (deltax-14) / SizeChar ;
 }
 
-S32	MenuBestFitY( S32 deltax )
+int32_t	MenuBestFitY( int32_t deltax )
 {
 	return (deltax-14) / (SizeChar+1) ;
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	OpenMenu(	T_MENU *ptrmenu,
-			S32 largeur, S32 hauteur )
+int32_t	OpenMenu(	T_MENU *ptrmenu,
+			int32_t largeur, int32_t hauteur )
 {
-	S32	dx, dy	;
+	int32_t	dx, dy	;
 
 	ptrmenu->LastClicked = -1 ;
 	ptrmenu->Repeat = FALSE ;
@@ -666,7 +666,7 @@ S32	OpenMenu(	T_MENU *ptrmenu,
 /*══════════════════════════════════════════════════════════════════════════*/
 void	CloseMenu( T_MENU *ptrmenu )
 {
-	S32	x0, y0, x1, y1				;
+	int32_t	x0, y0, x1, y1				;
 
 	GetCoorMenu(ptrmenu, &x0, &y0, &x1, &y1)	;
 
@@ -676,11 +676,11 @@ void	CloseMenu( T_MENU *ptrmenu )
 }
 
 /*══════════════════════════════════════════════════════════════════════════*/
-S32	DrawMenu( T_MENU *ptrmenu, S32 x1, S32 y1)
+int32_t	DrawMenu( T_MENU *ptrmenu, int32_t x1, int32_t y1)
 {
-	S32		n, nb ;
-	S32		x2,y2 ;
-	S32		oldx1,oldy1 ;
+	int32_t		n, nb ;
+	int32_t		x2,y2 ;
+	int32_t		oldx1,oldy1 ;
 	T_CLICK_BOX	*ptrlcb ;
 
 /*	ptrmenu->LastClicked = -1 ;	*/
@@ -752,12 +752,12 @@ void	ClearMenu( T_MENU *ptrmenu )
 
 /*══════════════════════════════════════════════════════════════════════════*/
 /* on scan TOUJOURS une list de click box en DECREMENTANT */
-S32	ScanListClick( T_MENU *ptrmenu )
+int32_t	ScanListClick( T_MENU *ptrmenu )
 {
-	S32		n ;
+	int32_t		n ;
 	T_CLICK_BOX	*ptrlcb ;
-	S32		x, y ;
-	S32		nb ;
+	int32_t		x, y ;
+	int32_t		nb ;
 
 	nb = ptrmenu->NbBox ;
 
@@ -786,17 +786,17 @@ S32	ScanListClick( T_MENU *ptrmenu )
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-S32	GereMenu( T_MENU *ptrmenu )
+int32_t	GereMenu( T_MENU *ptrmenu )
 {
 	char		inputvaluestring[64] ;
-	S32		exitflag = -1 ;
-	S32		select ;
+	int32_t		exitflag = -1 ;
+	int32_t		select ;
 
 	T_CLICK_BOX	*ptrlcb ;
 	T_CLICK_BOX	*ptrlcborg ;
-	S32		value, ivalue ;
-	S32		vmin, vmax ;
-	S32		click ;
+	int32_t		value, ivalue ;
+	int32_t		vmin, vmax ;
+	int32_t		click ;
 	const char	*memostring ;
 
 

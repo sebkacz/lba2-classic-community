@@ -21,35 +21,35 @@ extern "C" {
 #define MODE_RW    (O_RDWR   | O_BINARY | O_CREAT)
 
 // --- Private functions -------------------------------------------------------
-S32 OpenMode(const char *filename, int mode) {
+int32_t OpenMode(const char *filename, int mode) {
   assert(filename != NULL);
-  S32 handle = open(filename, mode, (S_IRUSR | S_IWUSR));
+  int32_t handle = open(filename, mode, (S_IRUSR | S_IWUSR));
   return (handle == -1) ? 0 : handle;
 }
 
 // --- Public functions --------------------------------------------------------
-S32 OpenRead(const char *filename) { return OpenMode(filename, MODE_READ); }
-S32 OpenWrite(const char *filename) { return OpenMode(filename, MODE_WRITE); }
-S32 OpenReadWrite(const char *filename) { return OpenMode(filename, MODE_RW); }
+int32_t OpenRead(const char *filename) { return OpenMode(filename, MODE_READ); }
+int32_t OpenWrite(const char *filename) { return OpenMode(filename, MODE_WRITE); }
+int32_t OpenReadWrite(const char *filename) { return OpenMode(filename, MODE_RW); }
 
-S32 Close(S32 handle) {
+int32_t Close(int32_t handle) {
   assert(handle > 0);
   return close(handle);
 }
 
-S32 Read(S32 handle, void *buffer, U32 maxReadBytes) {
+int32_t Read(int32_t handle, void *buffer, uint32_t maxReadBytes) {
   assert(handle > 0);
   assert(buffer != NULL);
   return read(handle, buffer, maxReadBytes);
 }
 
-S32 Write(S32 handle, const void *buffer, U32 maxWriteBytes) {
+int32_t Write(int32_t handle, const void *buffer, uint32_t maxWriteBytes) {
   assert(handle > 0);
   assert(buffer != NULL);
   return write(handle, buffer, maxWriteBytes);
 }
 
-S32 Seek(S32 handle, S32 offset, ESeekOrigin origin) {
+int32_t Seek(int32_t handle, int32_t offset, ESeekOrigin origin) {
   assert(handle > 0);
 
   int stdOrigin;
@@ -71,29 +71,29 @@ S32 Seek(S32 handle, S32 offset, ESeekOrigin origin) {
   return lseek(handle, offset, stdOrigin);
 }
 
-U32 Delete(const char *filename) {
+uint32_t Delete(const char *filename) {
   assert(filename != NULL);
-  S32 result = unlink(filename);
+  int32_t result = unlink(filename);
   return (result != -1);
 }
 
-S32 Touch(const char *filename) {
+int32_t Touch(const char *filename) {
   assert(filename != NULL);
   return utime(filename, NULL);
 }
 
-U32 FileSize(const char *filename) {
+uint32_t FileSize(const char *filename) {
   assert(filename != NULL);
 
-  S32 handle = OpenRead(filename);
+  int32_t handle = OpenRead(filename);
   if (!handle) {
     return 0;
   }
 
-  S32 fsize = lseek(handle, 0, SEEK_END);
+  int32_t fsize = lseek(handle, 0, SEEK_END);
   Close(handle);
 
-  return (U32)((fsize == -1) ? 0 : fsize);
+  return (uint32_t)((fsize == -1) ? 0 : fsize);
 }
 
 bool ExistsFileOrDir(const char* path) {

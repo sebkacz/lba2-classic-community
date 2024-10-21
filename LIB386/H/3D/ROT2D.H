@@ -11,7 +11,7 @@ extern	"C"	{
 #endif
 
 //****************************************************************************
-typedef	void (Func_Rotate)(S32 x, S32 z, S32 angle) ;
+typedef	void (Func_Rotate)(int32_t x, int32_t z, int32_t angle) ;
 
 #pragma aux Arg_Rotate	"*"	       		\
 	parm caller	[eax] [ecx] [edx]	\

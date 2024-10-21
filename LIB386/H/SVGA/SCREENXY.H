@@ -8,10 +8,10 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-extern S32 ScreenXMin;
-extern S32 ScreenYMin;
-extern S32 ScreenXMax;
-extern S32 ScreenYMax;
+extern int32_t ScreenXMin;
+extern int32_t ScreenYMin;
+extern int32_t ScreenXMax;
+extern int32_t ScreenYMax;
 
 // =============================================================================
 #ifdef __cplusplus

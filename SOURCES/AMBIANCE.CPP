@@ -12,13 +12,13 @@
 #define DISTANCE_SAMPLE_MAX_EXT 30000L
 
 #ifdef  CDROM
-extern  S32     FlagVoiceCD ;
+extern  int32_t     FlagVoiceCD ;
 #endif
 
 // Tableau d'indirection des palettes se trouvant dans RESS.HQR
 // (voir le fichier f:\projet\lba2\datas\ress.lst)
 
-U8      **ListPalette[MAX_PALETTES] = {
+uint8_t      **ListPalette[MAX_PALETTES] = {
         &PtrPalNormal,          // Palette Normal
         &PtrPalCurrent,         // Palette Courante
         &PtrPalEclair,          // Palette Eclair
@@ -26,13 +26,13 @@ U8      **ListPalette[MAX_PALETTES] = {
         } ;
 
 
-S32     RestartRainSample = FALSE       ;
+int32_t     RestartRainSample = FALSE       ;
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
 HQR_GET_CALLBACK      DelBlocHQRSample ;
 
-void    DelBlocHQRSample( char *name, S32 index )
+void    DelBlocHQRSample( char *name, int32_t index )
 {
         name  = name ;
         index = index ;
@@ -61,11 +61,11 @@ void    InitParmSample( void )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U32     HQ_MixSample( S32 numsample, S32 frequence, S32 decalage, S32 repeat, S32 pan, S32 volume )
+uint32_t     HQ_MixSample( int32_t numsample, int32_t frequence, int32_t decalage, int32_t repeat, int32_t pan, int32_t volume )
 {
-        U32     timesample ;
-        U32     retvalue = -1 ;
-        U8      *ptr ;
+        uint32_t     timesample ;
+        uint32_t     retvalue = -1 ;
+        uint8_t      *ptr ;
 
         if( SamplesEnable AND numsample != -1 )
 	{
@@ -109,7 +109,7 @@ U32     HQ_MixSample( S32 numsample, S32 frequence, S32 decalage, S32 repeat, S3
 		if( numsample&0xFF000000 )      numsample = (numsample>>8)&0xFFFF ;
 
 		// Blindage inutile
-                ptr = (U8*)GivePtrSample( numsample ) ;
+                ptr = (uint8_t*)GivePtrSample( numsample ) ;
 		if( ptr )
 		{
 			retvalue = PlaySample( ptr, numsample, frequence, repeat, volume, pan ) ;
@@ -131,10 +131,10 @@ U32     HQ_MixSample( S32 numsample, S32 frequence, S32 decalage, S32 repeat, S3
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-U32     HQ_RestartSample( S32 numsample, S32 frequence, S32 repeat, S32 pan, S32 volume )
+uint32_t     HQ_RestartSample( int32_t numsample, int32_t frequence, int32_t repeat, int32_t pan, int32_t volume )
 {
-        U32     retvalue = -1 ;
-        U8      *ptr ;
+        uint32_t     retvalue = -1 ;
+        uint8_t      *ptr ;
 
         if( SamplesEnable AND numsample != -1 )
         {
@@ -143,7 +143,7 @@ U32     HQ_RestartSample( S32 numsample, S32 frequence, S32 repeat, S32 pan, S32
                 HQRGetDelFunc = DelBlocHQRSample ;
 
                 // Blindage inutile
-                ptr = (U8*)GivePtrSample( numsample ) ;
+                ptr = (uint8_t*)GivePtrSample( numsample ) ;
                 if( ptr )
                 {
                         retvalue = PlaySample( ptr, numsample, frequence, repeat, volume, pan ) ;
@@ -180,7 +180,7 @@ void    HQ_ResumeSamples(void)
 }
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
-S32     GiveBalance( S32 xp, S32 yp, S32 distance, U32 *pan, S32 *vol )
+int32_t     GiveBalance( int32_t xp, int32_t yp, int32_t distance, uint32_t *pan, int32_t *vol )
 {
         if( (yp > 480+480)
         OR  (yp < -480) )       return FALSE ;
@@ -211,13 +211,13 @@ S32     GiveBalance( S32 xp, S32 yp, S32 distance, U32 *pan, S32 *vol )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-U32     HQ_3D_MixSample(        S32 numsample, S32 frequence, S32 decalage,
-                                S32 repeat,
-                                S32 x, S32 y, S32 z )
+uint32_t     HQ_3D_MixSample(        int32_t numsample, int32_t frequence, int32_t decalage,
+                                int32_t repeat,
+                                int32_t x, int32_t y, int32_t z )
 {
-        U32     pan ;
-        S32     volume, distance ;
-        S32     retvalue = 0 ;
+        uint32_t     pan ;
+        int32_t     volume, distance ;
+        int32_t     retvalue = 0 ;
 
         if( SamplesEnable )
         {
@@ -248,7 +248,7 @@ U32     HQ_3D_MixSample(        S32 numsample, S32 frequence, S32 decalage,
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    HQ_ChangePanSample( S32 numsample, S32 volume, U32 pan )
+void    HQ_ChangePanSample( int32_t numsample, int32_t volume, uint32_t pan )
 {
         if( SamplesEnable )
         {
@@ -269,10 +269,10 @@ void    HQ_ChangePanSample( S32 numsample, S32 volume, U32 pan )
 
 /*──────────────────────────────────────────────────────────────────────────*/
 
-void    HQ_3D_ChangePanSample(  S32 numsample, S32 x, S32 y, S32 z )
+void    HQ_3D_ChangePanSample(  int32_t numsample, int32_t x, int32_t y, int32_t z )
 {
-        U32     pan ;
-        S32     volume, distance ;
+        uint32_t     pan ;
+        int32_t     volume, distance ;
 
         if( SamplesEnable )
         {
@@ -301,12 +301,12 @@ void    HQ_3D_ChangePanSample(  S32 numsample, S32 x, S32 y, S32 z )
 
 void    LaunchAmbiance( void )
 {
-        S32     numsample ;
-        S32     n ;
-        S32     decal ;
-        S32     freq  ;
-        S32     volume ;
-        S32     repeat ;
+        int32_t     numsample ;
+        int32_t     n ;
+        int32_t     decal ;
+        int32_t     freq  ;
+        int32_t     volume ;
+        int32_t     repeat ;
 
 	if( !SamplesEnable )    return ;
 
@@ -342,13 +342,13 @@ void    LaunchAmbiance( void )
 
 void    GereAmbiance( void )
 {
-        S32     sample  ;
-        S32     numsample ;
-        S32     n       ;
-        S32     decal   ;
-        S32     repeat  ;
-        S32     freq    ;
-        S32     volume  ;
+        int32_t     sample  ;
+        int32_t     numsample ;
+        int32_t     n       ;
+        int32_t     decal   ;
+        int32_t     repeat  ;
+        int32_t     freq    ;
+        int32_t     volume  ;
 
         if( !SamplesEnable )    return ;
 
@@ -408,7 +408,7 @@ void    GereAmbiance( void )
 // Appelée au changement de cube pour couper les ambiance du cube en cours
 void    ClearAmbiance( void )
 {
-        S32     n ;
+        int32_t     n ;
 
         for( n=0; n<4; n++ )
         {
@@ -431,13 +431,13 @@ void    InitPalette( void )
 
         GetResPath(tmpFilePath, ADELINE_MAX_PATH, RESS_HQR_NAME);
 
-        PtrPalNormal = (U8*)LoadMalloc_HQR( tmpFilePath, RESS_PAL ) ;
+        PtrPalNormal = (uint8_t*)LoadMalloc_HQR( tmpFilePath, RESS_PAL ) ;
         if( !PtrPalNormal )     TheEndCheckFile( tmpFilePath ) ;
 
-        PtrPalEclair = (U8*)LoadMalloc_HQR( tmpFilePath, RESS_PAL_ECLAIR ) ;
+        PtrPalEclair = (uint8_t*)LoadMalloc_HQR( tmpFilePath, RESS_PAL_ECLAIR ) ;
         if( !PtrPalEclair )     TheEndCheckFile( tmpFilePath ) ;
 
-        PtrPalBlack = (U8*)LoadMalloc_HQR( tmpFilePath, RESS_PAL_BLACK ) ;
+        PtrPalBlack = (uint8_t*)LoadMalloc_HQR( tmpFilePath, RESS_PAL_BLACK ) ;
         if( !PtrPalBlack )      TheEndCheckFile( tmpFilePath ) ;
 }
 
@@ -502,25 +502,25 @@ void    StartRainSample( void )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadePal( U8 r, U8 v, U8 b, U8 *ptrpal, S32 scale )
+void    FadePal( uint8_t r, uint8_t v, uint8_t b, uint8_t *ptrpal, int32_t scale )
 {
-        U8      workpal[768] ;
-        S32     n ;
+        uint8_t      workpal[768] ;
+        int32_t     n ;
 
         for( n=0; n<256; n++ )
         {
-                workpal[n*3+0] = (U8)RegleTrois( r, ptrpal[n*3+0], FADE_DELAY, scale ) ;
-                workpal[n*3+1] = (U8)RegleTrois( v, ptrpal[n*3+1], FADE_DELAY, scale ) ;
-                workpal[n*3+2] = (U8)RegleTrois( b, ptrpal[n*3+2], FADE_DELAY, scale ) ;
+                workpal[n*3+0] = (uint8_t)RegleTrois( r, ptrpal[n*3+0], FADE_DELAY, scale ) ;
+                workpal[n*3+1] = (uint8_t)RegleTrois( v, ptrpal[n*3+1], FADE_DELAY, scale ) ;
+                workpal[n*3+2] = (uint8_t)RegleTrois( b, ptrpal[n*3+2], FADE_DELAY, scale ) ;
         }
 
         PaletteSync( workpal ) ;
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeToBlack( U8 *ptrpal )
+void    FadeToBlack( uint8_t *ptrpal )
 {
-        S32     starttime, delta;
+        int32_t     starttime, delta;
 
         if( FlagBlackPal )      return  ;
 
@@ -548,8 +548,8 @@ void    FadeToBlack( U8 *ptrpal )
 //──────────────────────────────────────────────────────────────────────────
 void    WhiteFade()
 {
-        U8      workpal[768] ;
-        S32     starttime, delta;
+        uint8_t      workpal[768] ;
+        int32_t     starttime, delta;
 
         SaveTimer() ;
 
@@ -575,9 +575,9 @@ void    WhiteFade()
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeWhiteToPal( U8 *ptrpal )
+void    FadeWhiteToPal( uint8_t *ptrpal )
 {
-        S32     starttime, delta;
+        int32_t     starttime, delta;
 
         SaveTimer() ;
 
@@ -601,9 +601,9 @@ void    FadeWhiteToPal( U8 *ptrpal )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeToPal( U8 *ptrpal )
+void    FadeToPal( uint8_t *ptrpal )
 {
-        S32     starttime, delta;
+        int32_t     starttime, delta;
 
         SaveTimer() ;
 
@@ -627,9 +627,9 @@ void    FadeToPal( U8 *ptrpal )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeToBlackAndSamples( U8 *ptrpal )
+void    FadeToBlackAndSamples( uint8_t *ptrpal )
 {
-        S32     delta = 0 ;
+        int32_t     delta = 0 ;
 
         SaveTimer( ) ;
 
@@ -657,9 +657,9 @@ void    FadeToBlackAndSamples( U8 *ptrpal )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeToPalAndSamples( U8 *ptrpal )
+void    FadeToPalAndSamples( uint8_t *ptrpal )
 {
-        S32     delta = FADE_DELAY ;
+        int32_t     delta = FADE_DELAY ;
 
         SaveTimer( ) ;
 
@@ -686,7 +686,7 @@ void    FadeToPalAndSamples( U8 *ptrpal )
 //──────────────────────────────────────────────────────────────────────────
 void    SetBlackPal()
 {
-        S32     n ;
+        int32_t     n ;
 
         for( n=0; n<256; n++ )
         {
@@ -696,10 +696,10 @@ void    SetBlackPal()
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadePalToPal( U8 *ptrpal, U8 *ptrpal1 )
+void    FadePalToPal( uint8_t *ptrpal, uint8_t *ptrpal1 )
 {
-        U8      workpal[768] ;
-        S32     starttime, delta;
+        uint8_t      workpal[768] ;
+        int32_t     starttime, delta;
 
         SaveTimer( ) ;
 
@@ -707,7 +707,7 @@ void    FadePalToPal( U8 *ptrpal, U8 *ptrpal1 )
 
         do
         {
-                S32     n ;
+                int32_t     n ;
 
                 ManageTime()    ;
 
@@ -717,9 +717,9 @@ void    FadePalToPal( U8 *ptrpal, U8 *ptrpal1 )
 
                 for( n=0; n<256; n++ )
                 {
-                        workpal[n*3+0] = (U8)RegleTrois( ptrpal[n*3+0], ptrpal1[n*3+0], FADE_DELAY, delta ) ;
-                        workpal[n*3+1] = (U8)RegleTrois( ptrpal[n*3+1], ptrpal1[n*3+1], FADE_DELAY, delta ) ;
-                        workpal[n*3+2] = (U8)RegleTrois( ptrpal[n*3+2], ptrpal1[n*3+2], FADE_DELAY, delta ) ;
+                        workpal[n*3+0] = (uint8_t)RegleTrois( ptrpal[n*3+0], ptrpal1[n*3+0], FADE_DELAY, delta ) ;
+                        workpal[n*3+1] = (uint8_t)RegleTrois( ptrpal[n*3+1], ptrpal1[n*3+1], FADE_DELAY, delta ) ;
+                        workpal[n*3+2] = (uint8_t)RegleTrois( ptrpal[n*3+2], ptrpal1[n*3+2], FADE_DELAY, delta ) ;
                 }
 
                 PaletteSync( workpal ) ;
@@ -730,7 +730,7 @@ void    FadePalToPal( U8 *ptrpal, U8 *ptrpal1 )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    FadeToPalIndex( U8 num )
+void    FadeToPalIndex( uint8_t num )
 {
 
         if( num>=MAX_PALETTES ) return ;
@@ -745,7 +745,7 @@ void    FadeToPalIndex( U8 num )
 }
 
 //──────────────────────────────────────────────────────────────────────────
-void    PaletteIndex( U8 num )
+void    PaletteIndex( uint8_t num )
 {
         if( num>=MAX_PALETTES ) return ;
 

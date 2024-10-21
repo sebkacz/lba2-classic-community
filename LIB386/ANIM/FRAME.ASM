@@ -25,7 +25,7 @@
 		PUBLIC	C	ObjectSetFrame
 
 ;*══════════════════════════════════════════════════════════════════════════*
-;void	ObjectSetFrame(T_OBJ *obj, U32 frame)
+;void	ObjectSetFrame(T_OBJ *obj, uint32_t frame)
 
 ;#pragma aux ObjectSetFrame			\
 ;	parm		[ebx] [edx]		\

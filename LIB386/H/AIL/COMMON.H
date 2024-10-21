@@ -8,9 +8,9 @@ extern "C" {
 #endif
 
 //--------------------------------------------------------------------------
-extern	S32		Sample_Driver_Enabled	;
-extern	S32		Midi_Driver_Enabled	;
-extern	S32		SamplingRate		;
+extern	int32_t		Sample_Driver_Enabled	;
+extern	int32_t		Midi_Driver_Enabled	;
+extern	int32_t		SamplingRate		;
 
 //--------------------------------------------------------------------------
 extern	char		MidiDriverName[]	;

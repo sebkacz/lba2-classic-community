@@ -33,7 +33,7 @@ char directoriesUserDir[ADELINE_MAX_PATH] = "";
 char directoriesResDir[ADELINE_MAX_PATH] = "";
 char directoriesCfgDir[ADELINE_MAX_PATH] = "";
 char directoriesCDPrefix[ADELINE_MAX_PATH] = "";
-S32 directoriesDistVersion;
+int32_t directoriesDistVersion;
 
 // --- Private functions -------------------------------------------------------
 /**
@@ -50,7 +50,7 @@ S32 directoriesDistVersion;
  * @return TRUE if discovered. When FALSE \p outFound is unchanged.
  * @note If \p foundMaxSize is 0, \p outFound will be ignored.
  */
-bool Discover(char *outFound, U16 foundMaxSize, const char *baseDir,
+bool Discover(char *outFound, uint16_t foundMaxSize, const char *baseDir,
               const char *checkPath) {
   assert(((foundMaxSize > 0) && (outFound != NULL)) || (foundMaxSize == 0));
   assert(baseDir != NULL);
@@ -107,7 +107,7 @@ bool Discover(char *outFound, U16 foundMaxSize, const char *baseDir,
  *       and \p outPath will contain only \p baseDir.
  * @see DiscoverFile()
  */
-void DiscoverEndingAndAppend(char *outPath, U16 pathMaxSize,
+void DiscoverEndingAndAppend(char *outPath, uint16_t pathMaxSize,
                              const char *baseDir, const char *endingPath) {
   assert((outPath != NULL) && (pathMaxSize > 0));
   assert(baseDir != NULL);
@@ -135,7 +135,7 @@ bool IsValidResourceDir(const char *path) {
 // --- Initialization ----------------------------------------------------------
 void InitDirectories(const char *userDir, const char *resDir,
                      const char *cfgDir, const char *CDPrefix,
-                     S32 distVersion) {
+                     int32_t distVersion) {
   assert(directoriesInitialized == false);
   assert(userDir != NULL);
   assert(resDir != NULL);
@@ -216,14 +216,14 @@ void GetDefaultUserDir(char *outDir) {
 
 void GetDefaultResDir(char *outDir) { GetCurrentRunningDir(outDir); }
 
-void GetCfgPath(char *outPath, U16 pathMaxSize, const char *cfgFilename) {
+void GetCfgPath(char *outPath, uint16_t pathMaxSize, const char *cfgFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
   DiscoverEndingAndAppend(outPath, pathMaxSize, directoriesCfgDir, cfgFilename);
 }
 
-void GetSavePath(char *outPath, U16 pathMaxSize, const char *saveFilename) {
+void GetSavePath(char *outPath, uint16_t pathMaxSize, const char *saveFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
@@ -238,7 +238,7 @@ void GetSavePath(char *outPath, U16 pathMaxSize, const char *saveFilename) {
   DiscoverEndingAndAppend(outPath, pathMaxSize, savePath, saveFilename);
 }
 
-void GetShootPath(char *outPath, U16 pathMaxSize, const char *shootFilename) {
+void GetShootPath(char *outPath, uint16_t pathMaxSize, const char *shootFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
@@ -256,7 +256,7 @@ void GetShootPath(char *outPath, U16 pathMaxSize, const char *shootFilename) {
   DiscoverEndingAndAppend(outPath, pathMaxSize, shootPath, shootFilename);
 }
 
-void GetJinglePath(char *outPath, U16 pathMaxSize, const char *jingleFilename) {
+void GetJinglePath(char *outPath, uint16_t pathMaxSize, const char *jingleFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
@@ -273,7 +273,7 @@ void GetJinglePath(char *outPath, U16 pathMaxSize, const char *jingleFilename) {
 
 // TODO: When direct from CD as resource completely implemented, VOX may
 //  need to be stored in user folder since it is streamed and cached to disk...
-void GetVoicePath(char *outPath, U16 pathMaxSize, const char *voiceFilename,
+void GetVoicePath(char *outPath, uint16_t pathMaxSize, const char *voiceFilename,
                   bool fromCD) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
@@ -308,7 +308,7 @@ void GetVoicePath(char *outPath, U16 pathMaxSize, const char *voiceFilename,
   }
 }
 
-void GetMoviePath(char *outPath, U16 pathMaxSize, const char *movieFilename) {
+void GetMoviePath(char *outPath, uint16_t pathMaxSize, const char *movieFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
@@ -323,7 +323,7 @@ void GetMoviePath(char *outPath, U16 pathMaxSize, const char *movieFilename) {
   DiscoverEndingAndAppend(outPath, pathMaxSize, moviePath, movieFilename);
 }
 
-void GetResPath(char *outPath, U16 pathMaxSize, const char *resFilename) {
+void GetResPath(char *outPath, uint16_t pathMaxSize, const char *resFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 
@@ -338,7 +338,7 @@ void GetResPath(char *outPath, U16 pathMaxSize, const char *resFilename) {
   DiscoverEndingAndAppend(outPath, pathMaxSize, directoriesResDir, resFilename);
 }
 
-void GetLogPath(char *outPath, U16 pathMaxSize, const char *logFilename) {
+void GetLogPath(char *outPath, uint16_t pathMaxSize, const char *logFilename) {
   assert(directoriesInitialized);
   assert((outPath != NULL) && (pathMaxSize > 0));
 

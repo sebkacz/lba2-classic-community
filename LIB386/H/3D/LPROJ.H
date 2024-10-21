@@ -9,18 +9,18 @@ extern "C" {
 #endif
 
 // -----------------------------------------------------------------------------
-typedef S32(Func_LongProjectPoint)(S32 x, S32 y, S32 z);
+typedef int32_t(Func_LongProjectPoint)(int32_t x, int32_t y, int32_t z);
 
 // -----------------------------------------------------------------------------
-S32 LongProjectPoint_C(S32 x, S32 y, S32 z);
+int32_t LongProjectPoint_C(int32_t x, int32_t y, int32_t z);
 #define LongProjectPoint LongProjectPoint_C
 
 extern Func_LongProjectPoint LongProjectPointIso; ///< Do Not call from C
 extern Func_LongProjectPoint *LongProjectPoint3D; ///< Do Not call from C
 
 // -----------------------------------------------------------------------------
-typedef S32(Func_ProjectList)(TYPE_PT *Dst, TYPE_VT16 *Src, S32 NbPt, S32 OrgX,
-                              S32 OrgY, S32 OrgZ);
+typedef int32_t(Func_ProjectList)(TYPE_PT *Dst, TYPE_VT16 *Src, int32_t NbPt, int32_t OrgX,
+                              int32_t OrgY, int32_t OrgZ);
 
 // -----------------------------------------------------------------------------
 extern Func_ProjectList *ProjectList;   ///< Do Not call from C

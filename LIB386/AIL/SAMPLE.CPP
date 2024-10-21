@@ -37,43 +37,43 @@ extern HDIGDRIVER	DigDriver 			;// Handle to digital audio driver
 //████████████████████████████████████████████████████████████████████████████
 typedef	struct		{
 				HSAMPLE	handle	;
-				U32	sample	;
-				U32	timer	;
+				uint32_t	sample	;
+				uint32_t	timer	;
 			}
 			SAMP_DESC	;
 
 //████████████████████████████████████████████████████████████████████████████
-	S32		SampleOverflow = FALSE		;
+	int32_t		SampleOverflow = FALSE		;
 
 //████████████████████████████████████████████████████████████████████████████
-	S32		LibWaveMasterVolume = 128	;
+	int32_t		LibWaveMasterVolume = 128	;
 #ifdef	_WIN32
-	S32		UseWaveMixer = FALSE		;
+	int32_t		UseWaveMixer = FALSE		;
 #endif//_WIN32
 
 //████████████████████████████████████████████████████████████████████████████
 #ifdef	_WIN32
 static	VOLUMECONTROL	WaveVolume			;
-static	S32		OldWaveVolume			;
+static	int32_t		OldWaveVolume			;
 #endif//_WIN32
 
 //████████████████████████████████████████████████████████████████████████████
 static	HTIMER		HandleTimer	= NULL		;
 static	void		*Timer_ptrsample		;
-static	U32		Timer_usernum	     		;
-static	S32		Timer_pitchbend			;
-static	S32		Timer_nbrepeat			;
-static	S32		Timer_volume	     		;
-static	S32		Timer_pan	     		;
+static	uint32_t		Timer_usernum	     		;
+static	int32_t		Timer_pitchbend			;
+static	int32_t		Timer_nbrepeat			;
+static	int32_t		Timer_volume	     		;
+static	int32_t		Timer_pan	     		;
 
-static	U32		InversePanMask = 0		;
+static	uint32_t		InversePanMask = 0		;
 
 	SAMP_DESC	Sample_Handle[MAX_SAMPLE_VOICES];
-static	S32		Nb_Voices			;
-static	U32		SampleSeed			;
-static	S32		SamplesPaused = 0		;
-static	S32		SamplesFade = 0			;
-static	S32		FadeStartTime			;
+static	int32_t		Nb_Voices			;
+static	uint32_t		SampleSeed			;
+static	int32_t		SamplesPaused = 0		;
+static	int32_t		SamplesFade = 0			;
+static	int32_t		FadeStartTime			;
 
 //████████████████████████████████████████████████████████████████████████████
 
@@ -95,17 +95,17 @@ VOID_FUNC	SpecialInitSampleDriver	;
 
 #ifdef	_WIN32
 
-S32	InitDriver(S32 rate, S32 bits, S32 chans)
+int32_t	InitDriver(int32_t rate, int32_t bits, int32_t chans)
 {
 	static	PCMWAVEFORMAT	sPCMWF	;
-	S32			res	;
+	int32_t			res	;
 
 	sPCMWF.wf.wFormatTag      = WAVE_FORMAT_PCM;
-	sPCMWF.wf.nChannels       = (U16)chans;
+	sPCMWF.wf.nChannels       = (uint16_t)chans;
 	sPCMWF.wf.nSamplesPerSec  = rate;
 	sPCMWF.wf.nAvgBytesPerSec = rate * (bits >> 3) * chans;
-	sPCMWF.wf.nBlockAlign     = (U16)( (bits >> 3) * chans );
-	sPCMWF.wBitsPerSample     = (U16)bits;
+	sPCMWF.wf.nBlockAlign     = (uint16_t)( (bits >> 3) * chans );
+	sPCMWF.wBitsPerSample     = (uint16_t)bits;
 
 	res = AIL_waveOutOpen(&DigDriver, NULL, 0, (LPWAVEFORMAT) &sPCMWF);
 
@@ -121,7 +121,7 @@ S32	InitDriver(S32 rate, S32 bits, S32 chans)
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	InitSampleDriver( char *driver_name )
+int32_t	InitSampleDriver( char *driver_name )
 {
 	if( Sample_Driver_Enabled )
 	{
@@ -196,8 +196,8 @@ retry:
 #endif
 	{
 		char 	desc[128] = ""	;
-		S32	format		;
-		S32	rate		;
+		int32_t	format		;
+		int32_t	rate		;
 
 		AIL_digital_configuration(DigDriver, &rate, &format, desc)	;
 
@@ -293,9 +293,9 @@ void	ClearSampleDriver()
 }
 //████████████████████████████████████████████████████████████████████████████
 
-static S32 GetHandleIndice(U32 sample)
+static int32_t GetHandleIndice(uint32_t sample)
 {
-	S32		hnum	;
+	int32_t		hnum	;
 
 	if(sample<0x1000000)
 	{
@@ -325,10 +325,10 @@ static S32 GetHandleIndice(U32 sample)
 
 //████████████████████████████████████████████████████████████████████████████
 
-static HSAMPLE FindFreeHandle(U32 *pnum)
+static HSAMPLE FindFreeHandle(uint32_t *pnum)
 {
 	HSAMPLE		handle	;
-	U32		hnum	;
+	uint32_t		hnum	;
 
 	if( !Sample_Driver_Enabled )	return 0 ;
 
@@ -346,7 +346,7 @@ static HSAMPLE FindFreeHandle(U32 *pnum)
 	{
 		// If none find the oldest
 
-		U32	bestsample	;
+		uint32_t	bestsample	;
 
 		SampleOverflow	= TRUE	;
 
@@ -408,9 +408,9 @@ ok:
 
 //████████████████████████████████████████████████████████████████████████████
 
-static U32 GenerateSampleHandle(U32 usernum, U32 hnum)
+static uint32_t GenerateSampleHandle(uint32_t usernum, uint32_t hnum)
 {
-	U32		sample	;
+	uint32_t		sample	;
 
 	// Compute handle
 	sample = SampleSeed | ((usernum&0xFFFF)<<8) | hnum ;
@@ -428,15 +428,15 @@ static U32 GenerateSampleHandle(U32 usernum, U32 hnum)
 
 //████████████████████████████████████████████████████████████████████████████
 
-static void ScaleVolumeSamples( S32 fadevol )
+static void ScaleVolumeSamples( int32_t fadevol )
 {
-	U32	hnum	;
+	uint32_t	hnum	;
 
 	// update all the volumes
 	for(hnum=0; hnum<Nb_Voices; hnum++)
 	{
 		HSAMPLE	handle	;
-		S32	volume	;
+		int32_t	volume	;
 
 		handle = Sample_Handle[hnum].handle	;
 		volume = AIL_sample_user_data( handle, USER_DATA_VOLUME);
@@ -447,7 +447,7 @@ static void ScaleVolumeSamples( S32 fadevol )
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	SetMasterVolumeSample( S32 volume )
+void	SetMasterVolumeSample( int32_t volume )
 {
 #ifdef	_WIN32
 	if(UseWaveMixer)
@@ -486,7 +486,7 @@ void	SetMasterVolumeSample( S32 volume )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetMasterVolumeSample()
+int32_t	GetMasterVolumeSample()
 {
 #ifdef	_WIN32
 	if(UseWaveMixer)
@@ -509,9 +509,9 @@ S32	GetMasterVolumeSample()
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	FadeOutSamples( S32 delay )
+int32_t	FadeOutSamples( int32_t delay )
 {
-	S32	delta	;
+	int32_t	delta	;
 
 	if(!SamplesFade)
 	{
@@ -530,7 +530,7 @@ S32	FadeOutSamples( S32 delay )
 
 	if(Sample_Driver_Enabled)
 	{
-		S32	ratio	;
+		int32_t	ratio	;
 
 		if(delay)
 		{
@@ -549,9 +549,9 @@ S32	FadeOutSamples( S32 delay )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	FadeInSamples( S32 delay )
+int32_t	FadeInSamples( int32_t delay )
 {
-	S32	delta	;
+	int32_t	delta	;
 
 	if(SamplesFade)
 	{
@@ -570,7 +570,7 @@ S32	FadeInSamples( S32 delay )
 
 	if(Sample_Driver_Enabled)
 	{
-		S32	ratio	;
+		int32_t	ratio	;
 
 		if(delay)
 		{
@@ -589,17 +589,17 @@ S32	FadeInSamples( S32 delay )
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	InverseStereoSample( S32 inverse )
+void	InverseStereoSample( int32_t inverse )
 {
 	InversePanMask = inverse ? 127 : 0 ;
 }
 
 //████████████████████████████████████████████████████████████████████████████
 
-U32	PlaySample(void *ptrsample, U32 usernum, S32 pitchbend, S32 nbrepeat, S32 volume, S32 pan)
+uint32_t	PlaySample(void *ptrsample, uint32_t usernum, int32_t pitchbend, int32_t nbrepeat, int32_t volume, int32_t pan)
 {
 	HSAMPLE		handle	;
-	U32		hnum	;
+	uint32_t		hnum	;
 
 	// get one available handle
 	handle = FindFreeHandle(&hnum)	;
@@ -655,7 +655,7 @@ static void WINAPI
 #else
 static void pascal
 #endif
-SampleCallBack(U32 user)
+SampleCallBack(uint32_t user)
 {
 	user = user	;
 
@@ -667,7 +667,7 @@ SampleCallBack(U32 user)
 
 //████████████████████████████████████████████████████████████████████████████
 
-U32	TimerPlaySample(void *ptrsample, U32 usernum, S32 pitchbend, S32 nbrepeat, S32 volume, S32 pan, S32 period)
+uint32_t	TimerPlaySample(void *ptrsample, uint32_t usernum, int32_t pitchbend, int32_t nbrepeat, int32_t volume, int32_t pan, int32_t period)
 {
 	if( !Sample_Driver_Enabled )	return	FALSE	;
 
@@ -713,10 +713,10 @@ void	TimerStopSample()
 }
 
 //████████████████████████████████████████████████████████████████████████████
-void	ChangePitchbendSample( U32 sample, S32 pitchbend)
+void	ChangePitchbendSample( uint32_t sample, int32_t pitchbend)
 {
 	HSAMPLE	handle	;
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -746,10 +746,10 @@ void	ChangePitchbendSample( U32 sample, S32 pitchbend)
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ChangeVolumePanSample( U32 sample, S32 volume, S32 pan)
+void	ChangeVolumePanSample( uint32_t sample, int32_t volume, int32_t pan)
 {
 	HSAMPLE	handle	;
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -783,9 +783,9 @@ void	ChangeVolumePanSample( U32 sample, S32 volume, S32 pan)
 
 //████████████████████████████████████████████████████████████████████████████
 
-HSAMPLE	GetSampleMSSHandle( U32 sample )
+HSAMPLE	GetSampleMSSHandle( uint32_t sample )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return NULL	;
 
@@ -801,10 +801,10 @@ HSAMPLE	GetSampleMSSHandle( U32 sample )
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	StopOneSample( U32 sample )
+void	StopOneSample( uint32_t sample )
 {
 	HSAMPLE	handle	;
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -824,7 +824,7 @@ void	StopOneSample( U32 sample )
 
 void	StopSamples()
 {
-	U32		hnum	;
+	uint32_t		hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -848,9 +848,9 @@ void	StopSamples()
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	PauseOneSample( U32 sample )
+void	PauseOneSample( uint32_t sample )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -866,9 +866,9 @@ void	PauseOneSample( U32 sample )
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	ResumeOneSample( U32 sample )
+void	ResumeOneSample( uint32_t sample )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -886,7 +886,7 @@ void	ResumeOneSample( U32 sample )
 
 void	PauseSamples()
 {
-	U32		hnum	;
+	uint32_t		hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -908,7 +908,7 @@ void	PauseSamples()
 
 void	ResumeSamples()
 {
-	U32		hnum	;
+	uint32_t		hnum	;
 
 	if( !Sample_Driver_Enabled )	return	;
 
@@ -933,9 +933,9 @@ void	ResumeSamples()
 
 //████████████████████████████████████████████████████████████████████████████
 
-U32	IsSamplePlaying( U32 sample )
+uint32_t	IsSamplePlaying( uint32_t sample )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )
 		return	FALSE	;
@@ -954,9 +954,9 @@ U32	IsSamplePlaying( U32 sample )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetSamplePosition( U32 sample )
+int32_t	GetSamplePosition( uint32_t sample )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled )
 		return	-1	;
@@ -974,9 +974,9 @@ S32	GetSamplePosition( U32 sample )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetPlayingSamples(SAMPLE_PLAYING tab[], S32 max)
+int32_t	GetPlayingSamples(SAMPLE_PLAYING tab[], int32_t max)
 {
-	S32	i, hnum	;
+	int32_t	i, hnum	;
 
 	hnum = 0	;
 
@@ -993,9 +993,9 @@ S32	GetPlayingSamples(SAMPLE_PLAYING tab[], S32 max)
 		}
 		tab[hnum].Usernum 	= (Sample_Handle[i].sample>>8)&0xFFFF		;
 		tab[hnum].Pitch  	= AIL_sample_user_data(Sample_Handle[i].handle, USER_DATA_PITCHBEND);
-		tab[hnum].Repeat	= (U8)AIL_sample_loop_count(Sample_Handle[i].handle)	;
-		tab[hnum].Volume	= (U8)AIL_sample_user_data(Sample_Handle[i].handle, USER_DATA_VOLUME);
-		tab[hnum].Pan		= (U8)(AIL_sample_pan(Sample_Handle[i].handle)^InversePanMask);
+		tab[hnum].Repeat	= (uint8_t)AIL_sample_loop_count(Sample_Handle[i].handle)	;
+		tab[hnum].Volume	= (uint8_t)AIL_sample_user_data(Sample_Handle[i].handle, USER_DATA_VOLUME);
+		tab[hnum].Pan		= (uint8_t)(AIL_sample_pan(Sample_Handle[i].handle)^InversePanMask);
 
 		if(AIL_sample_status(Sample_Handle[i].handle) == SMP_DONE)
 		{
@@ -1010,9 +1010,9 @@ S32	GetPlayingSamples(SAMPLE_PLAYING tab[], S32 max)
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetSamplePoly()
+int32_t	GetSamplePoly()
 {
-	S32	hnum, count	;
+	int32_t	hnum, count	;
 
 	if( !Sample_Driver_Enabled )
 		return	-1	;
@@ -1034,9 +1034,9 @@ S32	GetSamplePoly()
 
 //████████████████████████████████████████████████████████████████████████████
 
-void	SetDataSample( U32 sample, S32 index, S32 value )
+void	SetDataSample( uint32_t sample, int32_t index, int32_t value )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled || (index>8-USER_DATA_USER))
 		return		;
@@ -1053,9 +1053,9 @@ void	SetDataSample( U32 sample, S32 index, S32 value )
 
 //████████████████████████████████████████████████████████████████████████████
 
-S32	GetDataSample( U32 sample, S32 index )
+int32_t	GetDataSample( uint32_t sample, int32_t index )
 {
-	S32	hnum	;
+	int32_t	hnum	;
 
 	if( !Sample_Driver_Enabled || (index>8-USER_DATA_USER))
 		return	0	;

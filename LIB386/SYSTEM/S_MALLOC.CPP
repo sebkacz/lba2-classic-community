@@ -14,27 +14,27 @@ extern "C" {
 // --- Private state -----------------------------------------------------------
 static char MallocErrorString[256];
 static char MallocErrorFile[260];
-static U32 MallocErrorLine;
+static uint32_t MallocErrorLine;
 
 // --- Private functions -------------------------------------------------------
-void SafeErrorMalloc(const char *msg, char *file, U32 line) {
+void SafeErrorMalloc(const char *msg, char *file, uint32_t line) {
   strcpy(MallocErrorString, msg);
   strcpy(MallocErrorFile, file);
   MallocErrorLine = line;
   exit(1);
 }
 
-void CheckPtr(void *ptr, char *file, U32 line) {
-  if ((S32)ptr & (MALLOC_ALIGN - 1)) {
+void CheckPtr(void *ptr, char *file, uint32_t line) {
+  if ((int32_t)ptr & (MALLOC_ALIGN - 1)) {
   error:
     SafeErrorMalloc("Trying to Free or Mshrink a block not allocated with "
                     "Malloc/SMartMalloc/DosMalloc",
                     file, line);
     return;
   }
-  switch (*((U8 *)ptr - 2)) {
+  switch (*((uint8_t *)ptr - 2)) {
   case 0:
-    if (*((U8 *)ptr - 1) > MALLOC_ALIGN) {
+    if (*((uint8_t *)ptr - 1) > MALLOC_ALIGN) {
       goto error;
     }
     break;
@@ -51,7 +51,7 @@ void SafeErrorMallocMsg() {
   }
 }
 
-void SafeFree(void *ptr, char *file, U32 line) {
+void SafeFree(void *ptr, char *file, uint32_t line) {
   if (!ptr) {
     SafeErrorMalloc("Trying to Free a NULL ptr", file, line);
   }
@@ -61,7 +61,7 @@ void SafeFree(void *ptr, char *file, U32 line) {
   NormFree(ptr);
 }
 
-void *SafeMshrink(void *ptr, U32 taille, char *file, U32 line) {
+void *SafeMshrink(void *ptr, uint32_t taille, char *file, uint32_t line) {
   if (!ptr) {
     SafeErrorMalloc("Trying to Mshrink a NULL ptr", file, line);
   }
