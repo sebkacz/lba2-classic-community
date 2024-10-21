@@ -914,10 +914,7 @@ startloop:
 #endif
 
 #ifdef DEBUG_TOOLS
-      if ((MyKey == K_G) // Sauvegarde d'un bug
-          AND(ptrobj->LifePoint > 0) AND(ptrobj->Obj.Body.Num != -1)
-              AND(!(ptrobj->Flags & INVISIBLE))
-                  AND(NumCube != NUM_CUBE_PHANTOM)) {
+      if ((MyKey == K_G) /* Sauvegarde d'un bug */ && (ptrobj->LifePoint > 0) && (ptrobj->Obj.Body.Num != -1) && (!(ptrobj->Flags & INVISIBLE)) && (NumCube != NUM_CUBE_PHANTOM)) {
         int32_t savenewcube = NewCube;
 
         InitDial(0);
@@ -973,9 +970,7 @@ startloop:
 
       InventoryAction = -1;
 
-      if ((Input & I_INVENTORY) AND(PtrComportement->Flags & CF_INVENTORY)
-              AND(ptrobj->Obj.Body.Num != -1) && !(ptrobj->WorkFlags & SKATING)
-                  AND(ptrobj->Move == MOVE_MANUAL)) {
+      if ((Input & I_INVENTORY) && (PtrComportement->Flags & CF_INVENTORY) && (ptrobj->Obj.Body.Num != -1) && !(ptrobj->WorkFlags & SKATING) && (ptrobj->Move == MOVE_MANUAL)) {
         SaveTimer();
         StopSpeak();
         BackupScreen(true);
@@ -1088,17 +1083,12 @@ startloop:
         RestoreTimer();
       }
 
-      if ((Input & I_COMPORTEMENT) AND(ptrobj->Obj.Body.Num != -1)
-              && !(ptrobj->WorkFlags & SKATING)
-                  AND((ptrobj->Move == MOVE_MANUAL)
-                          OR(ptrobj->Move == MOVE_BUGGY_MANUAL))) {
+      if ((Input & I_COMPORTEMENT) && (ptrobj->Obj.Body.Num != -1) && !(ptrobj->WorkFlags & SKATING) && ((ptrobj->Move == MOVE_MANUAL) || (ptrobj->Move == MOVE_BUGGY_MANUAL))) {
         MenuComportement(false);
       }
 
       // changement d'arme ou de comportement
-      if (PtrComportement->Flags & CF_INVENTORY AND(ptrobj->Obj.Body.Num != -1)
-                                       && !(ptrobj->WorkFlags & SKATING)
-                                           AND(ptrobj->Move == MOVE_MANUAL)) {
+      if (PtrComportement->Flags & CF_INVENTORY && (ptrobj->Obj.Body.Num != -1) && !(ptrobj->WorkFlags & SKATING) && (ptrobj->Move == MOVE_MANUAL)) {
         if (Input & I_WEAPON_1) // Balle magique
         {
           if (ListVarGame[FLAG_BALLE_MAGIQUE]) {
@@ -1259,11 +1249,7 @@ startloop:
           WaitNoKey35 = false;
       }
 
-      if ((Input & (I_NORMAL | I_SPORTIF | I_AGRESSIF | I_DISCRET))
-              AND(PtrComportement->Flags & CF_COMPORTEMENT)
-                  AND(ptrobj->Obj.Body.Num != -1)
-                      && !(ptrobj->WorkFlags & SKATING)
-                          AND(ptrobj->Move == MOVE_MANUAL)) {
+      if ((Input & (I_NORMAL | I_SPORTIF | I_AGRESSIF | I_DISCRET)) && (PtrComportement->Flags & CF_COMPORTEMENT) && (ptrobj->Obj.Body.Num != -1) && !(ptrobj->WorkFlags & SKATING) && (ptrobj->Move == MOVE_MANUAL)) {
         switch (Comportement) {
         case C_NORMAL:
         case C_SPORTIF:
@@ -1325,17 +1311,12 @@ startloop:
         }
       }
 
-      if ((Input & I_HOLOMAP)
-              AND(PtrComportement->Flags & (CF_HOLOMAP | CF_INVENTORY))
-                  AND(ListVarGame[FLAG_HOLOMAP] == 1)
-                      AND(ptrobj->Obj.Body.Num != -1)
-                          AND(ptrobj->Move == MOVE_MANUAL || ptrobj->Move ==
-                              MOVE_BUGGY_MANUAL) && !CinemaMode) {
+      if ((Input & I_HOLOMAP) && (PtrComportement->Flags & (CF_HOLOMAP | CF_INVENTORY)) && (ListVarGame[FLAG_HOLOMAP] == 1) && (ptrobj->Obj.Body.Num != -1) && (ptrobj->Move == MOVE_MANUAL || ptrobj->Move == MOVE_BUGGY_MANUAL) && !CinemaMode) {
         SaveTimer();
         StopSpeak();
         //                      PauseMusic( true ) ;
         //			BackupScreen( false ) ;
-        InitWaitNoInput(I_HOLOMAP | I_MENUint | I_RETURN | I_ACTION);
+        InitWaitNoInput(I_HOLOMAP | I_MENUS | I_RETURN | I_ACTION);
         InitWaitNoKey();
         HoloMap();
         //                      ResumeMusic( true ) ;
@@ -1448,8 +1429,7 @@ startloop:
                           ptrobj->Obj.Y, ptrobj->Obj.Z);
 
           // 'explosion' de l'objet ?
-          if ((ptrobj->OptionFlags & EXTRA_MASK)
-                  && !(ptrobj->OptionFlags & EXTRA_GIVE_NOTHING)) {
+          if ((ptrobj->OptionFlags & EXTRA_MASK) && !(ptrobj->OptionFlags & EXTRA_GIVE_NOTHING)) {
             GiveExtraBonus(ptrobj);
           }
         }
@@ -1481,8 +1461,7 @@ startloop:
       if (pansample && ptrobj->SampleAlways) {
         ParmSampleVolume = ptrobj->SampleVolume;
 
-        if (!(ptrobj->SampleAlways & 0xFF000000)
-                || !IsSamplePlaying(ptrobj->SampleAlways)) {
+        if (!(ptrobj->SampleAlways & 0xFF000000) || !IsSamplePlaying(ptrobj->SampleAlways)) {
           ptrobj->SampleAlways =
               HQ_3D_MixSample((ptrobj->SampleAlways >> 8) & 0xFFFF, 0x1000, 0,
                               0, ptrobj->Obj.X, ptrobj->Obj.Y, ptrobj->Obj.Z);
